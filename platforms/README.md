@@ -20,12 +20,30 @@ Claude skills set `disable-model-invocation: true` to require explicit invocatio
 
 ## OpenAI Codex
 
-Copy the folders under `platforms/codex/skills/` into either:
+Download the ZIP from GitHub and extract it. The extracted folder is normally named `i-have-neurodivergence-main`. Open a terminal in that folder, which contains this pack's root `README.md` and `platforms/` directory. No build step is needed.
 
-- Your user skills directory: `$CODEX_HOME/skills/`, normally `~/.codex/skills/`.
-- A repository's `.agents/skills/` directory.
+For one project, run the following commands on macOS or Linux. Replace the example path with the project folder you will open in Codex:
 
-Invoke `$needs-picker`, `$i-have-autism`, `$easier-memory`, or another skill by name. Each folder contains `agents/openai.yaml` with `allow_implicit_invocation: false`, requesting explicit invocation. `platforms/codex/.codex-plugin/plugin.json` also provides a plugin manifest for hosts that support that installation route.
+```bash
+TARGET_PROJECT="/absolute/path/to/your-project"
+mkdir -p "$TARGET_PROJECT/.agents/skills"
+cp -R platforms/codex/skills/. "$TARGET_PROJECT/.agents/skills/"
+```
+
+For personal use across projects, use this destination instead:
+
+```bash
+mkdir -p "$HOME/.agents/skills"
+cp -R platforms/codex/skills/. "$HOME/.agents/skills/"
+```
+
+Both commands copy all 31 complete skill folders, including metadata and the picker's bundled vocabulary and compiler. If you have edited an existing copy, preserve those edits before replacing it. These locations follow the [OpenAI skill discovery guide](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills).
+
+Open the target project in Codex and select `needs-picker` from the skill picker. In the CLI or IDE extension, type `$needs-picker`. The picker displays “WHAT WOULD MAKE THIS EASIER?” and offers `skip` for the plain default. The picker stops after producing your setup. An authored skill such as `i-have-dyslexia` or an area skill such as `easier-communication` can also be selected directly.
+
+To check the installation, the destination should contain `needs-picker/SKILL.md`, `needs-picker/references/needs-vocabulary.json` and `needs-picker/scripts/compile.py`, alongside the other skill folders. If the skills do not appear, start a new chat or restart Codex, and check that you opened the project containing `.agents/skills/`. You can keep or remove the extracted download after copying; the installed folders contain their own resources. Python 3 is needed only when running the optional profile compiler.
+
+Each folder contains `agents/openai.yaml` with `allow_implicit_invocation: false`, requesting explicit invocation. `platforms/codex/.codex-plugin/plugin.json` also provides a plugin manifest for hosts that support that installation route; the commands above use direct skill installation.
 
 ## Hermes Agent
 

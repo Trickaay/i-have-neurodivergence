@@ -24,7 +24,7 @@ For Claude Code, add this repository as a marketplace and install the plugin:
 
 Restart the host if needed, then invoke `needs-picker` using its skill menu or command. The root plugin contains the 19 authored skills. The generated Claude platform plugin also includes the 12 area skills.
 
-For **Codex**, copy the folders in `platforms/codex/skills/` into your user skills directory or a repository's `.agents/skills/`, then invoke `$needs-picker` or another skill by name.
+For **Codex**, follow the [Codex installation steps](platforms/README.md#openai-codex) to copy all 31 complete folders from `platforms/codex/skills/` into your project's `.agents/skills/` or your personal `~/.agents/skills/`. Open that project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`.
 
 For **Hermes Agent**, use the skill folders and bundles under `platforms/hermes/`. For any other assistant, use the picker output or a block from `platforms/universal/`.
 
@@ -94,6 +94,8 @@ Browser conformance needs Playwright and Chromium; missing Playwright reports a 
 Browser verification covered 11 selection and note scenarios, with all 44 exports matching the Python compiler, plus selection removal, comparison controls, clipboard copying and file downloads. Live Codex checks discovered all 31 skills and exercised the picker and every support skill. After the initial checks of `needs-picker`, `easier-choice` and `i-have-dyslexia`, the remaining 28 skills each received an isolated three-turn check: activation, a new topic without reinvocation, and the documented stop phrase. All 28 stop phrases worked. The revised dyspraxia skill also passed separate manual UI and terminal walkthrough retests.
 
 An earlier `easier-communication` response used imperative recommendation wording. Its descriptive-language rule now explicitly covers recommendations and follow-up prompts while preserving quotations, commands, warnings and required confirmations. The revised skill passed four fresh Codex sessions (12 turns): two runs of the original scenario, new recommendation topics, and quotation and permission checks. Each session checked activation, persistence on a new topic and the stop phrase. These are behavioral smoke checks, not a guarantee of identical responses, effectiveness or complete assistive-technology coverage.
+
+A fresh GitHub ZIP installation was checked on macOS using the documented project-copy commands, including a destination path containing spaces. Codex CLI discovered all 31 installed skills without errors. The installed `needs-picker`, `i-have-dyslexia` and `easier-communication` passed nine live turns across three sessions, covering the picker's plain default and completion, support persistence and stop phrases. The installed picker's compiler matched the repository compiler in all six export formats without relying on the extracted download.
 
 ## Inspiration and license
 
