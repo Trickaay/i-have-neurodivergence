@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
-"""Static checks for the support-rule contracts.
+"""Check support-rule wording, evidence records and condition-free labels.
 
-Each check names a support atom and the words its rule must ask for. Passing here means the
-instruction asks for the behaviour; only a run of the agent shows the behaviour. Also asserts
-that no rule, label, demo or evidence record names a condition (the disclaimer phrases excepted),
-and that every atom carries the three-part evidence record.
-
-    python3 needs/rule_checks.py
+These static checks verify instructions, not live agent behaviour.
 """
 import json, os, sys
 
@@ -50,7 +45,7 @@ for atom, phrases, meaning in CHECKS:
             fails.append("%s: rule does not ask for %r (%s)" % (atom, ph, meaning))
 import importlib.util
 def tiebreak_of(path):
-    """The TIEBREAK constant as the module holds it (the source splits it across string literals)."""
+    """Read TIEBREAK after Python joins its string literals."""
     full = os.path.join(HERE, "..", path)
     if path.endswith(".py"):
         spec = importlib.util.spec_from_file_location("m_" + os.path.basename(path)[:-3], full)
@@ -64,8 +59,8 @@ for s in vocab["support"]:
     b = s.get("evidence_basis")
     if not (isinstance(b, dict) and all(b.get(k) for k in ("phenomenon", "method", "rule"))):
         fails.append("%s: evidence_basis incomplete" % s["id"])
-    # the rule, label and demo reach the agent: they name no condition. The evidence record is repository
-    # provenance and may cite a study population, but never as a claim about the reader.
+    # Evidence may cite study populations; user-facing rules and labels must not
+    # imply a condition about the reader.
     face = " ".join([s["label"], s["rule"], s.get("demo", "")]).lower()
     for w in CONDITION_WORDS:
         if w in face:

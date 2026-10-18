@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Parity test: the vocabulary embedded in needs-picker.html must equal a
-projection of needs-vocabulary.json, and nothing outside that projection may
-have leaked into the page.
-
-    python3 needs/parity_check.py
-
-Exit 0 on parity, 1 on drift.
-"""
+"""Check the picker against its template and projected vocabulary; exit 1 on drift."""
 import json, os, re, sys
 
 import build
@@ -51,13 +44,11 @@ def main():
             failures.append("difficulty %s carries unprojected fields: %s"
                             % (row.get("id"), ", ".join(sorted(extra))))
 
-    # The generated file must be exactly what the template plus the source produce.
     template = open(build.TEMPLATE, encoding="utf-8").read()
     if build.render(template, expected) != html:
         failures.append("needs-picker.html is not the current build of "
                         "picker.template.html + needs-vocabulary.json")
 
-    # Counts, stated plainly, so a passing run is informative.
     if not failures:
         print("parity: needs-picker.html matches needs-vocabulary.json")
         print("  areas %d · difficulties %d · supports %d · scopes %d · presets %d"

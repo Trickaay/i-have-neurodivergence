@@ -1,17 +1,8 @@
 #!/usr/bin/env python3
 """Build the picker from the vocabulary.
 
-    needs/needs-vocabulary.json  ->  build.py  ->  needs-picker.html
-                                              ->  needs/vocab.embed.json
-
-needs-vocabulary.json is the only source of truth. The HTML carries a
-*projection* of it: the fields the picker actually reads, and nothing else.
-Editing the generated HTML's <script id="vocab"> block by hand will be
-overwritten by the next build, and parity_check.py will fail in the meantime.
-
-Usage:
-    python3 needs/build.py            # write needs-picker.html
-    python3 needs/build.py --check    # verify the checked-in file is current
+Generate the HTML, browser projection and standalone skill resources.
+Use --check to verify that generated files are current.
 """
 import json, os, re, sys
 
@@ -24,9 +15,8 @@ OUTPUT   = os.path.join(ROOT, "needs-picker.html")
 
 PLACEHOLDER = "__VOCAB__"
 
-# The projection contract. Anything not named here never reaches the browser:
-# `derived_from`, `resolutions`, `conflict_order`, `principles` and the prose
-# fields are for the repository, not for the page.
+# Per-record fields copied to the browser; project() also includes presets,
+# resolutions and conflict_order for the in-page compiler.
 AREA_FIELDS = ("id", "label", "description")
 DIFF_FIELDS = ("id", "label", "area", "offers", "recommended", "compare_pairs")
 SUPPORT_FIELDS = ("id", "area", "label", "rule", "evidence", "evidence_basis", "demo")
@@ -60,14 +50,13 @@ def project(vocab):
         # `always_not_brainstorming` is a scope that compiles to two contexts.
         "contexts":     [pick(c, SCOPE_FIELDS) for c in vocab["context_scopes"]],
         "presets":      vocab["presets"],
-        # Needed by the in-page compiler, which mirrors needs/compile.py.
         "resolutions":  vocab["resolutions"],
         "conflict_order": vocab["conflict_order"],
     }
 
 
 def validate(vocab, proj):
-    """Fail loudly rather than shipping a picker with dead references."""
+    """Validate references and evidence records before rendering."""
     errors = []
     atoms = {s["id"] for s in proj["support"]}
     areas = {a["id"] for a in proj["areas"]}

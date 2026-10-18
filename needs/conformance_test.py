@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
-"""The picker compiles in JavaScript; needs/compile.py compiles in Python.
-Two implementations of one spec drift unless something checks. This does.
+"""Compare browser exports with the Python compiler.
 
-For each fixture selection it drives the real page in a headless browser, takes
-the YAML the page emits, compiles that YAML with compile.py, and compares the
-result against what the page produced for the same format. Any difference at all
-is a failure, printed as a unified diff.
-
-    python3 needs/conformance_test.py
-
-Needs playwright and a chromium. Skips with exit 0 and a clear message when
-neither is available, so it never blocks a machine that only wants build.py.
+Run with Playwright and Chromium installed. CHROMIUM_PATH can select a browser.
+Missing Playwright reports a skip; browser launch failures fail the test.
 """
 import difflib, json, os, sys
 
@@ -21,7 +13,6 @@ PAGE = os.path.join(ROOT, "needs-picker.html")
 sys.path.insert(0, HERE)
 import compile as C
 
-# Each fixture: difficulties to tick, supports to add, and contexts to scope them to.
 FIXTURES = [
     ("empty", {}),
     ("one support", {"sup": ["summary_first"]}),
@@ -36,6 +27,9 @@ FIXTURES = [
     ("difficulties and notes", {"diff": ["long_explanations", "other"],
                                 "sup": ["summary_first"],
                                 "notes": "Say when you are guessing.\nDo not apologise."}),
+    ("note spacing", {"diff": ["other"], "notes": '  Keep <this> & "that".  \nNext line.'}),
+    ("note blank lines", {"diff": ["other"], "notes": "Line one.\n\n\nLine four.  \n"}),
+    ("note Unicode separators", {"diff": ["other"], "notes": "Keep \u007f\u0085\u009f\u2028\u2029 exactly."}),
     ("a whole preset", {"preset": "i-use-a-screen-reader"}),
 ]
 
@@ -51,6 +45,33 @@ APPLY = """(f)=>{
   return {yaml:P.yaml(), rules:P.writeRules(), agents:P.writeAgents(),
           skill:P.writeSkill(), json:P.writeJson()};
 }"""
+
+
+def check_ui(page):
+    page.reload()
+    page.locator("#d-long_explanations").check()
+    page.get_by_role("button", name="Try these", exact=True).click()
+    page.locator("#d-long_explanations").uncheck()
+    assert page.locator("#count").text_content() == "nothing chosen · plain default"
+
+    page.get_by_role("tab", name="By area", exact=True).click()
+    page.locator("#s-a-summary_first").check()
+    page.get_by_role("tab", name="What’s hard", exact=True).click()
+    page.locator("#d-long_explanations").check()
+    page.get_by_role("button", name="Try these", exact=True).click()
+    page.locator("#d-long_explanations").uncheck()
+    page.get_by_role("tab", name="Copy for your agent", exact=True).click()
+    page.locator("#fmt").select_option("json")
+    exported = json.loads(page.locator("#yaml").text_content())
+    assert [s["id"] for s in exported["contexts"]["always"]] == ["summary_first"]
+
+    page.locator("#d-other").check()
+    notes = '  Keep <this> & "that".  \n\n\nNext line.  \n'
+    page.locator("#notes").fill(notes)
+    assert json.loads(page.locator("#yaml").text_content())["notes"] == notes
+    page.locator("#d-other").uncheck()
+    assert json.loads(page.locator("#yaml").text_content())["notes"] == ""
+    return 4
 
 
 def main():
@@ -78,9 +99,12 @@ def main():
         page.goto("file://" + PAGE)
         page.wait_for_timeout(400)
 
-        # The page keeps its compiler inside a closure; expose it once for testing.
         for name, fixture in FIXTURES:
             got = page.evaluate("(" + APPLY + ")", fixture)
+            expected_notes = fixture.get("notes", "").replace("\r\n", "\n").replace("\r", "\n")
+            if json.loads(got["json"])["notes"] != expected_notes:
+                failures += 1
+                print("FAIL  %s / notes changed" % name)
             for fmt in ("rules", "agents", "skill", "json"):
                 mine, _ = C.compile_profile(got["yaml"], vocab, fmt)
                 checked += 1
@@ -91,6 +115,7 @@ def main():
                             mine.splitlines(), got[fmt].splitlines(),
                             "compile.py", "picker", lineterm=""))[:24]:
                         print("      " + line)
+        ui_checked = check_ui(page)
         browser.close()
 
     if errors:
@@ -101,6 +126,7 @@ def main():
         return 1
     print("conformance: %d comparisons, the page and compile.py agree exactly" % checked)
     print("  %d fixtures x 4 formats" % len(FIXTURES))
+    print("  %d UI regression checks" % ui_checked)
     return 0
 
 

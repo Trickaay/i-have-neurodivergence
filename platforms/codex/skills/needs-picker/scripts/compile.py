@@ -1,24 +1,8 @@
 #!/usr/bin/env python3
 """Compile a support profile into something you can paste into any agent.
 
-    needs.yaml  +  needs-vocabulary.json  ->  compile.py  ->  a block of plain rules
-
-The picker produces a profile. This turns that profile into instructions an agent
-actually reads. Nothing here is specific to one agent: the `rules` format is plain
-text for any system prompt, custom-instruction box or rules file, and the other
-formats are that same block wrapped for a particular host.
-
-Usage:
-    python3 needs/compile.py needs.yaml                  # plain rules (default)
-    python3 needs/compile.py needs.yaml --format skill   # a SKILL.md
-    python3 needs/compile.py needs.yaml --format agents  # an AGENTS.md section
-    python3 needs/compile.py needs.yaml --format json    # machine-readable
-    python3 needs/compile.py needs.yaml --format hermes  # a SKILL.md for Hermes Agent
-    python3 needs/compile.py needs.yaml --format codex   # a SKILL.md for OpenAI Codex
-    python3 needs/compile.py --self-test                 # fixtures round-trip
-
-Stdlib only, deliberately: a compiler that needs a pip install before it runs is
-a compiler most people will not run.
+Uses only the Python standard library. See --help for output formats and options.
+Run --self-test to check parsing and all output formats.
 """
 import argparse, json, os, sys
 
@@ -29,8 +13,6 @@ if not os.path.isfile(VOCAB):
 
 FORMATS = ("rules", "skill", "agents", "json", "hermes", "codex")
 
-
-# ---------------------------------------------------------------- profile input
 
 def parse_profile(text):
     """Parse the restricted YAML the picker emits. Not a general YAML parser.
@@ -45,6 +27,7 @@ def parse_profile(text):
             presets:      [- item]
             notes: |
               free text
+    Notes also accept a JSON-quoted string, preserving whitespace and line endings.
     Anything else raises, with the line number, rather than being silently ignored.
     """
     profile = {"version": None, "contexts": {}}
@@ -56,10 +39,9 @@ def parse_profile(text):
     for n, raw in enumerate(text.replace("\r\n", "\n").replace("\r", "\n").split("\n"), 1):
         line = raw.rstrip()
 
-        # inside a block scalar: keep going until the indent drops
         if notes_indent is not None:
             if line.strip() == "" or (len(line) - len(line.lstrip())) >= notes_indent:
-                notes.append(line[notes_indent:] if line.strip() else "")
+                notes.append(raw[notes_indent:] if len(raw) >= notes_indent else "")
                 continue
             profile["contexts"][ctx]["notes"] = "\n".join(notes).rstrip("\n")
             notes_indent, notes = None, []
@@ -94,6 +76,8 @@ def parse_profile(text):
                 rest = body.split(":", 1)[1].strip()
                 if rest in ("|", "|-", ">"):
                     notes_indent, notes = 6, []
+                elif rest.startswith('"'):
+                    profile["contexts"][ctx]["notes"] = json.loads(rest)
                 else:
                     profile["contexts"][ctx]["notes"] = rest
                 key = None
@@ -113,8 +97,6 @@ def parse_profile(text):
         profile["contexts"][ctx]["notes"] = "\n".join(notes).rstrip("\n")
     return profile
 
-
-# ------------------------------------------------------------------- resolution
 
 def resolve(profile, vocab):
     """The composer, exactly as NEEDS_MODEL.md specifies it.
@@ -157,11 +139,9 @@ def resolve(profile, vocab):
 
 
 def applicable_resolutions(active, vocab):
-    """Only the resolutions whose *both* halves are actually switched on."""
+    """Return resolutions whose two supports are active."""
     return [r for r in vocab["resolutions"] if all(x in active for x in r["between"])]
 
-
-# ---------------------------------------------------------------------- writers
 
 PREAMBLE = (
     "These are presentation settings I chose for myself. They describe how I would "
@@ -232,7 +212,7 @@ def write_rules(resolved, profile, vocab, heading=True):
 
     L += [TIEBREAK, ""]
 
-    notes = profile["contexts"].get("always", {}).get("notes", "").strip()
+    notes = profile["contexts"].get("always", {}).get("notes", "")
     if notes:
         L.append("IN MY OWN WORDS")
         L += [ln for ln in notes.split("\n")]
@@ -240,7 +220,7 @@ def write_rules(resolved, profile, vocab, heading=True):
 
     L.append("I can change any of this at any time. Ask me before assuming a setting "
              "is wrong; do not quietly drop one.")
-    return "\n".join(L).replace("\n\n\n", "\n\n").strip() + "\n"
+    return "\n".join(L).strip() + "\n"
 
 
 def write_skill(resolved, profile, vocab):
@@ -332,12 +312,10 @@ def write_skill_hermes(resolved, profile, vocab):
 
 
 def write_skill_codex(resolved, profile, vocab):
-    """A SKILL.md for OpenAI Codex: ~/.agents/skills/my-setup/SKILL.md, invoked with $my-setup.
+    """Write a Codex skill invoked with $my-setup.
 
-    Codex allows only name, description, license, metadata and allowed-tools in the frontmatter,
-    and decides from the description alone when to load a skill, so the description says
-    "only when invoked". An optional agents/openai.yaml beside it can add
-    `policy: {allow_implicit_invocation: false}`; see platforms/README.md.
+    Explicit-only loading also needs policy.allow_implicit_invocation: false in
+    agents/openai.yaml; see platforms/README.md.
     """
     n = len(resolved.get("always", []))
     desc = ("My presentation settings: %d chosen support%s covering how output is laid out, paced and "
@@ -401,8 +379,6 @@ def compile_profile(text, vocab, fmt="rules"):
     return WRITERS[fmt](resolved, profile, vocab), unknown
 
 
-# ------------------------------------------------------------------------- main
-
 FIXTURE = """version: 1
 contexts:
   always:
@@ -432,7 +408,15 @@ def self_test(vocab):
         ("notes parsed", p["contexts"]["always"]["notes"] == "Say when you are guessing."),
         ("suppress parsed", p["contexts"]["brainstorming"]["suppress"] == ["short_sections"]),
     ]
+    exact_notes = '  Keep <this> & "that".  \n\n\nNext line.  \n'
+    note_profile = "version: 1\ncontexts:\n  always:\n    notes: " + json.dumps(exact_notes) + "\n"
+    checks.append(("quoted notes preserved", parse_profile(note_profile)["contexts"]["always"]["notes"] == exact_notes))
+    block_profile = "version: 1\ncontexts:\n  always:\n    notes: |\n        Keep this spacing.  \n      Next line.\n"
+    checks.append(("block note spacing preserved", parse_profile(block_profile)["contexts"]["always"]["notes"] == "  Keep this spacing.  \nNext line."))
     for fmt in FORMATS:
+        note_out, _ = compile_profile(note_profile, vocab, fmt)
+        preserved = json.loads(note_out)["notes"] == exact_notes if fmt == "json" else exact_notes in note_out
+        checks.append(("%s preserves exact notes" % fmt, preserved))
         out, unknown = compile_profile(FIXTURE, vocab, fmt)
         checks.append(("%s emits" % fmt, bool(out.strip())))
         checks.append(("%s has no unknown ids" % fmt, not unknown))

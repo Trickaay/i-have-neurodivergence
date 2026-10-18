@@ -1,31 +1,9 @@
 #!/usr/bin/env python3
 """Build the per-platform skill trees from one source.
 
-    needs/needs-vocabulary.json      the 12 areas, 33 difficulties, 89 supports, contexts, presets
-    skills/<name>/SKILL.md           the 19 authored skills (the reasoning and the evidence)
-    platforms/adaptations.json       action/consent rewording carried over from the Claude Code mod
-
-        -> platforms/claude/     Claude Code and Cowork: skills/<name>/SKILL.md, plugin manifest
-        -> platforms/codex/      OpenAI Codex: skills/<name>/SKILL.md + agents/openai.yaml, plugin manifest
-        -> platforms/hermes/     Hermes Agent: skills/accessibility/<name>/SKILL.md, skill-bundles/*.yaml
-        -> platforms/universal/  one Markdown block per area for any custom-instructions box or AGENTS.md
-        -> platforms/index.json  every generated file with its sha256
-
-Each platform gets the same two layers:
-
-  * the 19 authored skills (16 "i-have-..." / "i-use-..." / "i-need-..." skills, the two "help-me-..."
-    skills for learning and communication, and needs-picker),
-    body unchanged apart from the platform's invocation syntax and a short platform note;
-  * 12 generated "easier-<area>" skills, one per functional area of the needs picker, built from
-    the vocabulary alone: the area's difficulties are the triggers, the difficulties' recommended
-    supports are the starting set, the rest of the area is listed as available. These name no
-    condition; the build fails if one appears.
-
-Usage:
-    python3 platforms/build_platform_skills.py            # write the trees
-    python3 platforms/build_platform_skills.py --check    # exit 1 if the trees on disk are stale
-
-Stdlib only, like the rest of the repository.
+Combine skills/, needs/needs-vocabulary.json and platforms/adaptations.json into
+Claude, Codex, Hermes and universal bundles. Record generated hashes in index.json.
+Use --check to detect stale outputs. Uses only the Python standard library.
 """
 import argparse, hashlib, io, json, os, re, sys
 
@@ -42,8 +20,7 @@ LICENSE = "MIT"
 HOMEPAGE = "https://github.com/Trickaay/i-have-neurodivergence"
 SOURCE = "what-would-make-this-easier"  # provenance tag in metadata; the collection name itself names a condition
 
-# Fixed product text. PREAMBLE, TIEBREAK and CLOSING are the compiler's own; the guard is the
-# sentence the Claude Code mod adds so a presentation preference can never read as permission.
+# Presentation preferences must not grant permission or hide required information.
 PREAMBLE = (
     "These are presentation settings I chose for myself. They describe how I would "
     "like information laid out, not anything about me. Do not infer a condition, a "
@@ -66,7 +43,6 @@ TIEBREAK = ("If two of these ever pull against each other, prefer in this order:
 CLOSING = ("I can change any of this at any time. Ask me before assuming a setting "
            "is wrong; do not quietly drop one.")
 
-# Words that must never appear in a generated (condition-free) file. Same list as compile.py.
 CONDITION_WORDS = ("autism", "adhd", "dyslex", "dyscalcul", "dyspraxi", "aphantasi",
                    "alexithymi", "diagnos", "disorder", "neurodiverg")
 
@@ -91,8 +67,6 @@ BUNDLES = [
      ["help-me-learn-this", "help-me-with-words", "i-have-working-memory-differences"]),
 ]
 
-
-# ------------------------------------------------------------------ small helpers
 
 def yq(s):
     """A YAML single-quoted scalar."""
@@ -124,8 +98,6 @@ def fit(text, lo, hi, pad=" (output shaping)"):
     return text[:hi]
 
 
-# ------------------------------------------------------------------ inputs
-
 def load_vocab():
     vocab = json.load(open(VOCAB_PATH, encoding="utf-8"))
     adapt = json.load(open(ADAPT_PATH, encoding="utf-8"))
@@ -139,7 +111,6 @@ def load_vocab():
 
 
 def load_compiler():
-    """Import needs/compile.py as a module without a package."""
     import importlib.util
     spec = importlib.util.spec_from_file_location("needs_compile", COMPILE_PATH)
     mod = importlib.util.module_from_spec(spec)
@@ -193,8 +164,6 @@ def load_authored():
             skills.append(s)
     return skills
 
-
-# ------------------------------------------------------------------ area skills (generated)
 
 def area_skills(vocab):
     atoms = {s["id"]: s for s in vocab["support"]}
@@ -314,8 +283,6 @@ def area_body(sk, vocab, inv):
     return "\n".join(L)
 
 
-# ------------------------------------------------------------------ per-platform rendering
-
 PLATFORMS = ("claude", "codex", "hermes")
 INVOKE = {"claude": "/", "codex": "$", "hermes": "/"}
 
@@ -421,8 +388,6 @@ def render_skill(platform, sk, vocab, names):
     return files
 
 
-# ------------------------------------------------------------------ platform-level files
-
 def claude_manifest(names):
     return json.dumps({
         "name": "what-would-make-this-easier-skills",
@@ -491,8 +456,6 @@ def universal_rules(vocab, compiler, sk):
     return head + text.replace("## How to work with me", "## How to work with me: %s" % sk["label"].lower(), 1)
 
 
-# ------------------------------------------------------------------ build
-
 def build():
     vocab = load_vocab()
     compiler = load_compiler()
@@ -514,7 +477,6 @@ def build():
     for sk in areas:
         files["universal/%s.md" % sk["name"]] = universal_rules(vocab, compiler, sk)
 
-    # Guard: generated (condition-free) files never name a condition.
     for path, text in files.items():
         base = os.path.basename(os.path.dirname(path)) if path.endswith("SKILL.md") else os.path.basename(path)
         generated = "/easier-" in path or path.startswith("universal/")
@@ -527,7 +489,6 @@ def build():
             if hit:
                 raise SystemExit("%s names a condition: %s" % (path, hit))
 
-    # Frontmatter sanity shared by every platform (agentskills.io limits).
     for path, text in files.items():
         if path.endswith("SKILL.md"):
             m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
@@ -537,7 +498,7 @@ def build():
             assert name == folder, (path, name)
             assert re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", name) and len(name) <= 64, name
             assert 0 < len(desc) <= 1024, (path, len(desc))
-            assert text.count("\n") < 1200, path  # authored skills stay well under the 500-line guidance
+            assert text.count("\n") < 1200, path
 
     index = {
         "version": 1,
@@ -568,7 +529,6 @@ def check(files):
             on_disk = None
         if on_disk != text:
             stale.append(rel)
-    # files on disk that the build no longer produces
     for platform in list(PLATFORMS) + ["universal"]:
         for dirpath, _, fnames in os.walk(os.path.join(HERE, platform)):
             for fn in fnames:

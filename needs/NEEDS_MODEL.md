@@ -97,3 +97,5 @@ python3 needs/conformance_test.py
 The build and parity checks cover generated-file consistency. The compiler self-test and rule checks cover data and instruction properties. Browser conformance compares JavaScript and Python exports; it requires Playwright and Chromium and reports a skip if unavailable. A skipped check is not a pass.
 
 These commands describe the validation workflow. They do not establish live host integration, accessibility testing or whether a support improves a reader's experience; those have not been verified for this release.
+
+The picker exports notes as a quoted YAML string so spaces, blank lines and Unicode characters survive export and compilation. The compiler also accepts the existing indented `notes: |` form.

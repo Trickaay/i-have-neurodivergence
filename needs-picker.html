@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What Would Make This Easier</title>
 <style>
 :root{
@@ -119,6 +124,8 @@ footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:v
 footer h3{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
 @media(prefers-reduced-motion:no-preference){label.opt,button.mini,.tab,.supwrap{transition:background-color .12s ease,border-color .12s ease}}
 </style>
+</head>
+<body>
 
 <div class="wrap">
 <header>
@@ -198,7 +205,7 @@ footer h3{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
   <h3>What a support is</h3>
   <p>Supports change how information and interaction are presented. They never infer anything about you. Some of them deliberately hold detail back or narrow a list of options &mdash; those say so on the label, before you choose them.</p>
   <h3 style="margin-top:16px">This page follows the rules it is collecting</h3>
-  <p>No meaning is carried by colour alone, nothing animates, nothing is required, every choice is reversible, and no question asks how anything feels. The provenance of each support &mdash; what it does and how good the evidence for it is &mdash; sits behind &ldquo;Why is this offered?&rdquo; rather than on the face of the choice. The preview is a real sample answer rebuilt from your selections; it demonstrates 31 of the 72 supports.</p>
+  <p>No meaning is carried by colour alone, nothing animates, nothing is required, every choice is reversible, and no question asks how anything feels. The provenance of each support &mdash; what it does and how good the evidence for it is &mdash; sits behind &ldquo;Why is this offered?&rdquo; rather than on the face of the choice. The preview is a real sample answer rebuilt from your selections; it demonstrates some of the supports. Every chosen support is included in the exported instructions.</p>
 </footer>
 </div>
 
@@ -213,10 +220,7 @@ V.areas.forEach(function(a){areaLabel[a.id]=a.label;areaDesc[a.id]=a.description
 var TIER={A:"Replicated experimental or meta-analytic evidence",B:"Consistent qualitative or observational findings",C:"Community-described; little formal study",D:"Design inference, not itself tested",S:"Published technical standard",X:"Contested construct: described, disputed as a distinct entity"};
 var state={diff:new Set(),sup:new Set(),ctx:{},cmp:{},origin:{},notes:""};
 
-/* Provenance. One support atom can be reached from several places: a difficulty block,
-   the by-area list, or a preset. The picker remembers who asked for what; the profile
-   contains only the survivor set. Dismissing one difficulty therefore cannot silently
-   remove a support that another difficulty, a preset, or a direct tick still claims. */
+/* Track each selection source so removing one keeps independently chosen supports. */
 function addSup(id,origin){var o=state.origin[id]||(state.origin[id]=[]);
   if(o.indexOf(origin)<0)o.push(origin); state.sup.add(id);}
 function removeSup(id){state.sup.delete(id);delete state.origin[id];delete state.ctx[id];}
@@ -233,7 +237,7 @@ function wireTabs(ids){ids.forEach(function(id){document.getElementById(id).addE
     var on=(o===id);ot.setAttribute("aria-selected",on?"true":"false");op.hidden=!on;});});});}
 wireTabs(["tab-d","tab-a","tab-p"]); wireTabs(["tab-pv","tab-yml"]);
 
-/* a support choice: plain label on the face, provenance behind an expander */
+
 function claimNote(id){
   var n=originsOf(id).length;
   if(n<2) return "";
@@ -260,7 +264,7 @@ function supportBlock(s,ns,origin){
   return w;
 }
 
-/* step 1a: difficulties */
+
 (function(){var host=document.getElementById("pane-d");
   V.areas.forEach(function(a){
     var items=V.difficulties.filter(function(d){return d.area===a.id;});
@@ -273,6 +277,8 @@ function supportBlock(s,ns,origin){
         if(e.target.checked) state.diff.add(d.id);
         else {
           state.diff.delete(d.id);
+          d.offers.forEach(function(s){dropOrigin(s,"d:"+d.id);});
+          delete state.cmp[d.id];
           /* The note belongs to the selection that opened it. Leaving it behind would
              export text the reader can no longer see, correct, or withdraw. */
           if(!d.offers.length) state.notes="";
@@ -283,7 +289,7 @@ function supportBlock(s,ns,origin){
     host.appendChild(g);});
 })();
 
-/* step 1b: supports by area */
+
 (function(){var host=document.getElementById("pane-a");
   V.areas.forEach(function(a){
     var items=V.support.filter(function(s){return s.area===a.id;});
@@ -294,7 +300,7 @@ function supportBlock(s,ns,origin){
     host.appendChild(g);});
 })();
 
-/* step 1c: presets */
+
 (function(){var host=document.getElementById("pane-p");
   host.appendChild(el('<p class="hint">A label you already have is a shortcut, not the model. It expands to supports, and the label itself is never stored.</p>'));
   var box=el('<div class="opts"></div>');
@@ -306,10 +312,8 @@ function supportBlock(s,ns,origin){
   host.appendChild(box);
 })();
 
-/* step 2 */
-/* Comparison pairs are authored in needs-vocabulary.json, one entry per difficulty.
-   Each pair sets two supports that differ in kind against each other. Nothing here
-   is derived from the order of the offers list. */
+
+/* Use authored comparison pairs, not the order of the offers list. */
 function pairsOf(d){
   return (d.compare_pairs||[]).map(function(p){
     return p.filter(function(x){return byId[x];});
@@ -389,7 +393,7 @@ function renderHelps(){
   });
 }
 
-/* step 3: contexts */
+
 function renderCtx(){
   var sec=document.getElementById("step3"), host=document.getElementById("ctx");
   host.innerHTML="";
@@ -411,7 +415,7 @@ function renderCtx(){
   });
 }
 
-/* preview */
+
 function has(x){return state.sup.has(x);}
 function preview(){
   var out=[],n=0; function u(){n++;}
@@ -474,10 +478,7 @@ function preview(){
   return {text:out.join("\n").replace(/\n{3,}/g,"\n\n").trim(),used:n};
 }
 
-/* ------------------------------------------------------------------ profile
-   One model, four writers. This mirrors needs/compile.py line for line; the
-   conformance test in needs/conformance_test.py runs both over the same
-   selections and fails if a single character differs. Change one, change both. */
+/* Keep these writers in sync with needs/compile.py; conformance_test.py checks parity. */
 
 var AREA_RANK={},ATOM_RANK={};
 V.areas.forEach(function(a,i){AREA_RANK[a.id]=i;});
@@ -490,8 +491,7 @@ var PREAMBLE="These are presentation settings I chose for myself. They describe 
 var TIEBREAK="If two of these ever pull against each other, prefer in this order: "+
   "what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.";
 
-/* The groups the profile is built from: what applies always, what applies only in
-   a context the reader declares, and what is set aside while brainstorming. */
+
 function model(){
   var groups={always:[],work:[],learning:[],stuck:[],overloaded:[]}, suppress=[];
   Array.from(state.sup).forEach(function(s){
@@ -507,7 +507,7 @@ function model(){
   });
   return {groups:groups,suppress:suppress,
           difficulties:Array.from(state.diff),
-          notes:(state.notes||"").replace(/\r/g,"").replace(/\s+$/,"")};
+          notes:(state.notes||"").replace(/\r\n?/g,"\n")};
 }
 
 function byArea(ids){
@@ -557,7 +557,7 @@ function writeRules(heading){
   if(m.notes){L.push("IN MY OWN WORDS");m.notes.split("\n").forEach(function(x){L.push(x);});L.push("");}
   L.push("I can change any of this at any time. Ask me before assuming a setting is wrong; "+
          "do not quietly drop one.");
-  return L.join("\n").replace(/\n\n\n/g,"\n\n").trim()+"\n";
+  return L.join("\n").trim()+"\n";
 }
 
 function writeSkill(){
@@ -609,8 +609,9 @@ function yaml(){
   if(groups.always.length){L.push("    support:");groups.always.forEach(function(s){L.push("      - "+s);});}
   else if(!m.difficulties.length){L.push("    support: []   # base layer only");}
   if(m.notes){
-    L.push("    notes: |");
-    m.notes.split("\n").forEach(function(x){L.push("      "+x);});
+    var quoted=JSON.stringify(m.notes).replace(/[\u007f-\u009f\u2028\u2029]/g,function(c){
+      return "\\u"+("0000"+c.charCodeAt(0).toString(16)).slice(-4);});
+    L.push("    notes: "+quoted);
   }
   ["work","learning","stuck","overloaded"].forEach(function(c){
     if(!groups[c].length) return;
@@ -621,7 +622,7 @@ function yaml(){
   return L.join("\n");
 }
 
-/* What each format is for, said in the panel so nobody has to guess. */
+
 var FORMATS={
   rules:{write:writeRules,file:"how-to-work-with-me.txt",type:"text/plain",
     hint:"Plain text. Paste it into a system prompt, a custom-instructions box, or the "+
@@ -685,11 +686,7 @@ function renderOut(){
 
 document.getElementById("fmt").addEventListener("change",renderOut);
 
-/* Saving a file works two different ways depending on where this page is open.
-   Opened from disk, a blob link is fine. Published as an artifact, the frame is
-   sandboxed and a blob link silently does nothing, so the host mediates the save
-   and the viewer confirms it. Detect which, and hide the button rather than
-   leaving one that does nothing. Copy always works either way. */
+/* Sandboxed artifact hosts need their download API instead of a blob link. */
 var dlBtn=document.getElementById("download"), saver=null;
 if(window.claude&&typeof window.claude.use==="function"){
   dlBtn.hidden=true;
@@ -726,12 +723,11 @@ document.getElementById("reset").addEventListener("click",function(){
   render();});
 render();
 
-/* Test hook. needs/conformance_test.py drives the page through this to check the
-   in-page compiler against needs/compile.py, which is the only thing keeping the
-   two implementations honest. It exposes nothing a viewer could not already do by
-   clicking, holds no data of its own, and sends nothing anywhere. */
+/* Compiler parity test hook; no persistence or network access. */
 window.__needsPicker={V:V,state:state,addSup:addSup,render:render,
   yaml:yaml,writeRules:writeRules,writeAgents:writeAgents,
   writeSkill:writeSkill,writeJson:writeJson};
 })();
 </script>
+</body>
+</html>

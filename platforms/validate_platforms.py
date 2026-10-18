@@ -1,18 +1,7 @@
 #!/usr/bin/env python3
-"""Validate the generated platform trees against each platform's published rules.
+"""Validate platform frontmatter, invocation policies and generated file hashes.
 
-Development-only dependencies (the generator itself needs none):
-    pip install pyyaml skills-ref
-
-Checks, per SKILL.md:
-  * agentskills.io reference validator (skills-ref): name/description constraints, name == folder
-  * Claude: `disable-model-invocation: true` present
-  * Codex: only name, description, license, metadata, allowed-tools in the frontmatter (the set Codex's
-    own quick_validate.py allows); agents/openai.yaml parses, short_description is 25-64 characters,
-    default_prompt names `$<skill>`, policy.allow_implicit_invocation is false
-  * Hermes: name, description, version present; metadata.hermes.tags is a list; category set
-  * generated files (easier-*, universal/) name no condition
-Then: every file listed in index.json exists with the recorded sha256.
+Requires PyYAML; install skills-ref for additional Agent Skills validation.
 """
 import hashlib, json, os, re, sys
 
@@ -67,9 +56,7 @@ def check_skill(platform, skill_dir):
         try:
             errs = ref_validate(skill_dir)
             for e in errs or []:
-                # Each host's own keys sit outside the open spec: Claude's disable-model-invocation,
-                # Hermes's top-level version and author (its contributor template requires them).
-                # Everything else is a real finding.
+                # Accept host-required extensions to the Agent Skills frontmatter.
                 msg = str(e)
                 if platform == "claude" and "disable-model-invocation" in msg:
                     continue
