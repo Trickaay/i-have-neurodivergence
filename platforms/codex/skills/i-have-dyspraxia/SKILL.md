@@ -49,11 +49,14 @@ Each human step is exactly one physical action: one paste, one click, one keypre
 
 Bad: "Open the file, find the function, and swap in the new one."
 Good:
-```
-1. Paste this command and press Enter:
-   (block below)
-2. Press Enter again when it asks to confirm.
-```
+
+1. Paste this command into the ready terminal:
+   ```sh
+   printf 'ready\n'
+   ```
+   You should see: the command at the prompt, not yet executed. If it fails: stop here.
+2. Press Enter.
+   You should see: `ready`, followed by a new prompt. If it fails: stop here.
 
 ### 3. Copy block for every exact string, full command every time
 
@@ -70,7 +73,7 @@ npm test -- src/auth/auth.spec.ts
 Keyboard chords (`Ctrl+Shift+P`), drag-and-drop, double-click, right-click, and "click the small icon" are precision motor tasks. Always give a typed or menu-path alternative, and put the alternative first.
 
 Bad: "Press Ctrl+Shift+P and type 'reload'."
-Good: "Menu: **View** then **Command Palette**. Type `reload`. Press Enter. (Shortcut if you prefer: Ctrl+Shift+P.)"
+Good: "The menu alternative is **View → Command Palette**." Give each menu click, text entry and Enter press as a separate step with its own result and recovery line.
 
 ### 5. No spatial directions
 
@@ -86,7 +89,7 @@ Every human step ends with what to do if it goes wrong. A slip must never cascad
 Format: `If it fails: <one action>.` or `Safe to run again: yes.`
 
 Bad: "Run the migration."
-Good: "Paste and run the block below. Safe to run again: yes, it checks before it changes anything. If it prints `error`: paste the error to me and stop."
+Good: "Press Enter. You should see: `ready`, followed by a new prompt. Safe to run again: yes, this command only prints a message. If it fails: stop here."
 
 Prefer commands that are safe to repeat. If a command is not safe to repeat, say so before it, not after.
 
@@ -99,10 +102,14 @@ No step depends on the reader remembering to do something later or doing two thi
 
 Bad: "While it installs, go update the config, and remember to restart afterwards."
 Good:
-```
-1. Paste and run the block below. Wait until it prints `done`.
-2. Then tell me. I will update the config and restart it.
-```
+
+1. Paste this command into the ready terminal:
+   ```sh
+   printf 'done\n'
+   ```
+   You should see: the command at the prompt. If it fails: stop here.
+2. When the full command is visible at the prompt, press Enter.
+   You should see: `done`, followed by a new prompt. If it prints an error: stop here.
 
 ### 8. State what to look for after each action
 
@@ -141,7 +148,7 @@ Override the defaults when:
 
 Before sending:
 
-1. For every human step, ask: could the agent do this? If yes, do it and delete the step.
+1. Respect a request for a manual walkthrough. Otherwise, for every human step, ask: could the agent do this within the existing permissions? If yes, do it and delete the step.
 2. Split every step with more than one physical action.
 3. Move every exact string into a complete fenced block with no placeholders.
 4. Add a typed or menu-path alternative before every chord, drag, or precision click.
@@ -164,16 +171,17 @@ If yes, send.
 
 > I replaced `verifyToken` in `src/auth.ts` (lines 42 to 58) and formatted the file. Tests pass: `1 passing`.
 >
-> One step remains that I cannot do from here: the dev server is running in your terminal.
+> The dev server is stopped in your focused terminal. I cannot start it from here.
 >
-> 1. Click in the terminal window. Press Ctrl+C once. You should see: the prompt returns. Safe to press again if nothing happens.
-> 2. Paste this and press Enter:
+> 1. Paste this command:
 >    ```
 >    npm run dev
 >    ```
->    You should see: `ready on http://localhost:3000`. If it prints `error`: paste the error to me and stop.
+>    You should see: `npm run dev` at the prompt, not yet executed. If it differs: stop here.
+> 2. Press Enter.
+>    You should see: `ready on http://localhost:3000`. If it prints `error`: stop here.
 >
-> Two pastes, no typing. I will not need anything else from you for this fix.
+> One paste and one Enter press. No manual typing.
 
 ## On Codex
 

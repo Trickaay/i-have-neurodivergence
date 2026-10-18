@@ -89,7 +89,9 @@ python3 platforms/build_platform_skills.py --check
 python3 platforms/validate_platforms.py
 ```
 
-Browser conformance needs Playwright and Chromium; missing Playwright reports a skip, while a missing browser executable must be installed or selected with `CHROMIUM_PATH`. Platform validation needs PyYAML, and uses `skills-ref` when installed. Browser verification covered 11 selection and note scenarios, with all 44 exports matching the Python compiler, plus selection removal, comparison controls, clipboard copying and file downloads. Isolated Codex sessions discovered all 31 skills and verified picker startup, activation and stop phrases for `easier-choice` and `i-have-dyslexia`, and persistence of `easier-choice` across two topics. These checks do not establish effectiveness or complete assistive-technology coverage.
+Browser conformance needs Playwright and Chromium; missing Playwright reports a skip, while a missing browser executable must be installed or selected with `CHROMIUM_PATH`. Platform validation needs PyYAML, and uses `skills-ref` when installed.
+
+Browser verification covered 11 selection and note scenarios, with all 44 exports matching the Python compiler, plus selection removal, comparison controls, clipboard copying and file downloads. Live Codex checks discovered all 31 skills and exercised the picker and every support skill. After the initial checks of `needs-picker`, `easier-choice` and `i-have-dyslexia`, the remaining 28 skills each received an isolated three-turn check: activation, a new topic without reinvocation, and the documented stop phrase. All 28 stop phrases worked. The revised dyspraxia skill also passed separate manual UI and terminal walkthrough retests. One `easier-communication` response used imperative wording despite its descriptive-language setting; an identical fresh-session check did not repeat that deviation. These are behavioral smoke checks, not a guarantee of identical responses, effectiveness or complete assistive-technology coverage.
 
 ## Inspiration and license
 

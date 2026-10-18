@@ -70,4 +70,4 @@ python3 needs/compile.py --self-test
 
 The generator uses Python's standard library. The validator requires PyYAML; installing `skills-ref` also enables the Agent Skills reference checks. The validator checks metadata, invocation settings and the file hashes in `index.json`.
 
-These are available checks, not recorded results for this release. Live installation, invocation and behavior inside Claude Code, Cowork, Codex and Hermes have not been verified for this release. Passing file validation does not establish host integration or the effectiveness of the exact rules.
+See the [root validation notes](../README.md#development-and-validation) for the browser and live Codex checks completed for this release. Live installation, invocation and behavior inside Claude Code, Cowork and Hermes have not been verified. Passing file validation does not establish host integration or the effectiveness of the exact rules.
