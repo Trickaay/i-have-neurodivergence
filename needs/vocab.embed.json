@@ -1561,12 +1561,12 @@
    "id": "declarative_not_imperative",
    "area": "communication",
    "label": "State the situation, do not instruct",
-   "rule": "Describe the state of the work rather than issuing commands.",
+   "rule": "In your own prose, describe the situation, available actions and observable consequences without directing me to act. This includes recommendations and follow-up prompts: state a default as 'My recommendation is X because...' rather than 'Choose X'. Keep my original fragments, quotations, code and commands unchanged when reproducing them. Keep warnings, permission requests and required confirmations explicit.",
    "evidence": "D",
    "evidence_basis": {
     "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand.",
     "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
-    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+    "rule": "The wording of this rule is the pack's own design. Agent behavior checks do not establish its effectiveness for users."
    },
    "demo": "The tests have not been run since the edit.\n(instead of: run the tests)",
    "defers": false,
