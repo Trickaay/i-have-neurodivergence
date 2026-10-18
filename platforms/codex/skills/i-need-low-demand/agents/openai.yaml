@@ -1,0 +1,6 @@
+interface:
+  display_name: "I need low demand"
+  short_description: "Shape output for a reader for whom a direct instruction is"
+  default_prompt: "Use $i-need-low-demand for the rest of this session."
+policy:
+  allow_implicit_invocation: false

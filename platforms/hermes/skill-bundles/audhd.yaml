@@ -1,0 +1,14 @@
+name: audhd
+description: 'Autism, ADHD, working memory and inertia together'
+skills:
+  - i-have-autism
+  - i-have-adhd
+  - i-have-working-memory-differences
+  - i-have-inertia
+instruction: |
+  Every skill above is a presentation setting the reader chose. Apply all of them; where two
+  conflict, what the reader can perceive outranks what they can act on, then understand, then
+  the rest; sensory overload the reader reports is an access barrier, and where two of their own
+  settings conflict, ask rather than rank. None of them grants permission or counts as a
+  confirmation. i-have-adhd, where listed, is the upstream ayghri skill; if it is not installed,
+  carry on without it.

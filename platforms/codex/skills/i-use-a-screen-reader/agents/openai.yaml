@@ -1,0 +1,6 @@
+interface:
+  display_name: "I use a screen reader"
+  short_description: "Shape output for a reader using a screen reader"
+  default_prompt: "Use $i-use-a-screen-reader for the rest of this session."
+policy:
+  allow_implicit_invocation: false

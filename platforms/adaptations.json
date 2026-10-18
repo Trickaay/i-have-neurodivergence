@@ -1,0 +1,37 @@
+{
+  "schema": "wwmte.adaptations",
+  "version": 1,
+  "note": "Action and consent rewording carried over unchanged from the What Would Make This Easier Claude Code mod (tools/adaptations.json there). The vocabulary's `rule` text is kept as the source; `productRule` is what every generated platform file emits, so a presentation preference can never read as permission on any agent. Every entry names its reason and maps back to the support id.",
+  "rules": {
+    "agent_does_it": {
+      "productRule": "Where you are already permitted to act, perform the edit or command yourself instead of instructing me to. This preference is not approval: permission prompts and my explicit confirmation still apply.",
+      "reason": "Source wording could be read as granting authority to act. A presentation preference must not grant execution permission (dispatch §4)."
+    },
+    "confirm_before_proceeding": {
+      "productRule": "Wait for a typed confirmation before each irreversible step. A confirmation covers only the step it was given for; an earlier or remembered 'yes', a default, or this setting itself is not confirmation.",
+      "reason": "A remembered generic 'yes' or a profile selection must not satisfy a confirmation request (brief, candidate scope)."
+    },
+    "decide_for_me": {
+      "productRule": "Make reversible decisions about approach and presentation yourself, state them, and say how to reverse them. Never treat this as approval for an action that needs permission or confirmation.",
+      "reason": "Source wording could extend to actions; narrowed to presentation/approach so it cannot stand in for approval."
+    },
+    "recommended_default": {
+      "productRule": "Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.",
+      "reason": "Silence-as-default must not become consent for actions."
+    },
+    "never_correct_typing": {
+      "productRule": "Interpret misspellings silently. Never correct, quote back, or comment on them. If a misspelling could change what is done to files, commands or data, ask instead of guessing.",
+      "reason": "Conflict order rank 3 (confirm possibly-unintended input) outranks silent interpretation where an action is affected."
+    },
+    "answer_by_number": {
+      "productRule": "Frame questions so a single number or character is a complete answer. A one-character answer applies only to the question it answers.",
+      "reason": "Prevents a short answer being reused as approval for a different action."
+    }
+  },
+  "resolutions": {
+    "agent_does_it+confirm_before_proceeding": {
+      "productResolution": "Both. Act only where already permitted, and only after an explicit confirmation for that specific irreversible step; permission prompts still apply.",
+      "reason": "Source resolution referenced a typed confirmation but not the existing permission policy; made explicit that the preference grants nothing."
+    }
+  }
+}

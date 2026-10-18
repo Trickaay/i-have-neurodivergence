@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Attention"
+  short_description: "Presentation settings: Attention"
+  default_prompt: "Use $easier-attention for the rest of this session."
+policy:
+  allow_implicit_invocation: false

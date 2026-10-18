@@ -1,0 +1,26 @@
+{
+  "name": "what-would-make-this-easier",
+  "version": "0.4.0",
+  "description": "Output-shaping skills for a reader who chose them: 16 condition skills, the needs picker, 2 learning and communication skills, and 12 per-area skills. Nothing infers, stores or displays a condition.",
+  "author": {
+    "name": "Accessibility skill pack contributors",
+    "url": "https://github.com/Trickaay/i-have-neurodivergence"
+  },
+  "homepage": "https://github.com/Trickaay/i-have-neurodivergence",
+  "license": "MIT",
+  "keywords": [
+    "accessibility",
+    "neurodiversity",
+    "output-formatting",
+    "personalisation",
+    "screen-reader"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "What Would Make This Easier",
+    "developerName": "Accessibility skill pack contributors",
+    "shortDescription": "Presentation settings the reader chooses, one skill each",
+    "longDescription": "Skills that change how Codex lays out, paces and words its answers, chosen by the reader by area or by a label they already use. Every skill loads only when named. None grants permission or stands in for a confirmation.",
+    "category": "Productivity"
+  }
+}

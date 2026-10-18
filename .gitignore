@@ -1,0 +1,36 @@
+# Local credentials and assistant/editor state
+.env
+.env.*
+!.env.example
+.claude/
+.codex/
+.hermes/
+.vscode/
+.idea/
+
+# Personal picker profiles and raw session evidence
+/needs.yaml
+/needs.yml
+/my-setup/
+/platforms/evidence/
+/private-original/
+*.log
+*.har
+
+# Generated caches and local dependencies
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# Research and development material excluded from this release
+/REPORT.md
+/ADDITIONS.md
+/RESEARCH_REVIEW*
+/EVALUATION_PILOT.md
+/RENDER_SAFETY.md
+/rebuild/

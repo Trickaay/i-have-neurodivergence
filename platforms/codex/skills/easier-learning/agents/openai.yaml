@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Learning"
+  short_description: "Presentation settings: Learning"
+  default_prompt: "Use $easier-learning for the rest of this session."
+policy:
+  allow_implicit_invocation: false

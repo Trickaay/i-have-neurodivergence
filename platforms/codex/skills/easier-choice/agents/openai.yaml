@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Choice and decision"
+  short_description: "Presentation settings: Choice and decision"
+  default_prompt: "Use $easier-choice for the rest of this session."
+policy:
+  allow_implicit_invocation: false

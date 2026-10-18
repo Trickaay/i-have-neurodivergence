@@ -1,0 +1,737 @@
+<title>What Would Make This Easier</title>
+<style>
+:root{
+  --ground:#F3F4F7; --surface:#FFFFFF; --surface-2:#FAFBFC;
+  --ink:#191D25; --muted:#5B6373; --line:#DBDFE7; --line-strong:#B9C0CC;
+  --accent:#2E5C8A; --accent-soft:#E6EDF6; --accent-ink:#1F4267;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --r:6px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#14171C; --surface:#1C2027; --surface-2:#22272F;
+  --ink:#E7EAEF; --muted:#959DAC; --line:#2C323B; --line-strong:#454D59;
+  --accent:#82ACD9; --accent-soft:#1E2937; --accent-ink:#A8C7E8;
+}}
+:root[data-theme="dark"]{
+  --ground:#14171C; --surface:#1C2027; --surface-2:#22272F;
+  --ink:#E7EAEF; --muted:#959DAC; --line:#2C323B; --line-strong:#454D59;
+  --accent:#82ACD9; --accent-soft:#1E2937; --accent-ink:#A8C7E8;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;margin:0;padding-block:0 64px;padding-left:20px;padding-right:20px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0}
+header{padding-block:44px 28px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.01em;line-height:1.15}
+.standfirst{margin-top:14px;max-width:62ch;color:var(--muted);font-size:16px}
+.assure{margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r);max-width:62ch}
+.assure strong{display:block;font-weight:600;margin-bottom:2px}
+.assure span{color:var(--muted);font-size:14px}
+.flow{margin-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em}
+.flow b{color:var(--ink);font-weight:500}
+
+.cols{display:grid;grid-template-columns:1fr;gap:32px;margin-top:32px;align-items:start}
+@media(min-width:1000px){.cols{grid-template-columns:minmax(0,1fr) 400px;gap:40px}}
+.step{margin-bottom:36px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+h2{font-family:var(--serif);font-size:23px;font-weight:500}
+.hint{color:var(--muted);font-size:14px;margin-top:6px;max-width:62ch}
+.fmtrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.fmtrow label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fmtrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%;flex:1 1 200px}
+.fmtrow select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.fmthint{font-size:12.5px;color:var(--muted);margin:0 0 8px}
+.freetext{display:block;width:100%;margin-top:8px;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);resize:vertical}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 20px;border-bottom:1px solid var(--line)}
+.tab{font:inherit;font-size:14px;font-weight:500;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;border-radius:var(--r) var(--r) 0 0}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);background:var(--accent-soft)}
+.tab:hover{color:var(--ink)}
+
+.areagroup{margin-bottom:22px}
+.areahead{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.areahead h3{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);font-weight:500}
+.areahead p{margin:0;font-size:13px;color:var(--muted)}
+.opts{display:grid;gap:6px}
+@media(min-width:660px){.opts.two{grid-template-columns:1fr 1fr}}
+
+label.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);cursor:pointer;font-size:14.5px}
+label.opt:hover{border-color:var(--line-strong)}
+label.opt:has(input:checked){background:var(--accent-soft);border-color:var(--accent);font-weight:500}
+label.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+label.opt input{margin:3px 0 0;accent-color:var(--accent);flex:0 0 auto}
+.opt .defers{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px}
+.supwrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.supwrap:has(input:checked){border-color:var(--accent)}
+.supwrap label.opt{border:0;background:none}
+.supwrap details{border-top:1px solid var(--line);margin:0}
+.supwrap summary{font-size:12.5px;color:var(--muted);cursor:pointer;padding:6px 12px;list-style:none}
+.supwrap summary::-webkit-details-marker{display:none}
+.supwrap summary::before{content:"+ ";font-family:var(--mono)}
+.supwrap details[open] summary::before{content:"− "}
+.supwrap summary:hover{color:var(--ink)}
+.why{padding:0 12px 12px;font-size:13px;color:var(--muted)}
+.why p{margin:0 0 8px}
+.why .tierline{font-family:var(--mono);font-size:11.5px}
+pre.demo{font-family:var(--mono);font-size:12px;line-height:1.55;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:8px 10px;margin:0;white-space:pre-wrap;color:var(--ink)}
+
+.helps{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
+.helps > h3{font-size:16px;font-weight:600;margin-bottom:2px}
+.helps .said{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:12px}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button.mini{font:inherit;font-size:13px;font-weight:500;padding:6px 12px;background:var(--surface-2);color:var(--ink);border:1px solid var(--line-strong);border-radius:var(--r);cursor:pointer}
+button.mini:hover{background:var(--accent-soft);border-color:var(--accent)}
+button.mini:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.mini.primary{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+
+.cmp{margin-top:14px;border:1px solid var(--accent);border-radius:var(--r);padding:14px;background:var(--surface-2)}
+.cmp h4{margin:0 0 2px;font-size:15px;font-weight:600}
+.cmp .sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-bottom:12px}
+.pair{display:grid;gap:12px;margin-bottom:12px}
+@media(min-width:620px){.pair{grid-template-columns:1fr 1fr}}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px}
+.side .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:6px}
+.side pre{margin:0;font-family:var(--mono);font-size:12px;white-space:pre-wrap;line-height:1.55}
+
+.ctxrow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;font-size:14px}
+.ctxrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%}
+.ctxrow select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+@media(min-width:1000px){.panel{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}}
+.panel h2{font-size:19px}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+.saidlist{margin:14px 0 0;padding:0;list-style:none;font-size:14px}
+.saidlist li{padding:5px 0 5px 16px;position:relative;border-bottom:1px solid var(--line)}
+.saidlist li::before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;background:var(--accent);border-radius:1px}
+.saidlist li:last-child{border-bottom:0}
+.saidlist li.hdr{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:0;padding-left:0}
+.saidlist li.hdr::before{display:none}
+.saidlist li .scope{color:var(--muted);font-size:12px;font-family:var(--mono)}
+.blank{color:var(--muted);font-size:14px;font-style:italic}
+.pv{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:12px;overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word}
+pre.answer{font-family:var(--sans);font-size:13.5px;line-height:1.6}
+.pvnote{font-size:12px;color:var(--muted);margin-top:8px}
+footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;max-width:70ch}
+footer h3{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+@media(prefers-reduced-motion:no-preference){label.opt,button.mini,.tab,.supwrap{transition:background-color .12s ease,border-color .12s ease}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>What would make this easier?</h1>
+  <p class="standfirst">A setup built from what you notice about the exchange, not from anything about you. Tick what you recognise, choose what helps &mdash; or compare two side by side and pick the one that reads better.</p>
+  <div class="assure">
+    <strong>You can change this any time.</strong>
+    <span>Nothing here is a diagnosis. These are just the ways you would like me to work with you.</span>
+  </div>
+  <p class="flow"><b>What is difficult</b> &rarr; <b>what would help</b> &rarr; <b>see the difference</b> &rarr; <b>choose context</b> &rarr; <b>portable support profile</b></p>
+</header>
+
+<div class="cols">
+  <main>
+    <section class="step">
+      <span class="eyebrow">Step 1 of 3</span>
+      <h2>Tick anything you recognise</h2>
+      <p class="hint">All optional. Skip straight to picking supports by area, or start from a label you already have.</p>
+      <div class="tabs" role="tablist" aria-label="How to start">
+        <button class="tab" role="tab" id="tab-d" aria-controls="pane-d" aria-selected="true">What&rsquo;s hard</button>
+        <button class="tab" role="tab" id="tab-a" aria-controls="pane-a" aria-selected="false">By area</button>
+        <button class="tab" role="tab" id="tab-p" aria-controls="pane-p" aria-selected="false">From a label</button>
+      </div>
+      <div id="pane-d" role="tabpanel" aria-labelledby="tab-d"></div>
+      <div id="pane-a" role="tabpanel" aria-labelledby="tab-a" hidden></div>
+      <div id="pane-p" role="tabpanel" aria-labelledby="tab-p" hidden></div>
+    </section>
+
+    <section class="step">
+      <span class="eyebrow">Step 2 of 3</span>
+      <h2>What helps?</h2>
+      <p class="hint" id="step2hint">Nothing ticked yet. Choose something above, or pick supports directly under &ldquo;By area&rdquo;.</p>
+      <div id="helps"></div>
+    </section>
+
+    <section class="step" id="step3" hidden>
+      <span class="eyebrow">Step 3 of 3</span>
+      <h2>When should these apply?</h2>
+      <p class="hint">Everything is <em>Always</em> unless you change it. Most people never need this &mdash; it is here because a support you want at work can be the wrong thing while brainstorming.</p>
+      <div id="ctx"></div>
+    </section>
+  </main>
+
+  <aside class="panel" aria-label="Your setup">
+    <h2>Your setup</h2>
+    <p class="count" id="count">nothing chosen &middot; plain default</p>
+    <ul class="saidlist" id="saidlist"></ul>
+    <div class="pv">
+      <div class="tabs" role="tablist" aria-label="Setup view" style="margin-top:0">
+        <button class="tab" role="tab" id="tab-pv" aria-controls="pane-pv" aria-selected="true">Preview</button>
+        <button class="tab" role="tab" id="tab-yml" aria-controls="pane-yml" aria-selected="false">Copy for your agent</button>
+      </div>
+      <div id="pane-pv" role="tabpanel" aria-labelledby="tab-pv">
+        <pre class="answer" id="preview"></pre>
+        <p class="pvnote" id="pvnote"></p>
+      </div>
+      <div id="pane-yml" role="tabpanel" aria-labelledby="tab-yml" hidden>
+        <div class="fmtrow">
+          <label for="fmt">Give me this as</label>
+          <select id="fmt">
+            <option value="rules">Plain instructions &mdash; paste anywhere</option>
+            <option value="agents">AGENTS.md / CLAUDE.md section</option>
+            <option value="skill">A skill file (SKILL.md)</option>
+            <option value="yaml">Support profile (YAML)</option>
+            <option value="json">JSON</option>
+          </select>
+        </div>
+        <p class="fmthint" id="fmthint"></p>
+        <pre id="yaml"></pre>
+        <div class="quick"><button class="mini primary" id="copy">Copy</button><button class="mini" id="download">Download</button><button class="mini" id="reset">Start again</button></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <h3>What a support is</h3>
+  <p>Supports change how information and interaction are presented. They never infer anything about you. Some of them deliberately hold detail back or narrow a list of options &mdash; those say so on the label, before you choose them.</p>
+  <h3 style="margin-top:16px">This page follows the rules it is collecting</h3>
+  <p>No meaning is carried by colour alone, nothing animates, nothing is required, every choice is reversible, and no question asks how anything feels. The provenance of each support &mdash; what it does and how good the evidence for it is &mdash; sits behind &ldquo;Why is this offered?&rdquo; rather than on the face of the choice. The preview is a real sample answer rebuilt from your selections; it demonstrates 31 of the 72 supports.</p>
+</footer>
+</div>
+
+<script id="vocab" type="application/json">{"areas":[{"id":"understanding","label":"Understanding","description":"Making sense of what is said: wording, terms, examples, implied meaning."},{"id":"information_load","label":"Information load","description":"How much arrives at once: length, density, layers."},{"id":"attention","label":"Attention","description":"Staying on one thing, and getting back to it."},{"id":"planning","label":"Planning","description":"Breaking work up, ordering it, and starting it."},{"id":"memory","label":"Memory","description":"Not having to hold things in your head between turns."},{"id":"learning","label":"Learning","description":"Taking in something new: examples, representation, checking."},{"id":"communication","label":"Communication","description":"Intent, implication, tone, and questions."},{"id":"sensory","label":"Sensory and interface","description":"Visual density, motion, colour, sound."},{"id":"choice","label":"Choice and decision","description":"How options are offered and decided."},{"id":"transitions","label":"Transitions","description":"Changing topic or task without losing the thread."},{"id":"motor","label":"Motor and interaction","description":"What you physically have to do to act on a response."},{"id":"pacing","label":"Pacing","description":"Time, speed, confirmation, and how much is asked at once."}],"difficulties":[{"id":"long_explanations","label":"I lose track of long explanations","area":"information_load","offers":["summary_first","short_sections","one_instruction","progress_markers","restate_goal","progressive_disclosure"],"recommended":["summary_first","short_sections"],"compare_pairs":[["summary_first","one_instruction"],["short_sections","progressive_disclosure"],["progress_markers","restate_goal"]]},{"id":"need_steps","label":"I need things broken into steps","area":"planning","offers":["break_down","sequence_explicitly","next_step_only","done_when","one_instruction","meaning_before_command"],"recommended":["break_down","done_when"],"compare_pairs":[["break_down","next_step_only"],["done_when","meaning_before_command"],["sequence_explicitly","one_instruction"]]},{"id":"starting","label":"I struggle to start tasks","area":"planning","offers":["starting_prompt","if_then_triggers","next_step_only","break_down","decide_for_me"],"recommended":["starting_prompt","if_then_triggers"],"compare_pairs":[["starting_prompt","decide_for_me"],["if_then_triggers","next_step_only"],["break_down"]]},{"id":"too_many_choices","label":"I get overwhelmed by too many choices","area":"choice","offers":["fewer_options","recommended_default","decide_for_me","comparison_table","consequences_not_adjectives"],"recommended":["fewer_options","recommended_default"],"compare_pairs":[["fewer_options","comparison_table"],["recommended_default","decide_for_me"],["consequences_not_adjectives"]]},{"id":"visual_examples","label":"I need visual examples","area":"learning","offers":["visual_representation","worked_examples","worked_then_practice","comparison_table"],"recommended":["worked_examples","visual_representation"],"compare_pairs":[["visual_representation","worked_examples"],["worked_then_practice","comparison_table"]]},{"id":"literal","label":"I prefer exact / literal wording","area":"understanding","offers":["literal_wording","one_term_per_thing","explain_terms","state_the_inference","done_when"],"recommended":["literal_wording","one_term_per_thing"],"compare_pairs":[["literal_wording","state_the_inference"],["one_term_per_thing","explain_terms"],["done_when"]]},{"id":"implied_meaning","label":"I miss implied meaning or sarcasm","area":"communication","offers":["explicit_intent","no_implied_meaning","explain_implied","literal_wording","analogy_then_literal"],"recommended":["no_implied_meaning","explicit_intent"],"compare_pairs":[["explicit_intent","explain_implied"],["no_implied_meaning","analogy_then_literal"],["literal_wording"]]},{"id":"repetition","label":"I need important information repeated","area":"memory","offers":["repeat_key_info","restate_goal","no_carry_over","persistent_state","checkpoints"],"recommended":["repeat_key_info","restate_goal"],"compare_pairs":[["repeat_key_info","persistent_state"],["restate_goal","checkpoints"],["no_carry_over"]]},{"id":"visual_clutter","label":"I am sensitive to visual clutter","area":"sensory","offers":["reduce_visual_stimulus","low_density","uniform_format","short_sections","declare_length"],"recommended":["reduce_visual_stimulus","low_density"],"compare_pairs":[["reduce_visual_stimulus","low_density"],["uniform_format","declare_length"],["short_sections"]]},{"id":"sound_interruption","label":"I am sensitive to sound / interruptions","area":"sensory","offers":["quiet","reduce_motion","reduce_distraction","warn_before_switch"],"recommended":["quiet","reduce_motion"],"compare_pairs":[["quiet","reduce_distraction"],["reduce_motion","warn_before_switch"]]},{"id":"processing_time","label":"I need more time to process","area":"pacing","offers":["more_time","confirm_before_proceeding","one_instruction","progressive_disclosure","clock_not_feeling"],"recommended":["more_time","one_instruction"],"compare_pairs":[["more_time","confirm_before_proceeding"],["one_instruction","progressive_disclosure"],["clock_not_feeling"]]},{"id":"lost_after_interruption","label":"I forget where I was after interruptions","area":"memory","offers":["restart_help","recap","persistent_state","checkpoints","preserve_unfinished"],"recommended":["restart_help","persistent_state"],"compare_pairs":[["restart_help","preserve_unfinished"],["persistent_state","recap"],["checkpoints"]]},{"id":"switching","label":"I struggle switching between tasks","area":"transitions","offers":["warn_before_switch","preserve_unfinished","no_parallel","one_goal","stop_point"],"recommended":["warn_before_switch","preserve_unfinished"],"compare_pairs":[["warn_before_switch","no_parallel"],["preserve_unfinished","stop_point"],["one_goal"]]},{"id":"planning_sequencing","label":"I find planning and sequencing difficult","area":"planning","offers":["break_down","sequence_explicitly","prioritise","if_then_triggers","done_when"],"recommended":["break_down","prioritise"],"compare_pairs":[["break_down","prioritise"],["sequence_explicitly","if_then_triggers"],["done_when"]]},{"id":"structure_first","label":"I need to see the overall structure first","area":"understanding","offers":["summary_first","visual_representation","sequence_explicitly","progress_markers","explicit_intent"],"recommended":["summary_first","sequence_explicitly"],"compare_pairs":[["summary_first","visual_representation"],["sequence_explicitly","explicit_intent"],["progress_markers"]]},{"id":"acting_on_it","label":"Acting on the answer is the hard part","area":"motor","offers":["agent_does_it","one_physical_action","copyable_blocks","keyboard_first","no_spatial_directions"],"recommended":["agent_does_it","copyable_blocks"],"compare_pairs":[["agent_does_it","copyable_blocks"],["one_physical_action","no_spatial_directions"],["keyboard_first"]]},{"id":"running_out","label":"I run out of energy before the task does","area":"pacing","offers":["cost_upfront","smallest_version_first","stop_point","one_word_reduce","fewer_options"],"recommended":["cost_upfront","smallest_version_first"],"compare_pairs":[["cost_upfront","smallest_version_first"],["stop_point","one_word_reduce"],["fewer_options"]]},{"id":"feelings_questions","label":"I cannot answer questions about how I feel","area":"communication","offers":["no_feelings_questions","consequences_not_adjectives","recommended_default","clock_not_feeling"],"recommended":["no_feelings_questions","consequences_not_adjectives"],"compare_pairs":[["no_feelings_questions","recommended_default"],["consequences_not_adjectives","clock_not_feeling"]]},{"id":"being_told","label":"Being told to do something makes it harder","area":"communication","offers":["declarative_not_imperative","recommended_default","more_time","decide_for_me"],"recommended":["declarative_not_imperative","recommended_default"],"compare_pairs":[["declarative_not_imperative","decide_for_me"],["recommended_default","more_time"]]},{"id":"hear_output","label":"I hear the output rather than see it","area":"sensory","offers":["linear_output","summary_first","no_colour_meaning","declare_length","reduce_motion"],"recommended":["linear_output","summary_first"],"compare_pairs":[["linear_output","summary_first"],["no_colour_meaning","reduce_motion"],["declare_length"]]},{"id":"cannot_use_colour","label":"I cannot rely on the colours","area":"sensory","offers":["no_colour_meaning","copyable_blocks"],"recommended":["no_colour_meaning"],"compare_pairs":[["no_colour_meaning","copyable_blocks"]]},{"id":"doesnt_stick","label":"Explanations do not stick unless I do something with them","area":"learning","offers":["interactive_explanation","worked_then_practice","check_understanding","worked_examples","visual_representation"],"recommended":["worked_then_practice","interactive_explanation"],"compare_pairs":[["interactive_explanation","worked_examples"],["check_understanding","visual_representation"],["worked_then_practice"]]},{"id":"pulled_away","label":"I get pulled away from what I was doing","area":"attention","offers":["one_goal","reduce_distraction","restate_goal","progress_markers","one_instruction"],"recommended":["one_goal","restate_goal"],"compare_pairs":[["one_goal","reduce_distraction"],["restate_goal","progress_markers"],["one_instruction"]]},{"id":"forget_later","label":"I understand it now but forget it later","area":"learning","offers":["retrieval_feedback","spaced_revisit","representation_mapping","worked_then_practice"],"recommended":["retrieval_feedback","representation_mapping"],"compare_pairs":[["retrieval_feedback","worked_then_practice"],["spaced_revisit","representation_mapping"]]},{"id":"cannot_transfer","label":"I can copy the example but cannot use it elsewhere","area":"learning","offers":["transfer_check","fade_teaching_prompts","familiar_domain_examples","check_understanding"],"recommended":["transfer_check","fade_teaching_prompts"],"compare_pairs":[["transfer_check","check_understanding"],["fade_teaching_prompts","familiar_domain_examples"]]},{"id":"choose_purpose","label":"I want to choose: do it for me, show me, or let me try","area":"learning","offers":["purpose_do_it","purpose_show_me","purpose_practise_together","purpose_let_me_try"],"recommended":["purpose_show_me"],"compare_pairs":[["purpose_do_it","purpose_show_me"],["purpose_practise_together","purpose_let_me_try"]]},{"id":"silent_working","label":"Working it out silently in my head does not work for me","area":"learning","offers":["written_trace","no_imagery_requests","visual_representation","persistent_state"],"recommended":["written_trace"],"compare_pairs":[["written_trace","no_imagery_requests"],["visual_representation","persistent_state"]]},{"id":"whole_or_parts","label":"I need to choose between the whole explanation and one part at a time","area":"information_load","offers":["whole_explanation","interactive_explanation","summary_first","progress_markers"],"recommended":["whole_explanation"],"compare_pairs":[["whole_explanation","interactive_explanation"],["summary_first","progress_markers"]]},{"id":"wording_hard","label":"The wording is hard to follow even when I know the subject","area":"understanding","offers":["untangle_language","plain_language_version","explain_terms","short_sentences"],"recommended":["untangle_language"],"compare_pairs":[["untangle_language","plain_language_version"],["explain_terms","short_sentences"]]},{"id":"own_subject","label":"Examples from a subject I already know help me","area":"understanding","offers":["familiar_domain_examples","analogy_then_literal","worked_examples"],"recommended":["familiar_domain_examples"],"compare_pairs":[["familiar_domain_examples","analogy_then_literal"],["worked_examples"]]},{"id":"finding_words","label":"I know what I mean but finding the words is hard","area":"communication","offers":["help_me_say_it","communication_method","answer_by_number","ask_one"],"recommended":["help_me_say_it","answer_by_number"],"compare_pairs":[["help_me_say_it","answer_by_number"],["communication_method","ask_one"]]},{"id":"audio_video","label":"Audio or video is hard to follow","area":"sensory","offers":["media_access","repeat_key_info"],"recommended":["media_access"],"compare_pairs":[["media_access","repeat_key_info"]]},{"id":"other","label":"Something else...","area":"understanding","offers":[],"recommended":[],"compare_pairs":[]}],"support":[{"id":"literal_wording","area":"understanding","label":"Exact, literal wording","rule":"Use literal language only. No idiom, metaphor, sarcasm, hyperbole, or rhetorical questions.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"verifyToken reads JWT_SECRET.\nIt is unset when the tests run.","defers":false,"defers_note":""},{"id":"explain_terms","area":"understanding","label":"Explain terms as you use them","rule":"Define each technical term at first use, in one clause, in the same sentence.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The token is a JWT — a signed string the server can check without a database lookup.","defers":false,"defers_note":""},{"id":"worked_examples","area":"understanding","label":"Show a worked example","rule":"Give one complete worked example before or instead of an abstract rule.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Here it is done once, in full:\n  jwt.verify(token, secret)  ->  { userId: 'u_12' }","defers":false,"defers_note":""},{"id":"analogy_then_literal","area":"understanding","label":"Analogies, then the literal version","rule":"Label analogies `Analogy:` and follow immediately with `Literal:`, saying where the analogy stops applying. Offer one only when I have asked for analogies.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Analogy: the cache is a fixed-size queue.\nLiteral: maxSize is 500; entry 501 evicts entry 1.","defers":false,"defers_note":""},{"id":"state_the_inference","area":"understanding","label":"Spell out the reasoning","rule":"Never leave a 'therefore' unspoken. Every recommendation carries its reason in the same sentence.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Set JWT_SECRET in test/setup.ts, because verifyToken reads it and an unset secret is what returns 401.","defers":false,"defers_note":""},{"id":"one_term_per_thing","area":"understanding","label":"One name per thing","rule":"Use one term per concept for the whole session. No synonyms, no pronouns for key objects.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism, i-have-dyslexia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"verifyToken, every time. Not “the handler”, not “the auth thing”, not “it”.","defers":false,"defers_note":""},{"id":"meaning_before_command","area":"understanding","label":"Say what it does before the command","rule":"State what a command or code block does before showing it.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyslexia (hyperlexic).","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"This adds one line to test/setup.ts:\n  process.env.JWT_SECRET = 'test-secret'","defers":false,"defers_note":""},{"id":"summary_first","area":"information_load","label":"Summary first, detail underneath","rule":"Answer or summary in the first line. Detail after. Never the reverse.","evidence":"S","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: a published technical standard, recorded in the skill i-use-a-screen-reader.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The 401 comes from auth.ts:47.\nCause and fix below.","defers":false,"defers_note":""},{"id":"short_sections","area":"information_load","label":"Short labelled sections","rule":"Sections of at most five lines, each with a label.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Cause\n  JWT_SECRET is unset in the tests.\n\nFix\n  One line, below.","defers":false,"defers_note":""},{"id":"progressive_disclosure","area":"information_load","label":"Least first, more on request","rule":"Give the minimum that answers it. Offer depth as a named next step, do not include it.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Upgrade to 9 and convert the one function.\nSay “why” for the reasoning, “more” for the other two files.","defers":true,"defers_note":"Holds detail back until you ask for it."},{"id":"short_sentences","area":"information_load","label":"Short sentences","rule":"Sentences of 15 words or fewer. Paragraphs of 3 sentences or fewer.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-dyslexia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The token expired.\nThe handshake takes 6 seconds.\nRaise the timeout to 30.","defers":false,"defers_note":""},{"id":"declare_length","area":"information_load","label":"Say how long it is first","rule":"State what is coming and how long before anything longer than ten lines.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity, i-use-a-screen-reader.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Next: the cause, one command, one check. 9 lines.","defers":false,"defers_note":""},{"id":"no_tangents","area":"information_load","label":"Keep tangents out","rule":"Anything outside the current scope goes in a `Deferred:` list at the end, one line each.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"… and the test passes.\n\nDeferred:\n- Cookie SameSite setting in session.ts.","defers":false,"defers_note":""},{"id":"one_goal","area":"attention","label":"One goal at a time","rule":"One current goal, named at the top. Everything else is parked explicitly.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Current goal: make auth.spec.ts pass.\nParked: the cookie settings, the README.","defers":true,"defers_note":"Parks anything that is not the current goal."},{"id":"restate_goal","area":"attention","label":"Repeat the current goal","rule":"Restate the current goal at the start of every response.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Goal: make auth.spec.ts pass. Continuing from step 2.","defers":false,"defers_note":""},{"id":"one_instruction","area":"attention","label":"One instruction at a time","rule":"Give one instruction, then stop and wait for it to be done.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Add to test/setup.ts: process.env.JWT_SECRET = 'test-secret'\n\nThat is the whole step. Tell me when it is done.","defers":true,"defers_note":"Holds the next instruction back until this one is done."},{"id":"progress_markers","area":"attention","label":"Progress markers","rule":"Show step N of M on every step.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-tics.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Step 2 of 3 · convert verifyToken","defers":false,"defers_note":""},{"id":"restart_help","area":"attention","label":"Help me pick up where I was","rule":"After any gap, open with location, last action, next action, on one line.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Where we are: auth.ts:42 · dependency upgraded · next is the token check.","defers":false,"defers_note":""},{"id":"reduce_distraction","area":"attention","label":"Nothing that pulls attention away","rule":"No asides, no 'by the way', no unrequested suggestions, no notifications.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"(the response ends at the answer — no asides, no “by the way”, no extra suggestions)","defers":false,"defers_note":""},{"id":"break_down","area":"planning","label":"Break it into steps","rule":"Decompose into steps of one action each.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"1. Upgrade the dependency.\n2. Convert verifyToken.\n3. Run the test.","defers":false,"defers_note":""},{"id":"sequence_explicitly","area":"planning","label":"Number and order the steps","rule":"Number every step and state what each one depends on.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"2. Convert verifyToken. Depends on step 1 — the promise form does not exist before the upgrade.","defers":false,"defers_note":""},{"id":"next_step_only","area":"planning","label":"Show only the next step","rule":"Show one step. Hold the rest until that one is done.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Step 1: upgrade the dependency.\nStep 2 comes when step 1 is done.","defers":true,"defers_note":"Holds later steps back until this one is done."},{"id":"starting_prompt","area":"planning","label":"Give me a way to start","rule":"Open with a first action that takes under two minutes and contains no decision.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-inertia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"First action: open src/auth.ts and go to line 42.\nThat is the whole step. No decisions needed.","defers":false,"defers_note":""},{"id":"if_then_triggers","area":"planning","label":"Attach actions to a trigger","rule":"Phrase every next action as 'When <observable event>, <action>'.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"When the file is saved, run npm test -- auth.spec.ts.","defers":false,"defers_note":""},{"id":"done_when","area":"planning","label":"Say when a step is finished","rule":"Every step states its observable completion condition.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Run npm test -- auth.spec.ts.\nDone when: the last line reads 1 passing.","defers":false,"defers_note":""},{"id":"prioritise","area":"planning","label":"Tell me what to do first","rule":"State which item comes first and why, rather than giving a flat list.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Do the dependency first — the other two both fail until it is done.","defers":false,"defers_note":""},{"id":"recap","area":"memory","label":"Recap where we are","rule":"One-line recap at the start of any response following a gap.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Where we are: auth.ts converted, tests not yet run.","defers":false,"defers_note":""},{"id":"persistent_state","area":"memory","label":"Keep a running state block","rule":"Maintain a `State:` block with done, now, next, open — same place, every turn.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"State:\n- Done: secret set in test/setup.ts\n- Now: rerun auth.spec.ts\n- Next: the same import in session.spec.ts","defers":false,"defers_note":""},{"id":"no_carry_over","area":"memory","label":"Never make me remember a value","rule":"Restate every path, identifier, number and command at the point of use.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Run npm test -- auth.spec.ts. This is the command from step 2, unchanged.","defers":false,"defers_note":""},{"id":"checkpoints","area":"memory","label":"Mark checkpoints","rule":"Mark a resumable checkpoint after each step, naming the exact state.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Checkpoint: dependency at 9.0.2, no files edited. Safe to stop here.","defers":false,"defers_note":""},{"id":"repeat_key_info","area":"memory","label":"Repeat important things","rule":"Restate a fact rather than referring back to it. Outside a practice I opted into, repetition over retrieval.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The secret comes from process.env.JWT_SECRET — the same variable as in step 1.","defers":false,"defers_note":""},{"id":"visual_representation","area":"learning","label":"Draw the structure","rule":"Give the structure as a diagram, tree or table, with its text equivalent below it.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"request -> authMiddleware -> verifyToken -> handleLogin\n\nIn words: the request reaches the middleware first.","defers":false,"defers_note":""},{"id":"no_imagery_requests","area":"learning","label":"Never ask me to picture it","rule":"Never say picture, imagine, visualise or 'see it as'. Supply the artefact instead.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-aphantasia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The token has expired.\n(instead of: picture the token as a stamped ticket)","defers":false,"defers_note":""},{"id":"interactive_explanation","area":"learning","label":"One part at a time, with the map","rule":"Explain one part, then show where it belongs in the whole and keep that map visible. Wait for me before the next part. Do not require a confirmation after every paragraph if I say interruptions make it harder.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Part 1 of 3: where the secret is read (src/auth.ts:42). Map: setup -> read -> test. Say \"next\" for part 2.","defers":false,"defers_note":""},{"id":"worked_then_practice","area":"learning","label":"Example first, then one to try","rule":"Give a worked example, then one similar item for the reader to do.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Done once for auth.spec.ts, above.\nNow the same import for session.spec.ts — line 1.","defers":false,"defers_note":""},{"id":"check_understanding","area":"learning","label":"Check I have it, using facts","rule":"Check by asking a question with a right answer, never by asking whether it made sense.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Quick check: which line returns the 401 — 47 or 22?","defers":false,"defers_note":""},{"id":"explicit_intent","area":"communication","label":"Say what you are doing and why","rule":"State the purpose of the response in its first line.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"This finds the cause of the 401. It does not fix the cookie settings.","defers":false,"defers_note":""},{"id":"no_implied_meaning","area":"communication","label":"No hints or implication","rule":"State things directly. No hints, no leading questions, no expecting a conclusion to be drawn.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The test will keep failing until the dependency is upgraded.\n(instead of: you might want to look at the dependency)","defers":false,"defers_note":""},{"id":"explain_implied","area":"communication","label":"Unpack what others implied","rule":"When quoting someone else's message, give the literal reading and the likely intended reading separately, labelled.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"They wrote “whenever you get a chance”.\nLiterally: no deadline. Likely intended: this week.","defers":false,"defers_note":""},{"id":"plain_tone","area":"communication","label":"Plain tone, no filler","rule":"No greeting, praise, enthusiasm or closing pleasantry. An apology for an actual error is information: one sentence, then cause, effect and fix.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Test failed. Cause: missing Authorization header. Fix: add it at line 40.","defers":false,"defers_note":""},{"id":"no_feelings_questions","area":"communication","label":"Do not ask how I feel about it","rule":"Never ask how something feels, seems or sits. Offer observable options instead.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-alexithymia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"1. Upgrade — the 401 stops.\n2. Pin — nothing changes today.\nWhich: 1 or 2.","defers":false,"defers_note":""},{"id":"ask_one","area":"communication","label":"One question, clearly marked","rule":"At most one question per response, in a marked block, saying what each answer changes.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Question: which database?\nIf Postgres: JSONB. If SQLite: TEXT, parsed in code.","defers":false,"defers_note":""},{"id":"declarative_not_imperative","area":"communication","label":"State the situation, do not instruct","rule":"Describe the state of the work rather than issuing commands.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The tests have not been run since the edit.\n(instead of: run the tests)","defers":false,"defers_note":""},{"id":"reduce_motion","area":"sensory","label":"No motion","rule":"No animation, spinners, progress bars, or redrawn lines.","evidence":"S","evidence_basis":{"phenomenon":"The letter rates the underlying access need, not this rule: reduced-motion accessibility requirements in published web standards.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Installing. 12 seconds elapsed.\n(instead of a spinner redrawing ten times a second)","defers":false,"defers_note":""},{"id":"reduce_visual_stimulus","area":"sensory","label":"Less on screen","rule":"No emoji, exclamation marks, ALL CAPS, ASCII art, box drawing, or decorative rules.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Note: the cookie setting is also wrong.\n(instead of: ✅ IMPORTANT! Don't forget!!)","defers":false,"defers_note":""},{"id":"uniform_format","area":"sensory","label":"Same shape every time","rule":"Same structure and labels each turn. Announce any change of shape before it happens.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Every turn: Scope, then steps, then Status. Same labels, same order.","defers":false,"defers_note":""},{"id":"quiet","area":"sensory","label":"No sound or pop-ups","rule":"No terminal bell, notification, or window focus change.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"(no terminal bell, no notification, no window stealing focus)","defers":false,"defers_note":""},{"id":"low_density","area":"sensory","label":"Space it out","rule":"One idea per line. No dense or multi-column tables.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"auth-service: passing.\n\nsession-service: failing, 1 test.","defers":false,"defers_note":""},{"id":"no_colour_meaning","area":"sensory","label":"Never rely on colour","rule":"Never identify anything by its colour. Every status carries a word.","evidence":"S","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: a published technical standard, recorded in the skill i-have-colour-vision-deficiency.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Two tests are listed as FAIL.\n(instead of: two of them show up in red)","defers":false,"defers_note":""},{"id":"linear_output","area":"sensory","label":"Readable as a flat stream","rule":"No meaning carried by alignment, indentation or layout. Tables become labelled lists.","evidence":"S","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: a published technical standard, recorded in the skill i-use-a-screen-reader.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Service: auth-service. Status: passing. Tests: 12 of 12.\n(instead of a four-column table)","defers":false,"defers_note":""},{"id":"fewer_options","area":"choice","label":"Fewer options","rule":"At most two or three options, ever.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"1. Upgrade to 9.\n2. Pin 8.5.1.\n(instead of four options)","defers":true,"defers_note":"Leaves some options out."},{"id":"recommended_default","area":"choice","label":"Always give a default","rule":"Name a default and say what happens if nothing is said.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand, i-have-alexithymia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Default: 1, if you say nothing.","defers":false,"defers_note":""},{"id":"comparison_table","area":"choice","label":"Compare on the same points","rule":"Compare options against the same named dimensions, side by side.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"           upgrade   pin\nfixes 401    yes      no\nfiles        1        0","defers":false,"defers_note":""},{"id":"consequences_not_adjectives","area":"choice","label":"Describe what will be true, not which is better","rule":"Describe each option by its observable consequence, never as better, cleaner or nicer.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-alexithymia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"1. Upgrade — the 401 stops; session.ts needs the same change later.\n(instead of: the cleaner option)","defers":false,"defers_note":""},{"id":"decide_for_me","area":"choice","label":"Decide the reversible ones for me","rule":"Make reversible decisions yourself, state them, and say how to reverse them.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Going with the promise form. Reversible: git revert 4a1c9f2.","defers":false,"defers_note":""},{"id":"warn_before_switch","area":"transitions","label":"Warn me before changing topic","rule":"Say before changing topic, and name what is being left.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Leaving auth.ts at line 58, converted and saved. Moving to session.ts.","defers":false,"defers_note":""},{"id":"preserve_unfinished","area":"transitions","label":"Hold my unfinished thread","rule":"Park unfinished work with its exact resumption state and trigger.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Parked: dependency install, running in terminal 1.\nTo resume: when it prints “added 41 packages”, return to step 3.","defers":false,"defers_note":""},{"id":"stop_point","area":"transitions","label":"Offer a clean stopping point","rule":"Name a clean stop point before long work begins, and what will be true there.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-inertia, i-have-limited-energy.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Clean stop: when the test passes. One file changed, nothing half-edited.","defers":false,"defers_note":""},{"id":"no_parallel","area":"transitions","label":"Never two things at once","rule":"Never leave two items in progress at the same time.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The install is still running. Nothing else starts until it finishes.","defers":false,"defers_note":""},{"id":"agent_does_it","area":"motor","label":"Do it rather than tell me to","rule":"Perform the edit or command yourself instead of instructing the reader to.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"I have made the edit at src/auth.ts:42. Nothing for you to type.","defers":false,"defers_note":""},{"id":"keyboard_first","area":"motor","label":"Typed commands, not mouse paths","rule":"Give typed commands. Never key chords or mouse directions.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Run: git commit -am \"fix token check\"\n(instead of: press Ctrl+Shift+P and click Commit)","defers":false,"defers_note":""},{"id":"one_physical_action","area":"motor","label":"One physical action per step","rule":"One physical action per step, each with a recovery line if it goes wrong.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Save the file. If the editor reports a conflict, close without saving and tell me.","defers":false,"defers_note":""},{"id":"no_spatial_directions","area":"motor","label":"Name it, do not point at it","rule":"Name the control, file and line number. Never 'above', 'top right', 'the one below'.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia, i-have-aphantasia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"src/auth.ts, line 42.\n(instead of: near the top of the file, on the right)","defers":false,"defers_note":""},{"id":"copyable_blocks","area":"motor","label":"Everything copy-ready","rule":"Every exact string in its own copyable block, never inside a sentence.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyslexia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"process.env.JWT_SECRET = 'test-secret'   (in test/setup.ts)","defers":false,"defers_note":""},{"id":"answer_by_number","area":"motor","label":"Let me answer with one character","rule":"Frame questions so a single number or character is a complete answer.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dysgraphia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"1 Postgres   2 SQLite\nReply with 1 or 2.","defers":false,"defers_note":""},{"id":"never_correct_typing","area":"motor","label":"Do not correct my typing","rule":"Interpret misspellings silently. Never correct, quote back, or comment on them.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dysgraphia.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Opening verifyToken and carrying on.","defers":false,"defers_note":""},{"id":"more_time","area":"pacing","label":"No time pressure","rule":"No urgency words. No deadline that is not real and sourced.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The token expires at 14:00. That is the only deadline.\n(instead of: do this as soon as possible)","defers":false,"defers_note":""},{"id":"confirm_before_proceeding","area":"pacing","label":"Confirm before each step","rule":"Wait for a typed confirmation before each irreversible step.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-tics.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"This drops the sessions table. Type “yes” to run it.","defers":false,"defers_note":""},{"id":"clock_not_feeling","area":"pacing","label":"Times as numbers","rule":"State durations as numbers. Never 'quick', 'shortly' or 'a while'.","evidence":"A","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"The suite took 4 minutes 10 seconds on the last run.\n(instead of: it takes a while)","defers":false,"defers_note":""},{"id":"cost_upfront","area":"pacing","label":"Tell me what it will cost first","rule":"State steps, decisions required, and minutes, before starting.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-limited-energy.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Cost: 4 steps · 1 decision from you · about 25 minutes.","defers":false,"defers_note":""},{"id":"smallest_version_first","area":"pacing","label":"Smallest useful version first","rule":"Offer the smallest version that actually works before the full one.","evidence":"B","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-limited-energy.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Smallest version: fix auth.ts only — 2 steps, 8 minutes.\nFull version: all three files — 6 steps, 70 minutes.","defers":true,"defers_note":"Offers a smaller piece of work before the whole one."},{"id":"one_word_reduce","area":"pacing","label":"One word to shorten everything","rule":"Honour a single word that reduces any answer to its shortest form.","evidence":"D","evidence_basis":{"phenomenon":"The letter rates the underlying difficulty, not this rule: design inference.","method":"Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Say “less” at any point for the shortest form of any answer.","defers":false,"defers_note":""},{"id":"purpose_do_it","area":"learning","label":"Do the task for me","rule":"Complete the task yourself and show the result. Explain only what I ask about. My other settings stay on.","evidence":"D","evidence_basis":{"phenomenon":"A stated purpose, not a difficulty: the person chooses whether this exchange completes, demonstrates or practises (CAST UDL 3.0, choice and autonomy, S10).","method":"Design inference (D): making the purpose explicit stops an agent from either withholding help or doing everything.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Done: test/setup.ts now sets JWT_SECRET; auth.spec.ts passes. Say \"why\" for the cause.","defers":false,"defers_note":""},{"id":"purpose_show_me","area":"learning","label":"Show me how it is done","rule":"Demonstrate the task step by step with every intermediate state visible, then give the result. Do not ask me to do a step unless I say so.","evidence":"B","evidence_basis":{"phenomenon":"Demonstration followed by practice improved vocational skills for two of three autistic adults, with transfer for two (English et al. 2017, S31): a very small single-case study, task-specific. Worked examples are general instructional evidence (Atkinson et al. 2003, S06).","method":"Design inference (D): a demonstration with the state visible before and after each step; static step captures stand in where no recording is possible.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Step 1: test/setup.ts before: (no JWT_SECRET line). After: process.env.JWT_SECRET = 'test-secret'.\nStep 2: npm test -- auth.spec.ts -> 1 passing.","defers":false,"defers_note":""},{"id":"purpose_practise_together","area":"learning","label":"Let me practise it with you","rule":"Work through it with me: do the first step fully, then offer me one step with a hint available, then the next. If I say \"you do it\", finish it without comment.","evidence":"B","evidence_basis":{"phenomenon":"Fading solution steps with a focused question improved learning in two instructional experiments (Atkinson et al. 2003, S06); not autism-specific.","method":"Design inference (D): one offered step at a time, help restorable at any point, no penalty for handing the step back.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"I set the secret in test/setup.ts. Your turn: which test file needs the same line? Hint: it calls refreshToken.","defers":false,"defers_note":""},{"id":"purpose_let_me_try","area":"learning","label":"Let me try it myself","rule":"Set the task up and let me attempt it. Give the answer whenever I ask, with no penalty and no comment. Review my attempt by stating what is correct, what is not, and why.","evidence":"A","evidence_basis":{"phenomenon":"Retrieval with feedback improved later performance for autistic and non-autistic adults on word pairs (Cairney et al. 2026, S03); the task boundary is narrow and does not cover complex reasoning.","method":"Design inference (D): an attempt with the answer always available; feedback states the relationship, never a judgment about effort.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Your attempt: import './setup' at line 1 of session.spec.ts. Correct: the file now loads the secret. Missing: auth.spec.ts still needs the same import.","defers":false,"defers_note":""},{"id":"retrieval_feedback","area":"learning","label":"Let me try remembering, with hints and the answer available","rule":"After an explanation, offer one optional recall or application question. If I attempt it, show the correct answer and explain the relationship it rests on; a wrong answer gets a better explanation, never a judgment. \"Hint\", \"show me\" and \"skip\" are always available, and the answer is never withheld as the price of continuing. Note whether I recalled it or recognised it.","evidence":"A","evidence_basis":{"phenomenon":"Feedback after retrieval helped autistic and non-autistic adults in two experiments, and retrieval beat restudy in the second (Cairney et al. 2026, S03: online sample, self-reported formal diagnosis, unrelated word pairs). Retrieval also helped students with ADHD without removing every difference (Minear et al. 2023, S09).","method":"The general retrieval-practice effect is replicated (A); its application to complex technical learning through an assistant is an inference (D). Recognition from a list and unaided recall are different tasks and are recorded as such.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Optional: which variable does verifyToken read the secret from? (hint / show me / skip)\n-> JWT_SECRET. It is read at src/auth.ts:42; the test sets it in test/setup.ts.","defers":false,"defers_note":""},{"id":"fade_teaching_prompts","area":"learning","label":"Give less help gradually, and let me restore it","rule":"Across a sequence of examples, remove one solution step at a time and ask which rule justifies it, never for a long explanation. Keep the full worked example available on request. Fade teaching prompts only, never access aids: captions, symbol keys, diagrams, calculators and text-to-speech stay as long as I want them.","evidence":"A","evidence_basis":{"phenomenon":"Progressively removed solution steps with prompts about the principle improved learning in two instructional experiments (Atkinson, Renkl and Merrill 2003, S06); general, not autistic-adult evidence.","method":"Design inference (D): fading applies to teaching prompts only; continued use of an access aid is not failed learning.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Example 3 of 3: the secret is set; the import is missing from one file. Which file, and which rule says so? (full example on request)","defers":false,"defers_note":""},{"id":"transfer_check","area":"learning","label":"Show the same idea in a different example","rule":"After an example, change one relevant feature and say what changed and what stayed the same. Include one contrasting case where the rule does not apply. For technical work, apply the principle in a different file, dataset or diagram. Keep my chosen way of answering.","evidence":"D","evidence_basis":{"phenomenon":"Combining examples with problem solving, connecting representations and asking explanatory questions is recommended with varying evidence ratings (IES practice guide, S01); not autism-specific.","method":"Design inference (D): a changed example with the difference named, plus a contrasting case; the response method stays the person's choice.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Changed: session.spec.ts instead of auth.spec.ts. Same: the secret is still read from JWT_SECRET. Does not apply: a test that mocks jwt.verify never reads the secret.","defers":false,"defers_note":""},{"id":"spaced_revisit","area":"learning","label":"Keep selected ideas for a later review I choose","rule":"Keep a short list of ideas I ask to revisit. When I say \"revisit\", offer one short recall or application task on one of them, with feedback. I set the pace and can drop any item. Do not schedule reminders yourself; if the host cannot remember the list between sessions, say so rather than inventing it.","evidence":"A","evidence_basis":{"phenomenon":"The best gap between study sessions depends on how long the material must be retained (Cepeda et al. 2008, S05, over 1,350 participants, general factual learning); the result supports distributed review, not a fixed schedule.","method":"Design inference (D): an opt-in list and a person-paced review. Reminders between sessions need a host capability the instruction alone does not have.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Revisit list: (1) where the test secret is set. Say \"revisit\" when you want one question on it; no reminder will be sent.","defers":false,"defers_note":""},{"id":"representation_mapping","area":"learning","label":"Keep the diagram, symbols and meanings connected","rule":"When notation appears, give a table of each symbol, its name, its meaning and one substituted example. Use the same labels in the diagram, the table and the prose. Keep the table on screen or redisplay it on request; never ask me to hold it in my head.","evidence":"A","evidence_basis":{"phenomenon":"Making the link between concrete and abstract forms explicit helps (concreteness fading review, Fyfe et al. 2014, S07). Aphantasic participants copy a visible image as accurately as anyone while remembering less object detail (Bainbridge et al. 2021, S08): working from a visible reference differs from imagining one.","method":"Design inference (D): one stable correspondence across representations, kept visible, rather than more pictures.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"s_next = f(s_now, event)\nSymbol | Meaning | Example\ns_now | the stored state | count = 2\nevent | the input asking for a change | increment\nf | the rule for the next state | add one\ns_next | the state after the rule | count = 3","defers":false,"defers_note":""},{"id":"whole_explanation","area":"learning","label":"The complete explanation first","rule":"Give the complete explanation in one piece: a short overview, then every part, then where each part belongs. Do not stop for a confirmation between parts unless I ask.","evidence":"B","evidence_basis":{"phenomenon":"Recalling a whole text produced better delayed recall than recalling it section by section, for students with and without ADHD, though neither beat restudy (Stern and Halamish 2023, S04): immediate ease and lasting learning can differ. One study.","method":"Design inference (D): the person chooses whole or part-by-part; the map stays available either way.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Overview: the secret, where it is read, where the tests set it. Part 1 ... Part 2 ... Map: setup.ts -> auth.ts:42 -> auth.spec.ts.","defers":false,"defers_note":""},{"id":"familiar_domain_examples","area":"understanding","label":"Examples from a subject I name","rule":"When I name a subject I know (code, graphs, physical systems, music, anything), draw examples and analogies from it, then state the exact correspondence and where it stops applying. Keep a neutral example available. Never hold an example back as a reward.","evidence":"D","evidence_basis":{"phenomenon":"Choice, relevance and links to prior knowledge are design principles (CAST UDL 3.0, S10); applying them through an assistant is a proposal.","method":"Design inference (D): an interest is a resource the person controls, never a lever; no permanent learning type is assigned.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"In code terms: the state machine is a reducer, state_next = reduce(state_now, event). Where it stops: a reducer must be pure; this one may read a clock.","defers":false,"defers_note":""},{"id":"written_trace","area":"learning","label":"Print the trace; never ask me to work it out silently","rule":"Where a step could be worked out silently, print it: the intermediate values and the state before and after. Never ask me to say it in my head, rehearse it or run it in my mind.","evidence":"C","evidence_basis":{"phenomenon":"Adults who report little inner speech differ on some verbal tasks (Nedergaard and Lupyan 2024, S22); whether this shows complete absence is disputed (Lind 2025, S23). The science is unsettled; the person's own report is enough to offer the option.","method":"Design inference (D): a printed trace costs nothing for readers who do rehearse silently.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Trace: count = 2 -> event increment -> rule: add one -> count = 3.","defers":false,"defers_note":""},{"id":"untangle_language","area":"understanding","label":"Help me understand the wording","rule":"Explain unfamiliar words as they appear, say what each pronoun refers to, split long sentences, and state connections that are only implied. Keep the technical depth; change only the wording.","evidence":"B","evidence_basis":{"phenomenon":"Language difficulties such as developmental language disorder are distinct from dyslexia and from auditory processing differences; adult assessment evidence is limited (RCSLT, S12); adults with the same label report different preferences (co-design account, S13).","method":"Design inference (D): comprehension support offered on its own, without routing through any label, and separate from conceptual depth.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"\"It fails because the secret it reads is unset\" ->\nverifyToken fails. The reason: verifyToken reads JWT_SECRET, and JWT_SECRET is unset.","defers":false,"defers_note":""},{"id":"plain_language_version","area":"understanding","label":"A plain-language version, full detail available","rule":"Give a short plain-language version first: one idea per sentence, everyday words, no figures of speech. Keep the full version underneath or on request. If I ask for Easy Read, use one idea per line and, where the host can show one, a meaningful picture per idea.","evidence":"B","evidence_basis":{"phenomenon":"Easy Read is an access format with its own guidance (ASAN, One Idea Per Line, S17), not a measure of ability and not a default for autistic adults.","method":"Design inference (D): the plain version never replaces the full one; a decorative picture adds work, so pictures are meaningful or absent.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Plain: the test needs a secret. The secret is missing. Add it in test/setup.ts.\nFull detail below.","defers":false,"defers_note":""},{"id":"help_me_say_it","area":"communication","label":"Help me put my idea into words","rule":"Accept fragments, lists and half-sentences as complete messages. Offer a sentence starter or a word only when I ask. Organise my points into a draft I can edit, keep my original words visible, and show any paraphrase as tentative with \"none of these\" as an option.","evidence":"B","evidence_basis":{"phenomenon":"Expression difficulties are described for adults with developmental language disorder and others; preferences vary within a label (RCSLT, S12; S13).","method":"Design inference (D): the person's words stay primary; a paraphrase is a tentative offer they can reject.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"You wrote: \"secret - test - missing\". Draft (edit freely): \"The test fails because the secret is missing.\"\nIs that it? 1 yes 2 close, let me edit 3 none of these","defers":false,"defers_note":""},{"id":"communication_method","area":"communication","label":"Accept the way I communicate and let me finish","rule":"Accept typed fragments, saved phrases, symbols or text from a device as my message. Judge nothing from fluency or speed. Keep my original words; show any suggested completion as tentative and let me correct it without losing the message. Offer a free-form answer beside every choice set. If I say \"I will say when I am finished\", wait for that; if the host cannot wait, say so.","evidence":"B","evidence_basis":{"phenomenon":"AAC (augmentative and alternative communication) guidance supports individualised modes and extra turn-taking time (ASHA, S14); twelve autistic adults named input and output flexibility and control over communication as design concerns (Martin and Nagalakshmi 2025, S15: qualitative, not a trial).","method":"Design inference (D): the message is the person's, completions are tentative, and end-of-turn control depends on the host.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Received: \"setup.ts secret\". Kept as written. Reply 1 to continue, 2 to add more, or type freely.","defers":false,"defers_note":""},{"id":"media_access","area":"sensory","label":"Captions, a transcript or another usable format","rule":"For any audio or video, offer captions, a complete transcript, a summary and a text-first version as separate choices; I pick. Keep technical terms, numbers and negation exact. Mark an unverified transcript as unverified. Where the host allows, let me replay or change the speed.","evidence":"S","evidence_basis":{"phenomenon":"Captions carry speaker information and meaningful sound, and unchecked automatic captions can misrepresent speech (W3C WAI, S16): a published standard.","method":"Design inference (D): captions, transcript and summary are different products offered separately; playback controls are host-dependent.","rule":"The wording of this rule is the pack's own design and has not been tested in an agent."},"demo":"Choose: 1 captions 2 full transcript 3 summary 4 text first. Transcript status: machine-generated, not checked.","defers":false,"defers_note":""}],"contexts":[{"id":"always","label":"Always","yaml":"always"},{"id":"work","label":"Only for work / technical","yaml":"work"},{"id":"learning","label":"Only when learning something new","yaml":"learning"},{"id":"stuck","label":"Only when I am stuck","yaml":"stuck"},{"id":"overloaded","label":"Only when I am overloaded","yaml":"overloaded"},{"id":"always_not_brainstorming","label":"Always, except when brainstorming","yaml":"always + suppress in brainstorming"}],"presets":{"i-have-adhd":["summary_first","short_sections","prioritise","next_step_only","progress_markers","one_goal","reduce_distraction","starting_prompt"],"i-have-autism":["literal_wording","state_the_inference","one_term_per_thing","uniform_format","done_when","no_tangents","ask_one","plain_tone","explicit_intent","consequences_not_adjectives"],"i-have-dyslexia":["short_sentences","low_density","copyable_blocks","one_term_per_thing","reduce_visual_stimulus","summary_first"],"i-have-dyscalculia":["comparison_table","clock_not_feeling","explain_terms","done_when","consequences_not_adjectives"],"i-have-dyspraxia":["agent_does_it","one_physical_action","keyboard_first","no_spatial_directions","sequence_explicitly","checkpoints"],"i-have-tics":["more_time","progress_markers","checkpoints","confirm_before_proceeding","done_when","uniform_format","reduce_visual_stimulus"],"i-have-apd":["linear_output","copyable_blocks","explain_terms","declare_length","one_instruction"],"i-have-sensory-sensitivity":["reduce_visual_stimulus","uniform_format","quiet","low_density","declare_length","reduce_motion"],"i-have-dysgraphia":["answer_by_number","never_correct_typing","agent_does_it","fewer_options","recommended_default"],"i-have-working-memory-differences":["no_carry_over","restart_help","recap","persistent_state","if_then_triggers","no_parallel","clock_not_feeling","copyable_blocks"],"i-have-inertia":["starting_prompt","if_then_triggers","next_step_only","stop_point","decide_for_me"],"i-need-low-demand":["declarative_not_imperative","recommended_default","more_time","plain_tone","decide_for_me"],"i-have-limited-energy":["cost_upfront","smallest_version_first","stop_point","one_word_reduce","progressive_disclosure"],"i-have-alexithymia":["no_feelings_questions","consequences_not_adjectives","recommended_default","clock_not_feeling","plain_tone"],"i-have-aphantasia":["no_imagery_requests","visual_representation","no_spatial_directions","worked_examples"],"i-use-a-screen-reader":["linear_output","summary_first","reduce_motion","no_colour_meaning","declare_length","reduce_visual_stimulus"],"i-have-colour-vision-deficiency":["no_colour_meaning","copyable_blocks"]},"resolutions":[{"between":["visual_representation","linear_output"],"resolution":"Both. The diagram is drawn and its text equivalent follows. The text is authoritative."},{"between":["visual_representation","no_imagery_requests"],"resolution":"No conflict. Supplying a drawn structure is exactly what replaces asking for an imagined one."},{"between":["fewer_options","comparison_table"],"resolution":"Both. Two or three options, compared on the same dimensions."},{"between":["agent_does_it","confirm_before_proceeding"],"resolution":"Both. The agent performs it, after a typed confirmation for anything irreversible."},{"between":["declarative_not_imperative","one_instruction"],"resolution":"State the situation, then the single next action as an observation with a default. Clarity outranks demand-removal."},{"between":["summary_first","explicit_intent"],"resolution":"One line serves both: what this is and what it concludes."},{"between":["progressive_disclosure","repeat_key_info"],"resolution":"Repetition wins for anything needed to act. Disclosure limits new material, not restated material."},{"between":["stop_point","one_goal"],"resolution":"No conflict. The stop point is named for the current goal only."},{"between":["agent_does_it","purpose_let_me_try"],"resolution":"The attempt is mine only for the part I chose to practise; you perform everything else, and the answer is available on request. Motor, language and sensory settings stay."},{"between":["agent_does_it","purpose_practise_together"],"resolution":"You perform every step I have not taken; the step offered to me comes with a hint and can be handed back without comment."},{"between":["purpose_do_it","purpose_let_me_try"],"resolution":"Both chosen: ask which applies to this task in one marked question; until answered, do it and offer the attempt afterwards."},{"between":["purpose_show_me","purpose_let_me_try"],"resolution":"Both: show it first, then set up the attempt, and say which is happening."},{"between":["retrieval_feedback","repeat_key_info"],"resolution":"Outside a practice I opted into, repeat as usual. During it, the cue comes first and the answer on request."},{"between":["whole_explanation","interactive_explanation"],"resolution":"The complete explanation first, then one part at a time on request; the map stays either way."},{"between":["whole_explanation","one_instruction"],"resolution":"Explanations come whole; instructions I must act on still come one at a time."},{"between":["communication_method","never_correct_typing"],"resolution":"Both: my words stay as written; a tentative completion is shown only if I ask for one."},{"between":["untangle_language","short_sentences"],"resolution":"No conflict: splitting the sentence is the same operation; untangling adds the referents and the implied links."},{"between":["fade_teaching_prompts","visual_representation"],"resolution":"The diagram is an access aid and is never faded; only the teaching prompts are."}],"conflict_order":["safety_and_harness","assistive_technology_readable","confirm_unintended_input","preserve_state","remove_number","remove_physical_action","remove_internal_reference","remove_ambiguity","remove_demand_framing","remove_pressure_or_stimulus","written_chunked_form","shorten_sentence","shorten_list"]}</script>
+<script>
+(function(){
+"use strict";
+var V=JSON.parse(document.getElementById("vocab").textContent);
+var byId={}; V.support.forEach(function(s){byId[s.id]=s;});
+var areaLabel={},areaDesc={};
+V.areas.forEach(function(a){areaLabel[a.id]=a.label;areaDesc[a.id]=a.description;});
+var TIER={A:"Replicated experimental or meta-analytic evidence",B:"Consistent qualitative or observational findings",C:"Community-described; little formal study",D:"Design inference, not itself tested",S:"Published technical standard",X:"Contested construct: described, disputed as a distinct entity"};
+var state={diff:new Set(),sup:new Set(),ctx:{},cmp:{},origin:{},notes:""};
+
+/* Provenance. One support atom can be reached from several places: a difficulty block,
+   the by-area list, or a preset. The picker remembers who asked for what; the profile
+   contains only the survivor set. Dismissing one difficulty therefore cannot silently
+   remove a support that another difficulty, a preset, or a direct tick still claims. */
+function addSup(id,origin){var o=state.origin[id]||(state.origin[id]=[]);
+  if(o.indexOf(origin)<0)o.push(origin); state.sup.add(id);}
+function removeSup(id){state.sup.delete(id);delete state.origin[id];delete state.ctx[id];}
+function dropOrigin(id,origin){var o=state.origin[id];
+  if(!o){removeSup(id);return;}
+  var i=o.indexOf(origin); if(i>-1)o.splice(i,1);
+  if(!o.length) removeSup(id);}
+function originsOf(id){return state.origin[id]||[];}
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function el(h){var d=document.createElement("div");d.innerHTML=h.trim();return d.firstChild;}
+function wireTabs(ids){ids.forEach(function(id){document.getElementById(id).addEventListener("click",function(){
+  ids.forEach(function(o){var ot=document.getElementById(o),op=document.getElementById(ot.getAttribute("aria-controls"));
+    var on=(o===id);ot.setAttribute("aria-selected",on?"true":"false");op.hidden=!on;});});});}
+wireTabs(["tab-d","tab-a","tab-p"]); wireTabs(["tab-pv","tab-yml"]);
+
+/* a support choice: plain label on the face, provenance behind an expander */
+function claimNote(id){
+  var n=originsOf(id).length;
+  if(n<2) return "";
+  return '<p class="tierline">Chosen '+n+' times over. Dismissing one reason will keep it.</p>';
+}
+
+function supportBlock(s,ns,origin){
+  var w=el('<div class="supwrap"></div>');
+  var l=el('<label class="opt"><input type="checkbox" data-sup="'+s.id+'" id="s-'+ns+'-'+s.id+'"><span>'+esc(s.label)+
+           (s.defers?'<span class="defers">'+esc(s.defers_note)+'</span>':'')+'</span></label>');
+  var i=l.querySelector("input"); i.checked=state.sup.has(s.id);
+  /* Unticking the box is a global removal: it drops every claim on the atom. */
+  i.addEventListener("change",function(e){ if(e.target.checked) addSup(s.id,origin); else removeSup(s.id); render(); });
+  w.appendChild(l);
+  var d=el('<details><summary>Why is this offered?</summary><div class="why">'+
+           '<p>'+esc(s.rule)+'</p>'+
+           '<pre class="demo">'+esc(s.demo)+'</pre>'+
+           '<p class="tierline" style="margin-top:8px">Evidence '+esc(s.evidence)+' &middot; '+esc(TIER[s.evidence]||"")+'</p>'+
+           (s.evidence_basis?'<p class="tierline">What the letter rates: '+esc(s.evidence_basis.phenomenon)+'</p>'+
+             '<p class="tierline">The method: '+esc(s.evidence_basis.method)+'</p>'+
+             '<p class="tierline">This exact rule: '+esc(s.evidence_basis.rule)+'</p>':'')+
+           claimNote(s.id)+'</div></details>');
+  w.appendChild(d);
+  return w;
+}
+
+/* step 1a: difficulties */
+(function(){var host=document.getElementById("pane-d");
+  V.areas.forEach(function(a){
+    var items=V.difficulties.filter(function(d){return d.area===a.id;});
+    if(!items.length) return;
+    var g=el('<div class="areagroup"><div class="areahead"><h3>'+esc(a.label)+'</h3><p>'+esc(a.description)+'</p></div><div class="opts"></div></div>');
+    var box=g.querySelector(".opts");
+    items.forEach(function(d){
+      var l=el('<label class="opt"><input type="checkbox" id="d-'+d.id+'"><span>'+esc(d.label)+'</span></label>');
+      l.querySelector("input").addEventListener("change",function(e){
+        if(e.target.checked) state.diff.add(d.id);
+        else {
+          state.diff.delete(d.id);
+          /* The note belongs to the selection that opened it. Leaving it behind would
+             export text the reader can no longer see, correct, or withdraw. */
+          if(!d.offers.length) state.notes="";
+        }
+        render();});
+      box.appendChild(l);
+    });
+    host.appendChild(g);});
+})();
+
+/* step 1b: supports by area */
+(function(){var host=document.getElementById("pane-a");
+  V.areas.forEach(function(a){
+    var items=V.support.filter(function(s){return s.area===a.id;});
+    if(!items.length) return;
+    var g=el('<div class="areagroup"><div class="areahead"><h3>'+esc(a.label)+'</h3><p>'+esc(a.description)+'</p></div><div class="opts two"></div></div>');
+    var box=g.querySelector(".opts");
+    items.forEach(function(s){box.appendChild(supportBlock(s,"a","direct"));});
+    host.appendChild(g);});
+})();
+
+/* step 1c: presets */
+(function(){var host=document.getElementById("pane-p");
+  host.appendChild(el('<p class="hint">A label you already have is a shortcut, not the model. It expands to supports, and the label itself is never stored.</p>'));
+  var box=el('<div class="opts"></div>');
+  Object.keys(V.presets).forEach(function(name){
+    var atoms=V.presets[name];
+    var b=el('<button class="mini" style="text-align:left;display:block;width:100%">'+esc(name)+' <span style="color:var(--muted);font-weight:400">&mdash; sets '+atoms.length+' supports</span></button>');
+    b.addEventListener("click",function(){atoms.forEach(function(a){addSup(a,"preset:"+name);});render();document.getElementById("tab-a").click();});
+    box.appendChild(b);});
+  host.appendChild(box);
+})();
+
+/* step 2 */
+/* Comparison pairs are authored in needs-vocabulary.json, one entry per difficulty.
+   Each pair sets two supports that differ in kind against each other. Nothing here
+   is derived from the order of the offers list. */
+function pairsOf(d){
+  return (d.compare_pairs||[]).map(function(p){
+    return p.filter(function(x){return byId[x];});
+  }).filter(function(p){return p.length;});
+}
+
+function comparePane(d){
+  var pairs=pairsOf(d), idx=state.cmp[d.id]||0;
+  if(idx>=pairs.length){
+    var done=el('<div class="cmp"><h4>That is all of them</h4><p class="sub">'+esc(d.label)+'</p></div>');
+    var again=el('<button class="mini">Compare again from the start</button>');
+    again.addEventListener("click",function(){state.cmp[d.id]=0;render();});
+    var close=el('<button class="mini">Close</button>');
+    close.addEventListener("click",function(){delete state.cmp[d.id];render();});
+    var q=el('<div class="quick"></div>');q.appendChild(again);q.appendChild(close);done.appendChild(q);
+    return done;
+  }
+  var pair=pairs[idx], A=byId[pair[0]], B=pair[1]?byId[pair[1]]:null;
+  var c=el('<div class="cmp"><h4>Which helps more?</h4><p class="sub">'+esc(d.label)+' &middot; pair '+(idx+1)+' of '+pairs.length+'</p><div class="pair"></div><div class="quick"></div></div>');
+  var p=c.querySelector(".pair"), q=c.querySelector(".quick");
+  p.appendChild(el('<div class="side"><span class="k">A</span><pre>'+esc(A.demo)+'</pre></div>'));
+  if(B) p.appendChild(el('<div class="side"><span class="k">B</span><pre>'+esc(B.demo)+'</pre></div>'));
+  function advance(){state.cmp[d.id]=idx+1;render();}
+  var ba=el('<button class="mini primary">A helps</button>');
+  ba.addEventListener("click",function(){addSup(A.id,"d:"+d.id);advance();});
+  q.appendChild(ba);
+  if(B){var bb=el('<button class="mini primary">B helps</button>');
+    bb.addEventListener("click",function(){addSup(B.id,"d:"+d.id);advance();});q.appendChild(bb);}
+  var bo=el('<button class="mini">'+(B?"Both help":"Yes, this helps")+'</button>');
+  bo.addEventListener("click",function(){addSup(A.id,"d:"+d.id);if(B)addSup(B.id,"d:"+d.id);advance();});
+  q.appendChild(bo);
+  var bn=el('<button class="mini">Neither</button>');
+  bn.addEventListener("click",advance); q.appendChild(bn);
+  var bx=el('<button class="mini">Stop comparing</button>');
+  bx.addEventListener("click",function(){delete state.cmp[d.id];render();}); q.appendChild(bx);
+  return c;
+}
+
+function renderHelps(){
+  var host=document.getElementById("helps"); host.innerHTML="";
+  var hint=document.getElementById("step2hint");
+  var ds=Array.from(state.diff).map(function(id){
+    return V.difficulties.filter(function(x){return x.id===id;})[0];}).filter(Boolean);
+  if(!ds.length){hint.textContent="Nothing ticked yet. Choose something above, or pick supports directly under “By area”.";return;}
+  hint.textContent="One block per thing you ticked. Pick any that help, or compare two side by side and choose the one that reads better.";
+  ds.forEach(function(d,i){
+    var card=el('<div class="helps"><h3>What helps?</h3><p class="said">'+esc(d.label)+'  ·  '+(i+1)+' of '+ds.length+'</p><div class="opts"></div><div class="quick"></div></div>');
+    var box=card.querySelector(".opts"), q=card.querySelector(".quick");
+    if(!d.offers.length){
+      box.appendChild(el('<p class="hint">Tell me in your own words what would help here. It is stored under <code>notes</code> without interpretation. Nothing is inferred from it, and it is cleared if you untick this.</p>'));
+      var ta=document.createElement("textarea");
+      ta.className="freetext"; ta.rows=3; ta.id="notes";
+      ta.setAttribute("aria-label","What would help, in your own words");
+      ta.placeholder="e.g. Say when you are guessing.";
+      ta.value=state.notes||"";
+      /* renderOut only: rebuilding this pane mid-keystroke would take the focus away. */
+      ta.addEventListener("input",function(e){state.notes=e.target.value;renderOut();});
+      box.appendChild(ta);
+    }
+    d.offers.forEach(function(sid){if(byId[sid]) box.appendChild(supportBlock(byId[sid],"h"+d.id,"d:"+d.id));});
+    if(d.offers.length){
+      var rec=(d.recommended&&d.recommended.length)?d.recommended:d.offers.slice(0,2);
+      var t=el('<button class="mini primary">Try these</button>');
+      t.title="Adds "+rec.map(function(r){return byId[r]?byId[r].label:r;}).join(" and ");
+      t.addEventListener("click",function(){rec.forEach(function(s){addSup(s,"d:"+d.id);});render();});
+      q.appendChild(t);
+      var cm=el('<button class="mini">Show me the difference</button>');
+      cm.addEventListener("click",function(){state.cmp[d.id]=0;render();});
+      q.appendChild(cm);
+      var none=el('<button class="mini">Not now</button>');
+      none.addEventListener("click",function(){d.offers.forEach(function(s){dropOrigin(s,"d:"+d.id);});delete state.cmp[d.id];render();});
+      q.appendChild(none);
+      q.appendChild(el('<span style="font-size:12.5px;color:var(--muted);align-self:center">Try these = '+rec.length+' suggested starting points, not all '+d.offers.length+'</span>'));
+    }
+    if(state.cmp[d.id]!==undefined) card.appendChild(comparePane(d));
+    host.appendChild(card);
+  });
+}
+
+/* step 3: contexts */
+function renderCtx(){
+  var sec=document.getElementById("step3"), host=document.getElementById("ctx");
+  host.innerHTML="";
+  if(!state.sup.size){sec.hidden=true;return;}
+  sec.hidden=false;
+  Array.from(state.sup).forEach(function(sid){
+    var s=byId[sid]; if(!s) return;
+    var row=el('<div class="ctxrow"><span>'+esc(s.label)+'</span></div>');
+    var sel=document.createElement("select");
+    sel.id="ctx-"+sid;
+    sel.setAttribute("aria-label","When should “"+s.label+"” apply?");
+    V.contexts.forEach(function(c){
+      var o=document.createElement("option"); o.value=c.id; o.textContent=c.label; sel.appendChild(o);});
+    sel.value=state.ctx[sid]||"always";
+    sel.addEventListener("change",function(e){
+      if(e.target.value==="always") delete state.ctx[sid]; else state.ctx[sid]=e.target.value;
+      render();});
+    row.appendChild(sel); host.appendChild(row);
+  });
+}
+
+/* preview */
+function has(x){return state.sup.has(x);}
+function preview(){
+  var out=[],n=0; function u(){n++;}
+  if(has("declare_length")){out.push("Next: the cause, one command, one check. 9 lines.");u();}
+  if(has("recap")||has("restate_goal")){out.push("Where we are: test/setup.ts · secret set · next is the auth test.");u();}
+  if(has("cost_upfront")){out.push("Cost: 2 steps · 1 decision from you · about 8 minutes.");u();}
+  if(has("summary_first")){out.push("The 401 comes from src/auth.ts:47. Cause and fix below.");u();}
+  if(out.length) out.push("");
+  var open=has("plain_tone")?"":"Great question! "; if(has("plain_tone"))u();
+  var cause=has("literal_wording")
+    ?"verifyToken reads the secret from JWT_SECRET. JWT_SECRET is unset when the tests run, so jwt.verify throws and the handler returns 401."
+    :"Your auth flow is a bit of a tangle and verifyToken is almost certainly the culprit here.";
+  if(has("literal_wording"))u();
+  if(has("short_sentences")){cause=has("literal_wording")
+    ?"verifyToken reads JWT_SECRET.\nJWT_SECRET is unset in the tests.\nThe handler returns 401."
+    :"Your auth flow is tangled.\nverifyToken is the likely culprit.";u();}
+  out.push(open+cause);
+  out.push(has("no_imagery_requests")?"The token has expired.":"Picture the token as a stamped ticket that has expired.");
+  if(has("no_imagery_requests"))u();
+  out.push("");
+  var numbered=has("break_down")||has("sequence_explicitly")||has("next_step_only")||has("one_instruction");
+  if(has("break_down")||has("sequence_explicitly"))u();
+  var s1=has("declarative_not_imperative")?"JWT_SECRET is unset in the test environment. The fix is one line in test/setup.ts.":"Set JWT_SECRET in test/setup.ts.";
+  if(has("declarative_not_imperative"))u();
+  if(has("progress_markers")){s1="Step 1 of 2 · "+s1;u();}
+  if(has("done_when")){s1+=" Done when: test/setup.ts contains the line process.env.JWT_SECRET = 'test-secret'.";u();}
+  out.push(numbered?"1. "+s1:s1);
+  if(has("copyable_blocks")){out.push("    process.env.JWT_SECRET = 'test-secret'");u();}
+  if(has("one_instruction")||has("next_step_only")){u();out.push("(the next step comes when this one is done)");}
+  else{var s2=has("if_then_triggers")?"When the file is saved, run the auth test.":"Then run the auth test.";
+    if(has("if_then_triggers"))u();
+    if(has("done_when")) s2+=" Done when: the last line reads 1 passing.";
+    out.push(numbered?"2. "+s2:s2);}
+  out.push("");
+  if(has("fewer_options")){u();
+    out.push(has("consequences_not_adjectives")
+      ?"1. Set the secret in test/setup.ts — the 401 stops; session.spec.ts needs the same import later.\n2. Skip the test — nothing changes today; it keeps failing."
+      :"1. Set the secret in test/setup.ts — the proper option.\n2. Skip the test — the quick one.");
+    if(has("consequences_not_adjectives"))u();
+  } else if(has("progressive_disclosure")){out.push("Set the secret in test/setup.ts. Say “options” for the other three ways to do this.");u();}
+  else{out.push("You could set it in test/setup.ts, or export it in the shell, or hard-code a test secret, or mock jwt.verify.");}
+  if(has("recommended_default")){out.push("Default: 1, if you say nothing.");u();}
+  if(!has("no_feelings_questions")) out.push("Does that sound good?"); else u();
+  out.push("");
+  out.push(has("no_colour_meaning")
+    ?"Two tests are listed as FAIL: refreshes an expired token, rejects a malformed header."
+    :"Two of the tests show up in red.");
+  if(has("no_colour_meaning"))u();
+  if(!has("linear_output")){out.push("  auth-service     | pass | 12");out.push("  session-service  | fail |  8");}
+  else{out.push("Service: auth-service. Status: passing. Tests: 12 of 12.");
+       out.push("Service: session-service. Status: failing. Tests: 7 of 8.");u();}
+  if(!has("reduce_visual_stimulus")) out.push("✅ IMPORTANT! Don’t forget the cookie settings!!"); else u();
+  if(has("no_tangents")){out.push("");out.push("Deferred:");out.push("- Cookie SameSite setting in src/session.ts.");u();}
+  else if(has("reduce_visual_stimulus")) out.push("You will also want to check the cookie settings.");
+  if(has("smallest_version_first")){out.push("");out.push("Smallest version: test/setup.ts only — 1 step. Full version: both test files — 3 steps.");u();}
+  if(has("stop_point")){out.push("");out.push("Clean stop: after the auth test passes. One file changed, nothing half-edited.");u();}
+  if(has("one_goal")){out.push("");out.push("Current goal: make auth.spec.ts pass. Parked: cookie settings, README.");u();}
+  if(has("persistent_state")){out.push("");out.push("State:");out.push("- Done: secret set in test/setup.ts");
+    out.push("- Now: rerun the auth test");out.push("- Next: the same import in session.spec.ts");out.push("- Open questions: none");u();}
+  return {text:out.join("\n").replace(/\n{3,}/g,"\n\n").trim(),used:n};
+}
+
+/* ------------------------------------------------------------------ profile
+   One model, four writers. This mirrors needs/compile.py line for line; the
+   conformance test in needs/conformance_test.py runs both over the same
+   selections and fails if a single character differs. Change one, change both. */
+
+var AREA_RANK={},ATOM_RANK={};
+V.areas.forEach(function(a,i){AREA_RANK[a.id]=i;});
+V.support.forEach(function(s,i){ATOM_RANK[s.id]=i;});
+var SCOPE_LABEL={}; V.contexts.forEach(function(c){SCOPE_LABEL[c.id]=c.label;});
+
+var PREAMBLE="These are presentation settings I chose for myself. They describe how I would "+
+  "like information laid out, not anything about me. Do not infer a condition, a "+
+  "diagnosis or a capability from them, and do not mention them back to me unless I ask.";
+var TIEBREAK="If two of these ever pull against each other, prefer in this order: "+
+  "what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.";
+
+/* The groups the profile is built from: what applies always, what applies only in
+   a context the reader declares, and what is set aside while brainstorming. */
+function model(){
+  var groups={always:[],work:[],learning:[],stuck:[],overloaded:[]}, suppress=[];
+  Array.from(state.sup).forEach(function(s){
+    var c=state.ctx[s]||"always";
+    if(c==="always_not_brainstorming"){groups.always.push(s);suppress.push(s);}
+    else groups[c].push(s);
+  });
+  Object.keys(groups).forEach(function(k){
+    groups[k]=groups[k].filter(function(a){return byId[a];});
+    groups[k].sort(function(a,b){
+      var d=AREA_RANK[byId[a].area]-AREA_RANK[byId[b].area];
+      return d||ATOM_RANK[a]-ATOM_RANK[b];});
+  });
+  return {groups:groups,suppress:suppress,
+          difficulties:Array.from(state.diff),
+          notes:(state.notes||"").replace(/\r/g,"").replace(/\s+$/,"")};
+}
+
+function byArea(ids){
+  var order=[],seen={};
+  ids.forEach(function(i){var a=byId[i].area;
+    if(!seen[a]){seen[a]=[];order.push(a);} seen[a].push(byId[i].rule);});
+  var labels={}; V.areas.forEach(function(a){labels[a.id]=a.label;});
+  return order.map(function(a){return [labels[a]||a,seen[a]];});
+}
+
+function activeResolutions(active){
+  var set={}; active.forEach(function(a){set[a]=1;});
+  return (V.resolutions||[]).filter(function(r){
+    return r.between.every(function(x){return set[x];});});
+}
+
+function writeRules(heading){
+  var m=model(), L=[];
+  if(heading!==false) L=L.concat(["How to work with me","===================",""]);
+  L.push(PREAMBLE); L.push("");
+  if(m.groups.always.length){
+    byArea(m.groups.always).forEach(function(g){
+      L.push(g[0].toUpperCase());
+      g[1].forEach(function(r){L.push("- "+r);});
+      L.push("");});
+  } else {
+    L.push("No presentation settings chosen. Use your normal style."); L.push("");
+  }
+  ["work","learning","stuck","overloaded"].forEach(function(c){
+    if(!m.groups[c].length) return;
+    var lab=(SCOPE_LABEL[c]||c).replace("Only when ","when ").replace("Only for ","for ");
+    L.push(("ONLY "+lab+" \u2014 I will say when this applies").toUpperCase());
+    m.groups[c].forEach(function(i){L.push("- "+byId[i].rule);});
+    L.push("");});
+  if(m.suppress.length){
+    L.push("EXCEPT WHEN I SAY I AM BRAINSTORMING");
+    m.suppress.forEach(function(i){L.push("- Set aside: "+byId[i].label.toLowerCase()+".");});
+    L.push("");}
+  var res=activeResolutions(m.groups.always);
+  if(res.length){
+    L.push("WHERE TWO OF THESE MEET");
+    res.forEach(function(r){
+      L.push("- "+r.between.map(function(x){return byId[x].label.toLowerCase();}).join(" + ")+
+             ": "+r.resolution);});
+    L.push("");}
+  L.push(TIEBREAK); L.push("");
+  if(m.notes){L.push("IN MY OWN WORDS");m.notes.split("\n").forEach(function(x){L.push(x);});L.push("");}
+  L.push("I can change any of this at any time. Ask me before assuming a setting is wrong; "+
+         "do not quietly drop one.");
+  return L.join("\n").replace(/\n\n\n/g,"\n\n").trim()+"\n";
+}
+
+function writeSkill(){
+  var n=model().groups.always.length;
+  var desc="My presentation settings: "+n+" chosen support"+(n===1?"":"s")+
+    " covering how output is laid out, paced and worded. These are choices about the "+
+    "output, not a description of me; infer nothing from them. Invoke with /my-setup; "+
+    "stays on until \"stop my setup\".";
+  return ["---","name: my-setup","description: '"+desc.replace(/'/g,"''")+"'",
+    "disable-model-invocation: true","license: MIT","---","",
+    "# my-setup","","## Persistence","",
+    "These rules apply to every response for the rest of the session, not only this one. "+
+    "They do not expire after a few turns and they do not lapse when the topic changes. "+
+    "If you are unsure whether they still apply, they do.","",
+    "Turn them off only when I say \"stop my setup\" or \"normal mode\". Confirm in one line, "+
+    "then return to your default style.","",
+    "## The settings","",writeRules(false).replace(/\s+$/,""),"",
+    "## Generated","",
+    "Built from a support profile by `needs/compile.py`. Edit the profile and recompile "+
+    "rather than editing this file, or edit this file and keep it \u2014 it is yours either way.",
+    ""].join("\n");
+}
+
+function writeAgents(){
+  return ["## How to work with me","",
+    "<!-- Generated from a support profile by needs/compile.py. Paste this into "+
+    "AGENTS.md, CLAUDE.md, .cursorrules, or any custom-instructions box. -->","",
+    writeRules(false).replace(/\s+$/,""),""].join("\n");
+}
+
+function writeJson(){
+  var m=model(), out={version:1,generated_by:"needs/compile.py",preamble:PREAMBLE,
+    tiebreak:TIEBREAK,contexts:{},suppress:{},
+    resolutions:activeResolutions(m.groups.always),
+    conflict_order:V.conflict_order||[],notes:m.notes};
+  Object.keys(m.groups).forEach(function(c){
+    if(!m.groups[c].length) return;
+    out.contexts[c]=m.groups[c].map(function(i){
+      return {id:i,area:byId[i].area,label:byId[i].label,rule:byId[i].rule};});});
+  if(m.suppress.length) out.suppress.brainstorming=m.suppress;
+  return JSON.stringify(out,null,2)+"\n";
+}
+
+function yaml(){
+  var m=model();
+  var L=["version: 1","contexts:","  always:"];
+  if(m.difficulties.length){L.push("    difficulties:");m.difficulties.forEach(function(d){L.push("      - "+d);});}
+  var groups=m.groups, suppressBrainstorm=m.suppress;
+  if(groups.always.length){L.push("    support:");groups.always.forEach(function(s){L.push("      - "+s);});}
+  else if(!m.difficulties.length){L.push("    support: []   # base layer only");}
+  if(m.notes){
+    L.push("    notes: |");
+    m.notes.split("\n").forEach(function(x){L.push("      "+x);});
+  }
+  ["work","learning","stuck","overloaded"].forEach(function(c){
+    if(!groups[c].length) return;
+    L.push("  "+c+":");L.push("    support:");groups[c].forEach(function(s){L.push("      - "+s);});});
+  if(suppressBrainstorm.length){L.push("  brainstorming:");L.push("    suppress:");
+    suppressBrainstorm.forEach(function(s){L.push("      - "+s);});}
+  L.push("# supports change how things are presented; no condition is recorded or inferred");
+  return L.join("\n");
+}
+
+/* What each format is for, said in the panel so nobody has to guess. */
+var FORMATS={
+  rules:{write:writeRules,file:"how-to-work-with-me.txt",type:"text/plain",
+    hint:"Plain text. Paste it into a system prompt, a custom-instructions box, or the "+
+         "start of a conversation. Works with any assistant."},
+  agents:{write:writeAgents,file:"AGENTS.md",type:"text/markdown",
+    hint:"A markdown section. Paste it into AGENTS.md, CLAUDE.md, a .cursorrules file, "+
+         "or any project instructions file your tool already reads."},
+  skill:{write:writeSkill,file:"SKILL.md",type:"text/markdown",
+    hint:"A skill file for Claude Code and Cowork. Save it as skills/my-setup/SKILL.md, "+
+         "then invoke it with /my-setup."},
+  yaml:{write:yaml,file:"needs-profile.txt",type:"text/plain",
+    hint:"The profile itself: what you chose, in the vocabulary's own terms. Keep this "+
+         "one if you want to reopen or edit your setup later; save it as needs.yaml."},
+  json:{write:writeJson,file:"needs.json",type:"application/json",
+    hint:"Machine-readable, for building your own tooling on top."}
+};
+function currentFormat(){
+  var el=document.getElementById("fmt");
+  return FORMATS[el&&el.value?el.value:"rules"]?(el?el.value:"rules"):"rules";
+}
+function currentText(){return FORMATS[currentFormat()].write();}
+
+function render(){
+  document.querySelectorAll("input[data-sup]").forEach(function(i){i.checked=state.sup.has(i.dataset.sup);});
+  renderHelps();
+  document.querySelectorAll("input[data-sup]").forEach(function(i){i.checked=state.sup.has(i.dataset.sup);});
+  renderCtx();
+  renderOut();
+}
+
+function renderOut(){
+  document.getElementById("count").textContent = state.sup.size
+    ? state.diff.size+" ticked · "+state.sup.size+" support"+(state.sup.size===1?"":"s")+" chosen"
+    : "nothing chosen · plain default";
+  var list=document.getElementById("saidlist"); list.innerHTML="";
+  if(state.diff.size){
+    list.appendChild(el('<li class="hdr">You said</li>'));
+    Array.from(state.diff).forEach(function(id){
+      var d=V.difficulties.filter(function(x){return x.id===id;})[0];
+      if(d) list.appendChild(el("<li>"+esc(d.label)+"</li>"));});
+  }
+  if(state.sup.size){
+    list.appendChild(el('<li class="hdr" style="padding-top:12px">You asked for</li>'));
+    Array.from(state.sup).forEach(function(s){
+      if(!byId[s]) return;
+      var c=state.ctx[s]; var scope="";
+      if(c){var cl=V.contexts.filter(function(x){return x.id===c;})[0];
+        if(cl) scope=' <span class="scope">'+esc(cl.label.toLowerCase())+'</span>';}
+      list.appendChild(el("<li>"+esc(byId[s].label)+scope+"</li>"));});
+  }
+  if(!state.diff.size&&!state.sup.size) list.appendChild(el('<li class="blank">Nothing yet. The preview shows the plain default.</li>'));
+  var p=preview();
+  document.getElementById("preview").textContent=p.text;
+  document.getElementById("pvnote").textContent=state.sup.size
+    ? "A sample answer, rebuilt from your selections. "+p.used+" of your choices change this example."
+    : "A sample answer with no supports applied. Tick something to see it change.";
+  var f=FORMATS[currentFormat()];
+  document.getElementById("yaml").textContent=f.write();
+  document.getElementById("fmthint").textContent=f.hint;
+}
+
+document.getElementById("fmt").addEventListener("change",renderOut);
+
+/* Saving a file works two different ways depending on where this page is open.
+   Opened from disk, a blob link is fine. Published as an artifact, the frame is
+   sandboxed and a blob link silently does nothing, so the host mediates the save
+   and the viewer confirms it. Detect which, and hide the button rather than
+   leaving one that does nothing. Copy always works either way. */
+var dlBtn=document.getElementById("download"), saver=null;
+if(window.claude&&typeof window.claude.use==="function"){
+  dlBtn.hidden=true;
+  window.claude.use("downloads").then(function(d){
+    if(d&&typeof d.save==="function"){saver=d;dlBtn.hidden=false;}
+  }).catch(function(){});
+}
+function flash(msg){var was=dlBtn.textContent;dlBtn.textContent=msg;
+  setTimeout(function(){dlBtn.textContent=was;},1800);}
+dlBtn.addEventListener("click",function(){
+  var f=FORMATS[currentFormat()], text=f.write();
+  if(saver){
+    saver.save({filename:f.file,data:text}).then(function(){flash("Saved");})
+      .catch(function(err){ if(err&&err.code==="declined") return;
+        flash("Could not save \u2014 use Copy"); });
+    return;
+  }
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type:f.type+";charset=utf-8"}));
+  a.download=f.file; document.body.appendChild(a); a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},0);
+});
+document.getElementById("copy").addEventListener("click",function(e){
+  var t=currentText();
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){e.target.textContent="Copied";
+      setTimeout(function(){e.target.textContent="Copy";},1400);});}
+  else{var r=document.createRange();r.selectNodeContents(document.getElementById("yaml"));
+    var s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent="Selected — press Ctrl+C";}
+});
+document.getElementById("reset").addEventListener("click",function(){
+  state.diff.clear();state.sup.clear();state.ctx={};state.cmp={};state.origin={};state.notes="";
+  document.querySelectorAll("input[type=checkbox]").forEach(function(i){i.checked=false;});
+  render();});
+render();
+
+/* Test hook. needs/conformance_test.py drives the page through this to check the
+   in-page compiler against needs/compile.py, which is the only thing keeping the
+   two implementations honest. It exposes nothing a viewer could not already do by
+   clicking, holds no data of its own, and sends nothing anywhere. */
+window.__needsPicker={V:V,state:state,addSup:addSup,render:render,
+  yaml:yaml,writeRules:writeRules,writeAgents:writeAgents,
+  writeSkill:writeSkill,writeJson:writeJson};
+})();
+</script>

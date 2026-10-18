@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Motor and interaction"
+  short_description: "Presentation settings: Motor and interaction"
+  default_prompt: "Use $easier-motor for the rest of this session."
+policy:
+  allow_implicit_invocation: false

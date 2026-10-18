@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Memory"
+  short_description: "Presentation settings: Memory"
+  default_prompt: "Use $easier-memory for the rest of this session."
+policy:
+  allow_implicit_invocation: false

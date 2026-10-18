@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Communication"
+  short_description: "Presentation settings: Communication"
+  default_prompt: "Use $easier-communication for the rest of this session."
+policy:
+  allow_implicit_invocation: false

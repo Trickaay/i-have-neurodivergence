@@ -1,0 +1,16 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "i-have-neurodivergence",
+  "description": "Shape output around what you notice about the exchange, not around a label. Run /needs-picker to build a setup in two questions, or invoke any skill directly.",
+  "owner": {
+    "name": "Accessibility skill pack contributors"
+  },
+  "plugins": [
+    {
+      "name": "i-have-neurodivergence",
+      "description": "Nineteen stackable output-shaping skills. Start with /needs-picker, or invoke a skill directly, including /help-me-learn-this and /help-me-with-words. Settings are chosen by the reader, reversible, and never used to infer a condition.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

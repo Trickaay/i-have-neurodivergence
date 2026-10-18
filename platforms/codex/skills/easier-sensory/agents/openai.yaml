@@ -1,0 +1,6 @@
+interface:
+  display_name: "Easier: Sensory and interface"
+  short_description: "Presentation settings: Sensory and interface"
+  default_prompt: "Use $easier-sensory for the rest of this session."
+policy:
+  allow_implicit_invocation: false

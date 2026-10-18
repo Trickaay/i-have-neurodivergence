@@ -1,0 +1,6 @@
+interface:
+  display_name: "Needs picker"
+  short_description: "Choose what would make this easier, in two questions"
+  default_prompt: "Run $needs-picker to set up how you present information to me."
+policy:
+  allow_implicit_invocation: false

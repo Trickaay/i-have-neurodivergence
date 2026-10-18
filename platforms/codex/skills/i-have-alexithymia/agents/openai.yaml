@@ -1,0 +1,6 @@
+interface:
+  display_name: "I have alexithymia"
+  short_description: "Shape output for a reader who cannot reliably read their own"
+  default_prompt: "Use $i-have-alexithymia for the rest of this session."
+policy:
+  allow_implicit_invocation: false

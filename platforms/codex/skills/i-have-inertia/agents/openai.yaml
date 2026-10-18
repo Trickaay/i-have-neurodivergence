@@ -1,0 +1,6 @@
+interface:
+  display_name: "I have inertia"
+  short_description: "Shape output for a reader who has difficulty starting and"
+  default_prompt: "Use $i-have-inertia for the rest of this session."
+policy:
+  allow_implicit_invocation: false

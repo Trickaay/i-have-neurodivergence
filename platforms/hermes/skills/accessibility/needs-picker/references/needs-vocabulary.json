@@ -1,0 +1,2506 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "version": 2,
+ "name": "needs-vocabulary",
+ "purpose": "Source of truth for the needs picker and the prompt composer. A reader selects difficulties, then chooses the support they want for each, including the purpose of the exchange (do it, show me, practise, let me try). Support atoms carry the rules and a three-part evidence record. No diagnosis is inferred, stored or displayed; the reader's own note is kept as written.",
+ "principles": [
+  "The stored unit is a chosen support, not a condition.",
+  "A difficulty is what the reader notices. A support is what they asked for. The rule is what the agent does.",
+  "Supports change how information and interaction are presented. They never infer anything about you.",
+  "Some supports deliberately hold detail back or limit choices; those carry defers:true and say so in plain words before they are chosen.",
+  "The reader may skip the difficulty step and pick supports directly, or compare two supports side by side instead of choosing in the abstract.",
+  "Presets expand to supports. Nothing expands to a diagnosis.",
+  "Context is declared by the reader, never inferred from their behaviour.",
+  "Comparison pairs are authored in this file, not derived from list order. Each pair puts two supports that differ in kind against each other; a pair that restates itself teaches the reader nothing.",
+  "`recommended` is a suggested starting set, not an effectiveness ranking. Some of its members are design inference (tier D), not tested interventions.",
+  "Purpose is a separate choice from access: do the task for me, show me, practise together, or let me try. Access settings stay on in every purpose, and a practice is never the price of a requested answer.",
+  "An evidence letter rates the underlying phenomenon. The method and the exact wording of the rule are recorded separately in `evidence_basis`; the rule as worded is untested in an agent until the pilot says otherwise.",
+  "Faded help is teaching prompts only. Captions, symbol keys, diagrams, calculators and text-to-speech are access aids and stay as long as they are wanted.",
+  "The free-text note is stored as written. It has no structured field for a condition, and nothing infers one; what the person chooses to write there is theirs, and may be sensitive."
+ ],
+ "areas": [
+  {
+   "id": "understanding",
+   "label": "Understanding",
+   "description": "Making sense of what is said: wording, terms, examples, implied meaning."
+  },
+  {
+   "id": "information_load",
+   "label": "Information load",
+   "description": "How much arrives at once: length, density, layers."
+  },
+  {
+   "id": "attention",
+   "label": "Attention",
+   "description": "Staying on one thing, and getting back to it."
+  },
+  {
+   "id": "planning",
+   "label": "Planning",
+   "description": "Breaking work up, ordering it, and starting it."
+  },
+  {
+   "id": "memory",
+   "label": "Memory",
+   "description": "Not having to hold things in your head between turns."
+  },
+  {
+   "id": "learning",
+   "label": "Learning",
+   "description": "Taking in something new: examples, representation, checking."
+  },
+  {
+   "id": "communication",
+   "label": "Communication",
+   "description": "Intent, implication, tone, and questions."
+  },
+  {
+   "id": "sensory",
+   "label": "Sensory and interface",
+   "description": "Visual density, motion, colour, sound."
+  },
+  {
+   "id": "choice",
+   "label": "Choice and decision",
+   "description": "How options are offered and decided."
+  },
+  {
+   "id": "transitions",
+   "label": "Transitions",
+   "description": "Changing topic or task without losing the thread."
+  },
+  {
+   "id": "motor",
+   "label": "Motor and interaction",
+   "description": "What you physically have to do to act on a response."
+  },
+  {
+   "id": "pacing",
+   "label": "Pacing",
+   "description": "Time, speed, confirmation, and how much is asked at once."
+  }
+ ],
+ "difficulties": [
+  {
+   "id": "long_explanations",
+   "label": "I lose track of long explanations",
+   "area": "information_load",
+   "offers": [
+    "summary_first",
+    "short_sections",
+    "one_instruction",
+    "progress_markers",
+    "restate_goal",
+    "progressive_disclosure"
+   ],
+   "recommended": [
+    "summary_first",
+    "short_sections"
+   ],
+   "compare_pairs": [
+    [
+     "summary_first",
+     "one_instruction"
+    ],
+    [
+     "short_sections",
+     "progressive_disclosure"
+    ],
+    [
+     "progress_markers",
+     "restate_goal"
+    ]
+   ]
+  },
+  {
+   "id": "need_steps",
+   "label": "I need things broken into steps",
+   "area": "planning",
+   "offers": [
+    "break_down",
+    "sequence_explicitly",
+    "next_step_only",
+    "done_when",
+    "one_instruction",
+    "meaning_before_command"
+   ],
+   "recommended": [
+    "break_down",
+    "done_when"
+   ],
+   "compare_pairs": [
+    [
+     "break_down",
+     "next_step_only"
+    ],
+    [
+     "done_when",
+     "meaning_before_command"
+    ],
+    [
+     "sequence_explicitly",
+     "one_instruction"
+    ]
+   ]
+  },
+  {
+   "id": "starting",
+   "label": "I struggle to start tasks",
+   "area": "planning",
+   "offers": [
+    "starting_prompt",
+    "if_then_triggers",
+    "next_step_only",
+    "break_down",
+    "decide_for_me"
+   ],
+   "recommended": [
+    "starting_prompt",
+    "if_then_triggers"
+   ],
+   "compare_pairs": [
+    [
+     "starting_prompt",
+     "decide_for_me"
+    ],
+    [
+     "if_then_triggers",
+     "next_step_only"
+    ],
+    [
+     "break_down"
+    ]
+   ]
+  },
+  {
+   "id": "too_many_choices",
+   "label": "I get overwhelmed by too many choices",
+   "area": "choice",
+   "offers": [
+    "fewer_options",
+    "recommended_default",
+    "decide_for_me",
+    "comparison_table",
+    "consequences_not_adjectives"
+   ],
+   "recommended": [
+    "fewer_options",
+    "recommended_default"
+   ],
+   "compare_pairs": [
+    [
+     "fewer_options",
+     "comparison_table"
+    ],
+    [
+     "recommended_default",
+     "decide_for_me"
+    ],
+    [
+     "consequences_not_adjectives"
+    ]
+   ]
+  },
+  {
+   "id": "visual_examples",
+   "label": "I need visual examples",
+   "area": "learning",
+   "offers": [
+    "visual_representation",
+    "worked_examples",
+    "worked_then_practice",
+    "comparison_table"
+   ],
+   "recommended": [
+    "worked_examples",
+    "visual_representation"
+   ],
+   "compare_pairs": [
+    [
+     "visual_representation",
+     "worked_examples"
+    ],
+    [
+     "worked_then_practice",
+     "comparison_table"
+    ]
+   ]
+  },
+  {
+   "id": "literal",
+   "label": "I prefer exact / literal wording",
+   "area": "understanding",
+   "offers": [
+    "literal_wording",
+    "one_term_per_thing",
+    "explain_terms",
+    "state_the_inference",
+    "done_when"
+   ],
+   "recommended": [
+    "literal_wording",
+    "one_term_per_thing"
+   ],
+   "compare_pairs": [
+    [
+     "literal_wording",
+     "state_the_inference"
+    ],
+    [
+     "one_term_per_thing",
+     "explain_terms"
+    ],
+    [
+     "done_when"
+    ]
+   ]
+  },
+  {
+   "id": "implied_meaning",
+   "label": "I miss implied meaning or sarcasm",
+   "area": "communication",
+   "offers": [
+    "explicit_intent",
+    "no_implied_meaning",
+    "explain_implied",
+    "literal_wording",
+    "analogy_then_literal"
+   ],
+   "recommended": [
+    "no_implied_meaning",
+    "explicit_intent"
+   ],
+   "compare_pairs": [
+    [
+     "explicit_intent",
+     "explain_implied"
+    ],
+    [
+     "no_implied_meaning",
+     "analogy_then_literal"
+    ],
+    [
+     "literal_wording"
+    ]
+   ]
+  },
+  {
+   "id": "repetition",
+   "label": "I need important information repeated",
+   "area": "memory",
+   "offers": [
+    "repeat_key_info",
+    "restate_goal",
+    "no_carry_over",
+    "persistent_state",
+    "checkpoints"
+   ],
+   "recommended": [
+    "repeat_key_info",
+    "restate_goal"
+   ],
+   "compare_pairs": [
+    [
+     "repeat_key_info",
+     "persistent_state"
+    ],
+    [
+     "restate_goal",
+     "checkpoints"
+    ],
+    [
+     "no_carry_over"
+    ]
+   ]
+  },
+  {
+   "id": "visual_clutter",
+   "label": "I am sensitive to visual clutter",
+   "area": "sensory",
+   "offers": [
+    "reduce_visual_stimulus",
+    "low_density",
+    "uniform_format",
+    "short_sections",
+    "declare_length"
+   ],
+   "recommended": [
+    "reduce_visual_stimulus",
+    "low_density"
+   ],
+   "compare_pairs": [
+    [
+     "reduce_visual_stimulus",
+     "low_density"
+    ],
+    [
+     "uniform_format",
+     "declare_length"
+    ],
+    [
+     "short_sections"
+    ]
+   ]
+  },
+  {
+   "id": "sound_interruption",
+   "label": "I am sensitive to sound / interruptions",
+   "area": "sensory",
+   "offers": [
+    "quiet",
+    "reduce_motion",
+    "reduce_distraction",
+    "warn_before_switch"
+   ],
+   "recommended": [
+    "quiet",
+    "reduce_motion"
+   ],
+   "compare_pairs": [
+    [
+     "quiet",
+     "reduce_distraction"
+    ],
+    [
+     "reduce_motion",
+     "warn_before_switch"
+    ]
+   ]
+  },
+  {
+   "id": "processing_time",
+   "label": "I need more time to process",
+   "area": "pacing",
+   "offers": [
+    "more_time",
+    "confirm_before_proceeding",
+    "one_instruction",
+    "progressive_disclosure",
+    "clock_not_feeling"
+   ],
+   "recommended": [
+    "more_time",
+    "one_instruction"
+   ],
+   "compare_pairs": [
+    [
+     "more_time",
+     "confirm_before_proceeding"
+    ],
+    [
+     "one_instruction",
+     "progressive_disclosure"
+    ],
+    [
+     "clock_not_feeling"
+    ]
+   ]
+  },
+  {
+   "id": "lost_after_interruption",
+   "label": "I forget where I was after interruptions",
+   "area": "memory",
+   "offers": [
+    "restart_help",
+    "recap",
+    "persistent_state",
+    "checkpoints",
+    "preserve_unfinished"
+   ],
+   "recommended": [
+    "restart_help",
+    "persistent_state"
+   ],
+   "compare_pairs": [
+    [
+     "restart_help",
+     "preserve_unfinished"
+    ],
+    [
+     "persistent_state",
+     "recap"
+    ],
+    [
+     "checkpoints"
+    ]
+   ]
+  },
+  {
+   "id": "switching",
+   "label": "I struggle switching between tasks",
+   "area": "transitions",
+   "offers": [
+    "warn_before_switch",
+    "preserve_unfinished",
+    "no_parallel",
+    "one_goal",
+    "stop_point"
+   ],
+   "recommended": [
+    "warn_before_switch",
+    "preserve_unfinished"
+   ],
+   "compare_pairs": [
+    [
+     "warn_before_switch",
+     "no_parallel"
+    ],
+    [
+     "preserve_unfinished",
+     "stop_point"
+    ],
+    [
+     "one_goal"
+    ]
+   ]
+  },
+  {
+   "id": "planning_sequencing",
+   "label": "I find planning and sequencing difficult",
+   "area": "planning",
+   "offers": [
+    "break_down",
+    "sequence_explicitly",
+    "prioritise",
+    "if_then_triggers",
+    "done_when"
+   ],
+   "recommended": [
+    "break_down",
+    "prioritise"
+   ],
+   "compare_pairs": [
+    [
+     "break_down",
+     "prioritise"
+    ],
+    [
+     "sequence_explicitly",
+     "if_then_triggers"
+    ],
+    [
+     "done_when"
+    ]
+   ]
+  },
+  {
+   "id": "structure_first",
+   "label": "I need to see the overall structure first",
+   "area": "understanding",
+   "offers": [
+    "summary_first",
+    "visual_representation",
+    "sequence_explicitly",
+    "progress_markers",
+    "explicit_intent"
+   ],
+   "recommended": [
+    "summary_first",
+    "sequence_explicitly"
+   ],
+   "compare_pairs": [
+    [
+     "summary_first",
+     "visual_representation"
+    ],
+    [
+     "sequence_explicitly",
+     "explicit_intent"
+    ],
+    [
+     "progress_markers"
+    ]
+   ]
+  },
+  {
+   "id": "acting_on_it",
+   "label": "Acting on the answer is the hard part",
+   "area": "motor",
+   "offers": [
+    "agent_does_it",
+    "one_physical_action",
+    "copyable_blocks",
+    "keyboard_first",
+    "no_spatial_directions"
+   ],
+   "recommended": [
+    "agent_does_it",
+    "copyable_blocks"
+   ],
+   "compare_pairs": [
+    [
+     "agent_does_it",
+     "copyable_blocks"
+    ],
+    [
+     "one_physical_action",
+     "no_spatial_directions"
+    ],
+    [
+     "keyboard_first"
+    ]
+   ]
+  },
+  {
+   "id": "running_out",
+   "label": "I run out of energy before the task does",
+   "area": "pacing",
+   "offers": [
+    "cost_upfront",
+    "smallest_version_first",
+    "stop_point",
+    "one_word_reduce",
+    "fewer_options"
+   ],
+   "recommended": [
+    "cost_upfront",
+    "smallest_version_first"
+   ],
+   "compare_pairs": [
+    [
+     "cost_upfront",
+     "smallest_version_first"
+    ],
+    [
+     "stop_point",
+     "one_word_reduce"
+    ],
+    [
+     "fewer_options"
+    ]
+   ]
+  },
+  {
+   "id": "feelings_questions",
+   "label": "I cannot answer questions about how I feel",
+   "area": "communication",
+   "offers": [
+    "no_feelings_questions",
+    "consequences_not_adjectives",
+    "recommended_default",
+    "clock_not_feeling"
+   ],
+   "recommended": [
+    "no_feelings_questions",
+    "consequences_not_adjectives"
+   ],
+   "compare_pairs": [
+    [
+     "no_feelings_questions",
+     "recommended_default"
+    ],
+    [
+     "consequences_not_adjectives",
+     "clock_not_feeling"
+    ]
+   ]
+  },
+  {
+   "id": "being_told",
+   "label": "Being told to do something makes it harder",
+   "area": "communication",
+   "offers": [
+    "declarative_not_imperative",
+    "recommended_default",
+    "more_time",
+    "decide_for_me"
+   ],
+   "recommended": [
+    "declarative_not_imperative",
+    "recommended_default"
+   ],
+   "compare_pairs": [
+    [
+     "declarative_not_imperative",
+     "decide_for_me"
+    ],
+    [
+     "recommended_default",
+     "more_time"
+    ]
+   ]
+  },
+  {
+   "id": "hear_output",
+   "label": "I hear the output rather than see it",
+   "area": "sensory",
+   "offers": [
+    "linear_output",
+    "summary_first",
+    "no_colour_meaning",
+    "declare_length",
+    "reduce_motion"
+   ],
+   "recommended": [
+    "linear_output",
+    "summary_first"
+   ],
+   "compare_pairs": [
+    [
+     "linear_output",
+     "summary_first"
+    ],
+    [
+     "no_colour_meaning",
+     "reduce_motion"
+    ],
+    [
+     "declare_length"
+    ]
+   ]
+  },
+  {
+   "id": "cannot_use_colour",
+   "label": "I cannot rely on the colours",
+   "area": "sensory",
+   "offers": [
+    "no_colour_meaning",
+    "copyable_blocks"
+   ],
+   "recommended": [
+    "no_colour_meaning"
+   ],
+   "compare_pairs": [
+    [
+     "no_colour_meaning",
+     "copyable_blocks"
+    ]
+   ]
+  },
+  {
+   "id": "doesnt_stick",
+   "label": "Explanations do not stick unless I do something with them",
+   "area": "learning",
+   "offers": [
+    "interactive_explanation",
+    "worked_then_practice",
+    "check_understanding",
+    "worked_examples",
+    "visual_representation"
+   ],
+   "recommended": [
+    "worked_then_practice",
+    "interactive_explanation"
+   ],
+   "compare_pairs": [
+    [
+     "interactive_explanation",
+     "worked_examples"
+    ],
+    [
+     "check_understanding",
+     "visual_representation"
+    ],
+    [
+     "worked_then_practice"
+    ]
+   ]
+  },
+  {
+   "id": "pulled_away",
+   "label": "I get pulled away from what I was doing",
+   "area": "attention",
+   "offers": [
+    "one_goal",
+    "reduce_distraction",
+    "restate_goal",
+    "progress_markers",
+    "one_instruction"
+   ],
+   "recommended": [
+    "one_goal",
+    "restate_goal"
+   ],
+   "compare_pairs": [
+    [
+     "one_goal",
+     "reduce_distraction"
+    ],
+    [
+     "restate_goal",
+     "progress_markers"
+    ],
+    [
+     "one_instruction"
+    ]
+   ]
+  },
+  {
+   "id": "forget_later",
+   "label": "I understand it now but forget it later",
+   "area": "learning",
+   "offers": [
+    "retrieval_feedback",
+    "spaced_revisit",
+    "representation_mapping",
+    "worked_then_practice"
+   ],
+   "recommended": [
+    "retrieval_feedback",
+    "representation_mapping"
+   ],
+   "compare_pairs": [
+    [
+     "retrieval_feedback",
+     "worked_then_practice"
+    ],
+    [
+     "spaced_revisit",
+     "representation_mapping"
+    ]
+   ]
+  },
+  {
+   "id": "cannot_transfer",
+   "label": "I can copy the example but cannot use it elsewhere",
+   "area": "learning",
+   "offers": [
+    "transfer_check",
+    "fade_teaching_prompts",
+    "familiar_domain_examples",
+    "check_understanding"
+   ],
+   "recommended": [
+    "transfer_check",
+    "fade_teaching_prompts"
+   ],
+   "compare_pairs": [
+    [
+     "transfer_check",
+     "check_understanding"
+    ],
+    [
+     "fade_teaching_prompts",
+     "familiar_domain_examples"
+    ]
+   ]
+  },
+  {
+   "id": "choose_purpose",
+   "label": "I want to choose: do it for me, show me, or let me try",
+   "area": "learning",
+   "offers": [
+    "purpose_do_it",
+    "purpose_show_me",
+    "purpose_practise_together",
+    "purpose_let_me_try"
+   ],
+   "recommended": [
+    "purpose_show_me"
+   ],
+   "compare_pairs": [
+    [
+     "purpose_do_it",
+     "purpose_show_me"
+    ],
+    [
+     "purpose_practise_together",
+     "purpose_let_me_try"
+    ]
+   ]
+  },
+  {
+   "id": "silent_working",
+   "label": "Working it out silently in my head does not work for me",
+   "area": "learning",
+   "offers": [
+    "written_trace",
+    "no_imagery_requests",
+    "visual_representation",
+    "persistent_state"
+   ],
+   "recommended": [
+    "written_trace"
+   ],
+   "compare_pairs": [
+    [
+     "written_trace",
+     "no_imagery_requests"
+    ],
+    [
+     "visual_representation",
+     "persistent_state"
+    ]
+   ]
+  },
+  {
+   "id": "whole_or_parts",
+   "label": "I need to choose between the whole explanation and one part at a time",
+   "area": "information_load",
+   "offers": [
+    "whole_explanation",
+    "interactive_explanation",
+    "summary_first",
+    "progress_markers"
+   ],
+   "recommended": [
+    "whole_explanation"
+   ],
+   "compare_pairs": [
+    [
+     "whole_explanation",
+     "interactive_explanation"
+    ],
+    [
+     "summary_first",
+     "progress_markers"
+    ]
+   ]
+  },
+  {
+   "id": "wording_hard",
+   "label": "The wording is hard to follow even when I know the subject",
+   "area": "understanding",
+   "offers": [
+    "untangle_language",
+    "plain_language_version",
+    "explain_terms",
+    "short_sentences"
+   ],
+   "recommended": [
+    "untangle_language"
+   ],
+   "compare_pairs": [
+    [
+     "untangle_language",
+     "plain_language_version"
+    ],
+    [
+     "explain_terms",
+     "short_sentences"
+    ]
+   ]
+  },
+  {
+   "id": "own_subject",
+   "label": "Examples from a subject I already know help me",
+   "area": "understanding",
+   "offers": [
+    "familiar_domain_examples",
+    "analogy_then_literal",
+    "worked_examples"
+   ],
+   "recommended": [
+    "familiar_domain_examples"
+   ],
+   "compare_pairs": [
+    [
+     "familiar_domain_examples",
+     "analogy_then_literal"
+    ],
+    [
+     "worked_examples"
+    ]
+   ]
+  },
+  {
+   "id": "finding_words",
+   "label": "I know what I mean but finding the words is hard",
+   "area": "communication",
+   "offers": [
+    "help_me_say_it",
+    "communication_method",
+    "answer_by_number",
+    "ask_one"
+   ],
+   "recommended": [
+    "help_me_say_it",
+    "answer_by_number"
+   ],
+   "compare_pairs": [
+    [
+     "help_me_say_it",
+     "answer_by_number"
+    ],
+    [
+     "communication_method",
+     "ask_one"
+    ]
+   ]
+  },
+  {
+   "id": "audio_video",
+   "label": "Audio or video is hard to follow",
+   "area": "sensory",
+   "offers": [
+    "media_access",
+    "repeat_key_info"
+   ],
+   "recommended": [
+    "media_access"
+   ],
+   "compare_pairs": [
+    [
+     "media_access",
+     "repeat_key_info"
+    ]
+   ]
+  },
+  {
+   "id": "other",
+   "label": "Something else...",
+   "area": "understanding",
+   "offers": [],
+   "recommended": [],
+   "compare_pairs": []
+  }
+ ],
+ "support": [
+  {
+   "id": "literal_wording",
+   "area": "understanding",
+   "label": "Exact, literal wording",
+   "rule": "Use literal language only. No idiom, metaphor, sarcasm, hyperbole, or rhetorical questions.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "verifyToken reads JWT_SECRET.\nIt is unset when the tests run.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "explain_terms",
+   "area": "understanding",
+   "label": "Explain terms as you use them",
+   "rule": "Define each technical term at first use, in one clause, in the same sentence.",
+   "evidence": "D",
+   "demo": "The token is a JWT — a signed string the server can check without a database lookup.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "worked_examples",
+   "area": "understanding",
+   "label": "Show a worked example",
+   "rule": "Give one complete worked example before or instead of an abstract rule.",
+   "evidence": "D",
+   "demo": "Here it is done once, in full:\n  jwt.verify(token, secret)  ->  { userId: 'u_12' }",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "analogy_then_literal",
+   "area": "understanding",
+   "label": "Analogies, then the literal version",
+   "rule": "Label analogies `Analogy:` and follow immediately with `Literal:`, saying where the analogy stops applying. Offer one only when I have asked for analogies.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "Analogy: the cache is a fixed-size queue.\nLiteral: maxSize is 500; entry 501 evicts entry 1.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "state_the_inference",
+   "area": "understanding",
+   "label": "Spell out the reasoning",
+   "rule": "Never leave a 'therefore' unspoken. Every recommendation carries its reason in the same sentence.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "Set JWT_SECRET in test/setup.ts, because verifyToken reads it and an unset secret is what returns 401.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "one_term_per_thing",
+   "area": "understanding",
+   "label": "One name per thing",
+   "rule": "Use one term per concept for the whole session. No synonyms, no pronouns for key objects.",
+   "evidence": "B",
+   "derived_from": "i-have-autism, i-have-dyslexia",
+   "demo": "verifyToken, every time. Not “the handler”, not “the auth thing”, not “it”.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism, i-have-dyslexia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "meaning_before_command",
+   "area": "understanding",
+   "label": "Say what it does before the command",
+   "rule": "State what a command or code block does before showing it.",
+   "evidence": "B",
+   "derived_from": "i-have-dyslexia (hyperlexic)",
+   "demo": "This adds one line to test/setup.ts:\n  process.env.JWT_SECRET = 'test-secret'",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyslexia (hyperlexic).",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "summary_first",
+   "area": "information_load",
+   "label": "Summary first, detail underneath",
+   "rule": "Answer or summary in the first line. Detail after. Never the reverse.",
+   "evidence": "S",
+   "derived_from": "i-use-a-screen-reader",
+   "demo": "The 401 comes from auth.ts:47.\nCause and fix below.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: a published technical standard, recorded in the skill i-use-a-screen-reader.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "short_sections",
+   "area": "information_load",
+   "label": "Short labelled sections",
+   "rule": "Sections of at most five lines, each with a label.",
+   "evidence": "D",
+   "demo": "Cause\n  JWT_SECRET is unset in the tests.\n\nFix\n  One line, below.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "progressive_disclosure",
+   "area": "information_load",
+   "label": "Least first, more on request",
+   "rule": "Give the minimum that answers it. Offer depth as a named next step, do not include it.",
+   "evidence": "D",
+   "demo": "Upgrade to 9 and convert the one function.\nSay “why” for the reasoning, “more” for the other two files.",
+   "defers": true,
+   "defers_note": "Holds detail back until you ask for it.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "short_sentences",
+   "area": "information_load",
+   "label": "Short sentences",
+   "rule": "Sentences of 15 words or fewer. Paragraphs of 3 sentences or fewer.",
+   "evidence": "A",
+   "derived_from": "i-have-dyslexia",
+   "demo": "The token expired.\nThe handshake takes 6 seconds.\nRaise the timeout to 30.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-dyslexia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "declare_length",
+   "area": "information_load",
+   "label": "Say how long it is first",
+   "rule": "State what is coming and how long before anything longer than ten lines.",
+   "evidence": "B",
+   "derived_from": "i-have-sensory-sensitivity, i-use-a-screen-reader",
+   "demo": "Next: the cause, one command, one check. 9 lines.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity, i-use-a-screen-reader.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_tangents",
+   "area": "information_load",
+   "label": "Keep tangents out",
+   "rule": "Anything outside the current scope goes in a `Deferred:` list at the end, one line each.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "… and the test passes.\n\nDeferred:\n- Cookie SameSite setting in session.ts.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "one_goal",
+   "area": "attention",
+   "label": "One goal at a time",
+   "rule": "One current goal, named at the top. Everything else is parked explicitly.",
+   "evidence": "D",
+   "demo": "Current goal: make auth.spec.ts pass.\nParked: the cookie settings, the README.",
+   "defers": true,
+   "defers_note": "Parks anything that is not the current goal.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "restate_goal",
+   "area": "attention",
+   "label": "Repeat the current goal",
+   "rule": "Restate the current goal at the start of every response.",
+   "evidence": "D",
+   "demo": "Goal: make auth.spec.ts pass. Continuing from step 2.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "one_instruction",
+   "area": "attention",
+   "label": "One instruction at a time",
+   "rule": "Give one instruction, then stop and wait for it to be done.",
+   "evidence": "D",
+   "demo": "Add to test/setup.ts: process.env.JWT_SECRET = 'test-secret'\n\nThat is the whole step. Tell me when it is done.",
+   "defers": true,
+   "defers_note": "Holds the next instruction back until this one is done.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "progress_markers",
+   "area": "attention",
+   "label": "Progress markers",
+   "rule": "Show step N of M on every step.",
+   "evidence": "B",
+   "derived_from": "i-have-tics",
+   "demo": "Step 2 of 3 · convert verifyToken",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-tics.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "restart_help",
+   "area": "attention",
+   "label": "Help me pick up where I was",
+   "rule": "After any gap, open with location, last action, next action, on one line.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "Where we are: auth.ts:42 · dependency upgraded · next is the token check.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "reduce_distraction",
+   "area": "attention",
+   "label": "Nothing that pulls attention away",
+   "rule": "No asides, no 'by the way', no unrequested suggestions, no notifications.",
+   "evidence": "D",
+   "demo": "(the response ends at the answer — no asides, no “by the way”, no extra suggestions)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "break_down",
+   "area": "planning",
+   "label": "Break it into steps",
+   "rule": "Decompose into steps of one action each.",
+   "evidence": "D",
+   "demo": "1. Upgrade the dependency.\n2. Convert verifyToken.\n3. Run the test.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "sequence_explicitly",
+   "area": "planning",
+   "label": "Number and order the steps",
+   "rule": "Number every step and state what each one depends on.",
+   "evidence": "D",
+   "demo": "2. Convert verifyToken. Depends on step 1 — the promise form does not exist before the upgrade.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "next_step_only",
+   "area": "planning",
+   "label": "Show only the next step",
+   "rule": "Show one step. Hold the rest until that one is done.",
+   "evidence": "D",
+   "demo": "Step 1: upgrade the dependency.\nStep 2 comes when step 1 is done.",
+   "defers": true,
+   "defers_note": "Holds later steps back until this one is done.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "starting_prompt",
+   "area": "planning",
+   "label": "Give me a way to start",
+   "rule": "Open with a first action that takes under two minutes and contains no decision.",
+   "evidence": "B",
+   "derived_from": "i-have-inertia",
+   "demo": "First action: open src/auth.ts and go to line 42.\nThat is the whole step. No decisions needed.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-inertia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "if_then_triggers",
+   "area": "planning",
+   "label": "Attach actions to a trigger",
+   "rule": "Phrase every next action as 'When <observable event>, <action>'.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "When the file is saved, run npm test -- auth.spec.ts.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "done_when",
+   "area": "planning",
+   "label": "Say when a step is finished",
+   "rule": "Every step states its observable completion condition.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "Run npm test -- auth.spec.ts.\nDone when: the last line reads 1 passing.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "prioritise",
+   "area": "planning",
+   "label": "Tell me what to do first",
+   "rule": "State which item comes first and why, rather than giving a flat list.",
+   "evidence": "D",
+   "demo": "Do the dependency first — the other two both fail until it is done.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "recap",
+   "area": "memory",
+   "label": "Recap where we are",
+   "rule": "One-line recap at the start of any response following a gap.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "Where we are: auth.ts converted, tests not yet run.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "persistent_state",
+   "area": "memory",
+   "label": "Keep a running state block",
+   "rule": "Maintain a `State:` block with done, now, next, open — same place, every turn.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "State:\n- Done: secret set in test/setup.ts\n- Now: rerun auth.spec.ts\n- Next: the same import in session.spec.ts",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_carry_over",
+   "area": "memory",
+   "label": "Never make me remember a value",
+   "rule": "Restate every path, identifier, number and command at the point of use.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "Run npm test -- auth.spec.ts. This is the command from step 2, unchanged.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "checkpoints",
+   "area": "memory",
+   "label": "Mark checkpoints",
+   "rule": "Mark a resumable checkpoint after each step, naming the exact state.",
+   "evidence": "D",
+   "demo": "Checkpoint: dependency at 9.0.2, no files edited. Safe to stop here.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "repeat_key_info",
+   "area": "memory",
+   "label": "Repeat important things",
+   "rule": "Restate a fact rather than referring back to it. Outside a practice I opted into, repetition over retrieval.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "The secret comes from process.env.JWT_SECRET — the same variable as in step 1.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "visual_representation",
+   "area": "learning",
+   "label": "Draw the structure",
+   "rule": "Give the structure as a diagram, tree or table, with its text equivalent below it.",
+   "evidence": "D",
+   "demo": "request -> authMiddleware -> verifyToken -> handleLogin\n\nIn words: the request reaches the middleware first.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_imagery_requests",
+   "area": "learning",
+   "label": "Never ask me to picture it",
+   "rule": "Never say picture, imagine, visualise or 'see it as'. Supply the artefact instead.",
+   "evidence": "A",
+   "derived_from": "i-have-aphantasia",
+   "demo": "The token has expired.\n(instead of: picture the token as a stamped ticket)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-aphantasia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "interactive_explanation",
+   "area": "learning",
+   "label": "One part at a time, with the map",
+   "rule": "Explain one part, then show where it belongs in the whole and keep that map visible. Wait for me before the next part. Do not require a confirmation after every paragraph if I say interruptions make it harder.",
+   "evidence": "D",
+   "demo": "Part 1 of 3: where the secret is read (src/auth.ts:42). Map: setup -> read -> test. Say \"next\" for part 2.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "worked_then_practice",
+   "area": "learning",
+   "label": "Example first, then one to try",
+   "rule": "Give a worked example, then one similar item for the reader to do.",
+   "evidence": "D",
+   "demo": "Done once for auth.spec.ts, above.\nNow the same import for session.spec.ts — line 1.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "check_understanding",
+   "area": "learning",
+   "label": "Check I have it, using facts",
+   "rule": "Check by asking a question with a right answer, never by asking whether it made sense.",
+   "evidence": "D",
+   "demo": "Quick check: which line returns the 401 — 47 or 22?",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "explicit_intent",
+   "area": "communication",
+   "label": "Say what you are doing and why",
+   "rule": "State the purpose of the response in its first line.",
+   "evidence": "D",
+   "demo": "This finds the cause of the 401. It does not fix the cookie settings.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_implied_meaning",
+   "area": "communication",
+   "label": "No hints or implication",
+   "rule": "State things directly. No hints, no leading questions, no expecting a conclusion to be drawn.",
+   "evidence": "D",
+   "demo": "The test will keep failing until the dependency is upgraded.\n(instead of: you might want to look at the dependency)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "explain_implied",
+   "area": "communication",
+   "label": "Unpack what others implied",
+   "rule": "When quoting someone else's message, give the literal reading and the likely intended reading separately, labelled.",
+   "evidence": "D",
+   "demo": "They wrote “whenever you get a chance”.\nLiterally: no deadline. Likely intended: this week.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "plain_tone",
+   "area": "communication",
+   "label": "Plain tone, no filler",
+   "rule": "No greeting, praise, enthusiasm or closing pleasantry. An apology for an actual error is information: one sentence, then cause, effect and fix.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "Test failed. Cause: missing Authorization header. Fix: add it at line 40.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_feelings_questions",
+   "area": "communication",
+   "label": "Do not ask how I feel about it",
+   "rule": "Never ask how something feels, seems or sits. Offer observable options instead.",
+   "evidence": "A",
+   "derived_from": "i-have-alexithymia",
+   "demo": "1. Upgrade — the 401 stops.\n2. Pin — nothing changes today.\nWhich: 1 or 2.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-alexithymia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "ask_one",
+   "area": "communication",
+   "label": "One question, clearly marked",
+   "rule": "At most one question per response, in a marked block, saying what each answer changes.",
+   "evidence": "B",
+   "derived_from": "i-have-autism",
+   "demo": "Question: which database?\nIf Postgres: JSONB. If SQLite: TEXT, parsed in code.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-autism.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "declarative_not_imperative",
+   "area": "communication",
+   "label": "State the situation, do not instruct",
+   "rule": "Describe the state of the work rather than issuing commands.",
+   "evidence": "D",
+   "derived_from": "i-need-low-demand",
+   "demo": "The tests have not been run since the edit.\n(instead of: run the tests)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "reduce_motion",
+   "area": "sensory",
+   "label": "No motion",
+   "rule": "No animation, spinners, progress bars, or redrawn lines.",
+   "evidence": "S",
+   "derived_from": "Reduced-motion accessibility design",
+   "demo": "Installing. 12 seconds elapsed.\n(instead of a spinner redrawing ten times a second)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying access need, not this rule: reduced-motion accessibility requirements in published web standards.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "reduce_visual_stimulus",
+   "area": "sensory",
+   "label": "Less on screen",
+   "rule": "No emoji, exclamation marks, ALL CAPS, ASCII art, box drawing, or decorative rules.",
+   "evidence": "B",
+   "derived_from": "i-have-sensory-sensitivity",
+   "demo": "Note: the cookie setting is also wrong.\n(instead of: ✅ IMPORTANT! Don't forget!!)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "uniform_format",
+   "area": "sensory",
+   "label": "Same shape every time",
+   "rule": "Same structure and labels each turn. Announce any change of shape before it happens.",
+   "evidence": "B",
+   "derived_from": "i-have-sensory-sensitivity",
+   "demo": "Every turn: Scope, then steps, then Status. Same labels, same order.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "quiet",
+   "area": "sensory",
+   "label": "No sound or pop-ups",
+   "rule": "No terminal bell, notification, or window focus change.",
+   "evidence": "B",
+   "derived_from": "i-have-sensory-sensitivity",
+   "demo": "(no terminal bell, no notification, no window stealing focus)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-sensory-sensitivity.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "low_density",
+   "area": "sensory",
+   "label": "Space it out",
+   "rule": "One idea per line. No dense or multi-column tables.",
+   "evidence": "D",
+   "demo": "auth-service: passing.\n\nsession-service: failing, 1 test.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_colour_meaning",
+   "area": "sensory",
+   "label": "Never rely on colour",
+   "rule": "Never identify anything by its colour. Every status carries a word.",
+   "evidence": "S",
+   "derived_from": "i-have-colour-vision-deficiency",
+   "demo": "Two tests are listed as FAIL.\n(instead of: two of them show up in red)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: a published technical standard, recorded in the skill i-have-colour-vision-deficiency.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "linear_output",
+   "area": "sensory",
+   "label": "Readable as a flat stream",
+   "rule": "No meaning carried by alignment, indentation or layout. Tables become labelled lists.",
+   "evidence": "S",
+   "derived_from": "i-use-a-screen-reader",
+   "demo": "Service: auth-service. Status: passing. Tests: 12 of 12.\n(instead of a four-column table)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: a published technical standard, recorded in the skill i-use-a-screen-reader.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "fewer_options",
+   "area": "choice",
+   "label": "Fewer options",
+   "rule": "At most two or three options, ever.",
+   "evidence": "D",
+   "demo": "1. Upgrade to 9.\n2. Pin 8.5.1.\n(instead of four options)",
+   "defers": true,
+   "defers_note": "Leaves some options out.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "recommended_default",
+   "area": "choice",
+   "label": "Always give a default",
+   "rule": "Name a default and say what happens if nothing is said.",
+   "evidence": "D",
+   "derived_from": "i-need-low-demand, i-have-alexithymia",
+   "demo": "Default: 1, if you say nothing.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand, i-have-alexithymia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "comparison_table",
+   "area": "choice",
+   "label": "Compare on the same points",
+   "rule": "Compare options against the same named dimensions, side by side.",
+   "evidence": "D",
+   "demo": "           upgrade   pin\nfixes 401    yes      no\nfiles        1        0",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "consequences_not_adjectives",
+   "area": "choice",
+   "label": "Describe what will be true, not which is better",
+   "rule": "Describe each option by its observable consequence, never as better, cleaner or nicer.",
+   "evidence": "A",
+   "derived_from": "i-have-alexithymia",
+   "demo": "1. Upgrade — the 401 stops; session.ts needs the same change later.\n(instead of: the cleaner option)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-alexithymia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "decide_for_me",
+   "area": "choice",
+   "label": "Decide the reversible ones for me",
+   "rule": "Make reversible decisions yourself, state them, and say how to reverse them.",
+   "evidence": "D",
+   "demo": "Going with the promise form. Reversible: git revert 4a1c9f2.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "warn_before_switch",
+   "area": "transitions",
+   "label": "Warn me before changing topic",
+   "rule": "Say before changing topic, and name what is being left.",
+   "evidence": "D",
+   "demo": "Leaving auth.ts at line 58, converted and saved. Moving to session.ts.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "preserve_unfinished",
+   "area": "transitions",
+   "label": "Hold my unfinished thread",
+   "rule": "Park unfinished work with its exact resumption state and trigger.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "Parked: dependency install, running in terminal 1.\nTo resume: when it prints “added 41 packages”, return to step 3.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "stop_point",
+   "area": "transitions",
+   "label": "Offer a clean stopping point",
+   "rule": "Name a clean stop point before long work begins, and what will be true there.",
+   "evidence": "B",
+   "derived_from": "i-have-inertia, i-have-limited-energy",
+   "demo": "Clean stop: when the test passes. One file changed, nothing half-edited.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-inertia, i-have-limited-energy.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_parallel",
+   "area": "transitions",
+   "label": "Never two things at once",
+   "rule": "Never leave two items in progress at the same time.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "The install is still running. Nothing else starts until it finishes.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "agent_does_it",
+   "area": "motor",
+   "label": "Do it rather than tell me to",
+   "rule": "Perform the edit or command yourself instead of instructing the reader to.",
+   "evidence": "B",
+   "derived_from": "i-have-dyspraxia",
+   "demo": "I have made the edit at src/auth.ts:42. Nothing for you to type.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "keyboard_first",
+   "area": "motor",
+   "label": "Typed commands, not mouse paths",
+   "rule": "Give typed commands. Never key chords or mouse directions.",
+   "evidence": "B",
+   "derived_from": "i-have-dyspraxia",
+   "demo": "Run: git commit -am \"fix token check\"\n(instead of: press Ctrl+Shift+P and click Commit)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "one_physical_action",
+   "area": "motor",
+   "label": "One physical action per step",
+   "rule": "One physical action per step, each with a recovery line if it goes wrong.",
+   "evidence": "B",
+   "derived_from": "i-have-dyspraxia",
+   "demo": "Save the file. If the editor reports a conflict, close without saving and tell me.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "no_spatial_directions",
+   "area": "motor",
+   "label": "Name it, do not point at it",
+   "rule": "Name the control, file and line number. Never 'above', 'top right', 'the one below'.",
+   "evidence": "B",
+   "derived_from": "i-have-dyspraxia, i-have-aphantasia",
+   "demo": "src/auth.ts, line 42.\n(instead of: near the top of the file, on the right)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyspraxia, i-have-aphantasia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "copyable_blocks",
+   "area": "motor",
+   "label": "Everything copy-ready",
+   "rule": "Every exact string in its own copyable block, never inside a sentence.",
+   "evidence": "B",
+   "derived_from": "i-have-dyslexia",
+   "demo": "process.env.JWT_SECRET = 'test-secret'   (in test/setup.ts)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dyslexia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "answer_by_number",
+   "area": "motor",
+   "label": "Let me answer with one character",
+   "rule": "Frame questions so a single number or character is a complete answer.",
+   "evidence": "B",
+   "derived_from": "i-have-dysgraphia",
+   "demo": "1 Postgres   2 SQLite\nReply with 1 or 2.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dysgraphia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "never_correct_typing",
+   "area": "motor",
+   "label": "Do not correct my typing",
+   "rule": "Interpret misspellings silently. Never correct, quote back, or comment on them.",
+   "evidence": "B",
+   "derived_from": "i-have-dysgraphia",
+   "demo": "Opening verifyToken and carrying on.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-dysgraphia.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "more_time",
+   "area": "pacing",
+   "label": "No time pressure",
+   "rule": "No urgency words. No deadline that is not real and sourced.",
+   "evidence": "D",
+   "derived_from": "i-need-low-demand",
+   "demo": "The token expires at 14:00. That is the only deadline.\n(instead of: do this as soon as possible)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "confirm_before_proceeding",
+   "area": "pacing",
+   "label": "Confirm before each step",
+   "rule": "Wait for a typed confirmation before each irreversible step.",
+   "evidence": "B",
+   "derived_from": "i-have-tics",
+   "demo": "This drops the sessions table. Type “yes” to run it.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-tics.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "clock_not_feeling",
+   "area": "pacing",
+   "label": "Times as numbers",
+   "rule": "State durations as numbers. Never 'quick', 'shortly' or 'a while'.",
+   "evidence": "A",
+   "derived_from": "i-have-working-memory-differences",
+   "demo": "The suite took 4 minutes 10 seconds on the last run.\n(instead of: it takes a while)",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: replicated experimental or meta-analytic evidence, recorded in the skill i-have-working-memory-differences.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "cost_upfront",
+   "area": "pacing",
+   "label": "Tell me what it will cost first",
+   "rule": "State steps, decisions required, and minutes, before starting.",
+   "evidence": "B",
+   "derived_from": "i-have-limited-energy",
+   "demo": "Cost: 4 steps · 1 decision from you · about 25 minutes.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-limited-energy.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "smallest_version_first",
+   "area": "pacing",
+   "label": "Smallest useful version first",
+   "rule": "Offer the smallest version that actually works before the full one.",
+   "evidence": "B",
+   "derived_from": "i-have-limited-energy",
+   "demo": "Smallest version: fix auth.ts only — 2 steps, 8 minutes.\nFull version: all three files — 6 steps, 70 minutes.",
+   "defers": true,
+   "defers_note": "Offers a smaller piece of work before the whole one.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: consistent qualitative or observational findings, recorded in the skill i-have-limited-energy.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "one_word_reduce",
+   "area": "pacing",
+   "label": "One word to shorten everything",
+   "rule": "Honour a single word that reduces any answer to its shortest form.",
+   "evidence": "D",
+   "demo": "Say “less” at any point for the shortest form of any answer.",
+   "evidence_basis": {
+    "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
+    "method": "Design inference (D): the rule is the pack's translation of that evidence into one instruction; the teaching or presentation method itself was not tested here.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "purpose_do_it",
+   "area": "learning",
+   "label": "Do the task for me",
+   "rule": "Complete the task yourself and show the result. Explain only what I ask about. My other settings stay on.",
+   "evidence": "D",
+   "demo": "Done: test/setup.ts now sets JWT_SECRET; auth.spec.ts passes. Say \"why\" for the cause.",
+   "evidence_basis": {
+    "phenomenon": "A stated purpose, not a difficulty: the person chooses whether this exchange completes, demonstrates or practises (CAST UDL 3.0, choice and autonomy, S10).",
+    "method": "Design inference (D): making the purpose explicit stops an agent from either withholding help or doing everything.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "purpose_show_me",
+   "area": "learning",
+   "label": "Show me how it is done",
+   "rule": "Demonstrate the task step by step with every intermediate state visible, then give the result. Do not ask me to do a step unless I say so.",
+   "evidence": "B",
+   "demo": "Step 1: test/setup.ts before: (no JWT_SECRET line). After: process.env.JWT_SECRET = 'test-secret'.\nStep 2: npm test -- auth.spec.ts -> 1 passing.",
+   "evidence_basis": {
+    "phenomenon": "Demonstration followed by practice improved vocational skills for two of three autistic adults, with transfer for two (English et al. 2017, S31): a very small single-case study, task-specific. Worked examples are general instructional evidence (Atkinson et al. 2003, S06).",
+    "method": "Design inference (D): a demonstration with the state visible before and after each step; static step captures stand in where no recording is possible.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "purpose_practise_together",
+   "area": "learning",
+   "label": "Let me practise it with you",
+   "rule": "Work through it with me: do the first step fully, then offer me one step with a hint available, then the next. If I say \"you do it\", finish it without comment.",
+   "evidence": "B",
+   "demo": "I set the secret in test/setup.ts. Your turn: which test file needs the same line? Hint: it calls refreshToken.",
+   "evidence_basis": {
+    "phenomenon": "Fading solution steps with a focused question improved learning in two instructional experiments (Atkinson et al. 2003, S06); not autism-specific.",
+    "method": "Design inference (D): one offered step at a time, help restorable at any point, no penalty for handing the step back.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "purpose_let_me_try",
+   "area": "learning",
+   "label": "Let me try it myself",
+   "rule": "Set the task up and let me attempt it. Give the answer whenever I ask, with no penalty and no comment. Review my attempt by stating what is correct, what is not, and why.",
+   "evidence": "A",
+   "demo": "Your attempt: import './setup' at line 1 of session.spec.ts. Correct: the file now loads the secret. Missing: auth.spec.ts still needs the same import.",
+   "evidence_basis": {
+    "phenomenon": "Retrieval with feedback improved later performance for autistic and non-autistic adults on word pairs (Cairney et al. 2026, S03); the task boundary is narrow and does not cover complex reasoning.",
+    "method": "Design inference (D): an attempt with the answer always available; feedback states the relationship, never a judgment about effort.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "retrieval_feedback",
+   "area": "learning",
+   "label": "Let me try remembering, with hints and the answer available",
+   "rule": "After an explanation, offer one optional recall or application question. If I attempt it, show the correct answer and explain the relationship it rests on; a wrong answer gets a better explanation, never a judgment. \"Hint\", \"show me\" and \"skip\" are always available, and the answer is never withheld as the price of continuing. Note whether I recalled it or recognised it.",
+   "evidence": "A",
+   "demo": "Optional: which variable does verifyToken read the secret from? (hint / show me / skip)\n-> JWT_SECRET. It is read at src/auth.ts:42; the test sets it in test/setup.ts.",
+   "evidence_basis": {
+    "phenomenon": "Feedback after retrieval helped autistic and non-autistic adults in two experiments, and retrieval beat restudy in the second (Cairney et al. 2026, S03: online sample, self-reported formal diagnosis, unrelated word pairs). Retrieval also helped students with ADHD without removing every difference (Minear et al. 2023, S09).",
+    "method": "The general retrieval-practice effect is replicated (A); its application to complex technical learning through an assistant is an inference (D). Recognition from a list and unaided recall are different tasks and are recorded as such.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "fade_teaching_prompts",
+   "area": "learning",
+   "label": "Give less help gradually, and let me restore it",
+   "rule": "Across a sequence of examples, remove one solution step at a time and ask which rule justifies it, never for a long explanation. Keep the full worked example available on request. Fade teaching prompts only, never access aids: captions, symbol keys, diagrams, calculators and text-to-speech stay as long as I want them.",
+   "evidence": "A",
+   "demo": "Example 3 of 3: the secret is set; the import is missing from one file. Which file, and which rule says so? (full example on request)",
+   "evidence_basis": {
+    "phenomenon": "Progressively removed solution steps with prompts about the principle improved learning in two instructional experiments (Atkinson, Renkl and Merrill 2003, S06); general, not autistic-adult evidence.",
+    "method": "Design inference (D): fading applies to teaching prompts only; continued use of an access aid is not failed learning.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "transfer_check",
+   "area": "learning",
+   "label": "Show the same idea in a different example",
+   "rule": "After an example, change one relevant feature and say what changed and what stayed the same. Include one contrasting case where the rule does not apply. For technical work, apply the principle in a different file, dataset or diagram. Keep my chosen way of answering.",
+   "evidence": "D",
+   "demo": "Changed: session.spec.ts instead of auth.spec.ts. Same: the secret is still read from JWT_SECRET. Does not apply: a test that mocks jwt.verify never reads the secret.",
+   "evidence_basis": {
+    "phenomenon": "Combining examples with problem solving, connecting representations and asking explanatory questions is recommended with varying evidence ratings (IES practice guide, S01); not autism-specific.",
+    "method": "Design inference (D): a changed example with the difference named, plus a contrasting case; the response method stays the person's choice.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "spaced_revisit",
+   "area": "learning",
+   "label": "Keep selected ideas for a later review I choose",
+   "rule": "Keep a short list of ideas I ask to revisit. When I say \"revisit\", offer one short recall or application task on one of them, with feedback. I set the pace and can drop any item. Do not schedule reminders yourself; if the host cannot remember the list between sessions, say so rather than inventing it.",
+   "evidence": "A",
+   "demo": "Revisit list: (1) where the test secret is set. Say \"revisit\" when you want one question on it; no reminder will be sent.",
+   "evidence_basis": {
+    "phenomenon": "The best gap between study sessions depends on how long the material must be retained (Cepeda et al. 2008, S05, over 1,350 participants, general factual learning); the result supports distributed review, not a fixed schedule.",
+    "method": "Design inference (D): an opt-in list and a person-paced review. Reminders between sessions need a host capability the instruction alone does not have.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "representation_mapping",
+   "area": "learning",
+   "label": "Keep the diagram, symbols and meanings connected",
+   "rule": "When notation appears, give a table of each symbol, its name, its meaning and one substituted example. Use the same labels in the diagram, the table and the prose. Keep the table on screen or redisplay it on request; never ask me to hold it in my head.",
+   "evidence": "A",
+   "demo": "s_next = f(s_now, event)\nSymbol | Meaning | Example\ns_now | the stored state | count = 2\nevent | the input asking for a change | increment\nf | the rule for the next state | add one\ns_next | the state after the rule | count = 3",
+   "evidence_basis": {
+    "phenomenon": "Making the link between concrete and abstract forms explicit helps (concreteness fading review, Fyfe et al. 2014, S07). Aphantasic participants copy a visible image as accurately as anyone while remembering less object detail (Bainbridge et al. 2021, S08): working from a visible reference differs from imagining one.",
+    "method": "Design inference (D): one stable correspondence across representations, kept visible, rather than more pictures.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "whole_explanation",
+   "area": "learning",
+   "label": "The complete explanation first",
+   "rule": "Give the complete explanation in one piece: a short overview, then every part, then where each part belongs. Do not stop for a confirmation between parts unless I ask.",
+   "evidence": "B",
+   "demo": "Overview: the secret, where it is read, where the tests set it. Part 1 ... Part 2 ... Map: setup.ts -> auth.ts:42 -> auth.spec.ts.",
+   "evidence_basis": {
+    "phenomenon": "Recalling a whole text produced better delayed recall than recalling it section by section, for students with and without ADHD, though neither beat restudy (Stern and Halamish 2023, S04): immediate ease and lasting learning can differ. One study.",
+    "method": "Design inference (D): the person chooses whole or part-by-part; the map stays available either way.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "familiar_domain_examples",
+   "area": "understanding",
+   "label": "Examples from a subject I name",
+   "rule": "When I name a subject I know (code, graphs, physical systems, music, anything), draw examples and analogies from it, then state the exact correspondence and where it stops applying. Keep a neutral example available. Never hold an example back as a reward.",
+   "evidence": "D",
+   "demo": "In code terms: the state machine is a reducer, state_next = reduce(state_now, event). Where it stops: a reducer must be pure; this one may read a clock.",
+   "evidence_basis": {
+    "phenomenon": "Choice, relevance and links to prior knowledge are design principles (CAST UDL 3.0, S10); applying them through an assistant is a proposal.",
+    "method": "Design inference (D): an interest is a resource the person controls, never a lever; no permanent learning type is assigned.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "written_trace",
+   "area": "learning",
+   "label": "Print the trace; never ask me to work it out silently",
+   "rule": "Where a step could be worked out silently, print it: the intermediate values and the state before and after. Never ask me to say it in my head, rehearse it or run it in my mind.",
+   "evidence": "C",
+   "demo": "Trace: count = 2 -> event increment -> rule: add one -> count = 3.",
+   "evidence_basis": {
+    "phenomenon": "Adults who report little inner speech differ on some verbal tasks (Nedergaard and Lupyan 2024, S22); whether this shows complete absence is disputed (Lind 2025, S23). The science is unsettled; the person's own report is enough to offer the option.",
+    "method": "Design inference (D): a printed trace costs nothing for readers who do rehearse silently.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "untangle_language",
+   "area": "understanding",
+   "label": "Help me understand the wording",
+   "rule": "Explain unfamiliar words as they appear, say what each pronoun refers to, split long sentences, and state connections that are only implied. Keep the technical depth; change only the wording.",
+   "evidence": "B",
+   "demo": "\"It fails because the secret it reads is unset\" ->\nverifyToken fails. The reason: verifyToken reads JWT_SECRET, and JWT_SECRET is unset.",
+   "evidence_basis": {
+    "phenomenon": "Language difficulties such as developmental language disorder are distinct from dyslexia and from auditory processing differences; adult assessment evidence is limited (RCSLT, S12); adults with the same label report different preferences (co-design account, S13).",
+    "method": "Design inference (D): comprehension support offered on its own, without routing through any label, and separate from conceptual depth.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "plain_language_version",
+   "area": "understanding",
+   "label": "A plain-language version, full detail available",
+   "rule": "Give a short plain-language version first: one idea per sentence, everyday words, no figures of speech. Keep the full version underneath or on request. If I ask for Easy Read, use one idea per line and, where the host can show one, a meaningful picture per idea.",
+   "evidence": "B",
+   "demo": "Plain: the test needs a secret. The secret is missing. Add it in test/setup.ts.\nFull detail below.",
+   "evidence_basis": {
+    "phenomenon": "Easy Read is an access format with its own guidance (ASAN, One Idea Per Line, S17), not a measure of ability and not a default for autistic adults.",
+    "method": "Design inference (D): the plain version never replaces the full one; a decorative picture adds work, so pictures are meaningful or absent.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "help_me_say_it",
+   "area": "communication",
+   "label": "Help me put my idea into words",
+   "rule": "Accept fragments, lists and half-sentences as complete messages. Offer a sentence starter or a word only when I ask. Organise my points into a draft I can edit, keep my original words visible, and show any paraphrase as tentative with \"none of these\" as an option.",
+   "evidence": "B",
+   "demo": "You wrote: \"secret - test - missing\". Draft (edit freely): \"The test fails because the secret is missing.\"\nIs that it? 1 yes 2 close, let me edit 3 none of these",
+   "evidence_basis": {
+    "phenomenon": "Expression difficulties are described for adults with developmental language disorder and others; preferences vary within a label (RCSLT, S12; S13).",
+    "method": "Design inference (D): the person's words stay primary; a paraphrase is a tentative offer they can reject.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "communication_method",
+   "area": "communication",
+   "label": "Accept the way I communicate and let me finish",
+   "rule": "Accept typed fragments, saved phrases, symbols or text from a device as my message. Judge nothing from fluency or speed. Keep my original words; show any suggested completion as tentative and let me correct it without losing the message. Offer a free-form answer beside every choice set. If I say \"I will say when I am finished\", wait for that; if the host cannot wait, say so.",
+   "evidence": "B",
+   "demo": "Received: \"setup.ts secret\". Kept as written. Reply 1 to continue, 2 to add more, or type freely.",
+   "evidence_basis": {
+    "phenomenon": "AAC (augmentative and alternative communication) guidance supports individualised modes and extra turn-taking time (ASHA, S14); twelve autistic adults named input and output flexibility and control over communication as design concerns (Martin and Nagalakshmi 2025, S15: qualitative, not a trial).",
+    "method": "Design inference (D): the message is the person's, completions are tentative, and end-of-turn control depends on the host.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  },
+  {
+   "id": "media_access",
+   "area": "sensory",
+   "label": "Captions, a transcript or another usable format",
+   "rule": "For any audio or video, offer captions, a complete transcript, a summary and a text-first version as separate choices; I pick. Keep technical terms, numbers and negation exact. Mark an unverified transcript as unverified. Where the host allows, let me replay or change the speed.",
+   "evidence": "S",
+   "demo": "Choose: 1 captions 2 full transcript 3 summary 4 text first. Transcript status: machine-generated, not checked.",
+   "evidence_basis": {
+    "phenomenon": "Captions carry speaker information and meaningful sound, and unchecked automatic captions can misrepresent speech (W3C WAI, S16): a published standard.",
+    "method": "Design inference (D): captions, transcript and summary are different products offered separately; playback controls are host-dependent.",
+    "rule": "The wording of this rule is the pack's own design and has not been tested in an agent."
+   }
+  }
+ ],
+ "contexts": [
+  {
+   "id": "always",
+   "label": "Always",
+   "description": "Applies in every context unless a context overrides it."
+  },
+  {
+   "id": "work",
+   "label": "Work / technical",
+   "description": "Doing a known task under time or quality pressure."
+  },
+  {
+   "id": "learning",
+   "label": "Learning something new",
+   "description": "Taking in unfamiliar material."
+  },
+  {
+   "id": "brainstorming",
+   "label": "Brainstorming",
+   "description": "Generating options, exploring, no fixed target."
+  },
+  {
+   "id": "stuck",
+   "label": "When I am stuck",
+   "description": "The task has stalled."
+  },
+  {
+   "id": "overloaded",
+   "label": "When I am overloaded",
+   "description": "Capacity is low. Declared by the reader, never inferred."
+  }
+ ],
+ "presets": {
+  "i-have-adhd": [
+   "summary_first",
+   "short_sections",
+   "prioritise",
+   "next_step_only",
+   "progress_markers",
+   "one_goal",
+   "reduce_distraction",
+   "starting_prompt"
+  ],
+  "i-have-autism": [
+   "literal_wording",
+   "state_the_inference",
+   "one_term_per_thing",
+   "uniform_format",
+   "done_when",
+   "no_tangents",
+   "ask_one",
+   "plain_tone",
+   "explicit_intent",
+   "consequences_not_adjectives"
+  ],
+  "i-have-dyslexia": [
+   "short_sentences",
+   "low_density",
+   "copyable_blocks",
+   "one_term_per_thing",
+   "reduce_visual_stimulus",
+   "summary_first"
+  ],
+  "i-have-dyscalculia": [
+   "comparison_table",
+   "clock_not_feeling",
+   "explain_terms",
+   "done_when",
+   "consequences_not_adjectives"
+  ],
+  "i-have-dyspraxia": [
+   "agent_does_it",
+   "one_physical_action",
+   "keyboard_first",
+   "no_spatial_directions",
+   "sequence_explicitly",
+   "checkpoints"
+  ],
+  "i-have-tics": [
+   "more_time",
+   "progress_markers",
+   "checkpoints",
+   "confirm_before_proceeding",
+   "done_when",
+   "uniform_format",
+   "reduce_visual_stimulus"
+  ],
+  "i-have-apd": [
+   "linear_output",
+   "copyable_blocks",
+   "explain_terms",
+   "declare_length",
+   "one_instruction"
+  ],
+  "i-have-sensory-sensitivity": [
+   "reduce_visual_stimulus",
+   "uniform_format",
+   "quiet",
+   "low_density",
+   "declare_length",
+   "reduce_motion"
+  ],
+  "i-have-dysgraphia": [
+   "answer_by_number",
+   "never_correct_typing",
+   "agent_does_it",
+   "fewer_options",
+   "recommended_default"
+  ],
+  "i-have-working-memory-differences": [
+   "no_carry_over",
+   "restart_help",
+   "recap",
+   "persistent_state",
+   "if_then_triggers",
+   "no_parallel",
+   "clock_not_feeling",
+   "copyable_blocks"
+  ],
+  "i-have-inertia": [
+   "starting_prompt",
+   "if_then_triggers",
+   "next_step_only",
+   "stop_point",
+   "decide_for_me"
+  ],
+  "i-need-low-demand": [
+   "declarative_not_imperative",
+   "recommended_default",
+   "more_time",
+   "plain_tone",
+   "decide_for_me"
+  ],
+  "i-have-limited-energy": [
+   "cost_upfront",
+   "smallest_version_first",
+   "stop_point",
+   "one_word_reduce",
+   "progressive_disclosure"
+  ],
+  "i-have-alexithymia": [
+   "no_feelings_questions",
+   "consequences_not_adjectives",
+   "recommended_default",
+   "clock_not_feeling",
+   "plain_tone"
+  ],
+  "i-have-aphantasia": [
+   "no_imagery_requests",
+   "visual_representation",
+   "no_spatial_directions",
+   "worked_examples"
+  ],
+  "i-use-a-screen-reader": [
+   "linear_output",
+   "summary_first",
+   "reduce_motion",
+   "no_colour_meaning",
+   "declare_length",
+   "reduce_visual_stimulus"
+  ],
+  "i-have-colour-vision-deficiency": [
+   "no_colour_meaning",
+   "copyable_blocks"
+  ]
+ },
+ "resolutions": [
+  {
+   "between": [
+    "visual_representation",
+    "linear_output"
+   ],
+   "resolution": "Both. The diagram is drawn and its text equivalent follows. The text is authoritative."
+  },
+  {
+   "between": [
+    "visual_representation",
+    "no_imagery_requests"
+   ],
+   "resolution": "No conflict. Supplying a drawn structure is exactly what replaces asking for an imagined one."
+  },
+  {
+   "between": [
+    "fewer_options",
+    "comparison_table"
+   ],
+   "resolution": "Both. Two or three options, compared on the same dimensions."
+  },
+  {
+   "between": [
+    "agent_does_it",
+    "confirm_before_proceeding"
+   ],
+   "resolution": "Both. The agent performs it, after a typed confirmation for anything irreversible."
+  },
+  {
+   "between": [
+    "declarative_not_imperative",
+    "one_instruction"
+   ],
+   "resolution": "State the situation, then the single next action as an observation with a default. Clarity outranks demand-removal."
+  },
+  {
+   "between": [
+    "summary_first",
+    "explicit_intent"
+   ],
+   "resolution": "One line serves both: what this is and what it concludes."
+  },
+  {
+   "between": [
+    "progressive_disclosure",
+    "repeat_key_info"
+   ],
+   "resolution": "Repetition wins for anything needed to act. Disclosure limits new material, not restated material."
+  },
+  {
+   "between": [
+    "stop_point",
+    "one_goal"
+   ],
+   "resolution": "No conflict. The stop point is named for the current goal only."
+  },
+  {
+   "between": [
+    "agent_does_it",
+    "purpose_let_me_try"
+   ],
+   "resolution": "The attempt is mine only for the part I chose to practise; you perform everything else, and the answer is available on request. Motor, language and sensory settings stay."
+  },
+  {
+   "between": [
+    "agent_does_it",
+    "purpose_practise_together"
+   ],
+   "resolution": "You perform every step I have not taken; the step offered to me comes with a hint and can be handed back without comment."
+  },
+  {
+   "between": [
+    "purpose_do_it",
+    "purpose_let_me_try"
+   ],
+   "resolution": "Both chosen: ask which applies to this task in one marked question; until answered, do it and offer the attempt afterwards."
+  },
+  {
+   "between": [
+    "purpose_show_me",
+    "purpose_let_me_try"
+   ],
+   "resolution": "Both: show it first, then set up the attempt, and say which is happening."
+  },
+  {
+   "between": [
+    "retrieval_feedback",
+    "repeat_key_info"
+   ],
+   "resolution": "Outside a practice I opted into, repeat as usual. During it, the cue comes first and the answer on request."
+  },
+  {
+   "between": [
+    "whole_explanation",
+    "interactive_explanation"
+   ],
+   "resolution": "The complete explanation first, then one part at a time on request; the map stays either way."
+  },
+  {
+   "between": [
+    "whole_explanation",
+    "one_instruction"
+   ],
+   "resolution": "Explanations come whole; instructions I must act on still come one at a time."
+  },
+  {
+   "between": [
+    "communication_method",
+    "never_correct_typing"
+   ],
+   "resolution": "Both: my words stay as written; a tentative completion is shown only if I ask for one."
+  },
+  {
+   "between": [
+    "untangle_language",
+    "short_sentences"
+   ],
+   "resolution": "No conflict: splitting the sentence is the same operation; untangling adds the referents and the implied links."
+  },
+  {
+   "between": [
+    "fade_teaching_prompts",
+    "visual_representation"
+   ],
+   "resolution": "The diagram is an access aid and is never faded; only the teaching prompts are."
+  }
+ ],
+ "conflict_order": [
+  "safety_and_harness",
+  "assistive_technology_readable",
+  "confirm_unintended_input",
+  "preserve_state",
+  "remove_number",
+  "remove_physical_action",
+  "remove_internal_reference",
+  "remove_ambiguity",
+  "remove_demand_framing",
+  "remove_pressure_or_stimulus",
+  "written_chunked_form",
+  "shorten_sentence",
+  "shorten_list"
+ ],
+ "context_scopes": [
+  {
+   "id": "always",
+   "label": "Always",
+   "yaml": "always"
+  },
+  {
+   "id": "work",
+   "label": "Only for work / technical",
+   "yaml": "work"
+  },
+  {
+   "id": "learning",
+   "label": "Only when learning something new",
+   "yaml": "learning"
+  },
+  {
+   "id": "stuck",
+   "label": "Only when I am stuck",
+   "yaml": "stuck"
+  },
+  {
+   "id": "overloaded",
+   "label": "Only when I am overloaded",
+   "yaml": "overloaded"
+  },
+  {
+   "id": "always_not_brainstorming",
+   "label": "Always, except when brainstorming",
+   "yaml": "always + suppress in brainstorming"
+  }
+ ]
+}

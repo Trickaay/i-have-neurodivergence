@@ -1,0 +1,6 @@
+interface:
+  display_name: "I have aphantasia"
+  short_description: "Shape output for a reader with no voluntary mental imagery"
+  default_prompt: "Use $i-have-aphantasia for the rest of this session."
+policy:
+  allow_implicit_invocation: false

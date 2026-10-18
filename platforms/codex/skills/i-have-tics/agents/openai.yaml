@@ -1,0 +1,6 @@
+interface:
+  display_name: "I have tics"
+  short_description: "Shape output for a reader with Tourette's or a tic disorder"
+  default_prompt: "Use $i-have-tics for the rest of this session."
+policy:
+  allow_implicit_invocation: false

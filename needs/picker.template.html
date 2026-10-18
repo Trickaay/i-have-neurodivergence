@@ -1,0 +1,737 @@
+<title>What Would Make This Easier</title>
+<style>
+:root{
+  --ground:#F3F4F7; --surface:#FFFFFF; --surface-2:#FAFBFC;
+  --ink:#191D25; --muted:#5B6373; --line:#DBDFE7; --line-strong:#B9C0CC;
+  --accent:#2E5C8A; --accent-soft:#E6EDF6; --accent-ink:#1F4267;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --r:6px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#14171C; --surface:#1C2027; --surface-2:#22272F;
+  --ink:#E7EAEF; --muted:#959DAC; --line:#2C323B; --line-strong:#454D59;
+  --accent:#82ACD9; --accent-soft:#1E2937; --accent-ink:#A8C7E8;
+}}
+:root[data-theme="dark"]{
+  --ground:#14171C; --surface:#1C2027; --surface-2:#22272F;
+  --ink:#E7EAEF; --muted:#959DAC; --line:#2C323B; --line-strong:#454D59;
+  --accent:#82ACD9; --accent-soft:#1E2937; --accent-ink:#A8C7E8;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;margin:0;padding-block:0 64px;padding-left:20px;padding-right:20px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0}
+header{padding-block:44px 28px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.01em;line-height:1.15}
+.standfirst{margin-top:14px;max-width:62ch;color:var(--muted);font-size:16px}
+.assure{margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r);max-width:62ch}
+.assure strong{display:block;font-weight:600;margin-bottom:2px}
+.assure span{color:var(--muted);font-size:14px}
+.flow{margin-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em}
+.flow b{color:var(--ink);font-weight:500}
+
+.cols{display:grid;grid-template-columns:1fr;gap:32px;margin-top:32px;align-items:start}
+@media(min-width:1000px){.cols{grid-template-columns:minmax(0,1fr) 400px;gap:40px}}
+.step{margin-bottom:36px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+h2{font-family:var(--serif);font-size:23px;font-weight:500}
+.hint{color:var(--muted);font-size:14px;margin-top:6px;max-width:62ch}
+.fmtrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.fmtrow label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fmtrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%;flex:1 1 200px}
+.fmtrow select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.fmthint{font-size:12.5px;color:var(--muted);margin:0 0 8px}
+.freetext{display:block;width:100%;margin-top:8px;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);resize:vertical}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 20px;border-bottom:1px solid var(--line)}
+.tab{font:inherit;font-size:14px;font-weight:500;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;border-radius:var(--r) var(--r) 0 0}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);background:var(--accent-soft)}
+.tab:hover{color:var(--ink)}
+
+.areagroup{margin-bottom:22px}
+.areahead{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.areahead h3{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);font-weight:500}
+.areahead p{margin:0;font-size:13px;color:var(--muted)}
+.opts{display:grid;gap:6px}
+@media(min-width:660px){.opts.two{grid-template-columns:1fr 1fr}}
+
+label.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);cursor:pointer;font-size:14.5px}
+label.opt:hover{border-color:var(--line-strong)}
+label.opt:has(input:checked){background:var(--accent-soft);border-color:var(--accent);font-weight:500}
+label.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+label.opt input{margin:3px 0 0;accent-color:var(--accent);flex:0 0 auto}
+.opt .defers{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px}
+.supwrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.supwrap:has(input:checked){border-color:var(--accent)}
+.supwrap label.opt{border:0;background:none}
+.supwrap details{border-top:1px solid var(--line);margin:0}
+.supwrap summary{font-size:12.5px;color:var(--muted);cursor:pointer;padding:6px 12px;list-style:none}
+.supwrap summary::-webkit-details-marker{display:none}
+.supwrap summary::before{content:"+ ";font-family:var(--mono)}
+.supwrap details[open] summary::before{content:"− "}
+.supwrap summary:hover{color:var(--ink)}
+.why{padding:0 12px 12px;font-size:13px;color:var(--muted)}
+.why p{margin:0 0 8px}
+.why .tierline{font-family:var(--mono);font-size:11.5px}
+pre.demo{font-family:var(--mono);font-size:12px;line-height:1.55;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:8px 10px;margin:0;white-space:pre-wrap;color:var(--ink)}
+
+.helps{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
+.helps > h3{font-size:16px;font-weight:600;margin-bottom:2px}
+.helps .said{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:12px}
+.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button.mini{font:inherit;font-size:13px;font-weight:500;padding:6px 12px;background:var(--surface-2);color:var(--ink);border:1px solid var(--line-strong);border-radius:var(--r);cursor:pointer}
+button.mini:hover{background:var(--accent-soft);border-color:var(--accent)}
+button.mini:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.mini.primary{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+
+.cmp{margin-top:14px;border:1px solid var(--accent);border-radius:var(--r);padding:14px;background:var(--surface-2)}
+.cmp h4{margin:0 0 2px;font-size:15px;font-weight:600}
+.cmp .sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-bottom:12px}
+.pair{display:grid;gap:12px;margin-bottom:12px}
+@media(min-width:620px){.pair{grid-template-columns:1fr 1fr}}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px}
+.side .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:6px}
+.side pre{margin:0;font-family:var(--mono);font-size:12px;white-space:pre-wrap;line-height:1.55}
+
+.ctxrow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;font-size:14px}
+.ctxrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%}
+.ctxrow select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+@media(min-width:1000px){.panel{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}}
+.panel h2{font-size:19px}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+.saidlist{margin:14px 0 0;padding:0;list-style:none;font-size:14px}
+.saidlist li{padding:5px 0 5px 16px;position:relative;border-bottom:1px solid var(--line)}
+.saidlist li::before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;background:var(--accent);border-radius:1px}
+.saidlist li:last-child{border-bottom:0}
+.saidlist li.hdr{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:0;padding-left:0}
+.saidlist li.hdr::before{display:none}
+.saidlist li .scope{color:var(--muted);font-size:12px;font-family:var(--mono)}
+.blank{color:var(--muted);font-size:14px;font-style:italic}
+.pv{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:12px;overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word}
+pre.answer{font-family:var(--sans);font-size:13.5px;line-height:1.6}
+.pvnote{font-size:12px;color:var(--muted);margin-top:8px}
+footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;max-width:70ch}
+footer h3{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+@media(prefers-reduced-motion:no-preference){label.opt,button.mini,.tab,.supwrap{transition:background-color .12s ease,border-color .12s ease}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>What would make this easier?</h1>
+  <p class="standfirst">A setup built from what you notice about the exchange, not from anything about you. Tick what you recognise, choose what helps &mdash; or compare two side by side and pick the one that reads better.</p>
+  <div class="assure">
+    <strong>You can change this any time.</strong>
+    <span>Nothing here is a diagnosis. These are just the ways you would like me to work with you.</span>
+  </div>
+  <p class="flow"><b>What is difficult</b> &rarr; <b>what would help</b> &rarr; <b>see the difference</b> &rarr; <b>choose context</b> &rarr; <b>portable support profile</b></p>
+</header>
+
+<div class="cols">
+  <main>
+    <section class="step">
+      <span class="eyebrow">Step 1 of 3</span>
+      <h2>Tick anything you recognise</h2>
+      <p class="hint">All optional. Skip straight to picking supports by area, or start from a label you already have.</p>
+      <div class="tabs" role="tablist" aria-label="How to start">
+        <button class="tab" role="tab" id="tab-d" aria-controls="pane-d" aria-selected="true">What&rsquo;s hard</button>
+        <button class="tab" role="tab" id="tab-a" aria-controls="pane-a" aria-selected="false">By area</button>
+        <button class="tab" role="tab" id="tab-p" aria-controls="pane-p" aria-selected="false">From a label</button>
+      </div>
+      <div id="pane-d" role="tabpanel" aria-labelledby="tab-d"></div>
+      <div id="pane-a" role="tabpanel" aria-labelledby="tab-a" hidden></div>
+      <div id="pane-p" role="tabpanel" aria-labelledby="tab-p" hidden></div>
+    </section>
+
+    <section class="step">
+      <span class="eyebrow">Step 2 of 3</span>
+      <h2>What helps?</h2>
+      <p class="hint" id="step2hint">Nothing ticked yet. Choose something above, or pick supports directly under &ldquo;By area&rdquo;.</p>
+      <div id="helps"></div>
+    </section>
+
+    <section class="step" id="step3" hidden>
+      <span class="eyebrow">Step 3 of 3</span>
+      <h2>When should these apply?</h2>
+      <p class="hint">Everything is <em>Always</em> unless you change it. Most people never need this &mdash; it is here because a support you want at work can be the wrong thing while brainstorming.</p>
+      <div id="ctx"></div>
+    </section>
+  </main>
+
+  <aside class="panel" aria-label="Your setup">
+    <h2>Your setup</h2>
+    <p class="count" id="count">nothing chosen &middot; plain default</p>
+    <ul class="saidlist" id="saidlist"></ul>
+    <div class="pv">
+      <div class="tabs" role="tablist" aria-label="Setup view" style="margin-top:0">
+        <button class="tab" role="tab" id="tab-pv" aria-controls="pane-pv" aria-selected="true">Preview</button>
+        <button class="tab" role="tab" id="tab-yml" aria-controls="pane-yml" aria-selected="false">Copy for your agent</button>
+      </div>
+      <div id="pane-pv" role="tabpanel" aria-labelledby="tab-pv">
+        <pre class="answer" id="preview"></pre>
+        <p class="pvnote" id="pvnote"></p>
+      </div>
+      <div id="pane-yml" role="tabpanel" aria-labelledby="tab-yml" hidden>
+        <div class="fmtrow">
+          <label for="fmt">Give me this as</label>
+          <select id="fmt">
+            <option value="rules">Plain instructions &mdash; paste anywhere</option>
+            <option value="agents">AGENTS.md / CLAUDE.md section</option>
+            <option value="skill">A skill file (SKILL.md)</option>
+            <option value="yaml">Support profile (YAML)</option>
+            <option value="json">JSON</option>
+          </select>
+        </div>
+        <p class="fmthint" id="fmthint"></p>
+        <pre id="yaml"></pre>
+        <div class="quick"><button class="mini primary" id="copy">Copy</button><button class="mini" id="download">Download</button><button class="mini" id="reset">Start again</button></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <h3>What a support is</h3>
+  <p>Supports change how information and interaction are presented. They never infer anything about you. Some of them deliberately hold detail back or narrow a list of options &mdash; those say so on the label, before you choose them.</p>
+  <h3 style="margin-top:16px">This page follows the rules it is collecting</h3>
+  <p>No meaning is carried by colour alone, nothing animates, nothing is required, every choice is reversible, and no question asks how anything feels. The provenance of each support &mdash; what it does and how good the evidence for it is &mdash; sits behind &ldquo;Why is this offered?&rdquo; rather than on the face of the choice. The preview is a real sample answer rebuilt from your selections; it demonstrates 31 of the 72 supports.</p>
+</footer>
+</div>
+
+<script id="vocab" type="application/json">__VOCAB__</script>
+<script>
+(function(){
+"use strict";
+var V=JSON.parse(document.getElementById("vocab").textContent);
+var byId={}; V.support.forEach(function(s){byId[s.id]=s;});
+var areaLabel={},areaDesc={};
+V.areas.forEach(function(a){areaLabel[a.id]=a.label;areaDesc[a.id]=a.description;});
+var TIER={A:"Replicated experimental or meta-analytic evidence",B:"Consistent qualitative or observational findings",C:"Community-described; little formal study",D:"Design inference, not itself tested",S:"Published technical standard",X:"Contested construct: described, disputed as a distinct entity"};
+var state={diff:new Set(),sup:new Set(),ctx:{},cmp:{},origin:{},notes:""};
+
+/* Provenance. One support atom can be reached from several places: a difficulty block,
+   the by-area list, or a preset. The picker remembers who asked for what; the profile
+   contains only the survivor set. Dismissing one difficulty therefore cannot silently
+   remove a support that another difficulty, a preset, or a direct tick still claims. */
+function addSup(id,origin){var o=state.origin[id]||(state.origin[id]=[]);
+  if(o.indexOf(origin)<0)o.push(origin); state.sup.add(id);}
+function removeSup(id){state.sup.delete(id);delete state.origin[id];delete state.ctx[id];}
+function dropOrigin(id,origin){var o=state.origin[id];
+  if(!o){removeSup(id);return;}
+  var i=o.indexOf(origin); if(i>-1)o.splice(i,1);
+  if(!o.length) removeSup(id);}
+function originsOf(id){return state.origin[id]||[];}
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function el(h){var d=document.createElement("div");d.innerHTML=h.trim();return d.firstChild;}
+function wireTabs(ids){ids.forEach(function(id){document.getElementById(id).addEventListener("click",function(){
+  ids.forEach(function(o){var ot=document.getElementById(o),op=document.getElementById(ot.getAttribute("aria-controls"));
+    var on=(o===id);ot.setAttribute("aria-selected",on?"true":"false");op.hidden=!on;});});});}
+wireTabs(["tab-d","tab-a","tab-p"]); wireTabs(["tab-pv","tab-yml"]);
+
+/* a support choice: plain label on the face, provenance behind an expander */
+function claimNote(id){
+  var n=originsOf(id).length;
+  if(n<2) return "";
+  return '<p class="tierline">Chosen '+n+' times over. Dismissing one reason will keep it.</p>';
+}
+
+function supportBlock(s,ns,origin){
+  var w=el('<div class="supwrap"></div>');
+  var l=el('<label class="opt"><input type="checkbox" data-sup="'+s.id+'" id="s-'+ns+'-'+s.id+'"><span>'+esc(s.label)+
+           (s.defers?'<span class="defers">'+esc(s.defers_note)+'</span>':'')+'</span></label>');
+  var i=l.querySelector("input"); i.checked=state.sup.has(s.id);
+  /* Unticking the box is a global removal: it drops every claim on the atom. */
+  i.addEventListener("change",function(e){ if(e.target.checked) addSup(s.id,origin); else removeSup(s.id); render(); });
+  w.appendChild(l);
+  var d=el('<details><summary>Why is this offered?</summary><div class="why">'+
+           '<p>'+esc(s.rule)+'</p>'+
+           '<pre class="demo">'+esc(s.demo)+'</pre>'+
+           '<p class="tierline" style="margin-top:8px">Evidence '+esc(s.evidence)+' &middot; '+esc(TIER[s.evidence]||"")+'</p>'+
+           (s.evidence_basis?'<p class="tierline">What the letter rates: '+esc(s.evidence_basis.phenomenon)+'</p>'+
+             '<p class="tierline">The method: '+esc(s.evidence_basis.method)+'</p>'+
+             '<p class="tierline">This exact rule: '+esc(s.evidence_basis.rule)+'</p>':'')+
+           claimNote(s.id)+'</div></details>');
+  w.appendChild(d);
+  return w;
+}
+
+/* step 1a: difficulties */
+(function(){var host=document.getElementById("pane-d");
+  V.areas.forEach(function(a){
+    var items=V.difficulties.filter(function(d){return d.area===a.id;});
+    if(!items.length) return;
+    var g=el('<div class="areagroup"><div class="areahead"><h3>'+esc(a.label)+'</h3><p>'+esc(a.description)+'</p></div><div class="opts"></div></div>');
+    var box=g.querySelector(".opts");
+    items.forEach(function(d){
+      var l=el('<label class="opt"><input type="checkbox" id="d-'+d.id+'"><span>'+esc(d.label)+'</span></label>');
+      l.querySelector("input").addEventListener("change",function(e){
+        if(e.target.checked) state.diff.add(d.id);
+        else {
+          state.diff.delete(d.id);
+          /* The note belongs to the selection that opened it. Leaving it behind would
+             export text the reader can no longer see, correct, or withdraw. */
+          if(!d.offers.length) state.notes="";
+        }
+        render();});
+      box.appendChild(l);
+    });
+    host.appendChild(g);});
+})();
+
+/* step 1b: supports by area */
+(function(){var host=document.getElementById("pane-a");
+  V.areas.forEach(function(a){
+    var items=V.support.filter(function(s){return s.area===a.id;});
+    if(!items.length) return;
+    var g=el('<div class="areagroup"><div class="areahead"><h3>'+esc(a.label)+'</h3><p>'+esc(a.description)+'</p></div><div class="opts two"></div></div>');
+    var box=g.querySelector(".opts");
+    items.forEach(function(s){box.appendChild(supportBlock(s,"a","direct"));});
+    host.appendChild(g);});
+})();
+
+/* step 1c: presets */
+(function(){var host=document.getElementById("pane-p");
+  host.appendChild(el('<p class="hint">A label you already have is a shortcut, not the model. It expands to supports, and the label itself is never stored.</p>'));
+  var box=el('<div class="opts"></div>');
+  Object.keys(V.presets).forEach(function(name){
+    var atoms=V.presets[name];
+    var b=el('<button class="mini" style="text-align:left;display:block;width:100%">'+esc(name)+' <span style="color:var(--muted);font-weight:400">&mdash; sets '+atoms.length+' supports</span></button>');
+    b.addEventListener("click",function(){atoms.forEach(function(a){addSup(a,"preset:"+name);});render();document.getElementById("tab-a").click();});
+    box.appendChild(b);});
+  host.appendChild(box);
+})();
+
+/* step 2 */
+/* Comparison pairs are authored in needs-vocabulary.json, one entry per difficulty.
+   Each pair sets two supports that differ in kind against each other. Nothing here
+   is derived from the order of the offers list. */
+function pairsOf(d){
+  return (d.compare_pairs||[]).map(function(p){
+    return p.filter(function(x){return byId[x];});
+  }).filter(function(p){return p.length;});
+}
+
+function comparePane(d){
+  var pairs=pairsOf(d), idx=state.cmp[d.id]||0;
+  if(idx>=pairs.length){
+    var done=el('<div class="cmp"><h4>That is all of them</h4><p class="sub">'+esc(d.label)+'</p></div>');
+    var again=el('<button class="mini">Compare again from the start</button>');
+    again.addEventListener("click",function(){state.cmp[d.id]=0;render();});
+    var close=el('<button class="mini">Close</button>');
+    close.addEventListener("click",function(){delete state.cmp[d.id];render();});
+    var q=el('<div class="quick"></div>');q.appendChild(again);q.appendChild(close);done.appendChild(q);
+    return done;
+  }
+  var pair=pairs[idx], A=byId[pair[0]], B=pair[1]?byId[pair[1]]:null;
+  var c=el('<div class="cmp"><h4>Which helps more?</h4><p class="sub">'+esc(d.label)+' &middot; pair '+(idx+1)+' of '+pairs.length+'</p><div class="pair"></div><div class="quick"></div></div>');
+  var p=c.querySelector(".pair"), q=c.querySelector(".quick");
+  p.appendChild(el('<div class="side"><span class="k">A</span><pre>'+esc(A.demo)+'</pre></div>'));
+  if(B) p.appendChild(el('<div class="side"><span class="k">B</span><pre>'+esc(B.demo)+'</pre></div>'));
+  function advance(){state.cmp[d.id]=idx+1;render();}
+  var ba=el('<button class="mini primary">A helps</button>');
+  ba.addEventListener("click",function(){addSup(A.id,"d:"+d.id);advance();});
+  q.appendChild(ba);
+  if(B){var bb=el('<button class="mini primary">B helps</button>');
+    bb.addEventListener("click",function(){addSup(B.id,"d:"+d.id);advance();});q.appendChild(bb);}
+  var bo=el('<button class="mini">'+(B?"Both help":"Yes, this helps")+'</button>');
+  bo.addEventListener("click",function(){addSup(A.id,"d:"+d.id);if(B)addSup(B.id,"d:"+d.id);advance();});
+  q.appendChild(bo);
+  var bn=el('<button class="mini">Neither</button>');
+  bn.addEventListener("click",advance); q.appendChild(bn);
+  var bx=el('<button class="mini">Stop comparing</button>');
+  bx.addEventListener("click",function(){delete state.cmp[d.id];render();}); q.appendChild(bx);
+  return c;
+}
+
+function renderHelps(){
+  var host=document.getElementById("helps"); host.innerHTML="";
+  var hint=document.getElementById("step2hint");
+  var ds=Array.from(state.diff).map(function(id){
+    return V.difficulties.filter(function(x){return x.id===id;})[0];}).filter(Boolean);
+  if(!ds.length){hint.textContent="Nothing ticked yet. Choose something above, or pick supports directly under “By area”.";return;}
+  hint.textContent="One block per thing you ticked. Pick any that help, or compare two side by side and choose the one that reads better.";
+  ds.forEach(function(d,i){
+    var card=el('<div class="helps"><h3>What helps?</h3><p class="said">'+esc(d.label)+'  ·  '+(i+1)+' of '+ds.length+'</p><div class="opts"></div><div class="quick"></div></div>');
+    var box=card.querySelector(".opts"), q=card.querySelector(".quick");
+    if(!d.offers.length){
+      box.appendChild(el('<p class="hint">Tell me in your own words what would help here. It is stored under <code>notes</code> without interpretation. Nothing is inferred from it, and it is cleared if you untick this.</p>'));
+      var ta=document.createElement("textarea");
+      ta.className="freetext"; ta.rows=3; ta.id="notes";
+      ta.setAttribute("aria-label","What would help, in your own words");
+      ta.placeholder="e.g. Say when you are guessing.";
+      ta.value=state.notes||"";
+      /* renderOut only: rebuilding this pane mid-keystroke would take the focus away. */
+      ta.addEventListener("input",function(e){state.notes=e.target.value;renderOut();});
+      box.appendChild(ta);
+    }
+    d.offers.forEach(function(sid){if(byId[sid]) box.appendChild(supportBlock(byId[sid],"h"+d.id,"d:"+d.id));});
+    if(d.offers.length){
+      var rec=(d.recommended&&d.recommended.length)?d.recommended:d.offers.slice(0,2);
+      var t=el('<button class="mini primary">Try these</button>');
+      t.title="Adds "+rec.map(function(r){return byId[r]?byId[r].label:r;}).join(" and ");
+      t.addEventListener("click",function(){rec.forEach(function(s){addSup(s,"d:"+d.id);});render();});
+      q.appendChild(t);
+      var cm=el('<button class="mini">Show me the difference</button>');
+      cm.addEventListener("click",function(){state.cmp[d.id]=0;render();});
+      q.appendChild(cm);
+      var none=el('<button class="mini">Not now</button>');
+      none.addEventListener("click",function(){d.offers.forEach(function(s){dropOrigin(s,"d:"+d.id);});delete state.cmp[d.id];render();});
+      q.appendChild(none);
+      q.appendChild(el('<span style="font-size:12.5px;color:var(--muted);align-self:center">Try these = '+rec.length+' suggested starting points, not all '+d.offers.length+'</span>'));
+    }
+    if(state.cmp[d.id]!==undefined) card.appendChild(comparePane(d));
+    host.appendChild(card);
+  });
+}
+
+/* step 3: contexts */
+function renderCtx(){
+  var sec=document.getElementById("step3"), host=document.getElementById("ctx");
+  host.innerHTML="";
+  if(!state.sup.size){sec.hidden=true;return;}
+  sec.hidden=false;
+  Array.from(state.sup).forEach(function(sid){
+    var s=byId[sid]; if(!s) return;
+    var row=el('<div class="ctxrow"><span>'+esc(s.label)+'</span></div>');
+    var sel=document.createElement("select");
+    sel.id="ctx-"+sid;
+    sel.setAttribute("aria-label","When should “"+s.label+"” apply?");
+    V.contexts.forEach(function(c){
+      var o=document.createElement("option"); o.value=c.id; o.textContent=c.label; sel.appendChild(o);});
+    sel.value=state.ctx[sid]||"always";
+    sel.addEventListener("change",function(e){
+      if(e.target.value==="always") delete state.ctx[sid]; else state.ctx[sid]=e.target.value;
+      render();});
+    row.appendChild(sel); host.appendChild(row);
+  });
+}
+
+/* preview */
+function has(x){return state.sup.has(x);}
+function preview(){
+  var out=[],n=0; function u(){n++;}
+  if(has("declare_length")){out.push("Next: the cause, one command, one check. 9 lines.");u();}
+  if(has("recap")||has("restate_goal")){out.push("Where we are: test/setup.ts · secret set · next is the auth test.");u();}
+  if(has("cost_upfront")){out.push("Cost: 2 steps · 1 decision from you · about 8 minutes.");u();}
+  if(has("summary_first")){out.push("The 401 comes from src/auth.ts:47. Cause and fix below.");u();}
+  if(out.length) out.push("");
+  var open=has("plain_tone")?"":"Great question! "; if(has("plain_tone"))u();
+  var cause=has("literal_wording")
+    ?"verifyToken reads the secret from JWT_SECRET. JWT_SECRET is unset when the tests run, so jwt.verify throws and the handler returns 401."
+    :"Your auth flow is a bit of a tangle and verifyToken is almost certainly the culprit here.";
+  if(has("literal_wording"))u();
+  if(has("short_sentences")){cause=has("literal_wording")
+    ?"verifyToken reads JWT_SECRET.\nJWT_SECRET is unset in the tests.\nThe handler returns 401."
+    :"Your auth flow is tangled.\nverifyToken is the likely culprit.";u();}
+  out.push(open+cause);
+  out.push(has("no_imagery_requests")?"The token has expired.":"Picture the token as a stamped ticket that has expired.");
+  if(has("no_imagery_requests"))u();
+  out.push("");
+  var numbered=has("break_down")||has("sequence_explicitly")||has("next_step_only")||has("one_instruction");
+  if(has("break_down")||has("sequence_explicitly"))u();
+  var s1=has("declarative_not_imperative")?"JWT_SECRET is unset in the test environment. The fix is one line in test/setup.ts.":"Set JWT_SECRET in test/setup.ts.";
+  if(has("declarative_not_imperative"))u();
+  if(has("progress_markers")){s1="Step 1 of 2 · "+s1;u();}
+  if(has("done_when")){s1+=" Done when: test/setup.ts contains the line process.env.JWT_SECRET = 'test-secret'.";u();}
+  out.push(numbered?"1. "+s1:s1);
+  if(has("copyable_blocks")){out.push("    process.env.JWT_SECRET = 'test-secret'");u();}
+  if(has("one_instruction")||has("next_step_only")){u();out.push("(the next step comes when this one is done)");}
+  else{var s2=has("if_then_triggers")?"When the file is saved, run the auth test.":"Then run the auth test.";
+    if(has("if_then_triggers"))u();
+    if(has("done_when")) s2+=" Done when: the last line reads 1 passing.";
+    out.push(numbered?"2. "+s2:s2);}
+  out.push("");
+  if(has("fewer_options")){u();
+    out.push(has("consequences_not_adjectives")
+      ?"1. Set the secret in test/setup.ts — the 401 stops; session.spec.ts needs the same import later.\n2. Skip the test — nothing changes today; it keeps failing."
+      :"1. Set the secret in test/setup.ts — the proper option.\n2. Skip the test — the quick one.");
+    if(has("consequences_not_adjectives"))u();
+  } else if(has("progressive_disclosure")){out.push("Set the secret in test/setup.ts. Say “options” for the other three ways to do this.");u();}
+  else{out.push("You could set it in test/setup.ts, or export it in the shell, or hard-code a test secret, or mock jwt.verify.");}
+  if(has("recommended_default")){out.push("Default: 1, if you say nothing.");u();}
+  if(!has("no_feelings_questions")) out.push("Does that sound good?"); else u();
+  out.push("");
+  out.push(has("no_colour_meaning")
+    ?"Two tests are listed as FAIL: refreshes an expired token, rejects a malformed header."
+    :"Two of the tests show up in red.");
+  if(has("no_colour_meaning"))u();
+  if(!has("linear_output")){out.push("  auth-service     | pass | 12");out.push("  session-service  | fail |  8");}
+  else{out.push("Service: auth-service. Status: passing. Tests: 12 of 12.");
+       out.push("Service: session-service. Status: failing. Tests: 7 of 8.");u();}
+  if(!has("reduce_visual_stimulus")) out.push("✅ IMPORTANT! Don’t forget the cookie settings!!"); else u();
+  if(has("no_tangents")){out.push("");out.push("Deferred:");out.push("- Cookie SameSite setting in src/session.ts.");u();}
+  else if(has("reduce_visual_stimulus")) out.push("You will also want to check the cookie settings.");
+  if(has("smallest_version_first")){out.push("");out.push("Smallest version: test/setup.ts only — 1 step. Full version: both test files — 3 steps.");u();}
+  if(has("stop_point")){out.push("");out.push("Clean stop: after the auth test passes. One file changed, nothing half-edited.");u();}
+  if(has("one_goal")){out.push("");out.push("Current goal: make auth.spec.ts pass. Parked: cookie settings, README.");u();}
+  if(has("persistent_state")){out.push("");out.push("State:");out.push("- Done: secret set in test/setup.ts");
+    out.push("- Now: rerun the auth test");out.push("- Next: the same import in session.spec.ts");out.push("- Open questions: none");u();}
+  return {text:out.join("\n").replace(/\n{3,}/g,"\n\n").trim(),used:n};
+}
+
+/* ------------------------------------------------------------------ profile
+   One model, four writers. This mirrors needs/compile.py line for line; the
+   conformance test in needs/conformance_test.py runs both over the same
+   selections and fails if a single character differs. Change one, change both. */
+
+var AREA_RANK={},ATOM_RANK={};
+V.areas.forEach(function(a,i){AREA_RANK[a.id]=i;});
+V.support.forEach(function(s,i){ATOM_RANK[s.id]=i;});
+var SCOPE_LABEL={}; V.contexts.forEach(function(c){SCOPE_LABEL[c.id]=c.label;});
+
+var PREAMBLE="These are presentation settings I chose for myself. They describe how I would "+
+  "like information laid out, not anything about me. Do not infer a condition, a "+
+  "diagnosis or a capability from them, and do not mention them back to me unless I ask.";
+var TIEBREAK="If two of these ever pull against each other, prefer in this order: "+
+  "what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.";
+
+/* The groups the profile is built from: what applies always, what applies only in
+   a context the reader declares, and what is set aside while brainstorming. */
+function model(){
+  var groups={always:[],work:[],learning:[],stuck:[],overloaded:[]}, suppress=[];
+  Array.from(state.sup).forEach(function(s){
+    var c=state.ctx[s]||"always";
+    if(c==="always_not_brainstorming"){groups.always.push(s);suppress.push(s);}
+    else groups[c].push(s);
+  });
+  Object.keys(groups).forEach(function(k){
+    groups[k]=groups[k].filter(function(a){return byId[a];});
+    groups[k].sort(function(a,b){
+      var d=AREA_RANK[byId[a].area]-AREA_RANK[byId[b].area];
+      return d||ATOM_RANK[a]-ATOM_RANK[b];});
+  });
+  return {groups:groups,suppress:suppress,
+          difficulties:Array.from(state.diff),
+          notes:(state.notes||"").replace(/\r/g,"").replace(/\s+$/,"")};
+}
+
+function byArea(ids){
+  var order=[],seen={};
+  ids.forEach(function(i){var a=byId[i].area;
+    if(!seen[a]){seen[a]=[];order.push(a);} seen[a].push(byId[i].rule);});
+  var labels={}; V.areas.forEach(function(a){labels[a.id]=a.label;});
+  return order.map(function(a){return [labels[a]||a,seen[a]];});
+}
+
+function activeResolutions(active){
+  var set={}; active.forEach(function(a){set[a]=1;});
+  return (V.resolutions||[]).filter(function(r){
+    return r.between.every(function(x){return set[x];});});
+}
+
+function writeRules(heading){
+  var m=model(), L=[];
+  if(heading!==false) L=L.concat(["How to work with me","===================",""]);
+  L.push(PREAMBLE); L.push("");
+  if(m.groups.always.length){
+    byArea(m.groups.always).forEach(function(g){
+      L.push(g[0].toUpperCase());
+      g[1].forEach(function(r){L.push("- "+r);});
+      L.push("");});
+  } else {
+    L.push("No presentation settings chosen. Use your normal style."); L.push("");
+  }
+  ["work","learning","stuck","overloaded"].forEach(function(c){
+    if(!m.groups[c].length) return;
+    var lab=(SCOPE_LABEL[c]||c).replace("Only when ","when ").replace("Only for ","for ");
+    L.push(("ONLY "+lab+" \u2014 I will say when this applies").toUpperCase());
+    m.groups[c].forEach(function(i){L.push("- "+byId[i].rule);});
+    L.push("");});
+  if(m.suppress.length){
+    L.push("EXCEPT WHEN I SAY I AM BRAINSTORMING");
+    m.suppress.forEach(function(i){L.push("- Set aside: "+byId[i].label.toLowerCase()+".");});
+    L.push("");}
+  var res=activeResolutions(m.groups.always);
+  if(res.length){
+    L.push("WHERE TWO OF THESE MEET");
+    res.forEach(function(r){
+      L.push("- "+r.between.map(function(x){return byId[x].label.toLowerCase();}).join(" + ")+
+             ": "+r.resolution);});
+    L.push("");}
+  L.push(TIEBREAK); L.push("");
+  if(m.notes){L.push("IN MY OWN WORDS");m.notes.split("\n").forEach(function(x){L.push(x);});L.push("");}
+  L.push("I can change any of this at any time. Ask me before assuming a setting is wrong; "+
+         "do not quietly drop one.");
+  return L.join("\n").replace(/\n\n\n/g,"\n\n").trim()+"\n";
+}
+
+function writeSkill(){
+  var n=model().groups.always.length;
+  var desc="My presentation settings: "+n+" chosen support"+(n===1?"":"s")+
+    " covering how output is laid out, paced and worded. These are choices about the "+
+    "output, not a description of me; infer nothing from them. Invoke with /my-setup; "+
+    "stays on until \"stop my setup\".";
+  return ["---","name: my-setup","description: '"+desc.replace(/'/g,"''")+"'",
+    "disable-model-invocation: true","license: MIT","---","",
+    "# my-setup","","## Persistence","",
+    "These rules apply to every response for the rest of the session, not only this one. "+
+    "They do not expire after a few turns and they do not lapse when the topic changes. "+
+    "If you are unsure whether they still apply, they do.","",
+    "Turn them off only when I say \"stop my setup\" or \"normal mode\". Confirm in one line, "+
+    "then return to your default style.","",
+    "## The settings","",writeRules(false).replace(/\s+$/,""),"",
+    "## Generated","",
+    "Built from a support profile by `needs/compile.py`. Edit the profile and recompile "+
+    "rather than editing this file, or edit this file and keep it \u2014 it is yours either way.",
+    ""].join("\n");
+}
+
+function writeAgents(){
+  return ["## How to work with me","",
+    "<!-- Generated from a support profile by needs/compile.py. Paste this into "+
+    "AGENTS.md, CLAUDE.md, .cursorrules, or any custom-instructions box. -->","",
+    writeRules(false).replace(/\s+$/,""),""].join("\n");
+}
+
+function writeJson(){
+  var m=model(), out={version:1,generated_by:"needs/compile.py",preamble:PREAMBLE,
+    tiebreak:TIEBREAK,contexts:{},suppress:{},
+    resolutions:activeResolutions(m.groups.always),
+    conflict_order:V.conflict_order||[],notes:m.notes};
+  Object.keys(m.groups).forEach(function(c){
+    if(!m.groups[c].length) return;
+    out.contexts[c]=m.groups[c].map(function(i){
+      return {id:i,area:byId[i].area,label:byId[i].label,rule:byId[i].rule};});});
+  if(m.suppress.length) out.suppress.brainstorming=m.suppress;
+  return JSON.stringify(out,null,2)+"\n";
+}
+
+function yaml(){
+  var m=model();
+  var L=["version: 1","contexts:","  always:"];
+  if(m.difficulties.length){L.push("    difficulties:");m.difficulties.forEach(function(d){L.push("      - "+d);});}
+  var groups=m.groups, suppressBrainstorm=m.suppress;
+  if(groups.always.length){L.push("    support:");groups.always.forEach(function(s){L.push("      - "+s);});}
+  else if(!m.difficulties.length){L.push("    support: []   # base layer only");}
+  if(m.notes){
+    L.push("    notes: |");
+    m.notes.split("\n").forEach(function(x){L.push("      "+x);});
+  }
+  ["work","learning","stuck","overloaded"].forEach(function(c){
+    if(!groups[c].length) return;
+    L.push("  "+c+":");L.push("    support:");groups[c].forEach(function(s){L.push("      - "+s);});});
+  if(suppressBrainstorm.length){L.push("  brainstorming:");L.push("    suppress:");
+    suppressBrainstorm.forEach(function(s){L.push("      - "+s);});}
+  L.push("# supports change how things are presented; no condition is recorded or inferred");
+  return L.join("\n");
+}
+
+/* What each format is for, said in the panel so nobody has to guess. */
+var FORMATS={
+  rules:{write:writeRules,file:"how-to-work-with-me.txt",type:"text/plain",
+    hint:"Plain text. Paste it into a system prompt, a custom-instructions box, or the "+
+         "start of a conversation. Works with any assistant."},
+  agents:{write:writeAgents,file:"AGENTS.md",type:"text/markdown",
+    hint:"A markdown section. Paste it into AGENTS.md, CLAUDE.md, a .cursorrules file, "+
+         "or any project instructions file your tool already reads."},
+  skill:{write:writeSkill,file:"SKILL.md",type:"text/markdown",
+    hint:"A skill file for Claude Code and Cowork. Save it as skills/my-setup/SKILL.md, "+
+         "then invoke it with /my-setup."},
+  yaml:{write:yaml,file:"needs-profile.txt",type:"text/plain",
+    hint:"The profile itself: what you chose, in the vocabulary's own terms. Keep this "+
+         "one if you want to reopen or edit your setup later; save it as needs.yaml."},
+  json:{write:writeJson,file:"needs.json",type:"application/json",
+    hint:"Machine-readable, for building your own tooling on top."}
+};
+function currentFormat(){
+  var el=document.getElementById("fmt");
+  return FORMATS[el&&el.value?el.value:"rules"]?(el?el.value:"rules"):"rules";
+}
+function currentText(){return FORMATS[currentFormat()].write();}
+
+function render(){
+  document.querySelectorAll("input[data-sup]").forEach(function(i){i.checked=state.sup.has(i.dataset.sup);});
+  renderHelps();
+  document.querySelectorAll("input[data-sup]").forEach(function(i){i.checked=state.sup.has(i.dataset.sup);});
+  renderCtx();
+  renderOut();
+}
+
+function renderOut(){
+  document.getElementById("count").textContent = state.sup.size
+    ? state.diff.size+" ticked · "+state.sup.size+" support"+(state.sup.size===1?"":"s")+" chosen"
+    : "nothing chosen · plain default";
+  var list=document.getElementById("saidlist"); list.innerHTML="";
+  if(state.diff.size){
+    list.appendChild(el('<li class="hdr">You said</li>'));
+    Array.from(state.diff).forEach(function(id){
+      var d=V.difficulties.filter(function(x){return x.id===id;})[0];
+      if(d) list.appendChild(el("<li>"+esc(d.label)+"</li>"));});
+  }
+  if(state.sup.size){
+    list.appendChild(el('<li class="hdr" style="padding-top:12px">You asked for</li>'));
+    Array.from(state.sup).forEach(function(s){
+      if(!byId[s]) return;
+      var c=state.ctx[s]; var scope="";
+      if(c){var cl=V.contexts.filter(function(x){return x.id===c;})[0];
+        if(cl) scope=' <span class="scope">'+esc(cl.label.toLowerCase())+'</span>';}
+      list.appendChild(el("<li>"+esc(byId[s].label)+scope+"</li>"));});
+  }
+  if(!state.diff.size&&!state.sup.size) list.appendChild(el('<li class="blank">Nothing yet. The preview shows the plain default.</li>'));
+  var p=preview();
+  document.getElementById("preview").textContent=p.text;
+  document.getElementById("pvnote").textContent=state.sup.size
+    ? "A sample answer, rebuilt from your selections. "+p.used+" of your choices change this example."
+    : "A sample answer with no supports applied. Tick something to see it change.";
+  var f=FORMATS[currentFormat()];
+  document.getElementById("yaml").textContent=f.write();
+  document.getElementById("fmthint").textContent=f.hint;
+}
+
+document.getElementById("fmt").addEventListener("change",renderOut);
+
+/* Saving a file works two different ways depending on where this page is open.
+   Opened from disk, a blob link is fine. Published as an artifact, the frame is
+   sandboxed and a blob link silently does nothing, so the host mediates the save
+   and the viewer confirms it. Detect which, and hide the button rather than
+   leaving one that does nothing. Copy always works either way. */
+var dlBtn=document.getElementById("download"), saver=null;
+if(window.claude&&typeof window.claude.use==="function"){
+  dlBtn.hidden=true;
+  window.claude.use("downloads").then(function(d){
+    if(d&&typeof d.save==="function"){saver=d;dlBtn.hidden=false;}
+  }).catch(function(){});
+}
+function flash(msg){var was=dlBtn.textContent;dlBtn.textContent=msg;
+  setTimeout(function(){dlBtn.textContent=was;},1800);}
+dlBtn.addEventListener("click",function(){
+  var f=FORMATS[currentFormat()], text=f.write();
+  if(saver){
+    saver.save({filename:f.file,data:text}).then(function(){flash("Saved");})
+      .catch(function(err){ if(err&&err.code==="declined") return;
+        flash("Could not save \u2014 use Copy"); });
+    return;
+  }
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type:f.type+";charset=utf-8"}));
+  a.download=f.file; document.body.appendChild(a); a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},0);
+});
+document.getElementById("copy").addEventListener("click",function(e){
+  var t=currentText();
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){e.target.textContent="Copied";
+      setTimeout(function(){e.target.textContent="Copy";},1400);});}
+  else{var r=document.createRange();r.selectNodeContents(document.getElementById("yaml"));
+    var s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent="Selected — press Ctrl+C";}
+});
+document.getElementById("reset").addEventListener("click",function(){
+  state.diff.clear();state.sup.clear();state.ctx={};state.cmp={};state.origin={};state.notes="";
+  document.querySelectorAll("input[type=checkbox]").forEach(function(i){i.checked=false;});
+  render();});
+render();
+
+/* Test hook. needs/conformance_test.py drives the page through this to check the
+   in-page compiler against needs/compile.py, which is the only thing keeping the
+   two implementations honest. It exposes nothing a viewer could not already do by
+   clicking, holds no data of its own, and sends nothing anywhere. */
+window.__needsPicker={V:V,state:state,addSup:addSup,render:render,
+  yaml:yaml,writeRules:writeRules,writeAgents:writeAgents,
+  writeSkill:writeSkill,writeJson:writeJson};
+})();
+</script>

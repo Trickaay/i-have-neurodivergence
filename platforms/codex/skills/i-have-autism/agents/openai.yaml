@@ -1,0 +1,6 @@
+interface:
+  display_name: "I have autism"
+  short_description: "Shape output for an autistic reader who chose these settings"
+  default_prompt: "Use $i-have-autism for the rest of this session."
+policy:
+  allow_implicit_invocation: false
