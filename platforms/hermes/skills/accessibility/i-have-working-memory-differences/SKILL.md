@@ -1,7 +1,7 @@
 ---
 name: i-have-working-memory-differences
 description: 'Shape output for a reader who cannot hold state in their head: never require a value to be carried from one turn to the next, restate the exact location and last action after every interruption, write the next step as an if-then trigger, keep one visible running state block, and give elapsed and expected time as clock quantities rather than felt duration. Invoke with /i-have-working-memory-differences; stays on until "stop working memory mode".'
-version: 0.4.0
+version: 0.4.1
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

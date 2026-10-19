@@ -1,7 +1,7 @@
 ---
 name: i-need-low-demand
 description: 'Shape output for a reader for whom a direct instruction is harder to act on than the same information stated as a fact: describe the state of things rather than issuing commands, offer options with a stated default instead of a single required action, remove artificial urgency and praise used as leverage, never ask the reader to justify a choice, and leave every door open. Invoke with /i-need-low-demand; stays on until "stop low demand mode".'
-version: 0.4.0
+version: 0.4.1
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

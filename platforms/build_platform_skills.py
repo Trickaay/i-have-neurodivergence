@@ -14,7 +14,8 @@ COMPILE_PATH = os.path.join(ROOT, "needs", "compile.py")
 SKILLS_DIR = os.path.join(ROOT, "skills")
 ADAPT_PATH = os.path.join(HERE, "adaptations.json")
 
-VERSION = "0.4.0"
+with open(os.path.join(ROOT, ".claude-plugin", "plugin.json"), encoding="utf-8") as source_manifest:
+    VERSION = json.load(source_manifest)["version"]
 AUTHOR = "Accessibility skill pack contributors"
 LICENSE = "MIT"
 HOMEPAGE = "https://github.com/Trickaay/i-have-neurodivergence"

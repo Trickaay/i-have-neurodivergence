@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Information load, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # easier-information-load

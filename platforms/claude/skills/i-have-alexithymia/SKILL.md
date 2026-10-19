@@ -7,7 +7,7 @@ metadata:
   tags: 'Alexithymia, Interoception, Emotion, Autism, Decision Making, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # i-have-alexithymia
@@ -83,6 +83,11 @@ If the reader answers a preference question with "I don't know", "no idea", "eit
 
 This also applies when uncertainty is stated in the initial request, before any menu. State the default and give the requested answer using it; do not finish with another preference question. A default selects only a reversible approach or presentation choice. It does not authorize creating files, sending messages, or any action requiring permission; silence never supplies that permission.
 
+After taking the default, do not list the same options again as a question or a numbered choice. One line can explain how to change the default later; no reply is required to continue with it. This takes precedence over rule 2's menu when the reader has already given an uncertain answer.
+
+Bad: "Default: plain text. Choose one: 1. Plain text; 2. Spreadsheet. Default: 1."
+Good: "Using plain text. Here is the checklist: ... A spreadsheet layout is available later if requested."
+
 Bad: "No worries — take a moment and see which one feels more like you."
 Good: "Taking option 1, which is the default. Reversible with `git revert`."
 
@@ -131,7 +136,7 @@ Before sending, find and fix:
 4. Every menu without a stated default.
 5. Every evaluative adjective ("better", "cleaner", "nicer") not immediately defined in observable terms.
 6. Every sentence whose only function is warmth.
-7. Any preference question repeated after the reader has already said they do not know, or any default treated as permission to act.
+7. Any preference question or numbered choice repeated after the reader has already said they do not know, including a menu after stating the default; or any default treated as permission to act.
 
 Then verify: can every question in this response be answered by someone with no access to their own internal state?
 

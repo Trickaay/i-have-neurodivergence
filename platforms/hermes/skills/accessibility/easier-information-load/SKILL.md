@@ -1,7 +1,7 @@
 ---
 name: easier-information-load
 description: 'Presentation settings for information load: how much arrives at once: length, density, layers. Starting set: Summary first, detail underneath; Short labelled sections; The complete explanation first. For a reader who says "I lose track of long explanations" / "I need to choose between the whole explanation and one part at a time". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-information-load or asks for these settings; stays on until "stop easier information load".'
-version: 0.4.0
+version: 0.4.1
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

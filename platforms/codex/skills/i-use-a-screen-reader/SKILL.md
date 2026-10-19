@@ -6,7 +6,7 @@ metadata:
   tags: 'Screen Reader, Blindness, Low Vision, Assistive Technology, Terminal Accessibility, WCAG'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # i-use-a-screen-reader

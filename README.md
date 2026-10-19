@@ -13,6 +13,8 @@ The collection has **19 authored skills**, **89 supports** across **12 areas**, 
 
 The picker also exports an `AGENTS.md` section, a `SKILL.md`, YAML and JSON. To keep an editable profile, export YAML and save it as `needs.yaml` wherever you choose. The browser page does not require a Python installation or a build step.
 
+If clipboard access is blocked, Copy selects the displayed text for manual copying. Some browsers omit its final line break from that selection. Download preserves the complete export, including its final line break.
+
 ## Install skills
 
 For Claude Code, add this repository as a marketplace and install the plugin:
@@ -23,6 +25,15 @@ For Claude Code, add this repository as a marketplace and install the plugin:
 ```
 
 Restart the host if needed, then invoke `needs-picker` using its skill menu or command; in Claude Code it is listed as `/i-have-neurodivergence:needs-picker`. The root plugin contains the 19 authored skills. The generated Claude platform plugin also includes the 12 area skills; see the [platform installation guide](platforms/README.md#claude-code-and-cowork).
+
+For an existing Claude Code installation, refresh the marketplace and update the plugin, then restart the host:
+
+```text
+/plugin marketplace update i-have-neurodivergence
+/plugin update i-have-neurodivergence@i-have-neurodivergence
+```
+
+This release is **0.4.1**. Earlier repaired files still used the `0.4.0` version, which caused existing installations to keep their cached copy. Updating the marketplace alone does not update the installed plugin.
 
 For **Codex**, follow the [Codex installation steps](platforms/README.md#openai-codex) to copy all 31 complete folders from `platforms/codex/skills/` into your project's `.agents/skills/` or your personal `~/.agents/skills/`. Open that project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`.
 
@@ -77,6 +88,8 @@ python3 needs/build.py
 python3 platforms/build_platform_skills.py
 ```
 
+Before publishing changed skills, increase the version in `.claude-plugin/plugin.json`. The platform generator reads that version for every generated bundle; keeping the old version prevents existing Claude installations from receiving the update.
+
 Available checks:
 
 ```bash
@@ -93,17 +106,15 @@ Browser conformance needs Playwright and Chromium; missing Playwright reports a 
 
 ### Validation status
 
-These are smoke checks of files, the browser page and live sessions. **They do not show that any support is effective, that responses are identical between sessions, or that every assistive technology is covered.**
+These are smoke checks of files, the browser page and live sessions. **They do not establish support effectiveness, identical responses between sessions, or complete assistive-technology coverage.**
 
-**Supplied browser review.** The returned picker passed 88 browser checks in Chromium, including focus, controls, notes, copying and downloads, reflow, light/dark contrast and automated accessibility checks. The repository conformance suite passed 44 export comparisons and six UI assertions. These results are bound to the returned HTML, before the additional post-review changes. GitHub ZIP downloads were blocked in that environment, so its downloaded-copy test used a byte-verified archive produced from the pinned Git commit instead.
+**Claude retest of `af0cd63`.** Claude Code 2.1.303 installed the root marketplace plugin with 19 skills and the generated plugin with 31 skills, including a path containing spaces. A fresh GitHub browser ZIP matched all 194 files. Sixteen fresh three-turn sessions completed: 42 of 48 turns passed review; six failed across planning, default handling, numeric results and communication wording. Existing installations also stayed on an older cached copy because both releases used version `0.4.0`. The real-browser conformance suite passed 44 export comparisons and seven UI checks. Separate direct-file checks recorded 56 PASS, one final-newline selection failure and one screen-reader check NOT_RUN. These supplied results belong to that revision, before the repairs below.
 
-**Supplied Claude Code 2.1.303 review.** The root marketplace plugin installed from GitHub and listed 19 skills; the generated plugin listed 31 from a path containing spaces. The baseline had 31 fresh three-turn sessions, with 85 of 93 turns meeting review criteria. Retesting the repaired picker and dyspraxia skill gave a candidate-equivalent result of 87 of 93, reusing results for 29 byte-identical skills; this was not a new full-candidate run. The remaining failures concerned default handling, section length, action splitting, numeric presentation and reduced output. One communication session also used imperative follow-up wording. The two targeted dyspraxia walkthroughs passed once each after their examples were clarified.
+**Version 0.4.1 repairs and fresh checks.** The four remaining skill contracts now include more explicit examples and checks for external triggers, one-action steps, defaults without repeated menus, consistent arithmetic, tabled comparisons and descriptive editing notes. One root manifest supplies every generated release version; validation rejects mismatched versions. A real Claude Code 2.1.303 upgrade test reproduced the stale `0.4.0` cache, then updated to `0.4.1` and verified all 194 installed files through an isolated local Git remote. The public GitHub transport was not part of that upgrade test.
 
-**Post-review repairs and independent checks.** The preset selector now transfers focus to the visible area tab, with a regression assertion added to browser conformance. Default handling, section limits, action splitting, numeric echoes, reduced-output replies and descriptive answer keys were clarified in canonical sources and regenerated. Software integration checks using Node/jsdom passed 56 checks, including 44 JavaScript/Python export comparisons; the same checks reproduced eight failures on the published baseline. Both theme token contrasts were recalculated, and all six compiler formats matched an installed copy with exact free-text preservation. Fresh Codex smoke checks passed 33 turns across 11 sessions for nine affected skills, including activation, topic persistence, stop phrases, motor walkthroughs and quotation/permission boundaries. Every discovery check found all 31 skills. Service-capacity interruptions and an intermediate example revision were retained outside the pass counts. This DOM check does not establish browser layout, real clipboard permissions or assistive-technology behavior.
+Fresh Codex checks passed 30 reviewed turns across 10 sessions for the four repaired skills, the picker and quotation/permission boundaries. Intermediate outputs, including an additional numeric-comparison formatting failure corrected before the final tests, remain outside the final-source pass counts. Node/jsdom passed 64 software-integration checks, including 52 browser-compiler/Python comparisons across 13 profiles. This is not a native-browser run. All six root/installed compiler formats match; build, parity, compiler self-test, rule checks and validation of 93 generated skills pass.
 
-**Reported from earlier Codex checks.** On earlier revisions, Codex discovered all 31 skills, each received a three-turn check, the revised descriptive-language rule passed four fresh sessions, and a fresh ZIP installation on macOS passed nine live turns. These results were not rerun for this release.
-
-**Not established.** A fresh Claude Code run after the post-review clarifications, live behavior in Cowork and Hermes Agent, screen-reader and other assistive-technology use by people, and whether any support improves a reader's experience. The review host blocked local-file browser URLs, so the post-review pass did not repeat the direct-file GUI check.
+**Limits.** Fresh Claude conversations and a native-browser run after the 0.4.1 changes are NOT_RUN. The picker implementation and styling are unchanged; only embedded rule wording changed. Cowork, Hermes host behavior and screen-reader use by people remain unverified. The manual-copy final-line-break limitation is documented above; downloads retain the complete export. Narrow smoke checks do not establish that every rule holds in every response.
 
 ## Inspiration and license
 

@@ -7,7 +7,7 @@ metadata:
   tags: 'APD, Auditory Processing, Output Style, Accessibility, Voice, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # i-have-apd

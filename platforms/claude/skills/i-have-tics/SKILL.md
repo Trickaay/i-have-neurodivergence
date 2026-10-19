@@ -7,7 +7,7 @@ metadata:
   tags: 'Tourette''s, Tic Disorder, Output Style, Accessibility, Low Stress, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # i-have-tics

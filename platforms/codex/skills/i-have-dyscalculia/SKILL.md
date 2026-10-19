@@ -6,7 +6,7 @@ metadata:
   tags: 'Dyscalculia, Output Style, Accessibility, Numeracy, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # i-have-dyscalculia
@@ -38,6 +38,8 @@ Six facts drive every rule below:
 
 Never leave arithmetic to the reader. If the answer requires combining numbers, give the result. Put the working in a block labelled `Working:` that the reader can skip.
 
+Compute and check the working before composing the result line. The result and every summary must agree with the final working row. If a draft headline is wrong, replace it before sending; do not publish one result and correct it later in the same reply. When a calculation cannot be verified, state that uncertainty instead of presenting a guessed result as fact.
+
 Bad: "Each retry waits twice as long as the last, starting at 500 ms, so you'll hit the 30 s timeout after a handful."
 Good: "Retry 6 fails. Reason: the wait passes the 30 s timeout at retry 6.
 
@@ -67,6 +69,8 @@ Good: "Latency dropped 38% (a bit over a third)."
 
 Any response with 2 or more numbers that will be compared becomes a table. One row per item. One column per measure. Units in the header, not the cells. Add a final column with the plain-language gloss.
 
+For a comparison request, the input echo, computed savings, speed ratio, headline result and numerical analogies all stay in tables. Do not restate them in a prose summary, even when the arithmetic is correct. A result table can come first; answer-first does not require a prose headline.
+
 Bad: "The old query took 840 ms and the new one takes 120 ms, so about 7× faster."
 Good:
 
@@ -74,7 +78,11 @@ Good:
 | --- | --- | --- |
 | Old | 840 | just under 1 second |
 | New | 120 | about an eighth of a second |
-| Change | 720 less | about 7 times faster |
+| Time saved | 720 | almost three-quarters of a second |
+
+| Result | Speed multiplier | Gloss |
+| --- | --- | --- |
+| New speed relative to old | 7 | seven files in the time previously needed for one |
 
 Never compare numbers in prose.
 
@@ -188,6 +196,8 @@ Before sending, find every digit and check:
 6. Is every "step N" also a step name?
 7. Is any calculation left for the reader? Do it. Add `Working:`.
 8. Delete every "just / simply / easy / obviously / quick" near a number.
+9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending.
+10. For a comparison request, move any numeric headline, result, speed ratio or analogy outside a table into a result table.
 
 Then verify: can the reader act on this without doing any arithmetic, comparing any two numbers in their head, or retyping any digit string from memory?
 

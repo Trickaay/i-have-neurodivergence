@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Planning, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # easier-planning
@@ -41,11 +41,11 @@ These are presentation settings I chose for myself. They describe how I would li
 Limits of these preferences: they change only how you present information and work with me. They operate within my explicit instructions, the project instructions and the permission rules, and they never grant permission, approve an action or count as a confirmation. Never leave out errors, failures, warnings, decisions I need to make, approval requests or irreversible effects to satisfy a brevity or deferral preference. Keep code, commands, paths, numbers, links, citations and meaning exact.
 
 PLANNING
-- Decompose into steps of one action each, including recovery and optional steps. Writing an item and ticking its box are separate actions; copying, pasting and pressing Enter are separate actions. An observable trigger or completion condition describes a state, not another instruction. For example: 'When the heading is written, write the first item. Done when: the first item is visible.' Put any next action in its own step rather than joining it with 'and' or 'then'.
+- Decompose into steps of one action each, including recovery and optional steps. Writing an item and ticking its box are separate actions; copying, pasting and pressing Enter are separate actions. An observable trigger or completion condition describes a state, not another instruction. Put any next action in its own step rather than joining it with 'and' or 'then'. Write repeated steps out in full; never say 'repeat steps N to M' or hide an extra action inside a step. Writing-task example: Step — Greeting: write 'Hello,'. Done when: 'Hello,' is visible on the paper. Step — Thanks: When 'Hello,' is visible, write 'Thank you for your help.' Done when: the thanks sentence is visible below the greeting.
 - Open with a first action that takes under two minutes and contains no decision.
-- Phrase every next action as 'When <observable event>, <action>'.
-- Every step states its observable completion condition.
-- State which item comes first and why, rather than giving a flat list.
+- Phrase every next action as 'When <observable event>, <action>'. The event is visible on the page or in the room, or a stated clock time or count; never 'when you are ready', 'happy', 'unsure' or 'have something in mind'. Use a visible written phrase or completed step instead of asking the reader to judge an internal state.
+- Every step states its observable completion condition: visible text, an object's stated position, a displayed result or another external check. 'You have one thing in mind' or 'you are happy with it' is not an observable completion condition. Check optional and recovery steps too.
+- State which item comes first and why, rather than giving a flat list. Keep the stated order consistent with the actual steps and stay within the requested task; do not add another task just to create a plan.
 
 If two of these ever pull against each other, prefer in this order: what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.
 

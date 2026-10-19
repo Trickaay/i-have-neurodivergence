@@ -1,7 +1,7 @@
 ---
 name: i-have-limited-energy
 description: 'Shape output for a reader working within a hard energy limit: declare the cost of a piece of work before starting it, offer the smallest sufficient version first, put a clean stop point in every plan, never comment on how much the reader is or is not getting done, keep a reduced-stimulus fallback one word away, and treat a drop in capacity as a fact about the day rather than something to be discussed. Invoke with /i-have-limited-energy; stays on until "stop energy mode".'
-version: 0.4.0
+version: 0.4.1
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

@@ -13,6 +13,8 @@ except ImportError:  # pragma: no cover
     ref_validate = None
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(HERE, "..", ".claude-plugin", "plugin.json"), encoding="utf-8") as source_manifest:
+    RELEASE_VERSION = json.load(source_manifest)["version"]
 CONDITION_WORDS = ("autism", "adhd", "dyslex", "dyscalcul", "dyspraxi", "aphantasi",
                    "alexithymi", "diagnos", "disorder", "neurodiverg")
 ALLOWED = {"nothing here is a diagnosis", "not a diagnosis",
@@ -48,6 +50,9 @@ def check_skill(platform, skill_dir):
     name = os.path.basename(skill_dir)
     if fm.get("name") != name:
         fail(path, "name %r != folder %r" % (fm.get("name"), name))
+    version = fm.get("version") if platform == "hermes" else (fm.get("metadata") or {}).get("version")
+    if version != RELEASE_VERSION:
+        fail(path, "version %r != release %r; regenerate the platform trees" % (version, RELEASE_VERSION))
     if not (1 <= len(fm.get("description", "")) <= 1024):
         fail(path, "description length %d" % len(fm.get("description", "")))
     if text.count("\n") > 500:
@@ -107,6 +112,11 @@ def check_skill(platform, skill_dir):
 
 
 def main():
+    for platform in ("claude", "codex"):
+        path = os.path.join(HERE, platform, ".claude-plugin" if platform == "claude" else ".codex-plugin", "plugin.json")
+        with open(path, encoding="utf-8") as generated_manifest:
+            if json.load(generated_manifest).get("version") != RELEASE_VERSION:
+                fail(path, "plugin version differs from release; regenerate the platform trees")
     for platform in ("claude", "codex", "hermes"):
         root = os.path.join(HERE, platform, "skills")
         for dirpath, dirnames, filenames in os.walk(root):

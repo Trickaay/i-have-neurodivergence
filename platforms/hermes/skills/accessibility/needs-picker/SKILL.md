@@ -1,7 +1,7 @@
 ---
 name: needs-picker
 description: 'The quick start for the collection. Ask the reader what would make this easier, in terms of the exchange rather than of themselves, then ask what helps for each thing they picked, and build a working setup from their answers. Never infers, stores or displays a diagnosis. Invoke with /needs-picker; run it again any time by saying "settings".'
-version: 0.4.0
+version: 0.4.1
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

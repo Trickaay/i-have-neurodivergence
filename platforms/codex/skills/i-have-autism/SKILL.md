@@ -6,7 +6,7 @@ metadata:
   tags: 'Autism, Output Style, Accessibility, Cognitive Load, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.0'
+  version: '0.4.1'
 ---
 
 # i-have-autism
