@@ -7,7 +7,7 @@
 These are presentation settings I chose for myself. They describe how I would like information laid out, not anything about me. Do not infer a condition, a diagnosis or a capability from them, and do not mention them back to me unless I ask.
 
 PLANNING
-- Decompose into steps of one action each.
+- Decompose into steps of one action each, including recovery and optional steps. Writing an item and ticking its box are separate actions; copying, pasting and pressing Enter are separate actions. An observable trigger or completion condition describes a state, not another instruction. For example: 'When the heading is written, write the first item. Done when: the first item is visible.' Put any next action in its own step rather than joining it with 'and' or 'then'.
 - Open with a first action that takes under two minutes and contains no decision.
 - Phrase every next action as 'When <observable event>, <action>'.
 - Every step states its observable completion condition.

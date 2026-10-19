@@ -20,7 +20,7 @@ Recommendations are suggested starting points, not evidence of comparative effec
 
 Supports can have several selection origins: a difficulty, a direct choice or a preset. Dismissing one difficulty removes only its origin; a support chosen elsewhere remains. Explicitly unticking a support removes it entirely. Origins are picker state and are not exported into the profile.
 
-“Something else” accepts a free-text note without classifying it. Serialization normalizes line endings and trailing whitespace. Deselecting that entry clears its note.
+“Something else” accepts a free-text note without classifying it. The picker's quoted serialization converts CRLF and CR line endings to LF and otherwise keeps the note exactly, including leading and trailing spaces, blank lines, quotes and Unicode separators. Deselecting that entry clears its note.
 
 ## Contexts
 
@@ -96,6 +96,6 @@ python3 needs/conformance_test.py
 
 The build and parity checks cover generated-file consistency. The compiler self-test and rule checks cover data and instruction properties. Browser conformance compares JavaScript and Python exports; it requires Playwright and Chromium and reports a skip if unavailable. A skipped check is not a pass.
 
-These commands describe the validation workflow. They do not establish live host integration, accessibility testing or whether a support improves a reader's experience; those have not been verified for this release.
+These commands describe the validation workflow. On their own they do not establish live host integration, accessibility for people using assistive technology, or whether a support improves a reader's experience. The [validation status](../README.md#validation-status) lists the browser and live host checks performed for this release and what remains unverified.
 
 The picker exports notes as a quoted YAML string so spaces, blank lines and Unicode characters survive export and compilation. The compiler also accepts the existing indented `notes: |` form.

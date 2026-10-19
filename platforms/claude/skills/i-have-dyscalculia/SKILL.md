@@ -57,7 +57,7 @@ Working:
 Every quantity carries a plain-language magnitude in brackets, immediately after it. Percentages always get a fraction word.
 
 Good: "1,048,576 bytes (about 1 MB)."
-Good: "40% faster (about 29% less time: what took 10 minutes takes about 7)."
+Good: "40% (about two-fifths)."
 Good: "3 retries (a few)."
 Good: "0.02% (almost none)."
 
@@ -91,10 +91,11 @@ Never put two similar identifiers in one sentence.
 
 Bad: "Change 3000 to 3001 and 8080 to 8081."
 Good:
-```
-Dev server port: change `3000` to `3001`.
-API port: change `8080` to `8081`.
-```
+
+| Named identifier | Current label | Replacement label |
+| --- | --- | --- |
+| Dev server port | `3000` | `3001` |
+| API port | `8080` | `8081` |
 
 ### 5. Absolute, not relative
 
@@ -124,7 +125,12 @@ Bad: "Go back to step 2." Good: "Go back to **Step 2 — Rewrite**."
 Pick one unit per quantity type and never switch (all ms or all s, all MB or all GB). Same number of decimal places throughout. Thousands separators always. No scientific notation. No ranges unless the range is the answer; then give a midpoint gloss too.
 
 Bad: "Uses 1.2 GB idle and 1800 MB under load."
-Good: "Uses 1.2 GB idle and 1.8 GB under load (a bit more)."
+Good:
+
+| State | Memory (GB) | Gloss |
+| --- | --- | --- |
+| Idle | 1.2 | a little over one gigabyte |
+| Under load | 1.8 | a little under two gigabytes |
 
 ### 8. Worked example before formula
 
@@ -141,13 +147,20 @@ Good: "A megabyte is about one photo from a phone camera. Your file is 12 MB (ab
 Forbidden near any number or calculation: "just", "simply", "easy", "obviously", "quick maths", "trivially", "basic arithmetic". State the fact with no difficulty rating.
 
 Bad: "It's just 500 ms doubled five times."
-Good: "500 ms doubled 5 times is 16 s (see Working)."
+Good: "Result: 16 s (a little over a quarter of a minute)."
 
 ### 11. Echo numbers back
 
-When the reader gives a number, repeat it verbatim in the first line before acting on it. This catches transpositions on both sides.
+When the reader gives numeric inputs, repeat them verbatim before calculating. With one input, a named first line is enough. With several inputs, start with a labelled input table, one input per row, rather than a sentence echoing every number. Keep numeric identifiers named and code-formatted in their own rows. The input echo, summary and closing analogy obey the same comparison and numeric-density rules as the rest of the answer.
 
 Good: "Using port `8080` as you gave it."
+
+| Input | Value as supplied | Meaning |
+| --- | --- | --- |
+| Start time | `09:10` | ten minutes past nine |
+| Duration | `20` minutes | a third of an hour |
+| Task identifier | `7071` | label, not a quantity |
+| Service port | `7170` | label, not a quantity |
 
 ### 12. Cap numbers outside tables
 
@@ -189,7 +202,10 @@ If yes, send.
 
 ### After
 
-> Using the values you gave: base delay `500` ms, timeout `30` s.
+> | Input | Value as supplied | Meaning |
+> | --- | --- | --- |
+> | Base delay | `500` ms | half a second |
+> | Timeout | `30` s | half a minute |
 >
 > **Result: retries fail at retry 6.** Reason: the total wait passes the 30 s limit (half a minute) at retry 6.
 >
@@ -211,14 +227,19 @@ If yes, send.
 > | Base delay | 500 ms | 200 ms | less than half |
 > | Max retries | none | 5 | a handful |
 >
-> New total wait after the fix: 6.2 s (about 6 seconds, well under the 30 s limit; about a fifth of it).
+> | Result | Time (s) | Gloss |
+> | --- | --- | --- |
+> | New total wait | 6.2 | about six seconds |
+> | Timeout | 30.0 | half a minute |
 >
 > - [ ] **Step 1 — Edit delay.** In `retry.config.ts`, set `baseDelayMs` to `200`.
 > - [ ] **Step 2 — Edit cap.** In `retry.config.ts`, set `maxRetries` to `5`.
 > - [ ] **Step 3 — Ports.** Two separate edits:
 >
-> Dev server port: change `3000` to `3001`.
-> API port: change `8080` to `8081`.
+> | Named identifier | Current label | Replacement label |
+> | --- | --- | --- |
+> | Dev server port | `3000` | `3001` |
+> | API port | `8080` | `8081` |
 >
 > Time: done by about 14:40 (about 10 minutes from now).
 

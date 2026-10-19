@@ -54,17 +54,21 @@ If the agent cannot act, say why in one line, then give the human step under rul
 
 ### 2. One motor action per step
 
-Each human step is exactly one physical action: one paste, one click, one keypress, one command. Never "open, find, and replace." Split it.
+Each human step is exactly one physical action: one copy, one paste, one click, one keypress, one command. Never "open, find, and replace." Split it. Copying from a block, pasting and pressing Enter are separate steps, and each click in a menu path is its own step.
 
 Bad: "Open the file, find the function, and swap in the new one."
 Good:
 
-1. Paste this command into the ready terminal:
+1. Copy this command from the block:
    ```sh
    printf 'ready\n'
    ```
+   You should see: the text selected, or a copied message. If it fails: select the text in the block again.
+2. Click the menu labelled **Edit** in the terminal window.
+   You should see: a list that includes **Paste**. If it fails: click **Edit** again.
+3. Click **Paste**.
    You should see: the command at the prompt, not yet executed. If it fails: stop here.
-2. Press Enter.
+4. Press Enter.
    You should see: `ready`, followed by a new prompt. If it fails: stop here.
 
 ### 3. Copy block for every exact string, full command every time
@@ -79,7 +83,7 @@ npm test -- src/auth/auth.spec.ts
 
 ### 4. Typed alternative for every chord, drag, or precision action
 
-Keyboard chords (`Ctrl+Shift+P`), drag-and-drop, double-click, right-click, and "click the small icon" are precision motor tasks. Always give a typed or menu-path alternative, and put the alternative first.
+Keyboard chords (`Ctrl+Shift+P`), drag-and-drop, double-click, right-click, and "click the small icon" are precision motor tasks. Always give a typed or menu-path alternative, and put the alternative first. Pasting is one of these: its usual routes are the chord `Ctrl+V` (`⌘V` on macOS) or a right-click, so give the menu path **Edit → Paste** first, one click per step, and mention the chord after it.
 
 Bad: "Press Ctrl+Shift+P and type 'reload'."
 Good: "The menu alternative is **View → Command Palette**." Give each menu click, text entry and Enter press as a separate step with its own result and recovery line.
@@ -97,6 +101,8 @@ Every human step ends with what to do if it goes wrong. A slip must never cascad
 
 Format: `If it fails: <one action>.` or `Safe to run again: yes.`
 
+A recovery line holds one action too. When getting back on track takes more than one action, point to the step to return to instead of listing the actions: `If it fails: go back to step 1.` Never write "click X, then click Y" inside a recovery line.
+
 Bad: "Run the migration."
 Good: "Press Enter. You should see: `ready`, followed by a new prompt. Safe to run again: yes, this command only prints a message. If it fails: stop here."
 
@@ -112,12 +118,16 @@ No step depends on the reader remembering to do something later or doing two thi
 Bad: "While it installs, go update the config, and remember to restart afterwards."
 Good:
 
-1. Paste this command into the ready terminal:
+1. Copy this command from the block:
    ```sh
    printf 'done\n'
    ```
+   You should see: the text selected, or a copied message. If it fails: select the text in the block again.
+2. Click the menu labelled **Edit** in the terminal window.
+   You should see: a list that includes **Paste**. If it fails: click **Edit** again.
+3. Click **Paste**.
    You should see: the command at the prompt. If it fails: stop here.
-2. When the full command is visible at the prompt, press Enter.
+4. When the full command is visible at the prompt, press Enter.
    You should see: `done`, followed by a new prompt. If it prints an error: stop here.
 
 ### 8. State what to look for after each action
@@ -158,11 +168,11 @@ Override the defaults when:
 Before sending:
 
 1. Respect a request for a manual walkthrough. Otherwise, for every human step, ask: could the agent do this within the existing permissions? If yes, do it and delete the step.
-2. Split every step with more than one physical action.
+2. Split every step with more than one physical action, including copy, paste, Enter and each menu click.
 3. Move every exact string into a complete fenced block with no placeholders.
 4. Add a typed or menu-path alternative before every chord, drag, or precision click.
 5. Replace every spatial direction with a label, path, or line number.
-6. Add `If it fails:` or `Safe to run again:` to every step.
+6. Add `If it fails:` or `Safe to run again:` to every step, with one action or a step to go back to.
 7. Delete every "later", "afterwards", "while", "meanwhile", "in the background." Convert to sequence or agent-raised event.
 8. Add `You should see:` after every action.
 
@@ -182,15 +192,19 @@ If yes, send.
 >
 > The dev server is stopped in your focused terminal. I cannot start it from here.
 >
-> 1. Paste this command:
+> 1. Copy this command from the block:
 >    ```
 >    npm run dev
 >    ```
+>    You should see: the text selected, or a copied message. If it fails: select the text in the block again.
+> 2. Click the menu labelled **Edit** in the terminal window.
+>    You should see: a list that includes **Paste**. If it fails: click **Edit** again.
+> 3. Click **Paste**.
 >    You should see: `npm run dev` at the prompt, not yet executed. If it differs: stop here.
-> 2. Press Enter.
+> 4. Press Enter.
 >    You should see: `ready on http://localhost:3000`. If it prints `error`: stop here.
 >
-> One paste and one Enter press. No manual typing.
+> One copy, two menu clicks and one Enter press. No manual typing. The paste chord `Ctrl+V` (`⌘V` on macOS) can replace steps 2 and 3.
 
 ## On Hermes Agent
 

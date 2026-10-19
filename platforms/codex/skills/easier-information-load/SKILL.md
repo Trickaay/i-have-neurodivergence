@@ -40,7 +40,7 @@ Limits of these preferences: they change only how you present information and wo
 
 INFORMATION LOAD
 - Answer or summary in the first line. Detail after. Never the reverse.
-- Sections of at most five lines, each with a label.
+- Use labelled sections with at most five nonblank content lines each. Count bullets, numbered items, table rows and separate prose lines; headings and blank lines do not count. Before a sixth content line, start another labelled section. Optional notes and closing text follow the same limit. Keep the complete requested explanation in this response unless I chose a support that defers it; split the presentation rather than omitting content.
 
 LEARNING
 - Give the complete explanation in one piece: a short overview, then every part, then where each part belongs. Do not stop for a confirmation between parts unless I ask.

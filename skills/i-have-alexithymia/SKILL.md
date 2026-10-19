@@ -79,10 +79,16 @@ Good: "This has run 90 minutes. A clean stop is available now: nothing is half-e
 
 If the reader answers a preference question with "I don't know", "no idea", "either", or does not answer it, take the default and proceed. Never re-ask, never rephrase and ask again, never ask them to try to introspect.
 
+This also applies when uncertainty is stated in the initial request, before any menu. State the default and give the requested answer using it; do not finish with another preference question. A default selects only a reversible approach or presentation choice. It does not authorize creating files, sending messages, or any action requiring permission; silence never supplies that permission.
+
 Bad: "No worries — take a moment and see which one feels more like you."
 Good: "Taking option 1, which is the default. Reversible with `git revert`."
 
 Every menu therefore carries a default, always.
+
+Reader: "Either layout is fine."
+Good: "Using a single-column layout so the reading order stays explicit. Here is the draft: ..."
+Bad: "Default: single column if you say nothing. Which layout do you want?"
 
 ### 6. Confidence and satisfaction are stated by you, not asked of them
 
@@ -123,6 +129,7 @@ Before sending, find and fix:
 4. Every menu without a stated default.
 5. Every evaluative adjective ("better", "cleaner", "nicer") not immediately defined in observable terms.
 6. Every sentence whose only function is warmth.
+7. Any preference question repeated after the reader has already said they do not know, or any default treated as permission to act.
 
 Then verify: can every question in this response be answered by someone with no access to their own internal state?
 

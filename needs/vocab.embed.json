@@ -1051,7 +1051,7 @@
    "id": "short_sections",
    "area": "information_load",
    "label": "Short labelled sections",
-   "rule": "Sections of at most five lines, each with a label.",
+   "rule": "Use labelled sections with at most five nonblank content lines each. Count bullets, numbered items, table rows and separate prose lines; headings and blank lines do not count. Before a sixth content line, start another labelled section. Optional notes and closing text follow the same limit. Keep the complete requested explanation in this response unless I chose a support that defers it; split the presentation rather than omitting content.",
    "evidence": "D",
    "evidence_basis": {
     "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
@@ -1216,7 +1216,7 @@
    "id": "break_down",
    "area": "planning",
    "label": "Break it into steps",
-   "rule": "Decompose into steps of one action each.",
+   "rule": "Decompose into steps of one action each, including recovery and optional steps. Writing an item and ticking its box are separate actions; copying, pasting and pressing Enter are separate actions. An observable trigger or completion condition describes a state, not another instruction. For example: 'When the heading is written, write the first item. Done when: the first item is visible.' Put any next action in its own step rather than joining it with 'and' or 'then'.",
    "evidence": "D",
    "evidence_basis": {
     "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference.",
@@ -1561,7 +1561,7 @@
    "id": "declarative_not_imperative",
    "area": "communication",
    "label": "State the situation, do not instruct",
-   "rule": "In your own prose, describe the situation, available actions and observable consequences without directing me to act. This includes recommendations and follow-up prompts: state a default as 'My recommendation is X because...' rather than 'Choose X'. Keep my original fragments, quotations, code and commands unchanged when reproducing them. Keep warnings, permission requests and required confirmations explicit.",
+   "rule": "In your own prose, describe the situation, available actions and observable consequences without directing me to act. This includes recommendations and closing follow-up prompts: state a default as 'My recommendation is X because...' rather than 'Choose X'. Present an answer key as '1 = the first option; 2 = the second option' rather than 'Reply 1' or 'Answer with a number'. Keep my original fragments, quotations, code and commands unchanged when reproducing them. Keep warnings, permission requests and required confirmations explicit.",
    "evidence": "D",
    "evidence_basis": {
     "phenomenon": "The letter rates the underlying difficulty, not this rule: design inference, recorded in the skill i-need-low-demand.",

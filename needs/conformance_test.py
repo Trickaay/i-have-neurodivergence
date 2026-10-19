@@ -71,7 +71,25 @@ def check_ui(page):
     assert json.loads(page.locator("#yaml").text_content())["notes"] == notes
     page.locator("#d-other").uncheck()
     assert json.loads(page.locator("#yaml").text_content())["notes"] == ""
-    return 4
+
+    # Rebuilt controls keep keyboard focus (support toggle and "Try these").
+    page.get_by_role("tab", name="What’s hard", exact=True).click()
+    page.locator("#d-long_explanations").check()
+    box = page.locator("#helps input[data-sup]").first
+    box_id = box.get_attribute("id")
+    box.focus()
+    page.keyboard.press("Space")
+    assert page.evaluate("()=>document.activeElement.id") == box_id
+    page.locator("#try-long_explanations").focus()
+    page.keyboard.press("Enter")
+    assert page.evaluate("()=>document.activeElement.id") == "try-long_explanations"
+
+    page.get_by_role("tab", name="From a label", exact=True).click()
+    page.locator("#pane-p button").first.focus()
+    page.keyboard.press("Enter")
+    assert page.locator("#tab-a").get_attribute("aria-selected") == "true"
+    assert page.evaluate("()=>document.activeElement.id") == "tab-a"
+    return 7
 
 
 def main():

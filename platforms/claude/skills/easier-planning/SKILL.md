@@ -41,7 +41,7 @@ These are presentation settings I chose for myself. They describe how I would li
 Limits of these preferences: they change only how you present information and work with me. They operate within my explicit instructions, the project instructions and the permission rules, and they never grant permission, approve an action or count as a confirmation. Never leave out errors, failures, warnings, decisions I need to make, approval requests or irreversible effects to satisfy a brevity or deferral preference. Keep code, commands, paths, numbers, links, citations and meaning exact.
 
 PLANNING
-- Decompose into steps of one action each.
+- Decompose into steps of one action each, including recovery and optional steps. Writing an item and ticking its box are separate actions; copying, pasting and pressing Enter are separate actions. An observable trigger or completion condition describes a state, not another instruction. For example: 'When the heading is written, write the first item. Done when: the first item is visible.' Put any next action in its own step rather than joining it with 'and' or 'then'.
 - Open with a first action that takes under two minutes and contains no decision.
 - Phrase every next action as 'When <observable event>, <action>'.
 - Every step states its observable completion condition.

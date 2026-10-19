@@ -6,122 +6,132 @@
 <title>What Would Make This Easier</title>
 <style>
 :root{
-  --ground:#F3F4F7; --surface:#FFFFFF; --surface-2:#FAFBFC;
-  --ink:#191D25; --muted:#5B6373; --line:#DBDFE7; --line-strong:#B9C0CC;
-  --accent:#2E5C8A; --accent-soft:#E6EDF6; --accent-ink:#1F4267;
-  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
-  --r:6px;
+  /* Warm light ground for a plain-language page; cool-neutral dark theme with the same roles. */
+  --ground:#F3F1EC; --surface:#FBFAF7; --surface-2:#EFECE5;
+  --ink:#1C1814; --muted:#574F45; --line:#DDD7CC; --line-strong:#574F45;
+  --accent:#3F5666; --accent-soft:#E6EAEC; --accent-ink:#3F5666; --control:#574F45;
+  --rule:#CF4D18; --label-warm:#A33A10;
+  --sans:system-ui,-apple-system,"Segoe UI",Aptos,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --serif:"Iowan Old Style",Georgia,Palatino,"Palatino Linotype","Times New Roman",serif;
+  --r:8px; --r-sm:4px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ground:#14171C; --surface:#1C2027; --surface-2:#22272F;
-  --ink:#E7EAEF; --muted:#959DAC; --line:#2C323B; --line-strong:#454D59;
-  --accent:#82ACD9; --accent-soft:#1E2937; --accent-ink:#A8C7E8;
+  --ground:#12161B; --surface:#1A1F26; --surface-2:#232A33;
+  --ink:#E8ECF0; --muted:#AAB4BE; --line:#323A44; --line-strong:#AAB4BE;
+  --accent:#8FB0C8; --accent-soft:#1C2833; --accent-ink:#8FB0C8; --control:#AAB4BE;
+  --rule:#E8893A; --label-warm:#F0A060;
 }}
 :root[data-theme="dark"]{
-  --ground:#14171C; --surface:#1C2027; --surface-2:#22272F;
-  --ink:#E7EAEF; --muted:#959DAC; --line:#2C323B; --line-strong:#454D59;
-  --accent:#82ACD9; --accent-soft:#1E2937; --accent-ink:#A8C7E8;
+  --ground:#12161B; --surface:#1A1F26; --surface-2:#232A33;
+  --ink:#E8ECF0; --muted:#AAB4BE; --line:#323A44; --line-strong:#AAB4BE;
+  --accent:#8FB0C8; --accent-soft:#1C2833; --accent-ink:#8FB0C8; --control:#AAB4BE;
+  --rule:#E8893A; --label-warm:#F0A060;
 }
 *{box-sizing:border-box}
-body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;margin:0;padding-block:0 64px;padding-left:20px;padding-right:20px;-webkit-font-smoothing:antialiased}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;margin:0;padding-block:0 64px;padding-left:16px;padding-right:16px;-webkit-font-smoothing:antialiased}
+@media(min-width:660px){body{padding-left:24px;padding-right:24px}}
 .wrap{max-width:1200px;margin:0 auto}
 h1,h2,h3{text-wrap:balance;margin:0}
-header{padding-block:44px 28px;border-bottom:1px solid var(--line)}
-h1{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.01em;line-height:1.15}
-.standfirst{margin-top:14px;max-width:62ch;color:var(--muted);font-size:16px}
-.assure{margin-top:18px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r);max-width:62ch}
+header{padding-block:48px 32px;border-bottom:3px solid var(--rule)}
+h1{font-family:var(--serif);font-size:clamp(30px,5vw,44px);font-weight:400;letter-spacing:-.01em;line-height:1.14}
+.standfirst{margin-top:14px;max-width:62ch;color:var(--muted);font-size:19px;line-height:1.47}
+.assure{margin-top:20px;padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--r);max-width:62ch}
 .assure strong{display:block;font-weight:600;margin-bottom:2px}
-.assure span{color:var(--muted);font-size:14px}
-.flow{margin-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em}
+.assure span{color:var(--muted);font-size:15px}
+.flow{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
 .flow b{color:var(--ink);font-weight:500}
 
-.cols{display:grid;grid-template-columns:1fr;gap:32px;margin-top:32px;align-items:start}
+.cols{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;margin-top:32px;align-items:start}
 @media(min-width:1000px){.cols{grid-template-columns:minmax(0,1fr) 400px;gap:40px}}
 .step{margin-bottom:36px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
-h2{font-family:var(--serif);font-size:23px;font-weight:500}
-.hint{color:var(--muted);font-size:14px;margin-top:6px;max-width:62ch}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;color:var(--label-warm);display:block;margin-bottom:8px}
+h2{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.25}
+.hint{color:var(--muted);font-size:15px;margin-top:6px;max-width:68ch}
 .fmtrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-.fmtrow label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.fmtrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%;flex:1 1 200px}
-.fmtrow select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.fmtrow label{font-family:var(--sans);font-size:12px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.fmtrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--control);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%;min-width:0;flex:1 1 200px}
+.fmtrow select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .fmthint{font-size:12.5px;color:var(--muted);margin:0 0 8px}
-.freetext{display:block;width:100%;margin-top:8px;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);resize:vertical}
+.freetext{display:block;width:100%;margin-top:8px;font:inherit;font-size:15px;padding:8px 10px;border:1px solid var(--control);border-radius:var(--r-sm);background:var(--surface-2);color:var(--ink);resize:vertical}
 
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 20px;border-bottom:1px solid var(--line)}
-.tab{font:inherit;font-size:14px;font-weight:500;color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;border-radius:var(--r) var(--r) 0 0}
+.tab{font:inherit;font-size:15px;font-weight:500;color:var(--muted);background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;cursor:pointer;border-radius:var(--r-sm) var(--r-sm) 0 0}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);background:var(--accent-soft)}
 .tab:hover{color:var(--ink)}
 
 .areagroup{margin-bottom:22px}
 .areahead{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
-.areahead h3{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);font-weight:500}
-.areahead p{margin:0;font-size:13px;color:var(--muted)}
+.areahead h3{font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:650}
+.areahead p{margin:0;font-size:14px;color:var(--muted)}
 .opts{display:grid;gap:6px}
 @media(min-width:660px){.opts.two{grid-template-columns:1fr 1fr}}
 
-label.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);cursor:pointer;font-size:14.5px}
+label.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);cursor:pointer;font-size:15px}
 label.opt:hover{border-color:var(--line-strong)}
 label.opt:has(input:checked){background:var(--accent-soft);border-color:var(--accent);font-weight:500}
-label.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
-label.opt input{margin:3px 0 0;accent-color:var(--accent);flex:0 0 auto}
-.opt .defers{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px}
+label.opt:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+label.opt input{margin:4px 0 0;width:16px;height:16px;accent-color:var(--accent);flex:0 0 auto}
+.opt .defers{display:block;font-weight:400;color:var(--muted);font-size:13.5px;margin-top:2px}
 .supwrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
 .supwrap:has(input:checked){border-color:var(--accent)}
 .supwrap label.opt{border:0;background:none}
 .supwrap details{border-top:1px solid var(--line);margin:0}
-.supwrap summary{font-size:12.5px;color:var(--muted);cursor:pointer;padding:6px 12px;list-style:none}
+.supwrap summary{font-size:13.5px;color:var(--muted);cursor:pointer;padding:6px 14px;list-style:none}
+.supwrap summary:focus-visible{outline:3px solid var(--accent);outline-offset:-3px;border-radius:var(--r-sm)}
 .supwrap summary::-webkit-details-marker{display:none}
 .supwrap summary::before{content:"+ ";font-family:var(--mono)}
 .supwrap details[open] summary::before{content:"− "}
 .supwrap summary:hover{color:var(--ink)}
-.why{padding:0 12px 12px;font-size:13px;color:var(--muted)}
+.why{padding:0 14px 14px;font-size:14px;color:var(--muted)}
 .why p{margin:0 0 8px}
-.why .tierline{font-family:var(--mono);font-size:11.5px}
-pre.demo{font-family:var(--mono);font-size:12px;line-height:1.55;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:8px 10px;margin:0;white-space:pre-wrap;color:var(--ink)}
+.why .tierline{font-family:var(--mono);font-size:12px}
+pre.demo{font-family:var(--mono);font-size:13px;line-height:1.55;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px;margin:0;white-space:pre-wrap;color:var(--ink)}
 
-.helps{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
-.helps > h3{font-size:16px;font-weight:600;margin-bottom:2px}
-.helps .said{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:12px}
+.helps{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin-bottom:16px}
+@media(max-width:659px){.helps{padding:16px}}
+.helps > h3{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:2px}
+.helps .said{font-size:14px;color:var(--muted);margin-bottom:12px}
 .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-button.mini{font:inherit;font-size:13px;font-weight:500;padding:6px 12px;background:var(--surface-2);color:var(--ink);border:1px solid var(--line-strong);border-radius:var(--r);cursor:pointer}
+button.mini{font:inherit;font-size:14px;font-weight:500;padding:7px 14px;min-height:36px;background:var(--surface);color:var(--ink);border:1px solid var(--control);border-radius:var(--r-sm);cursor:pointer}
 button.mini:hover{background:var(--accent-soft);border-color:var(--accent)}
-button.mini:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-button.mini.primary{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+button.mini:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button.mini.primary{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
 
 .cmp{margin-top:14px;border:1px solid var(--accent);border-radius:var(--r);padding:14px;background:var(--surface-2)}
-.cmp h4{margin:0 0 2px;font-size:15px;font-weight:600}
-.cmp .sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-bottom:12px}
+.cmp h4{margin:0 0 2px;font-family:var(--serif);font-size:19px;font-weight:400}
+.cmp .sub{font-size:13.5px;color:var(--muted);margin-bottom:12px}
 .pair{display:grid;gap:12px;margin-bottom:12px}
 @media(min-width:620px){.pair{grid-template-columns:1fr 1fr}}
 .side{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px}
-.side .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:6px}
-.side pre{margin:0;font-family:var(--mono);font-size:12px;white-space:pre-wrap;line-height:1.55}
+.side .k{font-family:var(--sans);font-size:12px;font-weight:650;letter-spacing:.12em;color:var(--muted);display:block;margin-bottom:6px}
+.side pre{margin:0;font-family:var(--mono);font-size:13px;white-space:pre-wrap;line-height:1.55}
 
-.ctxrow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;font-size:14px}
-.ctxrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%}
-.ctxrow select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.ctxrow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;font-size:15px}
+.ctxrow select{font:inherit;font-size:13.5px;padding:5px 8px;border:1px solid var(--control);border-radius:4px;background:var(--surface-2);color:var(--ink);max-width:100%}
+.ctxrow select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--r);padding:20px}
 @media(min-width:1000px){.panel{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}}
-.panel h2{font-size:19px}
-.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+.panel h2{font-size:22px}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:4px}
 .saidlist{margin:14px 0 0;padding:0;list-style:none;font-size:14px}
 .saidlist li{padding:5px 0 5px 16px;position:relative;border-bottom:1px solid var(--line)}
 .saidlist li::before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;background:var(--accent);border-radius:1px}
 .saidlist li:last-child{border-bottom:0}
-.saidlist li.hdr{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:0;padding-left:0}
+.saidlist li.hdr{font-family:var(--sans);font-size:12px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:0;padding-left:0}
 .saidlist li.hdr::before{display:none}
-.saidlist li .scope{color:var(--muted);font-size:12px;font-family:var(--mono)}
-.blank{color:var(--muted);font-size:14px;font-style:italic}
+.saidlist li .scope{color:var(--muted);font-size:13px;font-family:var(--mono)}
+.blank{color:var(--muted);font-size:14px}
 .pv{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
-pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:12px;overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word}
-pre.answer{font-family:var(--sans);font-size:13.5px;line-height:1.6}
-.pvnote{font-size:12px;color:var(--muted);margin-top:8px}
-footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;max-width:70ch}
-footer h3{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+pre{font-family:var(--mono);font-size:13px;line-height:1.6;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:12px;overflow-x:auto;margin:0;white-space:pre-wrap;word-break:break-word}
+pre.answer{font-family:var(--sans);font-size:14px;line-height:1.6}
+.pvnote{font-size:13px;color:var(--muted);margin-top:8px}
+.freetext:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.cmp:focus-visible,.tab:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;max-width:68ch}
+footer h3{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--ink);margin-bottom:6px}
 @media(prefers-reduced-motion:no-preference){label.opt,button.mini,.tab,.supwrap{transition:background-color .12s ease,border-color .12s ease}}
 </style>
 </head>
@@ -196,6 +206,7 @@ footer h3{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
         <p class="fmthint" id="fmthint"></p>
         <pre id="yaml"></pre>
         <div class="quick"><button class="mini primary" id="copy">Copy</button><button class="mini" id="download">Download</button><button class="mini" id="reset">Start again</button></div>
+        <p class="sr-only" id="announce" role="status" aria-live="polite"></p>
       </div>
     </div>
   </aside>
@@ -219,6 +230,9 @@ var areaLabel={},areaDesc={};
 V.areas.forEach(function(a){areaLabel[a.id]=a.label;areaDesc[a.id]=a.description;});
 var TIER={A:"Replicated experimental or meta-analytic evidence",B:"Consistent qualitative or observational findings",C:"Community-described; little formal study",D:"Design inference, not itself tested",S:"Published technical standard",X:"Contested construct: described, disputed as a distinct entity"};
 var state={diff:new Set(),sup:new Set(),ctx:{},cmp:{},origin:{},notes:""};
+/* Parts of the page are rebuilt after each change. focusNext names the element that
+   should receive focus afterwards; otherwise focus returns to the control with the same id. */
+var focusNext=null;
 
 /* Track each selection source so removing one keeps independently chosen supports. */
 function addSup(id,origin){var o=state.origin[id]||(state.origin[id]=[]);
@@ -232,9 +246,17 @@ function originsOf(id){return state.origin[id]||[];}
 
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function el(h){var d=document.createElement("div");d.innerHTML=h.trim();return d.firstChild;}
-function wireTabs(ids){ids.forEach(function(id){document.getElementById(id).addEventListener("click",function(){
-  ids.forEach(function(o){var ot=document.getElementById(o),op=document.getElementById(ot.getAttribute("aria-controls"));
-    var on=(o===id);ot.setAttribute("aria-selected",on?"true":"false");op.hidden=!on;});});});}
+function wireTabs(ids){
+  function select(id){ids.forEach(function(o){var ot=document.getElementById(o),op=document.getElementById(ot.getAttribute("aria-controls"));
+    var on=(o===id);ot.setAttribute("aria-selected",on?"true":"false");ot.tabIndex=on?0:-1;op.hidden=!on;});}
+  ids.forEach(function(id,i){var t=document.getElementById(id);
+    t.tabIndex=t.getAttribute("aria-selected")==="true"?0:-1;
+    t.addEventListener("click",function(){select(id);});
+    /* Arrow keys, Home and End move between tabs, as in the WAI-ARIA tabs pattern. */
+    t.addEventListener("keydown",function(e){var j=null;
+      if(e.key==="ArrowRight")j=(i+1)%ids.length; else if(e.key==="ArrowLeft")j=(i-1+ids.length)%ids.length;
+      else if(e.key==="Home")j=0; else if(e.key==="End")j=ids.length-1;
+      if(j===null)return; e.preventDefault(); select(ids[j]); document.getElementById(ids[j]).focus();});});}
 wireTabs(["tab-d","tab-a","tab-p"]); wireTabs(["tab-pv","tab-yml"]);
 
 
@@ -307,7 +329,7 @@ function supportBlock(s,ns,origin){
   Object.keys(V.presets).forEach(function(name){
     var atoms=V.presets[name];
     var b=el('<button class="mini" style="text-align:left;display:block;width:100%">'+esc(name)+' <span style="color:var(--muted);font-weight:400">&mdash; sets '+atoms.length+' supports</span></button>');
-    b.addEventListener("click",function(){atoms.forEach(function(a){addSup(a,"preset:"+name);});render();document.getElementById("tab-a").click();});
+    b.addEventListener("click",function(){atoms.forEach(function(a){addSup(a,"preset:"+name);});render();var tab=document.getElementById("tab-a");tab.click();tab.focus();});
     box.appendChild(b);});
   host.appendChild(box);
 })();
@@ -323,32 +345,33 @@ function pairsOf(d){
 function comparePane(d){
   var pairs=pairsOf(d), idx=state.cmp[d.id]||0;
   if(idx>=pairs.length){
-    var done=el('<div class="cmp"><h4>That is all of them</h4><p class="sub">'+esc(d.label)+'</p></div>');
-    var again=el('<button class="mini">Compare again from the start</button>');
-    again.addEventListener("click",function(){state.cmp[d.id]=0;render();});
-    var close=el('<button class="mini">Close</button>');
-    close.addEventListener("click",function(){delete state.cmp[d.id];render();});
+    var done=el('<div class="cmp" role="group" tabindex="-1" id="cmp-'+d.id+'" aria-labelledby="cmp-'+d.id+'-h cmp-'+d.id+'-sub"><h4 id="cmp-'+d.id+'-h">That is all of them</h4><p class="sub" id="cmp-'+d.id+'-sub">'+esc(d.label)+'</p></div>');
+    var again=el('<button class="mini" id="cmp-'+d.id+'-again">Compare again from the start</button>');
+    again.addEventListener("click",function(){state.cmp[d.id]=0;focusNext="cmp-"+d.id;render();});
+    var close=el('<button class="mini" id="cmp-'+d.id+'-close">Close</button>');
+    close.addEventListener("click",function(){delete state.cmp[d.id];focusNext="cmpbtn-"+d.id;render();});
     var q=el('<div class="quick"></div>');q.appendChild(again);q.appendChild(close);done.appendChild(q);
     return done;
   }
   var pair=pairs[idx], A=byId[pair[0]], B=pair[1]?byId[pair[1]]:null;
-  var c=el('<div class="cmp"><h4>Which helps more?</h4><p class="sub">'+esc(d.label)+' &middot; pair '+(idx+1)+' of '+pairs.length+'</p><div class="pair"></div><div class="quick"></div></div>');
+  var c=el('<div class="cmp" role="group" tabindex="-1" id="cmp-'+d.id+'" aria-labelledby="cmp-'+d.id+'-h cmp-'+d.id+'-sub"><h4 id="cmp-'+d.id+'-h">Which helps more?</h4><p class="sub" id="cmp-'+d.id+'-sub">'+esc(d.label)+' &middot; pair '+(idx+1)+' of '+pairs.length+'</p><div class="pair"></div><div class="quick"></div></div>');
   var p=c.querySelector(".pair"), q=c.querySelector(".quick");
   p.appendChild(el('<div class="side"><span class="k">A</span><pre>'+esc(A.demo)+'</pre></div>'));
   if(B) p.appendChild(el('<div class="side"><span class="k">B</span><pre>'+esc(B.demo)+'</pre></div>'));
-  function advance(){state.cmp[d.id]=idx+1;render();}
-  var ba=el('<button class="mini primary">A helps</button>');
+  /* Move focus to the comparison itself so the next pair (or the end) is announced. */
+  function advance(){state.cmp[d.id]=idx+1;focusNext="cmp-"+d.id;render();}
+  var ba=el('<button class="mini primary" id="cmp-'+d.id+'-a">A helps</button>');
   ba.addEventListener("click",function(){addSup(A.id,"d:"+d.id);advance();});
   q.appendChild(ba);
-  if(B){var bb=el('<button class="mini primary">B helps</button>');
+  if(B){var bb=el('<button class="mini primary" id="cmp-'+d.id+'-b">B helps</button>');
     bb.addEventListener("click",function(){addSup(B.id,"d:"+d.id);advance();});q.appendChild(bb);}
-  var bo=el('<button class="mini">'+(B?"Both help":"Yes, this helps")+'</button>');
+  var bo=el('<button class="mini" id="cmp-'+d.id+'-both">'+(B?"Both help":"Yes, this helps")+'</button>');
   bo.addEventListener("click",function(){addSup(A.id,"d:"+d.id);if(B)addSup(B.id,"d:"+d.id);advance();});
   q.appendChild(bo);
-  var bn=el('<button class="mini">Neither</button>');
+  var bn=el('<button class="mini" id="cmp-'+d.id+'-neither">Neither</button>');
   bn.addEventListener("click",advance); q.appendChild(bn);
-  var bx=el('<button class="mini">Stop comparing</button>');
-  bx.addEventListener("click",function(){delete state.cmp[d.id];render();}); q.appendChild(bx);
+  var bx=el('<button class="mini" id="cmp-'+d.id+'-stop">Stop comparing</button>');
+  bx.addEventListener("click",function(){delete state.cmp[d.id];focusNext="cmpbtn-"+d.id;render();}); q.appendChild(bx);
   return c;
 }
 
@@ -376,14 +399,14 @@ function renderHelps(){
     d.offers.forEach(function(sid){if(byId[sid]) box.appendChild(supportBlock(byId[sid],"h"+d.id,"d:"+d.id));});
     if(d.offers.length){
       var rec=(d.recommended&&d.recommended.length)?d.recommended:d.offers.slice(0,2);
-      var t=el('<button class="mini primary">Try these</button>');
+      var t=el('<button class="mini primary" id="try-'+d.id+'">Try these</button>');
       t.title="Adds "+rec.map(function(r){return byId[r]?byId[r].label:r;}).join(" and ");
       t.addEventListener("click",function(){rec.forEach(function(s){addSup(s,"d:"+d.id);});render();});
       q.appendChild(t);
-      var cm=el('<button class="mini">Show me the difference</button>');
-      cm.addEventListener("click",function(){state.cmp[d.id]=0;render();});
+      var cm=el('<button class="mini" id="cmpbtn-'+d.id+'">Show me the difference</button>');
+      cm.addEventListener("click",function(){state.cmp[d.id]=0;focusNext="cmp-"+d.id;render();});
       q.appendChild(cm);
-      var none=el('<button class="mini">Not now</button>');
+      var none=el('<button class="mini" id="none-'+d.id+'">Not now</button>');
       none.addEventListener("click",function(){d.offers.forEach(function(s){dropOrigin(s,"d:"+d.id);});delete state.cmp[d.id];render();});
       q.appendChild(none);
       q.appendChild(el('<span style="font-size:12.5px;color:var(--muted);align-self:center">Try these = '+rec.length+' suggested starting points, not all '+d.offers.length+'</span>'));
@@ -646,11 +669,16 @@ function currentFormat(){
 function currentText(){return FORMATS[currentFormat()].write();}
 
 function render(){
+  var a=document.activeElement, back=(a&&a!==document.body&&a.id)?a.id:null;
+  var target=focusNext; focusNext=null;
   document.querySelectorAll("input[data-sup]").forEach(function(i){i.checked=state.sup.has(i.dataset.sup);});
   renderHelps();
   document.querySelectorAll("input[data-sup]").forEach(function(i){i.checked=state.sup.has(i.dataset.sup);});
   renderCtx();
   renderOut();
+  /* Rebuilt controls keep their ids, so keyboard and screen-reader focus can return to them. */
+  var n=(target&&document.getElementById(target))||(back&&document.getElementById(back));
+  if(n&&n!==document.activeElement&&!n.closest("[hidden]")) n.focus();
 }
 
 function renderOut(){
@@ -694,7 +722,9 @@ if(window.claude&&typeof window.claude.use==="function"){
     if(d&&typeof d.save==="function"){saver=d;dlBtn.hidden=false;}
   }).catch(function(){});
 }
-function flash(msg){var was=dlBtn.textContent;dlBtn.textContent=msg;
+function announce(msg){var a=document.getElementById("announce");a.textContent="";
+  setTimeout(function(){a.textContent=msg;},50);}
+function flash(msg){var was=dlBtn.textContent;dlBtn.textContent=msg;announce(msg);
   setTimeout(function(){dlBtn.textContent=was;},1800);}
 dlBtn.addEventListener("click",function(){
   var f=FORMATS[currentFormat()], text=f.write();
@@ -706,16 +736,19 @@ dlBtn.addEventListener("click",function(){
   }
   var a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob([text],{type:f.type+";charset=utf-8"}));
-  a.download=f.file; document.body.appendChild(a); a.click();
+  a.download=f.file; document.body.appendChild(a); a.click(); announce("Download started: "+f.file);
   setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},0);
 });
 document.getElementById("copy").addEventListener("click",function(e){
-  var t=currentText();
+  var b=e.currentTarget, t=currentText();
+  function say(msg,ms){b.textContent=msg;announce(msg);setTimeout(function(){b.textContent="Copy";},ms);}
+  /* If the clipboard is unavailable or refused, select the text so it can be copied by hand. */
+  function selectText(){var r=document.createRange();r.selectNodeContents(document.getElementById("yaml"));
+    var s=getSelection();s.removeAllRanges();s.addRange(r);
+    say("Text selected — copy it with Ctrl+C or ⌘C",4000);}
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(function(){e.target.textContent="Copied";
-      setTimeout(function(){e.target.textContent="Copy";},1400);});}
-  else{var r=document.createRange();r.selectNodeContents(document.getElementById("yaml"));
-    var s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent="Selected — press Ctrl+C";}
+    navigator.clipboard.writeText(t).then(function(){say("Copied",1400);},selectText);}
+  else selectText();
 });
 document.getElementById("reset").addEventListener("click",function(){
   state.diff.clear();state.sup.clear();state.ctx={};state.cmp={};state.origin={};state.notes="";

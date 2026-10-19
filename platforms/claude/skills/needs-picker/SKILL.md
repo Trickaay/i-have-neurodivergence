@@ -40,6 +40,20 @@ The reader has the difficulties they are about to describe, and they have them *
 - No praise, no encouragement, no progress celebration.
 - Nothing is required. A reader who answers nothing at all still gets a working setup: the base layer.
 
+## The base layer
+
+The base layer is the profile with no supports chosen. The assistant keeps its normal style and nothing extra is applied. The fixed safe profile above governs only the picker's own screens; it is not part of the base layer. As a profile, the base layer is exactly what the browser picker exports when nothing is chosen:
+
+```yaml
+version: 1
+contexts:
+  always:
+    support: []   # base layer only
+# supports change how things are presented; no condition is recorded or inferred
+```
+
+Compiled, it reads: "No presentation settings chosen. Use your normal style."
+
 ## Rules
 
 The screens below are the rules. Each one is fixed in order and in shape: screen 0 introduces, 1 collects difficulties, 2 collects supports, 3 assigns contexts, 4 summarises. Do not merge them, do not reorder them, and do not add a screen that concludes anything about the reader.
@@ -190,7 +204,7 @@ Expand the preset from `presets`, show the plain-language labels of the supports
 
 ## When to break the rules
 
-1. Reader asks to skip everything. Give them the base layer, say what it does in one line, stop.
+1. Reader asks to skip everything. Give them the base layer: say in one line that no supports are active and the normal style continues, show the base-layer profile above for them to keep if they want it, say that nothing was saved, and stop.
 2. Reader gives a diagnosis and asks you to just set it up. Offer the preset, expand it, store the supports. Do not store the label and do not argue about it.
 3. Reader asks what a support does, or why it is offered. Show the rule text, a worked demo, and the evidence tier with its meaning. This is always allowed, and is the only place tiers appear.
 4. Reader states distress. Stop the picker, acknowledge once, offer to stop or continue, do not ask assessment questions. The picker is never the priority.

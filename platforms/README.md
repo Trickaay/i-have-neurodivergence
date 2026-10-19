@@ -14,7 +14,7 @@ To use the generated Claude plugin with all 31 skills, launch Claude Code from t
 claude --plugin-dir platforms/claude
 ```
 
-Choose `needs-picker`, an authored skill such as `i-have-autism`, or an area skill such as `easier-memory` from the host's skill menu. Command names may include a plugin namespace; use the names shown by the host. The plugin layout also targets Cowork, but its loading flow depends on the host.
+Choose `needs-picker`, an authored skill such as `i-have-autism`, or an area skill such as `easier-memory` from the host's skill menu. Command names may include a plugin namespace; use the names shown by the host. In Claude Code 2.1, the generated plugin listed its skills as `/what-would-make-this-easier-skills:<skill>`, for example `/what-would-make-this-easier-skills:needs-picker`, and the root plugin listed them as `/i-have-neurodivergence:<skill>`. The plugin layout also targets Cowork, but its loading flow depends on the host.
 
 Claude skills set `disable-model-invocation: true` to require explicit invocation.
 
@@ -88,4 +88,4 @@ python3 needs/compile.py --self-test
 
 The generator uses Python's standard library. The validator requires PyYAML; installing `skills-ref` also enables the Agent Skills reference checks. The validator checks metadata, invocation settings and the file hashes in `index.json`.
 
-See the [root validation notes](../README.md#development-and-validation) for the browser and live Codex checks completed for this release. Live installation, invocation and behavior inside Claude Code, Cowork and Hermes have not been verified. Passing file validation does not establish host integration or the effectiveness of the exact rules.
+See the [validation status](../README.md#validation-status) for the browser and live Claude Code checks performed for this release and the earlier Codex checks. Live installation, invocation and behavior inside Cowork and Hermes have not been verified. Passing file validation does not establish host integration or the effectiveness of the exact rules.
