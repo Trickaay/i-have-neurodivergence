@@ -1,7 +1,7 @@
 ---
 name: i-have-sensory-sensitivity
 description: 'Shape output for a reader with sensory over-responsivity: minimum visual stimulus (no emoji, exclamation, caps, decorative rules, ASCII art, box-drawing, or heavy bold), one uniform format every turn, length declared before long output, no terminal bell or notification triggers, no dense multi-column tables, generous white space, and no sudden shape changes between turns. Invoke with /i-have-sensory-sensitivity; stays on until "stop sensory mode".'
-version: 0.4.3
+version: 0.4.4
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

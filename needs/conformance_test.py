@@ -47,6 +47,20 @@ APPLY = """(f)=>{
 }"""
 
 
+def check_export_contract(got, fixture):
+    profile = C.parse_profile(got["yaml"])
+    selected = profile["contexts"].get("always", {}).get("difficulties", [])
+    assert selected == fixture.get("diff", []), "YAML profile lost difficulty selections"
+    compiled = json.loads(got["json"])
+    assert "difficulties" not in compiled and all(
+        isinstance(supports, list) and all(
+            isinstance(s, dict) and "id" in s and "rule" in s and "difficulties" not in s
+            for s in supports)
+        for supports in compiled["contexts"].values()
+    ), "JSON must contain compiled supports, not profile difficulty fields"
+    return 2
+
+
 def check_ui(page):
     page.reload()
     page.locator("#d-long_explanations").check()
@@ -108,6 +122,7 @@ def main():
     vocab = json.load(open(C.VOCAB, encoding="utf-8"))
     failures = 0
     checked = 0
+    contract_checked = 0
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(executable_path=exe) if exe else pw.chromium.launch()
@@ -119,6 +134,7 @@ def main():
 
         for name, fixture in FIXTURES:
             got = page.evaluate("(" + APPLY + ")", fixture)
+            contract_checked += check_export_contract(got, fixture)
             expected_notes = fixture.get("notes", "").replace("\r\n", "\n").replace("\r", "\n")
             if json.loads(got["json"])["notes"] != expected_notes:
                 failures += 1
@@ -145,6 +161,7 @@ def main():
     print("conformance: %d comparisons, the page and compile.py agree exactly" % checked)
     print("  %d fixtures x 4 formats" % len(FIXTURES))
     print("  %d UI regression checks" % ui_checked)
+    print("  %d profile/compiled-export contract checks" % contract_checked)
     return 0
 
 

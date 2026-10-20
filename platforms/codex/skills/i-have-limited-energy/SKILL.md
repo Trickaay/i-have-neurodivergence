@@ -6,7 +6,7 @@ metadata:
   tags: 'Autistic Burnout, Fatigue, Pacing, Chronic Illness, Masking, Autism, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.3'
+  version: '0.4.4'
 ---
 
 # i-have-limited-energy

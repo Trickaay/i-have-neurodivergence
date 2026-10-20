@@ -6,7 +6,7 @@ metadata:
   tags: 'Dysgraphia, Written Expression, Output Style, Accessibility, Input Load, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.3'
+  version: '0.4.4'
 ---
 
 # i-have-dysgraphia

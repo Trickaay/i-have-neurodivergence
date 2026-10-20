@@ -6,7 +6,7 @@ metadata:
   tags: 'Onboarding, Accessibility, Personalisation, Needs Assessment, Neurodiversity'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.3'
+  version: '0.4.4'
 ---
 
 # needs-picker
@@ -61,7 +61,7 @@ The screens below are the rules. Each one is fixed in order and in shape: screen
 
 ## Screen 0 — what this is
 
-Say exactly this, then wait:
+The block below is the whole reader-facing reply, in plain text, then wait. Do not add a preface, explanation, code fence, afterword or narration of which files were read or skipped. Preparation instructions are internal, not text for the reader. A notice required by a higher-priority host instruction remains permitted; do not add optional implementation commentary. Say exactly:
 
 ```
 WHAT WOULD MAKE THIS EASIER?
@@ -243,6 +243,7 @@ Before sending any screen:
 6. Any praise or encouragement.
 7. Any atom id, rule text or evidence tier on a selection or summary screen the reader did not ask for.
 8. Any claim that supports only add or never remove anything.
+9. On screen 0, any optional text outside the exact opening block, especially commentary about references or preparation. Remove it; keep only notices required by the host.
 
 Then verify: could someone who has every difficulty on the list complete this picker?
 

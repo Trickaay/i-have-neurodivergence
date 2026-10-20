@@ -37,7 +37,7 @@ Six facts drive every rule below:
 
 Never leave arithmetic to the reader. If the answer requires combining numbers, give the result. Put the working in a block labelled `Working:` that the reader can skip.
 
-Compute and check the working before composing the result line. The result and every summary must agree with the final working row. If a draft headline is wrong, replace it before sending; do not publish one result and correct it later in the same reply. When a calculation cannot be verified, state that uncertainty instead of presenting a guessed result as fact.
+Compute and check the working before composing the result line. The result and every summary must agree with the final working row. If a draft headline is wrong, replace it before sending; do not publish one result and correct it later in the same reply. When a calculation cannot be verified, state that uncertainty instead of presenting a guessed result as fact. Show only the final chosen calculation path: each Working row contributes to the result, supplies an intermediate used later, or directly checks the result. Remove unused quantities, abandoned approaches and rejected question rows before sending.
 
 Bad: "Each retry waits twice as long, so the timeout is passed after a handful."
 Good:
@@ -205,7 +205,7 @@ Before sending, find every digit and check:
 6. Is every "step N" also a step name?
 7. Is any calculation left for the reader? Do it. Add `Working:`.
 8. Delete every "just / simply / easy / obviously / quick" near a number.
-9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending.
+9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending. Trace each Working row to the final result or its check; delete any unused detour, even when its arithmetic is correct.
 10. For a comparison request, move any numeric headline, result, speed ratio or analogy outside a table into a result table.
 11. Do analogy and scaling tables reuse the declared quantity unit? Convert only for mixed inputs or a requested conversion, in Working.
 12. Put every arithmetic back-check in the Working table. Count the numeric values in remaining prose sentences and paragraphs; remove over-limit repetitions.

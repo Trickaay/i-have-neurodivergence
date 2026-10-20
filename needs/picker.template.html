@@ -200,7 +200,7 @@ footer h3{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--in
             <option value="agents">AGENTS.md / CLAUDE.md section</option>
             <option value="skill">A skill file (SKILL.md)</option>
             <option value="yaml">Support profile (YAML)</option>
-            <option value="json">JSON</option>
+            <option value="json">JSON instructions</option>
           </select>
         </div>
         <p class="fmthint" id="fmthint"></p>
@@ -660,7 +660,8 @@ var FORMATS={
     hint:"The profile itself: what you chose, in the vocabulary's own terms. Keep this "+
          "one if you want to reopen or edit your setup later; save it as needs.yaml."},
   json:{write:writeJson,file:"needs.json",type:"application/json",
-    hint:"Machine-readable, for building your own tooling on top."}
+    hint:"Compiled instructions for tooling: chosen supports and rules, not the editable profile. "+
+         "Difficulty selections are kept in the YAML profile; notes are retained here as written."}
 };
 function currentFormat(){
   var el=document.getElementById("fmt");

@@ -56,8 +56,10 @@ The reader declares contexts. Typing speed, message length, errors or time of da
 | `skill` | A Claude-style `SKILL.md` |
 | `codex` | A Codex-style `SKILL.md` |
 | `hermes` | A Hermes-style `SKILL.md` |
-| `json` | Structured resolved rules for other tooling |
+| `json` | Compiled supports and resolved rules for tooling, not an editable profile |
 | YAML from the browser picker | The editable profile itself; save as `needs.yaml` |
+
+YAML retains explicitly selected difficulty IDs in the editable profile. Compiled JSON omits structured difficulty and preset selections: it contains resolved support rules, suppressions, conflict guidance and exact notes. Notes can still contain personal information supplied by the reader. JSON is not a profile backup; keep YAML to reopen or edit the selections.
 
 The browser offers `rules`, `agents`, `skill`, YAML and `json`; the command-line compiler also provides the Codex and Hermes formats. The authored skills supply explanations, examples and edge cases for the rules.
 

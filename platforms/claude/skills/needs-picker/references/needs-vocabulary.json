@@ -1283,7 +1283,7 @@
    "id": "done_when",
    "area": "planning",
    "label": "Say when a step is finished",
-   "rule": "Every step states the external result its action produces: visible text, an object's stated position or a displayed result. Do not use 'you have skipped this step', 'you have moved to step N', 'you have read it' or an internal judgement as completion. Do not create skip branches to pad the plan. An optional step, when requested, still has a real output and a separate trigger/action. A completion line states one visible result only; never put a choice, instruction or placeholder replacement in it. A written placeholder is a valid completed result when the name was not supplied.",
+   "rule": "Every step states the external result its action produces: visible text, an object's stated position or a displayed result. Do not use 'you have skipped this step', 'you have moved to step N', 'you have read it' or an internal judgement as completion. Do not create skip branches to pad the plan. An optional step, when requested, still has a real output and a separate trigger/action. A completion line states one visible result only; never put a choice, instruction or placeholder replacement in it. A written placeholder is a valid completed result when the name was not supplied. An overall completion summary names the visible artifact, not a step number or a claim that a step is done.",
    "evidence": "B",
    "derived_from": "i-have-autism",
    "demo": "Run npm test -- auth.spec.ts.\nDone when: the last line reads 1 passing.",
@@ -1297,7 +1297,7 @@
    "id": "prioritise",
    "area": "planning",
    "label": "Tell me what to do first",
-   "rule": "State which requested action comes first and why; keep that order consistent with the steps. Stop when the requested artifact is complete. Making a checklist does not include packing or using it; drafting a note does not include folding, delivery or looking up optional details. Use a plain placeholder for a nonessential missing name rather than adding a lookup task. Preserve required safety information and permission checks. Do not add a title unless requested or needed for the artifact. Use only supplied facts in sample wording; thanking someone for watering plants does not establish that the plants are healthy or that the reader was away. A nonessential name placeholder needs no later instruction to replace it.",
+   "rule": "State which requested task action comes first and why; keep that order in the steps. Stop when the requested artifact is complete. Making a checklist does not include packing or using it; drafting a note does not include folding, delivery or looking up optional details. Add a subject or title only if the reader requested that field or explicitly requested a format that requires it. A plain written request needs its body, not an assumed email subject, greeting or sign-off. Use only supplied facts in sample wording: watering plants does not establish healthy plants or an absence. Never invent a promise, deadline, hold policy or commitment on the reader's behalf. Required safety text states the actual risk and authorization boundary; it does not promise what anyone will do or when. Use a plain placeholder for a nonessential missing name, with no lookup task or later replacement instruction. Preserve required safety information and permission checks.",
    "evidence": "D",
    "demo": "Do the dependency first — the other two both fail until it is done.",
    "evidence_basis": {
