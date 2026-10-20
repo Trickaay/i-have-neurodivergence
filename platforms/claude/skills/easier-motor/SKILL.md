@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Motor and interaction, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.1'
+  version: '0.4.2'
 ---
 
 # easier-motor

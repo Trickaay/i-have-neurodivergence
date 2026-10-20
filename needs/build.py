@@ -4,7 +4,7 @@
 Generate the HTML, browser projection and standalone skill resources.
 Use --check to verify that generated files are current.
 """
-import json, os, re, sys
+import hashlib, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -113,6 +113,38 @@ def render(template, proj):
     return template.replace(PLACEHOLDER, payload)
 
 
+def render_menu(vocab, source_text):
+    """Compact complete menu data; detailed rules/evidence stay in the vocabulary."""
+    ordered = [d for a in vocab["areas"] for d in vocab["difficulties"]
+               if d["area"] == a["id"] and d["id"] != "other"]
+    ordered += [d for d in vocab["difficulties"] if d["id"] == "other"]
+    data = {
+        "source": "needs-vocabulary.json",
+        "source_sha256": hashlib.sha256(source_text.encode("utf-8")).hexdigest(),
+        "areas": [{k: a[k] for k in ("id", "label")} for a in vocab["areas"]],
+        "screen1": [{"number": n, "id": d["id"], "area": d["area"], "label": d["label"]}
+                    for n, d in enumerate(ordered, 1)],
+        "difficulties": vocab["difficulties"],
+        "support": [{k: s[k] for k in ("id", "area", "label", "demo", "defers", "defers_note") if k in s}
+                    for s in vocab["support"]],
+        "contexts": vocab["contexts"],
+        "context_scopes": vocab["context_scopes"],
+        "presets": vocab["presets"],
+    }
+    lines = []
+    for key, value in data.items():
+        prefix = " " + json.dumps(key) + ": "
+        if isinstance(value, list):
+            text = "[\n" + ",\n".join("  " + json.dumps(v, ensure_ascii=False, separators=(",", ":")) for v in value) + "\n ]"
+        else:
+            text = json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+        lines.append(prefix + text)
+    text = "{\n" + ",\n".join(lines) + "\n}\n"
+    if len(text.encode("utf-8")) > 40000:
+        raise ValueError("Picker menu exceeds its read budget; split it before adding more data")
+    return text
+
+
 def main():
     check = "--check" in sys.argv
     vocab = json.load(open(SOURCE, encoding="utf-8"))
@@ -135,6 +167,8 @@ def main():
         EMBED: json.dumps(proj, ensure_ascii=False, indent=1) + "\n",
         os.path.join(skill, "references", "needs-vocabulary.json"):
             open(SOURCE, encoding="utf-8").read(),
+        os.path.join(skill, "references", "picker-menu.json"):
+            render_menu(vocab, open(SOURCE, encoding="utf-8").read()),
         os.path.join(skill, "scripts", "compile.py"):
             open(os.path.join(HERE, "compile.py"), encoding="utf-8").read(),
     }

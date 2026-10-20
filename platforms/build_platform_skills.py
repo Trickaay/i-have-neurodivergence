@@ -368,6 +368,11 @@ def render_skill(platform, sk, vocab, names):
             body = body.replace("`needs/needs-vocabulary.json`", "`references/needs-vocabulary.json` (bundled with this skill)")
             body = body.replace("`needs-vocabulary.json`", "`references/needs-vocabulary.json`")
             files["references/needs-vocabulary.json"] = open(VOCAB_PATH, encoding="utf-8").read()
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("needs_build", os.path.join(ROOT, "needs", "build.py"))
+            builder = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(builder)
+            files["references/picker-menu.json"] = builder.render_menu(vocab, open(VOCAB_PATH, encoding="utf-8").read())
             files["scripts/compile.py"] = open(COMPILE_PATH, encoding="utf-8").read()
             related = [n for n in names if n.startswith("i-")] + [n for n in names if n.startswith("easier-")]
     text = render_frontmatter(platform, sk["name"], desc, tags, category, related if platform == "hermes" else None)

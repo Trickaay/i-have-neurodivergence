@@ -1,7 +1,7 @@
 ---
 name: easier-memory
 description: 'Presentation settings for memory: not having to hold things in your head between turns. Starting set: Repeat the current goal; Help me pick up where I was; Keep a running state block; Repeat important things. For a reader who says "I need important information repeated" / "I forget where I was after interruptions". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-memory or asks for these settings; stays on until "stop easier memory".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

@@ -7,14 +7,16 @@ metadata:
   tags: 'Onboarding, Accessibility, Personalisation, Needs Assessment, Neurodiversity'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.1'
+  version: '0.4.2'
 ---
 
 # needs-picker
 
 Two questions, in this order: what would make this easier, and what helps. The answers build the setup. Nothing asks what the reader has.
 
-Source of truth for every option below: `references/needs-vocabulary.json`. Read it before running this skill; do not work from memory of it.
+Source of truth: `references/needs-vocabulary.json`. For screens and comparisons, read the complete generated `references/picker-menu.json` before screen 1. It contains every difficulty, offer, recommended set, comparison pair, label, demo, context and preset, without the long evidence records. Screen 0 and the empty `skip` profile do not require option data.
+
+The menu is short enough for one normal read. Check that the read reaches the closing object. If a tool reports truncation, continue with consecutive offset/limit reads until the end; a filename, hash or partial Grep is not a complete read. Do not show choices from memory or invent missing entries. For a requested rule or evidence explanation, read the matching complete support entry from `references/needs-vocabulary.json`, continuing any truncated read, before answering. The full vocabulary remains the compiler's source.
 
 ## Persistence
 
@@ -74,15 +76,16 @@ Enter to start. Type "skip" to use the plain default.
 
 ## Screen 1 — the difficulties
 
-List the difficulties from `references/needs-vocabulary.json`, grouped under their area labels, numbered continuously. Areas in this order: Understanding, Information load, Attention, Planning, Memory, Learning, Communication, Sensory and interface, Choice and decision, Transitions, Motor and interaction, Pacing.
+Use the exact numbers and labels in `references/picker-menu.json` → `screen1`, grouped under their area labels. Keep its number-to-ID mapping for the whole session; never renumber a choice when processing the reply. The “Something else” entry is last, outside the area groups. Areas are Understanding, Information load, Attention, Planning, Memory, Learning, Communication, Sensory and interface, Choice and decision, Transitions, Motor and interaction, Pacing.
 
 ```
 1 of 2.  Tick anything you recognise. Numbers, separated by spaces.
 
 UNDERSTANDING
  1  I prefer exact / literal wording
- 2  I miss implied meaning or sarcasm
- 3  I need to see the overall structure first
+ 2  I need to see the overall structure first
+ 3  The wording is hard to follow even when I know the subject
+ 4  Examples from a subject I already know help me
 ...
 33  Something else — type it in your own words
 
@@ -173,13 +176,30 @@ You asked for:
 
 Applies: always, except visual examples which are learning only.
 
-Saved to needs.yaml at the location you chose.
-Change it any time by saying "settings". Delete it with "forget my setup".
+The profile is shown here. Nothing has been saved.
+Change it any time by saying "settings". Clear these selections with "forget my setup".
 ```
 
 Show what was chosen, phrased as what was chosen, with its context only where it is not `Always`. Never show atom ids, never show evidence tiers on a selection or summary screen, never show rule text unless asked, never show a count of matched conditions, never show a label. If the reader asks why a rule is behaving a certain way, name the support they picked and offer to remove it.
 
 To save the profile, use a location the reader chooses and report the actual path only after a successful write. If file access is unavailable, provide the profile for them to save. Free-text notes are preserved as written and may include sensitive information.
+
+The default is to show the profile in chat, with nothing written. `Enter` and `skip` never authorize a file write at this stage. A file is written only after an explicit request such as `save to <path>` supplies the destination and the host permits that action. Do not propose the current folder as an automatic default, infer a destination, or treat silence as consent. A failed or unavailable write leaves the profile in chat and is reported accurately.
+
+The chat profile uses the same schema as the browser: record explicitly selected difficulty IDs in `contexts.always.difficulties`, chosen support IDs in each declared context's `support`, and exact free text in `notes`. With no selected difficulties, that list may be omitted. A preset expands to supports only; never infer difficulties from it or store the preset/condition label. Working selection origins are not exported. Atom/difficulty IDs belong in the machine-readable profile, not the human selection or summary screens.
+
+For example, choosing “I lose track of long explanations” and its recommended pair produces:
+
+```yaml
+version: 1
+contexts:
+  always:
+    difficulties:
+      - long_explanations
+    support:
+      - summary_first
+      - short_sections
+```
 
 The bundled `scripts/compile.py` turns a saved profile into instructions: run `python3 scripts/compile.py /path/to/needs.yaml --format rules` from this skill folder, or invoke the script by its full path. It uses the bundled vocabulary and needs only Python 3. Offer the compiled rules for the reader to apply; do not claim they are installed until the host has loaded them.
 
@@ -204,7 +224,7 @@ Expand the preset from `presets`, show the plain-language labels of the supports
 
 ## When to break the rules
 
-1. Reader asks to skip everything. Give them the base layer: say in one line that no supports are active and the normal style continues, show the base-layer profile above for them to keep if they want it, say that nothing was saved, and stop.
+1. Reader asks to skip everything. Give them the base layer: say in one line that no supports are active and the normal style continues, copy the base-layer YAML block above verbatim including its comments, say that nothing was saved, and stop. Do not reconstruct a different empty profile from the general profile example.
 2. Reader gives a diagnosis and asks you to just set it up. Offer the preset, expand it, store the supports. Do not store the label and do not argue about it.
 3. Reader asks what a support does, or why it is offered. Show the rule text, a worked demo, and the evidence tier with its meaning. This is always allowed, and is the only place tiers appear.
 4. Reader states distress. Stop the picker, acknowledge once, offer to stop or continue, do not ask assessment questions. The picker is never the priority.

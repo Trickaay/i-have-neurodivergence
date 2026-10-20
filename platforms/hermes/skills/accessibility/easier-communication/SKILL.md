@@ -1,7 +1,7 @@
 ---
 name: easier-communication
 description: 'Presentation settings for communication: intent, implication, tone, and questions. Starting set: Say what you are doing and why; No hints or implication; Do not ask how I feel about it; State the situation, do not instruct; Always give a default; Describe what will be true, not which is better; Let me answer with one character; Help me put my idea into words. For a reader who says "I miss implied meaning or sarcasm" / "I cannot answer questions about how I feel" / "Being told to do something makes it harder" / "I know what I mean but finding the words is hard". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-communication or asks for these settings; stays on until "stop easier communication".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -56,7 +56,7 @@ COMMUNICATION
 
 CHOICE AND DECISION
 - Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.
-- Describe each option by its observable consequence, never as better, cleaner or nicer.
+- Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check conditional recommendations and closing notes too.
 
 MOTOR AND INTERACTION
 - Frame questions so a single number or character is a complete answer. A one-character answer applies only to the question it answers.

@@ -6,7 +6,7 @@ metadata:
   tags: 'Accessibility, Presentation, Understanding, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.1'
+  version: '0.4.2'
 ---
 
 # easier-understanding
@@ -67,7 +67,7 @@ Not on by default. The reader turns one on by saying its label; say in one line 
 - **Say what it does before the command.** State what a command or code block does before showing it.
 - **Short sentences.** Sentences of 15 words or fewer. Paragraphs of 3 sentences or fewer.
 - **Progress markers.** Show step N of M on every step.
-- **Say when a step is finished.** Every step states its observable completion condition: visible text, an object's stated position, a displayed result or another external check. 'You have one thing in mind' or 'you are happy with it' is not an observable completion condition. Check optional and recovery steps too.
+- **Say when a step is finished.** Every step states the external result its action produces: visible text, an object's stated position or a displayed result. Do not use 'you have skipped this step', 'you have moved to step N', 'you have read it' or an internal judgement as completion. Do not create skip branches to pad the plan. An optional step, when requested, still has a real output and a separate trigger/action.
 - **Draw the structure.** Give the structure as a diagram, tree or table, with its text equivalent below it.
 - **Say what you are doing and why.** State the purpose of the response in its first line.
 - **A plain-language version, full detail available.** Give a short plain-language version first: one idea per sentence, everyday words, no figures of speech. Keep the full version underneath or on request. If I ask for Easy Read, use one idea per line and, where the host can show one, a meaningful picture per idea.

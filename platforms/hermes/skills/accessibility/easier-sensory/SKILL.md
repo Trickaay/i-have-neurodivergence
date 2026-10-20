@@ -1,7 +1,7 @@
 ---
 name: easier-sensory
 description: 'Presentation settings for sensory and interface: visual density, motion, colour, sound. Starting set: Summary first, detail underneath; No motion; Less on screen; No sound or pop-ups; Space it out; Never rely on colour; Readable as a flat stream; Captions, a transcript or another usable format. For a reader who says "I am sensitive to visual clutter" / "I am sensitive to sound / interruptions" / "I hear the output rather than see it" / "I cannot rely on the colours" / "Audio or video is hard to follow". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-sensory or asks for these settings; stays on until "stop easier sensory".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -68,7 +68,7 @@ I can change any of this at any time. Ask me before assuming a setting is wrong;
 
 Not on by default. The reader turns one on by saying its label; say in one line that it is on.
 
-- **Short labelled sections.** Use labelled sections with at most five nonblank content lines each. Count bullets, numbered items, table rows and separate prose lines; headings and blank lines do not count. Before a sixth content line, start another labelled section. Optional notes and closing text follow the same limit. Keep the complete requested explanation in this response unless I chose a support that defers it; split the presentation rather than omitting content.
+- **Short labelled sections.** Use labelled sections with at most five nonblank content lines each; aim for four to leave room for necessary notes. Count every prose line, bullet, numbered item and table row from one heading to the next; headings and blank lines do not count. An introduction plus five bullets is six lines and must be split. Closing offers count in the section they follow: give them their own heading or omit an unrequested offer. Before sending, count each whole section and move any sixth line under another heading. Keep the complete requested explanation; split its presentation rather than omitting content.
 - **Say how long it is first.** State what is coming and how long before anything longer than ten lines.
 - **Nothing that pulls attention away.** No asides, no 'by the way', no unrequested suggestions, no notifications.
 - **Repeat important things.** Restate a fact rather than referring back to it. Outside a practice I opted into, repetition over retrieval.

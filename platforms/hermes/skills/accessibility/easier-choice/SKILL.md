@@ -1,7 +1,7 @@
 ---
 name: easier-choice
 description: 'Presentation settings for choice and decision: how options are offered and decided. Starting set: Fewer options; Always give a default. For a reader who says "I get overwhelmed by too many choices". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-choice or asks for these settings; stays on until "stop easier choice".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -57,7 +57,7 @@ I can change any of this at any time. Ask me before assuming a setting is wrong;
 Not on by default. The reader turns one on by saying its label; say in one line that it is on.
 
 - **Compare on the same points.** Compare options against the same named dimensions, side by side.
-- **Describe what will be true, not which is better.** Describe each option by its observable consequence, never as better, cleaner or nicer.
+- **Describe what will be true, not which is better.** Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check conditional recommendations and closing notes too.
 - **Decide the reversible ones for me.** Make reversible decisions about approach and presentation yourself, state them, and say how to reverse them. Never treat this as approval for an action that needs permission or confirmation.
 
 ## What the starting set holds back

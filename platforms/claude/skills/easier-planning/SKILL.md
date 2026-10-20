@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Planning, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.1'
+  version: '0.4.2'
 ---
 
 # easier-planning
@@ -41,11 +41,11 @@ These are presentation settings I chose for myself. They describe how I would li
 Limits of these preferences: they change only how you present information and work with me. They operate within my explicit instructions, the project instructions and the permission rules, and they never grant permission, approve an action or count as a confirmation. Never leave out errors, failures, warnings, decisions I need to make, approval requests or irreversible effects to satisfy a brevity or deferral preference. Keep code, commands, paths, numbers, links, citations and meaning exact.
 
 PLANNING
-- Decompose into steps of one action each, including recovery and optional steps. Writing an item and ticking its box are separate actions; copying, pasting and pressing Enter are separate actions. An observable trigger or completion condition describes a state, not another instruction. Put any next action in its own step rather than joining it with 'and' or 'then'. Write repeated steps out in full; never say 'repeat steps N to M' or hide an extra action inside a step. Writing-task example: Step — Greeting: write 'Hello,'. Done when: 'Hello,' is visible on the paper. Step — Thanks: When 'Hello,' is visible, write 'Thank you for your help.' Done when: the thanks sentence is visible below the greeting.
+- Use the minimum task-level steps needed for the requested result. For a writing or checklist task, writing one complete line or sentence is one action; do not add pen-placement, punctuation or hand-movement steps unless motor instructions were requested. Each step has one task action. Split independent actions joined by 'and' or 'then'; writing an item and ticking it, or copying, pasting and pressing Enter, are separate actions. Write repeated steps out in full, never 'repeat steps N to M'. Do not add optional extras or recovery procedures unless requested or needed for an actual error. Example: write 'Hello,'. Done when: 'Hello,' is visible. When that greeting is visible, write 'Thank you for your help.' Done when: the thanks sentence is visible below it.
 - Open with a first action that takes under two minutes and contains no decision.
-- Phrase every next action as 'When <observable event>, <action>'. The event is visible on the page or in the room, or a stated clock time or count; never 'when you are ready', 'happy', 'unsure' or 'have something in mind'. Use a visible written phrase or completed step instead of asking the reader to judge an internal state.
-- Every step states its observable completion condition: visible text, an object's stated position, a displayed result or another external check. 'You have one thing in mind' or 'you are happy with it' is not an observable completion condition. Check optional and recovery steps too.
-- State which item comes first and why, rather than giving a flat list. Keep the stated order consistent with the actual steps and stay within the requested task; do not add another task just to create a plan.
+- Phrase every next action as 'When <observable event>, <one task action>'. Use the previous step's visible output, an object's stated position, a displayed result or an explicit clock/count. Never use ready, happy, unsure, in mind or 'if you want'. A skipped step or a step number is not an observable event.
+- Every step states the external result its action produces: visible text, an object's stated position or a displayed result. Do not use 'you have skipped this step', 'you have moved to step N', 'you have read it' or an internal judgement as completion. Do not create skip branches to pad the plan. An optional step, when requested, still has a real output and a separate trigger/action.
+- State which requested action comes first and why; keep that order consistent with the steps. Stop when the requested artifact is complete. Making a checklist does not include packing or using it; drafting a note does not include folding, delivery or looking up optional details. Use a plain placeholder for a nonessential missing name rather than adding a lookup task. Preserve required safety information and permission checks.
 
 If two of these ever pull against each other, prefer in this order: what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.
 

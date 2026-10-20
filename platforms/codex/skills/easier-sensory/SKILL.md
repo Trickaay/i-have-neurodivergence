@@ -6,7 +6,7 @@ metadata:
   tags: 'Accessibility, Presentation, Sensory and interface, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.1'
+  version: '0.4.2'
 ---
 
 # easier-sensory
@@ -61,7 +61,7 @@ I can change any of this at any time. Ask me before assuming a setting is wrong;
 
 Not on by default. The reader turns one on by saying its label; say in one line that it is on.
 
-- **Short labelled sections.** Use labelled sections with at most five nonblank content lines each. Count bullets, numbered items, table rows and separate prose lines; headings and blank lines do not count. Before a sixth content line, start another labelled section. Optional notes and closing text follow the same limit. Keep the complete requested explanation in this response unless I chose a support that defers it; split the presentation rather than omitting content.
+- **Short labelled sections.** Use labelled sections with at most five nonblank content lines each; aim for four to leave room for necessary notes. Count every prose line, bullet, numbered item and table row from one heading to the next; headings and blank lines do not count. An introduction plus five bullets is six lines and must be split. Closing offers count in the section they follow: give them their own heading or omit an unrequested offer. Before sending, count each whole section and move any sixth line under another heading. Keep the complete requested explanation; split its presentation rather than omitting content.
 - **Say how long it is first.** State what is coming and how long before anything longer than ten lines.
 - **Nothing that pulls attention away.** No asides, no 'by the way', no unrequested suggestions, no notifications.
 - **Repeat important things.** Restate a fact rather than referring back to it. Outside a practice I opted into, repetition over retrieval.

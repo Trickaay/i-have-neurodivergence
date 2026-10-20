@@ -1,6 +1,6 @@
 {
   "name": "i-have-neurodivergence",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Output-shaping skills, plus a needs picker that builds a setup from what you notice about the exchange rather than from a diagnosis. Nineteen stackable skills covering wording, information load, attention, planning, memory, learning, communication, sensory load, choice, transitions, motor interaction and pacing. Start with /needs-picker. Nothing infers, stores or displays a condition.",
   "author": {
     "name": "Accessibility skill pack contributors"

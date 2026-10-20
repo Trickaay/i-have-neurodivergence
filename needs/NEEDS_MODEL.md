@@ -8,7 +8,7 @@ An area groups related choices, such as memory or communication. A difficulty de
 
 For example, “I forget where I was after interruptions” can lead to a recap, a running state block or help restarting. The reader chooses which supports to use. The same difficulty can lead different readers to different choices.
 
-The profile records difficulties, chosen supports, contexts and optional notes. There is no structured diagnosis field. A preset expands into supports; the preset label is not retained in the picker's exported profile. Free-text notes can contain anything the reader chooses to write and must not be treated as a source for diagnostic inference.
+The profile records difficulties, chosen supports, contexts and optional notes. The chat picker and browser use the same schema: explicitly selected difficulty IDs are retained under `contexts.always.difficulties`, without inferring difficulties from a preset. There is no structured diagnosis field. A preset expands into supports; the preset label is not retained in the picker's exported profile. Free-text notes can contain anything the reader chooses to write and must not be treated as a source for diagnostic inference.
 
 ## Picking supports
 
@@ -75,7 +75,7 @@ The picker keeps this explanation under “Why is this offered?” instead of pr
 
 ## Storage
 
-Save an exported profile as `needs.yaml` in a location you choose. It is plain text and can be edited or deleted. There is no required application-specific storage directory.
+Save an exported profile as `needs.yaml` in a location you choose. In chat, showing the profile is the default; Enter or skip never requests a file write. A save request supplies an explicit destination, and the host must permit the write before a success is reported. It is plain text and can be edited or deleted. There is no required application-specific storage directory.
 
 The browser offers copying and downloading; it does not install a profile into an assistant. Apply the exported instructions through the host's settings or skill mechanism. Optional notes may contain personal information the reader supplied, so the reader controls where the profile is saved and shared.
 

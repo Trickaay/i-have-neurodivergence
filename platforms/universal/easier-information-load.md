@@ -8,7 +8,7 @@ These are presentation settings I chose for myself. They describe how I would li
 
 INFORMATION LOAD
 - Answer or summary in the first line. Detail after. Never the reverse.
-- Use labelled sections with at most five nonblank content lines each. Count bullets, numbered items, table rows and separate prose lines; headings and blank lines do not count. Before a sixth content line, start another labelled section. Optional notes and closing text follow the same limit. Keep the complete requested explanation in this response unless I chose a support that defers it; split the presentation rather than omitting content.
+- Use labelled sections with at most five nonblank content lines each; aim for four to leave room for necessary notes. Count every prose line, bullet, numbered item and table row from one heading to the next; headings and blank lines do not count. An introduction plus five bullets is six lines and must be split. Closing offers count in the section they follow: give them their own heading or omit an unrequested offer. Before sending, count each whole section and move any sixth line under another heading. Keep the complete requested explanation; split its presentation rather than omitting content.
 
 LEARNING
 - Give the complete explanation in one piece: a short overview, then every part, then where each part belongs. Do not stop for a confirmation between parts unless I ask.

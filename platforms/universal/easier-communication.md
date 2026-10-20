@@ -15,7 +15,7 @@ COMMUNICATION
 
 CHOICE AND DECISION
 - Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.
-- Describe each option by its observable consequence, never as better, cleaner or nicer.
+- Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check conditional recommendations and closing notes too.
 
 MOTOR AND INTERACTION
 - Frame questions so a single number or character is a complete answer. A one-character answer applies only to the question it answers.

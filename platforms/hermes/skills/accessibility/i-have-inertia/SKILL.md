@@ -1,7 +1,7 @@
 ---
 name: i-have-inertia
 description: 'Shape output for a reader who has difficulty starting and difficulty stopping: give one concrete first physical action rather than a plan, never say "just start", offer an external start trigger and an external stop point, break the first step small enough to be done without a decision, and treat being unable to begin as a state to be scaffolded rather than a choice to be motivated. Invoke with /i-have-inertia; stays on until "stop inertia mode".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

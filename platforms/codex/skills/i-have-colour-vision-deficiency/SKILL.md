@@ -6,7 +6,7 @@ metadata:
   tags: 'Colour Vision Deficiency, Colour Blindness, WCAG, Terminal, Diffs, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.1'
+  version: '0.4.2'
 ---
 
 # i-have-colour-vision-deficiency

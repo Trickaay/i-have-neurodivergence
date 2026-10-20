@@ -2,7 +2,7 @@
 
 The Claude, Codex and Hermes trees each contain **31 skills**: the **19 authored skills** from `skills/` and **12 `easier-<area>` skills** generated from the vocabulary's **89 supports**. `universal/` contains one plain Markdown instruction block per area.
 
-All paths below are relative to the repository root unless stated otherwise. Copy entire skill folders. Each `needs-picker` folder includes `references/needs-vocabulary.json` and `scripts/compile.py` so its resources travel with the skill.
+All paths below are relative to the repository root unless stated otherwise. Copy entire skill folders. Each `needs-picker` folder includes `references/needs-vocabulary.json`, the compact `references/picker-menu.json`, and `scripts/compile.py` so its resources travel with the skill.
 
 ## Claude Code and Cowork
 

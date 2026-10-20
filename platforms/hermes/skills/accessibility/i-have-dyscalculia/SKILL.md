@@ -1,7 +1,7 @@
 ---
 name: i-have-dyscalculia
 description: 'Shape output for a reader with dyscalculia: do all arithmetic for the reader, gloss every number with a plain-language magnitude, put compared quantities in tables not prose, treat numeric identifiers as labels in code formatting, give clock times not durations, name steps instead of counting them, and never say "just" near a calculation. Invoke with /i-have-dyscalculia; stays on until "stop dyscalculia mode".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

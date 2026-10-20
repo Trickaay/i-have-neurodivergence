@@ -1,7 +1,7 @@
 ---
 name: i-have-autism
 description: 'Shape output for an autistic reader who chose these settings: state scope before content, literal language by default, every inference explicit, one fixed section order every turn, uncertainty stated with its basis, questions in one marked block, and an explicit completion status. Tone and analogies are selectable, not banned. Invoke with /i-have-autism; stays on until "stop autism mode".'
-version: 0.4.1
+version: 0.4.2
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
