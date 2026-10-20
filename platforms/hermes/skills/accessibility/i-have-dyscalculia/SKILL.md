@@ -1,7 +1,7 @@
 ---
 name: i-have-dyscalculia
-description: 'Shape output for a reader with dyscalculia: do all arithmetic for the reader, gloss every number with a plain-language magnitude, put compared quantities in tables not prose, treat numeric identifiers as labels in code formatting, give clock times not durations, name steps instead of counting them, and never say "just" near a calculation. Invoke with /i-have-dyscalculia; stays on until "stop dyscalculia mode".'
-version: 0.4.2
+description: 'Shape output for a reader with dyscalculia: do all arithmetic for the reader, gloss every number with a plain-language magnitude, put compared quantities in tables not prose, treat numeric identifiers as labels in code formatting, give finish times for anchored schedules and retain duration units for measurements, name steps instead of counting them, and never say "just" near a calculation. Invoke with /i-have-dyscalculia; stays on until "stop dyscalculia mode".'
+version: 0.4.3
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -25,7 +25,7 @@ The reader has dyscalculia. Output is not just accurate. It is shaped so that no
 
 These rules apply to every response for the rest of the session, not only this one. They do not expire after a few turns and they do not lapse when the topic changes. If you are unsure whether they still apply, they do.
 
-Turn them off only when the reader says "stop dyscalculia mode" or "normal mode". Confirm in one line, then return to your default style.
+Turn them off only when the reader says "stop dyscalculia mode" or "normal mode". Confirm in one separate line, then answer any accompanying request in the format the reader asked for, using your default style. The confirmation is separate from that answer: it does not count toward a requested sentence count. Do not carry these numeric-formatting rules into the answer after deactivation.
 
 If another output-shaping skill is also active (for example `i-have-adhd`), apply both. Where two rules conflict, the rule that removes a number the reader must process wins over the rule that shortens the response.
 
@@ -48,18 +48,28 @@ Never leave arithmetic to the reader. If the answer requires combining numbers, 
 
 Compute and check the working before composing the result line. The result and every summary must agree with the final working row. If a draft headline is wrong, replace it before sending; do not publish one result and correct it later in the same reply. When a calculation cannot be verified, state that uncertainty instead of presenting a guessed result as fact.
 
-Bad: "Each retry waits twice as long as the last, starting at 500 ms, so you'll hit the 30 s timeout after a handful."
-Good: "Retry 6 fails. Reason: the wait passes the 30 s timeout at retry 6.
+Bad: "Each retry waits twice as long, so the timeout is passed after a handful."
+Good:
+
+| Input | Value as supplied | Meaning |
+| --- | --- | --- |
+| Initial wait | `500` ms | half a second |
+| Timeout | `30000` ms | half a minute |
+
+| Result | Retry count | Gloss |
+| --- | --- | --- |
+| First retry whose cumulative wait exceeds the timeout | 6 | the sixth retry |
 
 Working:
-| Retry | Wait |
-| --- | --- |
-| 1 | 0.5 s |
-| 2 | 1 s |
-| 3 | 2 s |
-| 4 | 4 s |
-| 5 | 8 s |
-| 6 | 16 s (total so far: 31.5 s, over the 30 s limit) |"
+
+| Retry | Wait (ms) | Cumulative wait (ms) | Gloss |
+| --- | --- | --- | --- |
+| 1 | 500 | 500 | half a second |
+| 2 | 1,000 | 1,500 | a second and a half |
+| 3 | 2,000 | 3,500 | a few seconds |
+| 4 | 4,000 | 7,500 | under ten seconds |
+| 5 | 8,000 | 15,500 | about a quarter of a minute |
+| 6 | 16,000 | 31,500 | exceeds the supplied timeout |
 
 ### 2. Gloss every number
 
@@ -79,12 +89,12 @@ Any response with 2 or more numbers that will be compared becomes a table. One r
 
 For a comparison request, the input echo, computed savings, speed ratio, headline result and numerical analogies all stay in tables. Do not restate them in a prose summary, even when the arithmetic is correct. A result table can come first; answer-first does not require a prose headline.
 
-Bad: "The old query took 840 ms and the new one takes 120 ms, so about 7× faster."
+Bad: "The old query took 840 ms and the new one takes 120 ms, so about seven times faster."
 Good:
 
 | Query | Time (ms) | Gloss |
 | --- | --- | --- |
-| Old | 840 | just under 1 second |
+| Old | 840 | a little under a second |
 | New | 120 | about an eighth of a second |
 | Time saved | 720 | almost three-quarters of a second |
 
@@ -114,7 +124,7 @@ Good:
 
 ### 5. Absolute, not relative
 
-Times as clock times, not durations. If a duration is needed, give both.
+For a schedule with a supplied starting clock time, give the finishing clock time and the duration. Do not invent a clock time for an unanchored duration such as latency, retry waits or a file-conversion time; retain its duration unit.
 Positions as names, not offsets.
 Items by name, not by ordinal.
 
@@ -137,7 +147,7 @@ Bad: "Go back to step 2." Good: "Go back to **Step 2 — Rewrite**."
 
 ### 7. One unit, one format
 
-Pick one unit per quantity type and never switch (all ms or all s, all MB or all GB). Same number of decimal places throughout. Thousands separators always. No scientific notation. No ranges unless the range is the answer; then give a midpoint gloss too.
+Use one display unit per quantity type throughout the response, including result, working, analogy, scaling and back-check tables (all ms or all s, all MB or all GB). Reuse the input unit when the inputs share one. The input echo always preserves supplied values and units verbatim; if the inputs use different units, show their conversion once in Working and use the declared common unit afterward. A requested unit conversion may show both units in a clearly labelled conversion table. Plain-language magnitude glosses may use familiar words, but are not a second numeric scaling table. Same number of decimal places within a measure throughout. Thousands separators always. No scientific notation. No ranges unless the range is the answer; then give a midpoint gloss too.
 
 Bad: "Uses 1.2 GB idle and 1800 MB under load."
 Good:
@@ -179,7 +189,7 @@ Good: "Using port `8080` as you gave it."
 
 ### 12. Cap numbers outside tables
 
-At most 2 numbers per sentence. At most 4 per paragraph outside tables. If more are needed, it is a table.
+At most 2 numbers per sentence. At most 4 per paragraph outside tables. If more are needed, it is a table. Count each whole clock time as one numeric value. Put arithmetic back-checks in the Working table, not in a closing prose sentence; do not repeat a start time, duration and finish time together outside that table.
 
 ## When to break the rules
 
@@ -200,12 +210,14 @@ Before sending, find every digit and check:
 2. Are all compared numbers in a table?
 3. Is every identifier in code formatting and named?
 4. Are two similar numbers ever in the same sentence? Separate them.
-5. Is every duration also a clock time?
+5. For an anchored schedule, are the duration and finishing clock time both stated? For unanchored latency or retry waits, keep duration units and do not invent a clock time.
 6. Is every "step N" also a step name?
 7. Is any calculation left for the reader? Do it. Add `Working:`.
 8. Delete every "just / simply / easy / obviously / quick" near a number.
 9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending.
 10. For a comparison request, move any numeric headline, result, speed ratio or analogy outside a table into a result table.
+11. Do analogy and scaling tables reuse the declared quantity unit? Convert only for mixed inputs or a requested conversion, in Working.
+12. Put every arithmetic back-check in the Working table. Count the numeric values in remaining prose sentences and paragraphs; remove over-limit repetitions.
 
 Then verify: can the reader act on this without doing any arithmetic, comparing any two numbers in their head, or retyping any digit string from memory?
 
@@ -224,41 +236,49 @@ If yes, send.
 > | Base delay | `500` ms | half a second |
 > | Timeout | `30` s | half a minute |
 >
-> **Result: retries fail at retry 6.** Reason: the total wait passes the 30 s limit (half a minute) at retry 6.
->
-> Working:
->
-> | Retry | Wait this retry | Total so far | Gloss |
-> | --- | --- | --- | --- |
-> | 1 | 0.5 s | 0.5 s | half a second |
-> | 2 | 1.0 s | 1.5 s | a second and a half |
-> | 3 | 2.0 s | 3.5 s | a few seconds |
-> | 4 | 4.0 s | 7.5 s | under 10 seconds |
-> | 5 | 8.0 s | 15.5 s | about a quarter of a minute |
-> | 6 | 16.0 s | 31.5 s | **over the 30 s limit** |
->
-> **Fix: change 2 values.**
->
-> | Setting | Now | Change to | Gloss |
-> | --- | --- | --- | --- |
-> | Base delay | 500 ms | 200 ms | less than half |
-> | Max retries | none | 5 | a handful |
->
-> | Result | Time (s) | Gloss |
+> | Result | Value | Gloss |
 > | --- | --- | --- |
-> | New total wait | 6.2 | about six seconds |
-> | Timeout | 30.0 | half a minute |
+> | First retry whose cumulative wait exceeds the timeout | 6 | the sixth retry |
 >
-> - [ ] **Step 1 — Edit delay.** In `retry.config.ts`, set `baseDelayMs` to `200`.
-> - [ ] **Step 2 — Edit cap.** In `retry.config.ts`, set `maxRetries` to `5`.
-> - [ ] **Step 3 — Ports.** Two separate edits:
+> Working — the common duration unit is milliseconds:
 >
-> | Named identifier | Current label | Replacement label |
+> | Input conversion | Duration (ms) | Gloss |
+> | --- | --- | --- |
+> | Supplied timeout converted for the working | 30,000 | half a minute |
+>
+> | Retry | Wait (ms) | Cumulative wait (ms) | Gloss |
+> | --- | --- | --- | --- |
+> | 1 | 500 | 500 | half a second |
+> | 2 | 1,000 | 1,500 | a second and a half |
+> | 3 | 2,000 | 3,500 | a few seconds |
+> | 4 | 4,000 | 7,500 | under ten seconds |
+> | 5 | 8,000 | 15,500 | about a quarter of a minute |
+> | 6 | 16,000 | 31,500 | over the timeout |
+>
+> Proposed configuration; no file has been changed:
+>
+> | Setting | Current value | Proposed value | Gloss |
+> | --- | --- | --- | --- |
+> | Base delay (ms) | 500 | 200 | less than half the original wait |
+> | Retry cap (count) | none | 5 | a handful of attempts |
+>
+> | Proposed retry | Wait (ms) | Cumulative wait (ms) | Gloss |
+> | --- | --- | --- | --- |
+> | 1 | 200 | 200 | a fraction of a second |
+> | 2 | 400 | 600 | under a second |
+> | 3 | 800 | 1,400 | about a second and a half |
+> | 4 | 1,600 | 3,000 | a few seconds |
+> | 5 | 3,200 | 6,200 | about six seconds |
+>
+> | Check | Duration (ms) | Gloss |
+> | --- | --- | --- |
+> | Proposed cumulative wait | 6,200 | well below the timeout |
+> | Timeout | 30,000 | half a minute |
+>
+> | Named identifier | Current label | Proposed label |
 > | --- | --- | --- |
 > | Dev server port | `3000` | `3001` |
 > | API port | `8080` | `8081` |
->
-> Time: done by about 14:40 (about 10 minutes from now).
 
 ## On Hermes Agent
 

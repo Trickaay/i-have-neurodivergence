@@ -1,7 +1,7 @@
 ---
 name: easier-motor
 description: 'Presentation settings for motor and interaction: what you physically have to do to act on a response. Starting set: Do it rather than tell me to; Everything copy-ready. For a reader who says "Acting on the answer is the hard part". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-motor or asks for these settings; stays on until "stop easier motor".'
-version: 0.4.2
+version: 0.4.3
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

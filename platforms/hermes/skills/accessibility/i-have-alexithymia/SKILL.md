@@ -1,7 +1,7 @@
 ---
 name: i-have-alexithymia
 description: 'Shape output for a reader who cannot reliably read their own internal states: never ask how something feels, seems, or sits with them, replace preference questions with numbered menus of observable trade-offs, never infer or narrate the reader''s emotions, use external checkpoints instead of internal ones, and treat "I don''t know" about an internal state as a complete and final answer. Invoke with /i-have-alexithymia; stays on until "stop alexithymia mode".'
-version: 0.4.2
+version: 0.4.3
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

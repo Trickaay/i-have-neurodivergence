@@ -1,7 +1,7 @@
 ---
 name: needs-picker
 description: 'The quick start for the collection. Ask the reader what would make this easier, in terms of the exchange rather than of themselves, then ask what helps for each thing they picked, and build a working setup from their answers. Never infers, stores or displays a diagnosis. Invoke with /needs-picker; run it again any time by saying "settings".'
-version: 0.4.2
+version: 0.4.3
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -70,7 +70,7 @@ The reader has the difficulties they are about to describe, and they have them *
 
 - One screen at a time. Never both steps at once.
 - Every question answerable by numbers, separated by spaces or commas.
-- Every screen states how many screens remain.
+- Progress describes question stages, not a fixed total of messages: difficulties are question 1 of 2; supports are question 2 of 2, with the current difficulty and total selected shown separately. An optional context question may follow eligible supports; describe it as optional and the last question. The setup summary is final and asks no new required question.
 - Every screen has a default and an exit. "Enter" means the default. "skip" means move on. "stop" means keep what has been chosen so far and finish.
 - No question about how anything feels, seems, or sits.
 - No praise, no encouragement, no progress celebration.
@@ -121,8 +121,9 @@ UNDERSTANDING
  3  The wording is hard to follow even when I know the subject
  4  Examples from a subject I already know help me
 ...
-33  Something else — type it in your own words
+33  Something else...
 
+For Something else, free text can be typed instead of a number.
 Enter for none of these. "stop" to finish here.
 ```
 
@@ -130,10 +131,10 @@ Accept: numbers in any order, duplicates ignored, out-of-range ignored with one 
 
 ## Screen 2 — what helps, one difficulty at a time
 
-For each ticked difficulty, in the order ticked, show its `offers` with three fixed extras:
+For each ticked difficulty, in the order ticked, show its `offers` with three fixed extras. The two questions are difficulties and supports: screen 2 is the second question, regardless of how many difficulties are selected. The parenthetical count tracks difficulties separately. After the last support choice, offer the optional context screen only when relevant, then the summary; never promise a third required question. The examples abbreviate the menu for explanation; actual labels and numbers still come verbatim from `screen1`, including “Something else...”.
 
 ```
-2 of 3.  "I forget where I was after interruptions"  (1 of 3)
+2 of 2 questions.  "I forget where I was after interruptions"  (1 of 3 difficulties)
 
 What helps?
  1  Help me pick up where I was
@@ -181,7 +182,8 @@ B ──────────────────────────
 After the supports, one optional screen:
 
 ```
-Optional.  Do any of these only apply sometimes?
+Optional last question; the setup summary follows.
+Do any of these only apply sometimes?
 
  1  Visual examples — always / learning only / when I am stuck
  2  Two options and a default — always / except when brainstorming
@@ -196,7 +198,7 @@ Never detect a context. The reader declares it by saying so, and `overloaded` ma
 ## Screen 4 — the summary, in the reader's own terms
 
 ```
-YOUR SETUP
+YOUR SETUP — final
 
 You said:
   you forget where you were after interruptions

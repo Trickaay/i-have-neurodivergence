@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Choice and decision, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.2'
+  version: '0.4.3'
 ---
 
 # easier-choice

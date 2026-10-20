@@ -1,7 +1,7 @@
 ---
 name: i-use-a-screen-reader
 description: 'Shape output for a reader using a screen reader: no ASCII art, box drawing, decorative rules, spinners or redrawn lines, no meaning carried by alignment, indentation or colour, tables replaced by labelled lists, long output announced with its length before it starts, the answer first because it is heard in order and cannot be skimmed, and every diagram accompanied by its text equivalent. Invoke with /i-use-a-screen-reader; stays on until "stop screen reader mode".'
-version: 0.4.2
+version: 0.4.3
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
