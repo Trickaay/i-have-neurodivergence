@@ -4,6 +4,10 @@ Skills and a needs picker for choosing how an assistant presents information and
 
 The collection has **19 authored skills**, **89 supports** across **12 areas**, and **31 skills per platform** for Claude Code, Codex and Hermes Agent. It also exports plain instructions for other assistants.
 
+## Download the early-access bundle
+
+Get [version 0.4.5](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5), extract `i-have-neurodivergence-0.4.5.zip`, and open [START_HERE.md](START_HERE.md). The bundle includes [installation and removal instructions](INSTALL.md) and an [agent-install recipe](INSTALL_WITH_AGENT.md). It is an early-access release; see [release notes and limits](RELEASE_NOTES.md).
+
 ## Start with the picker
 
 1. Download this repository from [GitHub](https://github.com/Trickaay/i-have-neurodivergence) using **Code → Download ZIP**, then extract it.
@@ -35,7 +39,7 @@ For an existing Claude Code installation, refresh the marketplace and update the
 
 This release is **0.4.5**. Earlier repaired files still used the `0.4.0` version, which caused existing installations to keep their cached copy. Updating the marketplace alone does not update the installed plugin.
 
-For **Codex**, follow the [Codex installation steps](platforms/README.md#openai-codex) to copy all 31 complete folders from `platforms/codex/skills/` into your project's `.agents/skills/` or your personal `~/.agents/skills/`. Open that project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`.
+For **Codex**, follow the [Codex installation steps](INSTALL.md#codex) to copy all 31 complete folders from `platforms/codex/skills/` into your project's `.agents/skills/` or your personal `~/.agents/skills/`. Open that project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`.
 
 For **Hermes Agent**, use the skill folders and bundles under `platforms/hermes/`. For any other assistant, use the picker output or a block from `platforms/universal/`.
 
