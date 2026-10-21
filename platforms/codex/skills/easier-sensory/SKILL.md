@@ -6,7 +6,7 @@ metadata:
   tags: 'Accessibility, Presentation, Sensory and interface, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.4'
+  version: '0.4.5'
 ---
 
 # easier-sensory

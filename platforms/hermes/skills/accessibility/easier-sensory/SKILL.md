@@ -1,7 +1,7 @@
 ---
 name: easier-sensory
 description: 'Presentation settings for sensory and interface: visual density, motion, colour, sound. Starting set: Summary first, detail underneath; No motion; Less on screen; No sound or pop-ups; Space it out; Never rely on colour; Readable as a flat stream; Captions, a transcript or another usable format. For a reader who says "I am sensitive to visual clutter" / "I am sensitive to sound / interruptions" / "I hear the output rather than see it" / "I cannot rely on the colours" / "Audio or video is hard to follow". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-sensory or asks for these settings; stays on until "stop easier sensory".'
-version: 0.4.4
+version: 0.4.5
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

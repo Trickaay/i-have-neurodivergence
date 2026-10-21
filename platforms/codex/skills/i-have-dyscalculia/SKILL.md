@@ -6,7 +6,7 @@ metadata:
   tags: 'Dyscalculia, Output Style, Accessibility, Numeracy, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.4'
+  version: '0.4.5'
 ---
 
 # i-have-dyscalculia
@@ -38,7 +38,7 @@ Six facts drive every rule below:
 
 Never leave arithmetic to the reader. If the answer requires combining numbers, give the result. Put the working in a block labelled `Working:` that the reader can skip.
 
-Compute and check the working before composing the result line. The result and every summary must agree with the final working row. If a draft headline is wrong, replace it before sending; do not publish one result and correct it later in the same reply. When a calculation cannot be verified, state that uncertainty instead of presenting a guessed result as fact. Show only the final chosen calculation path: each Working row contributes to the result, supplies an intermediate used later, or directly checks the result. Remove unused quantities, abandoned approaches and rejected question rows before sending.
+Compute and check the working before composing the result line. The result and every summary must agree with the final working row. If a draft headline is wrong, replace it before sending; do not publish one result and correct it later in the same reply. When a calculation cannot be verified, state that uncertainty instead of presenting a guessed result as fact. Show only the final chosen calculation path: each Working row contributes to the result, supplies an intermediate used later, or directly checks the result. Inspect each calculation cell, not only whole rows: every clause and quantity must contribute to the chosen result, a later used intermediate or a direct check. Remove unused detours and abandoned/question text even when they share a cell with a valid calculation. For a same-hour addition, add the duration directly to the starting minutes; introduce a boundary such as midnight only when the chosen calculation actually crosses or uses it.
 
 Bad: "Each retry waits twice as long, so the timeout is passed after a handful."
 Good:
@@ -198,7 +198,7 @@ Override the defaults when:
 
 Before sending, find every digit and check:
 
-1. Does every quantity have a gloss in brackets?
+1. Does every quantity have a gloss? Check each gloss against the exact value as carefully as the arithmetic. A fractional-hour gloss must match the minutes divided by sixty; a clock reading or duration must not be described as smaller than it is. Prefer an exact worded reading when a rough analogy would mislead. For example, 00:40 is forty minutes after midnight, more than half an hour after it, not a third of the way through the hour.
 2. Are all compared numbers in a table?
 3. Is every identifier in code formatting and named?
 4. Are two similar numbers ever in the same sentence? Separate them.
@@ -206,7 +206,7 @@ Before sending, find every digit and check:
 6. Is every "step N" also a step name?
 7. Is any calculation left for the reader? Do it. Add `Working:`.
 8. Delete every "just / simply / easy / obviously / quick" near a number.
-9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending. Trace each Working row to the final result or its check; delete any unused detour, even when its arithmetic is correct.
+9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending. Trace every clause and quantity inside each Working cell to the result, a used intermediate or its check. Delete unused detours even inside an otherwise useful row, including correct arithmetic that the chosen path does not use.
 10. For a comparison request, move any numeric headline, result, speed ratio or analogy outside a table into a result table.
 11. Do analogy and scaling tables reuse the declared quantity unit? Convert only for mixed inputs or a requested conversion, in Working.
 12. Put every arithmetic back-check in the Working table. Count the numeric values in remaining prose sentences and paragraphs; remove over-limit repetitions.

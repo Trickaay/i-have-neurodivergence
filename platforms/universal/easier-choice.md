@@ -8,7 +8,7 @@ These are presentation settings I chose for myself. They describe how I would li
 
 CHOICE AND DECISION
 - At most two or three options, ever.
-- Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.
+- Name one concrete default option and say what happens if nothing is said. Two conditional recommendations are not a default. A presentation default can name a recommended option while making clear that no external action occurs without permission. A default is never approval for an action that needs permission or confirmation.
 
 If two of these ever pull against each other, prefer in this order: what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.
 

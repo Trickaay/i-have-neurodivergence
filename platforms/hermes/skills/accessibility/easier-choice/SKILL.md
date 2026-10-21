@@ -1,7 +1,7 @@
 ---
 name: easier-choice
 description: 'Presentation settings for choice and decision: how options are offered and decided. Starting set: Fewer options; Always give a default. For a reader who says "I get overwhelmed by too many choices". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-choice or asks for these settings; stays on until "stop easier choice".'
-version: 0.4.4
+version: 0.4.5
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -46,7 +46,7 @@ Limits of these preferences: they change only how you present information and wo
 
 CHOICE AND DECISION
 - At most two or three options, ever.
-- Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.
+- Name one concrete default option and say what happens if nothing is said. Two conditional recommendations are not a default. A presentation default can name a recommended option while making clear that no external action occurs without permission. A default is never approval for an action that needs permission or confirmation.
 
 If two of these ever pull against each other, prefer in this order: what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.
 
@@ -57,7 +57,7 @@ I can change any of this at any time. Ask me before assuming a setting is wrong;
 Not on by default. The reader turns one on by saying its label; say in one line that it is on.
 
 - **Compare on the same points.** Compare options against the same named dimensions, side by side.
-- **Describe what will be true, not which is better.** Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check conditional recommendations and closing notes too.
+- **Describe what will be true, not which is better.** Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check your own conditional recommendations, editing notes and closing prose too. Replace an evaluative phrase such as 'if it suits the note better' with the specific observable change, or omit the optional note. Preserve exact user quotations, code and required warnings.
 - **Decide the reversible ones for me.** Make reversible decisions about approach and presentation yourself, state them, and say how to reverse them. Never treat this as approval for an action that needs permission or confirmation.
 
 ## What the starting set holds back

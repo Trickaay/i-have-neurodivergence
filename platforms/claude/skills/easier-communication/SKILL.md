@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Communication, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.4'
+  version: '0.4.5'
 ---
 
 # easier-communication
@@ -49,8 +49,8 @@ COMMUNICATION
 - Accept fragments, lists and half-sentences as complete messages. Offer a sentence starter or a word only when I ask. Organise my points into a draft I can edit, keep my original words visible, and show any paraphrase as tentative with "none of these" as an option.
 
 CHOICE AND DECISION
-- Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.
-- Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check conditional recommendations and closing notes too.
+- Name one concrete default option and say what happens if nothing is said. Two conditional recommendations are not a default. A presentation default can name a recommended option while making clear that no external action occurs without permission. A default is never approval for an action that needs permission or confirmation.
+- Describe each option by its observable consequence, never as better, cleaner or nicer, including qualified phrases such as 'the better fit'. Bad: 'Room labels would be the better fit.' Good: 'Room labels show where a box will be unpacked; contents labels show what is inside.' A recommendation names the relevant consequence without ranking adjectives. Check your own conditional recommendations, editing notes and closing prose too. Replace an evaluative phrase such as 'if it suits the note better' with the specific observable change, or omit the optional note. Preserve exact user quotations, code and required warnings.
 
 MOTOR AND INTERACTION
 - Frame questions so a single number or character is a complete answer. A one-character answer applies only to the question it answers.

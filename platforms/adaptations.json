@@ -16,7 +16,7 @@
       "reason": "Source wording could extend to actions; narrowed to presentation/approach so it cannot stand in for approval."
     },
     "recommended_default": {
-      "productRule": "Name a default and say what happens if nothing is said. A default is never approval for an action that needs permission or confirmation.",
+      "productRule": "Name one concrete default option and say what happens if nothing is said. Two conditional recommendations are not a default. A presentation default can name a recommended option while making clear that no external action occurs without permission. A default is never approval for an action that needs permission or confirmation.",
       "reason": "Silence-as-default must not become consent for actions."
     },
     "never_correct_typing": {
