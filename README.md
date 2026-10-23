@@ -1,8 +1,26 @@
 # i-have-neurodivergence
 
-Skills and a needs picker for choosing how an assistant presents information and works with you. Choose supports such as shorter sections, explicit wording, fewer choices, written steps, or help getting back to an interrupted task. You can change or stop them at any time.
+[![The needs picker: choose what makes an exchange difficult and select the supports that help.](assets/needs-picker.jpg)](https://trickaay.github.io/i-have-neurodivergence/)
 
-The collection has **19 authored skills**, **89 supports** across **12 areas**, and **31 skills per platform** for Claude Code, Codex and Hermes Agent. It also exports plain instructions for other assistants.
+**Make AI replies easier to read, follow and act on—with settings you choose.**
+
+**[Try the live picker →](https://trickaay.github.io/i-have-neurodivergence/)** · [Download the skill pack](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5) · [Install with an agent](INSTALL_WITH_AGENT.md)
+
+Choose shorter sections, clearer wording, fewer choices or concrete steps. Copy the result into your assistant. No download, diagnosis or compiler needed to try the picker.
+
+## Quick start: try three lines
+
+Paste this into a ChatGPT or Claude conversation, or your custom instructions, then ask your usual question:
+
+```text
+Use short, clearly labelled sections and plain, literal language.
+For a task, give one concrete next step and say what “done” looks like.
+Keep essential warnings and exact details; ask before actions that need permission.
+```
+
+These are example preferences: change or remove any line. For your own combination, [open the picker](https://trickaay.github.io/i-have-neurodivergence/).
+
+The pack includes **19 authored skills**, **89 supports** across **12 areas**, and **31 skills per generated platform**. You can change or stop the settings at any time.
 
 ## Download the early-access bundle
 
@@ -10,8 +28,8 @@ Get [version 0.4.5](https://github.com/Trickaay/i-have-neurodivergence/releases/
 
 ## Start with the picker
 
-1. Download this repository from [GitHub](https://github.com/Trickaay/i-have-neurodivergence) using **Code → Download ZIP**, then extract it.
-2. Open `needs-picker.html` in your browser.
+1. [Open the live picker](https://trickaay.github.io/i-have-neurodivergence/).
+2. For offline use, download and extract the [release ZIP](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5), then open `needs-picker.html` in your browser.
 3. Choose what would make the exchange easier, then choose what helps. Everything is optional.
 4. Copy the **Plain instructions** output into your assistant's custom instructions or the start of a conversation.
 
@@ -91,6 +109,8 @@ Edit the authored skills, `needs/needs-vocabulary.json`, `needs/picker.template.
 python3 needs/build.py
 python3 platforms/build_platform_skills.py
 ```
+
+The same build writes `docs/index.html` as an exact copy of `needs-picker.html`. GitHub Pages publishes `main` → `/docs`; `needs/build.py --check` detects a stale live-page copy. The published 0.4.5 release ZIP and tag remain fixed when website or README content changes.
 
 Before publishing changed skills, increase the version in `.claude-plugin/plugin.json`. The platform generator reads that version for every generated bundle; keeping the old version prevents existing Claude installations from receiving the update.
 
