@@ -164,6 +164,7 @@ def main():
     skill = os.path.join(ROOT, "skills", "needs-picker")
     outputs = {
         OUTPUT: html,
+        os.path.join(ROOT, "docs", "index.html"): html,
         EMBED: json.dumps(proj, ensure_ascii=False, indent=1) + "\n",
         os.path.join(skill, "references", "needs-vocabulary.json"):
             open(SOURCE, encoding="utf-8").read(),
