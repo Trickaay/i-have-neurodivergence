@@ -4,7 +4,7 @@
 
 **Make AI replies easier to read, follow and act on—with settings you choose.**
 
-**[Try the live picker →](https://trickaay.github.io/i-have-neurodivergence/)** · [Download the skill pack](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5) · [Install with an agent](INSTALL_WITH_AGENT.md)
+**[Try the live picker →](https://trickaay.github.io/i-have-neurodivergence/)** · [Download current source](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip) · [Install with an agent](INSTALL_WITH_AGENT.md)
 
 Choose shorter sections, clearer wording, fewer choices or concrete steps. Copy the result into your assistant. No download, diagnosis or compiler needed to try the picker.
 
@@ -22,14 +22,16 @@ These are example preferences: change or remove any line. For your own combinati
 
 The pack includes **19 authored skills**, **89 supports** across **12 areas**, and **31 skills per generated platform**. You can change or stop the settings at any time.
 
-## Download the early-access bundle
+## Get the pack
 
-Get [version 0.4.5](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5), extract `i-have-neurodivergence-0.4.5.zip`, and open [START_HERE.md](START_HERE.md). The bundle includes [installation and removal instructions](INSTALL.md) and an [agent-install recipe](INSTALL_WITH_AGENT.md). It is an early-access release; see [release notes and limits](RELEASE_NOTES.md).
+The current source is **0.4.6**, with repairs from the 0.4.5 retest. [Download current source](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip), extract it, and open [START_HERE.md](START_HERE.md). It includes the [installation guide](INSTALL.md) and [agent-install recipe](INSTALL_WITH_AGENT.md). GitHub's source ZIP has no `BUNDLE_MANIFEST.json`; an installing agent must establish its source before copying.
+
+The original [0.4.5 early-access release](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5) remains available unchanged. Its curated ZIP contains a manifest, but predates the current skill and safe-removal guidance. The live picker and marketplace follow current source. See [release notes and limits](RELEASE_NOTES.md).
 
 ## Start with the picker
 
 1. [Open the live picker](https://trickaay.github.io/i-have-neurodivergence/).
-2. For offline use, download and extract the [release ZIP](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5), then open `needs-picker.html` in your browser.
+2. For offline use, download and extract the [current source ZIP](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip), then open `needs-picker.html` in your browser.
 3. Choose what would make the exchange easier, then choose what helps. Everything is optional.
 4. Copy the **Plain instructions** output into your assistant's custom instructions or the start of a conversation.
 
@@ -39,7 +41,7 @@ If clipboard access is blocked, Copy selects the displayed text for manual copyi
 
 ## Install skills
 
-For Claude Code, add this repository as a marketplace and install the plugin:
+In an interactive Claude Code session, add this repository as a marketplace and install the plugin:
 
 ```text
 /plugin marketplace add Trickaay/i-have-neurodivergence
@@ -55,7 +57,16 @@ For an existing Claude Code installation, refresh the marketplace and update the
 /plugin update i-have-neurodivergence@i-have-neurodivergence
 ```
 
-This release is **0.4.5**. Earlier repaired files still used the `0.4.0` version, which caused existing installations to keep their cached copy. Updating the marketplace alone does not update the installed plugin.
+For a terminal or coding agent, use the CLI form with the intended scope. This example uses project scope:
+
+```bash
+claude plugin marketplace add Trickaay/i-have-neurodivergence --scope project
+claude plugin install i-have-neurodivergence@i-have-neurodivergence --scope project
+```
+
+The [installation guide](INSTALL.md) also gives the CLI update commands. `/plugin` commands require an interactive Claude session; they are not commands for `claude -p`.
+
+The current marketplace version is **0.4.6**. Earlier repaired files still used the `0.4.0` version, which caused existing installations to keep their cached copy. Updating the marketplace alone does not update the installed plugin.
 
 For **Codex**, follow the [Codex installation steps](INSTALL.md#codex) to copy all 31 complete folders from `platforms/codex/skills/` into your project's `.agents/skills/` or your personal `~/.agents/skills/`. Open that project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`.
 
@@ -110,7 +121,7 @@ python3 needs/build.py
 python3 platforms/build_platform_skills.py
 ```
 
-The same build writes `docs/index.html` as an exact copy of `needs-picker.html`. GitHub Pages publishes `main` → `/docs`; `needs/build.py --check` detects a stale live-page copy. The published 0.4.5 release ZIP and tag remain fixed when website or README content changes.
+The same build writes `docs/index.html` as an exact copy of `needs-picker.html`. GitHub Pages publishes `main` → `/docs`; `needs/build.py --check` detects a stale live-page copy. Published release ZIPs and tags stay fixed; current source and the live picker can contain newer repairs.
 
 Before publishing changed skills, increase the version in `.claude-plugin/plugin.json`. The platform generator reads that version for every generated bundle; keeping the old version prevents existing Claude installations from receiving the update.
 
@@ -132,13 +143,13 @@ Browser conformance needs Playwright and Chromium; missing Playwright reports a 
 
 These are smoke checks of files, the browser page and live sessions. **They do not establish support effectiveness, identical responses between sessions, or complete assistive-technology coverage.**
 
-**Supplied Claude retest of 0.4.4 (`24413ad`).** The browser download matched all 198 source files. Fresh installs and public upgrades from 0.4.3, 0.4.2, 0.4.1 and both older 0.4.0 revisions passed. Independent reviewers scored 60 PASS and six FAIL across 66 fixed turns; 14 picker-journey and six save turns passed. The failures concern unused arithmetic text, an inaccurate worded time gloss, rejected planning text, an unrequested greeting, a missing concrete default and evaluative editing prose. The returned raw transcripts, source inventories and upgrade records were independently audited. Direct-file Chromium checks reported 96 PASS, two known final-newline selection failures and one screen-reader NOT_RUN; conformance passed 44 comparisons, seven interface checks and 22 export-contract assertions. The built-in browser route was blocked and remains NOT_RUN.
+**Returned Claude retest of 0.4.5.** The 66 fixed turns scored 56 PASS and 10 FAIL. Six new wording controls and six save turns passed; picker journeys scored 13 PASS and one FAIL. Agent-assisted installation had five passing cases, five failing cases and one hung attempt recorded as NOT_RUN. Independent review checked the raw responses, reviewer records, source identities and file effects. The reported release download, fresh installs and public plugin upgrade passed; Chromium browser failures were the known manual-selection final-newline limitation.
 
-**Version 0.4.5 repairs.** Planning examples use only requested list items; the first action agrees with the steps and discarded draft actions are removed. One-sentence notes omit unrequested greetings while retaining explicitly supplied wording. Numeric checks cover every clause inside a working cell and verify worded glosses against the value. Choice rules name a concrete default without granting permission; editing notes describe observable consequences. The generated Claude plugin now includes a README with its actual folder-launch instructions.
+**Current repairs (0.4.6).** Planning gives a reason within the first step; numeric tables distinguish duration, clock time and ratios; overview counts agree with the actual parts; the picker menu omits unsolicited preset labels. Agent installation saves a durable inventory, and removal stops on edited, extra, missing or symlinked entries. Instructions distinguish interactive and CLI commands and include both bundled-plugin launch forms.
 
-**Fresh 0.4.5 checks.** Codex completed 62 turns across 19 fresh sessions: 60 PASS, 0 FAIL and 2 UNKNOWN. Both UNKNOWN results concern the provenance of a separate host skill announcement; both final picker opening blocks were exact. The repaired behaviors and checks that supplied greetings, quotations and safety text remain intact passed. Local DOM checks passed 83 groups, including 56 export comparisons; all six export formats also matched across the portable compiler copies. Generated-file checks and validation of all 93 platform skills passed. Claude Code 2.1.306 accepted both plugin manifests, and the generated plugin README removed its missing-README directory-listing blocker. A separate local Git upgrade check verified 0.4.4 to 0.4.5 through the actual CLI and compared every installed file; this checks update mechanics, not public GitHub transport or live Claude behavior.
+**Verification.** Fresh Codex sessions scored 39 PASS and 5 UNKNOWN across 44 counted turns; all 44 final answers met the tested contracts, while five picker turns had extra host commentary whose priority could not be established. One harness-invalid session was retained and excluded. All 31 skills were discovered. Installation and removal checks preserved unrelated and pre-existing skills and stopped without changes on customized or extra files. Six static checks, both Claude plugin manifests and 83 software-DOM checks passed; a native-browser smoke check matched exports to the compiler. Native clipboard readback remained UNKNOWN. A genuine Claude CLI upgrade from 0.4.5 to 0.4.6 passed against an isolated local Git fixture, with all 206 installed source files matching; public update transport was not rerun for this candidate. A source-archive installation without a bundle manifest also retained verified provenance and copied all 31 folders exactly. These are bounded smoke checks, not a guarantee that models always follow the rules. Fresh Claude behavior for 0.4.6, native Windows installation, Cowork, Hermes and human screen-reader use remain unverified. A tool-restricted instruction test is not a reproduction of a tool-less Claude host. Host-required skill announcements can affect exact-screen checks; uncertain provenance stays UNKNOWN.
 
-**Limits.** Fresh Claude conversations and full native-browser conformance after these changes remain NOT_RUN locally. The live demo separately passed a bounded in-app-browser smoke check: selection, retained focus and an actual download matching the displayed export byte for byte. The served HTML matches the released picker; this does not qualify all browser or accessibility behavior. Browser logic, layout and styling are unchanged; embedded support wording changed. Software DOM checks do not qualify native clipboard, layout or assistive technology. Cowork, Hermes and human screen-reader use remain unverified. Manual selection may still omit the final newline; downloads preserve it according to the supplied browser evidence. Claude directory validation still reports a nonblocking missing-icon warning; the generated plugin is launched from its folder, not listed as a separate marketplace entry. Small repeated smoke checks do not establish reliability or support effectiveness.
+**Browser limits.** The browser's logic, layout and styling are unchanged; embedded support wording is regenerated. Software-DOM checks do not establish native clipboard or accessibility behavior. Manual selection may omit the final newline; use Download when exact bytes matter. The nonblocking missing-icon directory warning remains.
 
 ## Inspiration and license
 

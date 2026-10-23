@@ -1,7 +1,7 @@
 ---
 name: easier-pacing
 description: 'Presentation settings for pacing: time, speed, confirmation, and how much is asked at once. Starting set: One instruction at a time; No time pressure; Tell me what it will cost first; Smallest useful version first. For a reader who says "I need more time to process" / "I run out of energy before the task does". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-pacing or asks for these settings; stays on until "stop easier pacing".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

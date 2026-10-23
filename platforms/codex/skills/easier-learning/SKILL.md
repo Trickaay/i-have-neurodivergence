@@ -6,7 +6,7 @@ metadata:
   tags: 'Accessibility, Presentation, Learning, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.5'
+  version: '0.4.6'
 ---
 
 # easier-learning

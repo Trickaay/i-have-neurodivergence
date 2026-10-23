@@ -1,4 +1,4 @@
-# Install and remove the 0.4.5 pack
+# Install and remove the pack
 
 Extract the entire ZIP before starting. These instructions apply to macOS, Linux and Windows; a local host application must already be installed. The copy-based routes do not need Python, Git or a build step. See [START_HERE.md](START_HERE.md) for the browser-only option.
 
@@ -26,13 +26,13 @@ In Finder, Command-Shift-period shows hidden folders. In Windows File Explorer, 
 
 5. Open the target project and start a new Codex chat. Choose `needs-picker` from the skill menu; in the CLI or IDE extension, type `$needs-picker`. The first screen should say **WHAT WOULD MAKE THIS EASIER?**. `skip` selects the plain default. You can also invoke an individual skill.
 
-Keep a local installation record with the destination and the names of the folders you added (a saved folder listing is enough). Note any identical folders that were already there; they were not newly installed. The skill files are self-contained after copying, so the extracted download is no longer needed for this route once you have that record. Python 3 is optional, only for running the profile compiler yourself. File copying alone does not prove the host loaded the skills: if the menu is unavailable, report that check as not run.
+Keep a durable local installation record outside `skills`, for example `.agents/i-have-neurodivergence-install-record-<unique-id>.json`; use a new name and preserve earlier records. Record the destination and which folders you added versus identical folders already there. An agent can also save each new folder's complete file/directory inventory and file hashes, following [the installation recipe](INSTALL_WITH_AGENT.md#keep-a-durable-record-for-copied-skills). For a manual copy, retain the original download and a separate list of newly added folders so you can compare complete folders later. A temporary file or chat reply is not a durable record. Keep this local record private. The skill files themselves are self-contained after copying. Python 3 is optional, only for running the profile compiler yourself. File copying alone does not prove the host loaded the skills: if the menu is unavailable, report that check as not run.
 
 ### Update or remove
 
 For an update, compare the new complete folders with your installed copies first. Back up customised folders outside `.agents/skills/`, then replace only folders you explicitly choose. Keep unrelated skills and profiles. Check the menu again in a new chat. Avoid installing the same names in both project and personal locations unless you intend to manage both.
 
-To remove the pack, close the active chats using it and remove only the folders recorded as newly installed by this pack. If you did not keep a record, compare against the original download and check ownership before removing anything. Do not delete the entire `.agents/skills/` directory. Keep customised work and saved profiles unless you explicitly want to remove them. Start a new chat afterward.
+To remove the pack, close the active chats using it. Before deleting anything, compare every folder recorded as newly installed with its saved installation inventory or the retained original copy. Include hidden files, extra files and subfolders. If any folder has changed, is missing, contains a symlink, or its ownership is unclear, stop and decide what to keep or back up first. Without a record, establish ownership before removing anything; a matching skill name alone is not enough. Only unchanged folders recorded as newly added are eligible for removal. Keep pre-existing identical skills, custom work and saved profiles. Do not delete the entire `.agents/skills/` directory. Retain the record and start a new chat afterward.
 
 ## Claude Code
 
@@ -43,7 +43,7 @@ Choose one route. The bundled route has **31 skills**; the marketplace route has
 Keep the extracted folder in a location you intend to retain. Open a terminal in its root folder and run:
 
 ```text
-claude --plugin-dir platforms/claude
+claude --plugin-dir "platforms/claude"
 ```
 
 From another location, replace the example below with the full path to the extracted pack's `platforms/claude` folder. Keep quotes around paths containing spaces:
@@ -58,23 +58,37 @@ For an update, extract the new release into a separate retained folder and launc
 
 ### Marketplace installation: 19 authored skills
 
-In Claude Code:
+Inside an **interactive Claude Code session**:
 
 ```text
 /plugin marketplace add Trickaay/i-have-neurodivergence
 /plugin install i-have-neurodivergence@i-have-neurodivergence
 ```
 
-Choose your intended installation scope in the host. Restart if needed and invoke `/i-have-neurodivergence:needs-picker`. This installs the current marketplace version from GitHub, which may be newer than this ZIP; it is not a frozen 0.4.5 installation route.
+Choose your intended installation scope in the host. For a terminal or coding agent, use the shell commands instead; slash commands are not available in non-interactive `claude -p` sessions. This example uses project scope, so run it from the target project. Use `user` or `local` instead only if that is your chosen scope:
 
-To update:
+```text
+claude plugin marketplace add Trickaay/i-have-neurodivergence --scope project
+claude plugin install i-have-neurodivergence@i-have-neurodivergence --scope project
+```
+
+Restart if needed and invoke `/i-have-neurodivergence:needs-picker`. This installs the current marketplace version from GitHub, which may be newer than this ZIP; it is not a frozen release-ZIP installation route.
+
+To update inside an interactive session:
 
 ```text
 /plugin marketplace update i-have-neurodivergence
 /plugin update i-have-neurodivergence@i-have-neurodivergence
 ```
 
-Restart afterward. To disable or uninstall, use Claude Code's `/plugin` installed-plugin controls, selecting this plugin and its original scope. Do not remove other plugins or account configuration.
+Or update from a terminal, using the installed plugin's scope:
+
+```text
+claude plugin marketplace update i-have-neurodivergence
+claude plugin update i-have-neurodivergence@i-have-neurodivergence --scope project
+```
+
+Restart afterward. See the [Claude Code command reference](https://code.claude.com/docs/en/plugins/cli-reference) for your host version. To disable or uninstall, use Claude Code's `/plugin` installed-plugin controls, selecting this plugin and its original scope. Do not remove other plugins or account configuration.
 
 ## Other hosts
 

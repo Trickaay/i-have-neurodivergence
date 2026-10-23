@@ -7,7 +7,7 @@ metadata:
   tags: 'Accessibility, Presentation, Information load, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.5'
+  version: '0.4.6'
 ---
 
 # easier-information-load
@@ -40,7 +40,7 @@ These are presentation settings I chose for myself. They describe how I would li
 Limits of these preferences: they change only how you present information and work with me. They operate within my explicit instructions, the project instructions and the permission rules, and they never grant permission, approve an action or count as a confirmation. Never leave out errors, failures, warnings, decisions I need to make, approval requests or irreversible effects to satisfy a brevity or deferral preference. Keep code, commands, paths, numbers, links, citations and meaning exact.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
 - Use labelled sections with at most five nonblank content lines each; aim for four to leave room for necessary notes. Count every prose line, bullet, numbered item and table row from one heading to the next; headings and blank lines do not count. An introduction plus five bullets is six lines and must be split. Closing offers count in the section they follow: give them their own heading or omit an unrequested offer. Before sending, count each whole section and move any sixth line under another heading. Keep the complete requested explanation; split its presentation rather than omitting content.
 
 LEARNING

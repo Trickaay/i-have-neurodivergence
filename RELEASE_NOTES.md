@@ -1,4 +1,19 @@
-# 0.4.5 — first early-access bundle
+# 0.4.6 — source repairs after the 0.4.5 retest
+
+This source revision repairs the reviewed 0.4.5 findings. It does not replace the published `v0.4.5` tag or release assets. Current main, the marketplace and the live picker use 0.4.6 content; the earlier curated ZIP remains 0.4.5.
+
+- Planning includes a short reason for the first action, outside any quoted text the reader requested.
+- Numeric tables keep durations, clock times and speed ratios in correctly labelled measure columns, including Working. Neutral wording also covers numeric glosses.
+- Overviews check their counts and ranges against the final explanation.
+- The picker shows the difficulty menu without adding unsolicited preset names.
+- Agent installs retain a private durable record of ownership and complete file inventories. Removal checks every recorded new tree and stops before deleting if any content has changed, been added, gone missing or become a symlink. Identical pre-existing skills remain unowned and are preserved.
+- Installation guidance gives both bundled Claude launch forms, distinguishes terminal CLI commands from interactive slash commands, and requires an honest first response when filesystem tools are unavailable.
+
+The returned Claude 0.4.5 evidence was reviewed independently. It reports 56 PASS / 10 FAIL across 66 fixed turns and five failing agent-install cases. Correct arithmetic did not excuse wrong unit headers; blocked deletion did not make the unsafe proposed removal acceptable. The source changes address these concrete findings. See the README for fresh verification and remaining qualification limits. A new Claude retest is still needed; model behavior is not deterministic.
+
+---
+
+# 0.4.5 — first early-access bundle (historical publication record)
 
 A downloadable needs picker and optional skills for choosing how an assistant presents information. Start with [START_HERE.md](START_HERE.md), or give [INSTALL_WITH_AGENT.md](INSTALL_WITH_AGENT.md) to a local coding agent when asking it to help install.
 

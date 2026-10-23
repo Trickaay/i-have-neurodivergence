@@ -7,7 +7,7 @@ metadata:
   tags: 'Autistic Inertia, Task Initiation, Executive Function, Hyperfocus, Autism, ADHD, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.5'
+  version: '0.4.6'
 ---
 
 # i-have-inertia

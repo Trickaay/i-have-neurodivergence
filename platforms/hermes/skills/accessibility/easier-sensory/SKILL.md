@@ -1,7 +1,7 @@
 ---
 name: easier-sensory
 description: 'Presentation settings for sensory and interface: visual density, motion, colour, sound. Starting set: Summary first, detail underneath; No motion; Less on screen; No sound or pop-ups; Space it out; Never rely on colour; Readable as a flat stream; Captions, a transcript or another usable format. For a reader who says "I am sensitive to visual clutter" / "I am sensitive to sound / interruptions" / "I hear the output rather than see it" / "I cannot rely on the colours" / "Audio or video is hard to follow". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-sensory or asks for these settings; stays on until "stop easier sensory".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -49,7 +49,7 @@ These are presentation settings I chose for myself. They describe how I would li
 Limits of these preferences: they change only how you present information and work with me. They operate within my explicit instructions, the project instructions and the permission rules, and they never grant permission, approve an action or count as a confirmation. Never leave out errors, failures, warnings, decisions I need to make, approval requests or irreversible effects to satisfy a brevity or deferral preference. Keep code, commands, paths, numbers, links, citations and meaning exact.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
 
 SENSORY AND INTERFACE
 - No animation, spinners, progress bars, or redrawn lines.

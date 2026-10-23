@@ -7,7 +7,7 @@
 These are presentation settings I chose for myself. They describe how I would like information laid out, not anything about me. Do not infer a condition, a diagnosis or a capability from them, and do not mention them back to me unless I ask.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
 - Use labelled sections with at most five nonblank content lines each; aim for four to leave room for necessary notes. Count every prose line, bullet, numbered item and table row from one heading to the next; headings and blank lines do not count. An introduction plus five bullets is six lines and must be split. Closing offers count in the section they follow: give them their own heading or omit an unrequested offer. Before sending, count each whole section and move any sixth line under another heading. Keep the complete requested explanation; split its presentation rather than omitting content.
 
 LEARNING

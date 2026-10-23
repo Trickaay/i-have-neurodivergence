@@ -1,7 +1,7 @@
 ---
 name: easier-communication
 description: 'Presentation settings for communication: intent, implication, tone, and questions. Starting set: Say what you are doing and why; No hints or implication; Do not ask how I feel about it; State the situation, do not instruct; Always give a default; Describe what will be true, not which is better; Let me answer with one character; Help me put my idea into words. For a reader who says "I miss implied meaning or sarcasm" / "I cannot answer questions about how I feel" / "Being told to do something makes it harder" / "I know what I mean but finding the words is hard". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-communication or asks for these settings; stays on until "stop easier communication".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

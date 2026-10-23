@@ -1,7 +1,7 @@
 ---
 name: i-have-apd
 description: 'Shape output for a reader with auditory processing differences who chose it: written form is the primary channel unless the reader says otherwise, every spoken exchange gets a written copy, sequences are chunked and numbered, proper nouns and commands are spelled out, phonetically confusable terms are disambiguated, speech-to-text input is echoed back only when the reader says they use it, and nothing relies on an audio-only cue. Invoke with /i-have-apd; stays on until "stop apd mode".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

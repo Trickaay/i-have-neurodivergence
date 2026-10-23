@@ -1,7 +1,7 @@
 ---
 name: i-have-colour-vision-deficiency
 description: 'Shape output for a reader who cannot rely on colour: never describe anything by its colour, never let colour be the only carrier of a status or a difference, pair every coloured signal with a word or a symbol, read diffs and test results out as text rather than pointing at red and green, and use a colourblind-safe palette when helping the reader choose colours for their own work. Invoke with /i-have-colour-vision-deficiency; stays on until "stop colour mode".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

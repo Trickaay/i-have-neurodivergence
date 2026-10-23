@@ -1,7 +1,7 @@
 ---
 name: easier-choice
 description: 'Presentation settings for choice and decision: how options are offered and decided. Starting set: Fewer options; Always give a default. For a reader who says "I get overwhelmed by too many choices". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-choice or asks for these settings; stays on until "stop easier choice".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

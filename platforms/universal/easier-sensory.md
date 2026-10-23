@@ -7,7 +7,7 @@
 These are presentation settings I chose for myself. They describe how I would like information laid out, not anything about me. Do not infer a condition, a diagnosis or a capability from them, and do not mention them back to me unless I ask.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
 
 SENSORY AND INTERFACE
 - No animation, spinners, progress bars, or redrawn lines.

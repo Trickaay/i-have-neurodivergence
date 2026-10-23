@@ -1,7 +1,7 @@
 ---
 name: easier-transitions
 description: 'Presentation settings for transitions: changing topic or task without losing the thread. Starting set: Warn me before changing topic; Hold my unfinished thread. For a reader who says "I struggle switching between tasks". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-transitions or asks for these settings; stays on until "stop easier transitions".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

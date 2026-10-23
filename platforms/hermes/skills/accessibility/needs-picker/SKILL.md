@@ -1,7 +1,7 @@
 ---
 name: needs-picker
 description: 'The quick start for the collection. Ask the reader what would make this easier, in terms of the exchange rather than of themselves, then ask what helps for each thing they picked, and build a working setup from their answers. Never infers, stores or displays a diagnosis. Invoke with /needs-picker; run it again any time by saying "settings".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -109,6 +109,8 @@ Enter to start. Type "skip" to use the plain default.
 ```
 
 ## Screen 1 — the difficulties
+
+Show only the complete difficulty-menu block below, expanding its omitted entries from `screen1`; no preface, afterword, extra route or list of presets. Keep the exact defaults and exit at the end. The preset route is available only when the reader explicitly asks to start from a label or mentions one; do not advertise it on the ordinary screen. Notices required by higher-priority host instructions remain permitted.
 
 Use the exact numbers and labels in `references/picker-menu.json` → `screen1`, grouped under their area labels. Keep its number-to-ID mapping for the whole session; never renumber a choice when processing the reply. The “Something else” entry is last, outside the area groups. Areas are Understanding, Information load, Attention, Planning, Memory, Learning, Communication, Sensory and interface, Choice and decision, Transitions, Motor and interaction, Pacing.
 
@@ -279,6 +281,8 @@ Before sending any screen:
 7. Any atom id, rule text or evidence tier on a selection or summary screen the reader did not ask for.
 8. Any claim that supports only add or never remove anything.
 9. On screen 0, any optional text outside the exact opening block, especially commentary about references or preparation. Remove it; keep only notices required by the host.
+
+For screen 1, remove optional text before or after the complete menu, especially preset names the reader did not request.
 
 Then verify: could someone who has every difficulty on the list complete this picker?
 

@@ -1,7 +1,7 @@
 ---
 name: help-me-with-words
 description: 'Communication access the reader chooses, without any label: help understanding the wording (terms explained, pronouns resolved, long sentences split, implied links stated) while the technical depth stays; help expressing an idea (fragments accepted, tentative drafts the reader edits, "none of these" always offered); the reader''s own communication method accepted and their words kept; and, where the host carries media, captions, transcripts and summaries as separate choices with uncertainty marked. Invoke with /help-me-with-words; stays on until "stop words mode".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

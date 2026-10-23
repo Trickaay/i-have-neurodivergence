@@ -1,7 +1,7 @@
 ---
 name: easier-understanding
 description: 'Presentation settings for understanding: making sense of what is said: wording, terms, examples, implied meaning. Starting set: Exact, literal wording; One name per thing; Summary first, detail underneath; Number and order the steps; Examples from a subject I name; Help me understand the wording. For a reader who says "I prefer exact / literal wording" / "I need to see the overall structure first" / "The wording is hard to follow even when I know the subject" / "Examples from a subject I already know help me". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-understanding or asks for these settings; stays on until "stop easier understanding".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -54,7 +54,7 @@ UNDERSTANDING
 - Explain unfamiliar words as they appear, say what each pronoun refers to, split long sentences, and state connections that are only implied. Keep the technical depth; change only the wording.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
 
 PLANNING
 - Number every step and state what each one depends on.

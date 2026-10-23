@@ -1,7 +1,7 @@
 ---
 name: easier-attention
 description: 'Presentation settings for attention: staying on one thing, and getting back to it. Starting set: One goal at a time; Repeat the current goal. For a reader who says "I get pulled away from what I was doing". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-attention or asks for these settings; stays on until "stop easier attention".'
-version: 0.4.5
+version: 0.4.6
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
