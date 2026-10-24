@@ -1,7 +1,7 @@
 ---
 name: easier-pacing
 description: 'Presentation settings for pacing: time, speed, confirmation, and how much is asked at once. Starting set: One instruction at a time; No time pressure; Tell me what it will cost first; Smallest useful version first. For a reader who says "I need more time to process" / "I run out of energy before the task does". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-pacing or asks for these settings; stays on until "stop easier pacing".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -77,7 +77,7 @@ Errors, failures, decisions, approvals and irreversible effects are never held b
 
 ## When it applies
 
-Everything above applies always unless the reader says otherwise. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply all of them.
+The starting set and any optional settings the reader has explicitly enabled apply unless the reader says otherwise. Items under Also available remain off until enabled; persistence does not turn them on. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply the active settings in every context.
 
 ## Pre-send check
 

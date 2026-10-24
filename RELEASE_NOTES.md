@@ -1,3 +1,21 @@
+# 0.4.7 — recorded installation and recoverable removal
+
+This source update follows independent review of the 0.4.6 return. It does not replace the published `v0.4.5` tag or curated release assets.
+
+- `scripts/install_pack.py` provides read-only installation/removal previews and explicit `--apply` operations for copied Codex/Hermes skills. Python 3.10+ is required for this route; manual copying and the browser picker remain available without it.
+- Every applied install has a durable self-contained ownership record, including a no-op run that owns nothing. Removal requires its exact record and unchanged complete trees, then moves only owned skills into retained quarantine. It does not permanently delete them or reconstruct missing records.
+- Missing/edited/extra/link entries, malformed records, incomplete transactions, conflicting skills and ambiguous case/Unicode path aliases stop operations. Stop other writers during installation/removal; this is not a security boundary against malicious local processes.
+- Numeric examples keep duration, ratio and clock roles in correctly labelled columns. Overviews check actual members. Planning preserves risk and authorization without adding a hold request. Communication retains every supplied fragment. Pause points use observable state.
+- Alexithymia deactivation separates the acknowledgement from any accompanying answer and its requested sentence count.
+- Generated area skills clarify that optional supports remain off until enabled. Default draft greetings are not prohibited by an inactive optional setting.
+- Installation instructions use the supplied helper, preserve records and distinguish copied skills from Claude's own plugin install/update/uninstall routes.
+
+The preceding Claude return contained real unsafe agent removal and eight confirmed output-contract failures. Replacing the removal mechanism is a stronger boundary than another prose-only recipe, but an agent can still ignore instructions; the next Claude retest must verify helper use and refusals in real sessions. The helper's quarantine is retained recovery data, not an automatic rollback or backup service. Legacy/manual installations require separate ownership review.
+
+See [README validation status](README.md#validation-status) for fresh checks and remaining gates. Native Windows, Cowork, Hermes and screen-reader execution remain unqualified. Browser manual selection may omit a final newline; Download preserves exact export bytes. The private Claude mod is not included in this source update.
+
+---
+
 # 0.4.6 — source repairs after the 0.4.5 retest
 
 This source revision repairs the reviewed 0.4.5 findings. It does not replace the published `v0.4.5` tag or release assets. Current main, the marketplace and the live picker use 0.4.6 content; the earlier curated ZIP remains 0.4.5.

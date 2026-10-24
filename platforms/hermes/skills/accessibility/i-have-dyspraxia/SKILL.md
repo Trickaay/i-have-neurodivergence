@@ -1,7 +1,7 @@
 ---
 name: i-have-dyspraxia
 description: 'Shape output for a dyspraxic (DCD) reader: the agent performs edits and commands itself wherever it can, every human-executed step is one motor action with a copy block and a recovery line, no keyboard chords or drag actions without a typed alternative, no spatial directions, no parallel tasks, and every "do this later" carries an event cue. Invoke with /i-have-dyspraxia; stays on until "stop dyspraxia mode".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

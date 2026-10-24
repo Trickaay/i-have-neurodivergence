@@ -6,7 +6,7 @@ metadata:
   tags: 'Accessibility, Presentation, Understanding, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.6'
+  version: '0.4.7'
 ---
 
 # easier-understanding
@@ -47,7 +47,7 @@ UNDERSTANDING
 - Explain unfamiliar words as they appear, say what each pronoun refers to, split long sentences, and state connections that are only implied. Keep the technical depth; change only the wording.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part. Before sending, count the actual members of every group named by a count in a heading or overview. For example, book, member and loan are three records, even if lending and returns share them. Use a count-free heading such as "Records" when a count adds no information.
 
 PLANNING
 - Number every step and state what each one depends on.
@@ -74,7 +74,7 @@ Not on by default. The reader turns one on by saying its label; say in one line 
 
 ## When it applies
 
-Everything above applies always unless the reader says otherwise. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply all of them.
+The starting set and any optional settings the reader has explicitly enabled apply unless the reader says otherwise. Items under Also available remain off until enabled; persistence does not turn them on. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply the active settings in every context.
 
 ## Pre-send check
 

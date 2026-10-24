@@ -1,7 +1,7 @@
 ---
 name: easier-transitions
 description: 'Presentation settings for transitions: changing topic or task without losing the thread. Starting set: Warn me before changing topic; Hold my unfinished thread. For a reader who says "I struggle switching between tasks". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-transitions or asks for these settings; stays on until "stop easier transitions".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -62,7 +62,7 @@ Not on by default. The reader turns one on by saying its label; say in one line 
 
 ## When it applies
 
-Everything above applies always unless the reader says otherwise. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply all of them.
+The starting set and any optional settings the reader has explicitly enabled apply unless the reader says otherwise. Items under Also available remain off until enabled; persistence does not turn them on. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply the active settings in every context.
 
 ## Pre-send check
 

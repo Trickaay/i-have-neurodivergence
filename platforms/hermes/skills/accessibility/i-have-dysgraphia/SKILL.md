@@ -1,7 +1,7 @@
 ---
 name: i-have-dysgraphia
 description: 'Shape the exchange for a reader with dysgraphia: the reader is never asked to write more than a word or a number, every choice is a numbered menu answered by number, the agent drafts and the reader approves, misspelled or fragmentary input is interpreted charitably and never corrected, every exact string is copyable, and confirmations are one character. Invoke with /i-have-dysgraphia; stays on until "stop dysgraphia mode".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

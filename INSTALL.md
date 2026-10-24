@@ -1,6 +1,6 @@
 # Install and remove the pack
 
-Extract the entire ZIP before starting. These instructions apply to macOS, Linux and Windows; a local host application must already be installed. The copy-based routes do not need Python, Git or a build step. See [START_HERE.md](START_HERE.md) for the browser-only option.
+Extract the entire ZIP before starting. These instructions apply to macOS, Linux and Windows; a local host application must already be installed. Manual copying needs no Python, Git or build step. The recorded installer/remover needs Python 3.10 or later. See [START_HERE.md](START_HERE.md) for the browser-only option.
 
 ## Codex
 
@@ -11,7 +11,33 @@ Extract the entire ZIP before starting. These instructions apply to macOS, Linux
 
 In Finder, Command-Shift-period shows hidden folders. In Windows File Explorer, enable **View → Show → Hidden items**. In Linux file managers, Control-H commonly shows hidden folders. Create `.agents` and its `skills` subfolder if they do not exist. Keep the leading dot.
 
-### Copy and check
+### Recorded installation and removal (recommended)
+
+Create the chosen destination parent first: for a project, create `.agents` inside that project. Keep the extracted pack in a retained folder. The helper requires Python 3.10+, supplied by your environment; it does not install dependencies or contact the network.
+
+From the extracted pack root, preview the installation. Replace the example paths and source identity with your actual verified download or commit:
+
+```text
+python3 scripts/install_pack.py install --source "." --destination "FULL PROJECT PATH/.agents/skills" --host codex --scope project --source-id "VERIFIED SOURCE IDENTITY"
+```
+
+The preview makes no changes. If it matches your intended installation, repeat with `--apply` at the end. On Windows use `py -3` if that is how Python is installed. For personal scope choose the skills path in your home environment and `--scope personal`. Do not copy a placeholder identity without verifying it: the helper records this value but cannot authenticate a repository or release for you.
+
+Use the exact retained path spelling. Parent-traversal (`..`) components, links and destinations inside the record store are refused; `--source "."` is supported.
+
+Every applied run gets a durable record beside `skills`, under `.i-have-neurodivergence-records/RUN_ID/record.json`. Even an all-identical reinstall gets its own record and owns no pre-existing skills. Keep the exact path printed by the helper, including for later removal; keep these private records out of version control. Conflicting skills stop installation before any skill is copied. All 31 folders and their nested files are checked. Open a fresh Codex chat and invoke `$needs-picker` to verify the host loads them.
+
+To remove one run, close chats using its skills and preview:
+
+```text
+python3 scripts/install_pack.py remove --record "EXACT RECORD PATH"
+```
+
+If the preview succeeds, append `--apply`. Only that run's unchanged newly added skills move into its retained **quarantine**, outside the host's skills directory. The record and all original bytes remain available for recovery. This is removal from host discovery, not permanent deletion. No-op reinstall records cannot remove earlier skills. If the record or a skill is missing, moved, incomplete, edited or contains extra entries or links, the helper stops. Do not bypass the error with a shell deletion or a source-name/hash comparison.
+
+Keep the record and quarantine in place. Recovery after an interrupted operation or restoration into an occupied path needs explicit review; there is no automatic overwrite, permanent-delete or record-recovery command. The helper refuses older record schemas and cannot adopt or remove manually installed trees. Byte-identical manual trees may remain as pre-existing, unowned skills. Stop other writers during an operation: cooperative locking and integrity checks are not protection against a malicious local process modifying records or racing filesystem changes.
+
+### Manual copy and check
 
 1. Open this pack's `platforms/codex/skills/` folder. It contains 31 skill folders.
 2. Check the destination for folders with the same names before copying. If any exist, stop the copy and preserve them. An agent can compare them; identical copies need no update, while different files need your decision and a backup. Do not choose Replace or merge different versions blindly.
@@ -26,13 +52,13 @@ In Finder, Command-Shift-period shows hidden folders. In Windows File Explorer, 
 
 5. Open the target project and start a new Codex chat. Choose `needs-picker` from the skill menu; in the CLI or IDE extension, type `$needs-picker`. The first screen should say **WHAT WOULD MAKE THIS EASIER?**. `skip` selects the plain default. You can also invoke an individual skill.
 
-Keep a durable local installation record outside `skills`, for example `.agents/i-have-neurodivergence-install-record-<unique-id>.json`; use a new name and preserve earlier records. Record the destination and which folders you added versus identical folders already there. An agent can also save each new folder's complete file/directory inventory and file hashes, following [the installation recipe](INSTALL_WITH_AGENT.md#keep-a-durable-record-for-copied-skills). For a manual copy, retain the original download and a separate list of newly added folders so you can compare complete folders later. A temporary file or chat reply is not a durable record. Keep this local record private. The skill files themselves are self-contained after copying. Python 3 is optional, only for running the profile compiler yourself. File copying alone does not prove the host loaded the skills: if the menu is unavailable, report that check as not run.
+For manual copying, retain the original download and a separate durable list of newly added folders. These manual records are not accepted by the deterministic remover. For automatic ownership tracking use the recorded route above. The skill files are self-contained after copying; Python is optional for manual copying and compiling profiles. If host discovery cannot run, report it as not checked.
 
 ### Update or remove
 
-For an update, compare the new complete folders with your installed copies first. Back up customised folders outside `.agents/skills/`, then replace only folders you explicitly choose. Keep unrelated skills and profiles. Check the menu again in a new chat. Avoid installing the same names in both project and personal locations unless you intend to manage both.
+For a helper-managed update, preview removal using the exact old run record. If its owned trees are unchanged and you want the update, apply that removal, retaining the quarantine and record; then install the verified new source as a new run. A no-op record owns nothing and cannot remove an earlier run. Changed or pre-existing unowned trees need an explicit preservation/ownership review before updating; the helper never overwrites them. Do not manually replace a managed tree and expect its old record to remain valid. For a manual installation, compare and back up customised folders outside the skills root before replacing only folders you explicitly choose. Keep unrelated skills and profiles. Check discovery in a new chat. Avoid duplicate project/personal copies unless intended.
 
-To remove the pack, close the active chats using it. Before deleting anything, compare every folder recorded as newly installed with its saved installation inventory or the retained original copy. Include hidden files, extra files and subfolders. If any folder has changed, is missing, contains a symlink, or its ownership is unclear, stop and decide what to keep or back up first. Without a record, establish ownership before removing anything; a matching skill name alone is not enough. Only unchanged folders recorded as newly added are eligible for removal. Keep pre-existing identical skills, custom work and saved profiles. Do not delete the entire `.agents/skills/` directory. Retain the record and start a new chat afterward.
+For helper-managed installations, use the exact recorded-removal command above. For older/manual installations, automatic removal is unavailable: inspect ownership and custom work before deciding what to keep or back up. A matching name or source hash is not proof of ownership. Do not ask an agent to reconstruct a removal list or delete the entire skills directory. Keep unrelated skills, profiles and records.
 
 ## Claude Code
 

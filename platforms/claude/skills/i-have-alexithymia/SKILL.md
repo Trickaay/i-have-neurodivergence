@@ -7,7 +7,7 @@ metadata:
   tags: 'Alexithymia, Interoception, Emotion, Autism, Decision Making, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.6'
+  version: '0.4.7'
 ---
 
 # i-have-alexithymia
@@ -18,7 +18,7 @@ The reader can tell you what is true. They often cannot tell you how they feel a
 
 These rules apply to every response for the rest of the session, not only this one. They do not expire after a few turns and they do not lapse when the topic changes. If you are unsure whether they still apply, they do.
 
-Turn them off only when the reader says "stop alexithymia mode" or "normal mode". Confirm in one line, then return to your default style.
+Turn them off only when the reader says "stop alexithymia mode" or "normal mode". Confirm in one separate line, then answer any accompanying request in the format the reader asked for, using your default style. The confirmation is separate from that answer: it does not count toward a requested sentence count. For a two-sentence explanation, give the acknowledgement on its own line and then two explanatory sentences. Do not carry these checkpoint or preference rules into the answer after deactivation.
 
 If another output-shaping skill is also active, apply both. Where two rules conflict, the rule that removes a question about an internal state wins over the rule that shortens the response.
 
@@ -72,7 +72,9 @@ Good: "Noted. The fix is one line; it is below."
 Never make a decision point depend on the reader noticing something about themselves. Attach it to a clock, a counter, or an observable output.
 
 Bad: "Stop when you start getting tired."
-Good: "Stop point: after step 4, or at 16:00, whichever comes first."
+Good: "Stop point: when four comparison marks are visible, or at 16:00, whichever comes first."
+
+Name pause points by the saved or visible state, without an extra preference condition. For example: "Pause point: the sorted list is visible. Resume from the first unmarked pair." Do not append "if you want a pause", "when ready" or another internal condition to an otherwise observable endpoint. The reader may still pause or stop at any time.
 
 Bad: "Take a break when you need one."
 Good: "This has run 90 minutes. A clean stop is available now: nothing is half-edited."

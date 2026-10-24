@@ -20,9 +20,9 @@ Claude skills set `disable-model-invocation: true` to require explicit invocatio
 
 ## OpenAI Codex
 
-Follow the [Codex installation and removal guide](../INSTALL.md#codex). It covers project and personal locations on macOS, Linux and Windows, conflict checks before copying, and verification after installation. An [agent-install recipe](../INSTALL_WITH_AGENT.md) can help with file comparisons and copying.
+Follow the [Codex installation and removal guide](../INSTALL.md#codex). It covers project and personal locations on macOS, Linux and Windows, conflict checks before copying, and verification after installation. The [agent-install guide](../INSTALL_WITH_AGENT.md) uses a deterministic helper with retained ownership records and recoverable removal.
 
-Copy all 31 complete folders from `platforms/codex/skills/` into the chosen `.agents/skills/` root. Do not nest the outer `skills` folder. Stop before copying if existing same-named folders differ; preserve customised files and unrelated skills. No build step is needed. Python 3 is optional, only for the profile compiler.
+Copy all 31 complete folders from `platforms/codex/skills/` into the chosen `.agents/skills/` root. Do not nest the outer `skills` folder. Stop before copying if existing same-named folders differ; preserve customised files and unrelated skills. No build step is needed. Manual copying needs no Python; the recorded installer/remover requires Python 3.10+.
 
 Open the target project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`. The first screen should say “WHAT WOULD MAKE THIS EASIER?”. `skip` selects the plain default. The picker ends after setup; support skills have their own stop phrases.
 
@@ -30,7 +30,7 @@ Each folder contains `agents/openai.yaml` with `allow_implicit_invocation: false
 
 ## Hermes Agent
 
-Copy `platforms/hermes/skills/accessibility/` into `~/.hermes/skills/`, or configure that folder through `skills.external_dirs` in your Hermes configuration.
+For recorded copying, use the helper in [INSTALL.md](../INSTALL.md#recorded-installation-and-removal-recommended) with `--host hermes --scope personal` and the exact destination `~/.hermes/skills/accessibility` (expand it to a full path); create its parent first. It records only the 31 skill folders, not bundles or host configuration. Alternatively, manually copy `platforms/hermes/skills/accessibility/` into `~/.hermes/skills/`, or configure that folder through `skills.external_dirs` in your Hermes configuration. Hermes live loading remains unverified.
 
 Invoke `/needs-picker`, `/i-have-autism`, `/easier-memory`, or another skill by name. Copy `platforms/hermes/skill-bundles/*.yaml` into `~/.hermes/skill-bundles/` to use bundles such as `/reading-stack` or `/learning-layer`.
 

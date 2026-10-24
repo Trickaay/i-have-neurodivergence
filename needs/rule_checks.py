@@ -10,11 +10,13 @@ vocab = json.load(open(os.path.join(HERE, "needs-vocabulary.json"), encoding="ut
 atoms = {s["id"]: s for s in vocab["support"]}
 
 CHECKS = [
+    ("summary_first", ["count the actual members", "count-free heading"], "overview counts reflect the completed content"),
+    ("prioritise", ["Do not add a second request", "unless the reader requested that hold"], "a review request does not invent a hold request"),
     ("purpose_let_me_try", ["answer whenever I ask", "no penalty", "no comment"], "the answer during practice costs nothing"),
     ("retrieval_feedback", ["never withheld", "\"Hint\", \"show me\" and \"skip\"", "never a judgment", "recalled it or recognised it"], "optional practice; recognition and recall told apart"),
     ("fade_teaching_prompts", ["never access aids", "stay as long as I want them", "available on request"], "a kept diagram stays"),
     ("communication_method", ["Judge nothing from fluency or speed", "Keep my original words", "tentative", "free-form answer", "I will say when I am finished"], "fragments and AAC messages handled on content"),
-    ("help_me_say_it", ["none of these", "original words visible", "only when I ask"], "paraphrase tentative, words kept"),
+    ("help_me_say_it", ["none of these", "original words visible", "only when I ask", "unchanged list", "every supplied fragment", "before sending"], "paraphrase tentative, words kept"),
     ("media_access", ["unverified", "negation exact", "separate choices"], "uncertain captions flagged, not silently chosen"),
     ("spaced_revisit", ["say so", "inventing", "Do not schedule reminders"], "unavailable note stated, progress not invented"),
     ("transfer_check", ["what changed and what stayed the same", "does not apply", "my chosen way of answering"], "changed example with the difference named"),

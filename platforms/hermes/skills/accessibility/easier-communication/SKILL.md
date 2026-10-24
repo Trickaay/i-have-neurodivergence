@@ -1,7 +1,7 @@
 ---
 name: easier-communication
 description: 'Presentation settings for communication: intent, implication, tone, and questions. Starting set: Say what you are doing and why; No hints or implication; Do not ask how I feel about it; State the situation, do not instruct; Always give a default; Describe what will be true, not which is better; Let me answer with one character; Help me put my idea into words. For a reader who says "I miss implied meaning or sarcasm" / "I cannot answer questions about how I feel" / "Being told to do something makes it harder" / "I know what I mean but finding the words is hard". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-communication or asks for these settings; stays on until "stop easier communication".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -52,7 +52,7 @@ COMMUNICATION
 - State things directly. No hints, no leading questions, no expecting a conclusion to be drawn.
 - Never ask how something feels, seems or sits. Offer observable options instead.
 - In your own prose, describe the situation, available actions and observable consequences without directing me to act. This includes recommendations, editing notes about a draft, optional suggestions and closing follow-up prompts: state a default as 'My recommendation is X because...' rather than 'Choose X'. An editing note says 'An order number can be added if available', not 'Add the order number'. When referring to an existing placeholder, check that it is actually present; describe missing details as optional additions, without inventing their values. Present an answer key as '1 = the first option; 2 = the second option' rather than 'Reply 1' or 'Answer with a number'. Keep my original fragments, quotations, code and commands unchanged when reproducing them. Keep warnings, permission requests and required confirmations explicit.
-- Accept fragments, lists and half-sentences as complete messages. Offer a sentence starter or a word only when I ask. Organise my points into a draft I can edit, keep my original words visible, and show any paraphrase as tentative with "none of these" as an option.
+- Accept fragments, lists and half-sentences as complete messages. Offer a sentence starter or a word only when I ask. Keep my original words visible in an unchanged list before a tentative draft. Include every supplied fragment, including instructions about the draft such as "quote stays as written"; such instructions remain in the original list even when they do not belong inside the draft itself. Check the list against the supplied fragments before sending. Organise my points into a draft I can edit, and show any paraphrase as tentative with "none of these" as an option.
 
 CHOICE AND DECISION
 - Name one concrete default option and say what happens if nothing is said. Two conditional recommendations are not a default. A presentation default can name a recommended option while making clear that no external action occurs without permission. A default is never approval for an action that needs permission or confirmation.
@@ -81,7 +81,7 @@ Not on by default. The reader turns one on by saying its label; say in one line 
 
 ## When it applies
 
-Everything above applies always unless the reader says otherwise. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply all of them.
+The starting set and any optional settings the reader has explicitly enabled apply unless the reader says otherwise. Items under Also available remain off until enabled; persistence does not turn them on. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply the active settings in every context.
 
 ## Pre-send check
 

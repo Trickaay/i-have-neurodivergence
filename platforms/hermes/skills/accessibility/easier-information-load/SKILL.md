@@ -1,7 +1,7 @@
 ---
 name: easier-information-load
 description: 'Presentation settings for information load: how much arrives at once: length, density, layers. Starting set: Summary first, detail underneath; Short labelled sections; The complete explanation first. For a reader who says "I lose track of long explanations" / "I need to choose between the whole explanation and one part at a time". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-information-load or asks for these settings; stays on until "stop easier information load".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -46,7 +46,7 @@ These are presentation settings I chose for myself. They describe how I would li
 Limits of these preferences: they change only how you present information and work with me. They operate within my explicit instructions, the project instructions and the permission rules, and they never grant permission, approve an action or count as a confirmation. Never leave out errors, failures, warnings, decisions I need to make, approval requests or irreversible effects to satisfy a brevity or deferral preference. Keep code, commands, paths, numbers, links, citations and meaning exact.
 
 INFORMATION LOAD
-- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part.
+- Answer or summary in the first line. Detail after. Never the reverse. Compose the overview from the finished answer: any count, range or named stage must match the actual parts below. If two stages share one numbered part, count that part once; do not announce a missing part. Before sending, count the actual members of every group named by a count in a heading or overview. For example, book, member and loan are three records, even if lending and returns share them. Use a count-free heading such as "Records" when a count adds no information.
 - Use labelled sections with at most five nonblank content lines each; aim for four to leave room for necessary notes. Count every prose line, bullet, numbered item and table row from one heading to the next; headings and blank lines do not count. An introduction plus five bullets is six lines and must be split. Closing offers count in the section they follow: give them their own heading or omit an unrequested offer. Before sending, count each whole section and move any sixth line under another heading. Keep the complete requested explanation; split its presentation rather than omitting content.
 
 LEARNING
@@ -71,7 +71,7 @@ Not on by default. The reader turns one on by saying its label; say in one line 
 
 ## When it applies
 
-Everything above applies always unless the reader says otherwise. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply all of them.
+The starting set and any optional settings the reader has explicitly enabled apply unless the reader says otherwise. Items under Also available remain off until enabled; persistence does not turn them on. The reader may declare a context in their own words: "work mode", "learning mode", "brainstorming", "I am stuck", "I am overloaded". A context is declared by the reader, never inferred from typing, message length, errors or the time of day. If the reader has set some of these to apply only in a context, follow what they said; if they have not, apply the active settings in every context.
 
 ## Pre-send check
 

@@ -272,11 +272,13 @@ def area_body(sk, vocab, inv):
         L += ["- %s: %s" % (s["label"], s.get("defers_note", "")) for s in held]
         L += ["", "Errors, failures, decisions, approvals and irreversible effects are never held back.", ""]
     L += ["## When it applies", "",
-          "Everything above applies always unless the reader says otherwise. The reader may declare a context "
+          "The starting set and any optional settings the reader has explicitly enabled apply unless the reader "
+          "says otherwise. Items under Also available remain off until enabled; persistence does not turn them on. "
+          "The reader may declare a context "
           "in their own words: \"work mode\", \"learning mode\", \"brainstorming\", \"I am stuck\", \"I am "
           "overloaded\". A context is declared by the reader, never inferred from typing, message length, "
           "errors or the time of day. If the reader has set some of these to apply only in a context, follow "
-          "what they said; if they have not, apply all of them.", "",
+          "what they said; if they have not, apply the active settings in every context.", "",
           "## Pre-send check", "",
           "Before sending, confirm each line of the starting set is honoured, that no error, failure, decision "
           "or approval request was dropped to satisfy one, and that nothing in the response names a condition "

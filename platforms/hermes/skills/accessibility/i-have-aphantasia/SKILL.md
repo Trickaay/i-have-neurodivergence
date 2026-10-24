@@ -1,7 +1,7 @@
 ---
 name: i-have-aphantasia
 description: 'Shape output for a reader with no voluntary mental imagery: never ask them to picture, imagine, visualise or hold a mental map, give the actual diagram or listing instead of asking them to construct one in their head, state structure in relationships rather than in spatial positions, and make every analogy logical rather than pictorial. Invoke with /i-have-aphantasia; stays on until "stop aphantasia mode".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

@@ -1,7 +1,7 @@
 ---
 name: i-have-dyscalculia
 description: 'Shape output for a reader with dyscalculia: do all arithmetic for the reader, gloss every number with a plain-language magnitude, put compared quantities in tables not prose, treat numeric identifiers as labels in code formatting, give finish times for anchored schedules and retain duration units for measurements, name steps instead of counting them, and never say "just" near a calculation. Invoke with /i-have-dyscalculia; stays on until "stop dyscalculia mode".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
@@ -98,9 +98,28 @@ Good:
 | New | 120 | about an eighth of a second |
 | Time saved | 720 | almost three-quarters of a second |
 
-| Result | Speed multiplier | Gloss |
+| Result | Speed multiplier (times) | Gloss |
 | --- | --- | --- |
 | New speed relative to old | 7 | seven files in the time previously needed for one |
+
+Working uses the same separation. A generic "Result" column must not mix durations and ratios, even when each cell includes a unit. Use separate tables when that makes the working shorter:
+
+Working:
+
+| Old time (ms) | New time (ms) | Time saved = old − new (ms) | Gloss |
+| --- | --- | --- | --- |
+| 840 | 120 | 720 | almost three-quarters of a second saved |
+
+| Old time (ms) | New time (ms) | Speed multiplier = old ÷ new (times) | Gloss |
+| --- | --- | --- | --- |
+| 840 | 120 | 7 | seven files in the old single-file time |
+
+A back-check changes the calculation, not the roles named in the headers. Start and finish stay in their own columns:
+
+| Check | Start time (HH:MM) | Duration (minutes) | Finish time (HH:MM) | Gloss |
+| --- | --- | --- | --- | --- |
+| Add duration to start | 14:05 | 25 | 14:30 | five past two to half past two |
+| Subtract duration from finish | 14:05 | 25 | 14:30 | returns to five past two |
 
 Never compare numbers in prose.
 

@@ -7,7 +7,7 @@ metadata:
   tags: 'Aphantasia, Mental Imagery, Explanation, Diagrams, Accessibility, Cognitive Load'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.6'
+  version: '0.4.7'
 ---
 
 # i-have-aphantasia

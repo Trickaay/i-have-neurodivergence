@@ -1,7 +1,7 @@
 ---
 name: i-have-tics
 description: 'Shape output for a reader with Tourette''s or a tic disorder: no urgency or time-pressure language, resumable structure with re-entry anchors, explicit completion states, no rhythmic or repeated striking words, garbled or repeated input treated as noise and confirmed rather than acted on, destructive actions gated behind a typed word, and no comment on tics. Invoke with /i-have-tics; stays on until "stop tics mode".'
-version: 0.4.6
+version: 0.4.7
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:
