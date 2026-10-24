@@ -1,7 +1,7 @@
 ---
 name: easier-planning
 description: 'Presentation settings for planning: breaking work up, ordering it, and starting it. Starting set: Break it into steps; Give me a way to start; Attach actions to a trigger; Say when a step is finished; Tell me what to do first. For a reader who says "I need things broken into steps" / "I struggle to start tasks" / "I find planning and sequencing difficult". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-planning or asks for these settings; stays on until "stop easier planning".'
-version: 0.4.7
+version: 0.4.8
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

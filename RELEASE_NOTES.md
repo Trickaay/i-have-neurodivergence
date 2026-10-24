@@ -1,3 +1,17 @@
+# 0.4.8 — installation decision points and numeric examples
+
+This source update follows review of the 0.4.7 retest. The published `v0.4.5` tag and curated release assets remain unchanged.
+
+- The agent recipe and starting prompt require genuine filesystem tools, unchanged path components and a supplied exact record before any record selection. Manual fallback is for the user to perform; the agent must not offer its own replacement copy procedure.
+- An explicit permission denial stops the affected operation, including verification. Different flags, scripts, interpreters or shell commands are not authorization to retry. Missing software and denied permission are distinct outcomes.
+- Guidance excludes installation through symlinks, checks conflicts before manual copying and preserves later custom changes during manual-removal review.
+- Dyscalculia keeps unrequested teaching examples out of Working. Requested teaching examples use a separate labelled table, and conversion-factor columns name compound units. Numeric tables retain a separate final explanation column.
+- The deterministic helper retains its existing source/ownership records, fail-closed checks and recoverable quarantine. Its source identity remains a caller assertion, not download authentication.
+
+The reviewed 0.4.7 sample passed 65 of 66 fixed behavior turns. Agent results are 28 of 33 after correcting a missed denial-retry failure. Those results remain historical evidence, not proof that the new instructions will always be followed. Restricted-capability tests still showed a premature access announcement; this remains unresolved. Genuine tool-less behavior needs a new host test and remains unqualified. See the README for checks actually performed on this revision and remaining limits.
+
+---
+
 # 0.4.7 — recorded installation and recoverable removal
 
 This source update follows independent review of the 0.4.6 return. It does not replace the published `v0.4.5` tag or curated release assets.

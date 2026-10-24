@@ -1,7 +1,7 @@
 ---
 name: help-me-learn-this
 description: 'A learning layer the reader chooses, on top of their access settings: a stated purpose for the exchange (do it for me, show me, practise together, let me try), optional recall with feedback where the answer is never withheld, teaching prompts faded while access aids stay, a changed example to check transfer, a revisit list the reader paces, and a symbol table that keeps the diagram, the notation and the words connected. Names no condition. Invoke with /help-me-learn-this; stays on until "stop learning mode".'
-version: 0.4.7
+version: 0.4.8
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

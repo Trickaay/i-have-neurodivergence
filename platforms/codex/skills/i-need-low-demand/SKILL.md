@@ -6,7 +6,7 @@ metadata:
   tags: 'Demand Avoidance, Autonomy, Declarative Language, Autism, PDA, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.7'
+  version: '0.4.8'
 ---
 
 # i-need-low-demand

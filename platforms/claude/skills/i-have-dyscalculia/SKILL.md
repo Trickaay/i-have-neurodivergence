@@ -7,7 +7,7 @@ metadata:
   tags: 'Dyscalculia, Output Style, Accessibility, Numeracy, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.7'
+  version: '0.4.8'
 ---
 
 # i-have-dyscalculia
@@ -78,9 +78,11 @@ Good: "Latency dropped 38% (a bit over a third)."
 
 ### 3. Compared quantities go in tables
 
-Any response with 2 or more numbers that will be compared becomes a table. One row per item. One column per measure. Units in the header, not the cells. Every value must have the quantity type and unit named by its column, including inside Working. Durations, clock times and unitless ratios are different measures: use separate columns or tables headed, for example, "Time saved (ms)", "Clock time (HH:MM)" and "Speed multiplier (times)". Never put a ratio below "Result (ms)" or a clock time below "Duration (minutes)"; adding a unit in that cell does not repair a false header. Use an em dash for a measure that does not apply to that row. Add a final column with the plain-language gloss.
+Any response with 2 or more numbers that will be compared becomes a table. One row per item. One column per measure. Units in the header, not the cells. Every value must have the quantity type and unit named by its column, including inside Working. Durations, clock times and unitless ratios are different measures: use separate columns or tables headed, for example, "Time saved (ms)", "Clock time (HH:MM)" and "Speed multiplier (times)". Never put a ratio below "Result (ms)" or a clock time below "Duration (minutes)"; adding a unit in that cell does not repair a false header. Use an em dash for a measure that does not apply to that row. Every numeric table ends with a separate final `Gloss` or `Meaning` column, including Example, Working and back-check tables. Inline parenthetical glosses do not replace that final column.
 
 For a comparison request, the input echo, computed savings, speed ratio, headline result and numerical analogies all stay in tables. Do not restate them in a prose summary, even when the arithmetic is correct. A result table can come first; answer-first does not require a prose headline.
+
+A conversion factor has a compound unit: label its column, for example, "Factor (ms per s)", not "Milliseconds per second (ms)". Keep the input duration, conversion factor and output duration in separate columns, including in a back-check.
 
 Bad: "The old query took 840 ms and the new one takes 120 ms, so about seven times faster."
 Good:
@@ -129,10 +131,10 @@ Never put two similar identifiers in one sentence.
 Bad: "Change 3000 to 3001 and 8080 to 8081."
 Good:
 
-| Named identifier | Current label | Replacement label |
-| --- | --- | --- |
-| Dev server port | `3000` | `3001` |
-| API port | `8080` | `8081` |
+| Named identifier | Current label | Replacement label | Meaning |
+| --- | --- | --- | --- |
+| Dev server port | `3000` | `3001` | Dev server port labels, not quantities |
+| API port | `8080` | `8081` | API port labels, not quantities |
 
 ### 5. Absolute, not relative
 
@@ -171,7 +173,7 @@ Good:
 
 ### 8. Worked example before formula
 
-If a calculation must be taught, show one fully worked example with concrete numbers first. Then the general rule. Then the reader's own case.
+Only when the reader explicitly asks to be taught, show one fully worked example with concrete numbers in a separate table labelled `Example:`, followed by the general rule and the reader's own case. Keep that teaching example outside `Working:`; Working contains only the reader's calculation, used intermediates and direct checks. Compared numbers stay in tables, never prose. A request to calculate, convert, or show the working for the supplied values does not request a separate teaching example.
 
 ### 9. Concrete, then picture, then symbol
 
@@ -228,7 +230,7 @@ Before sending, find every digit and check:
 8. Delete every "just / simply / easy / obviously / quick" near a number, including inside magnitude glosses: write "under a second", not "just under a second".
 9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending. Trace every clause and quantity inside each Working cell to the result, a used intermediate or its check. Delete unused detours even inside an otherwise useful row, including correct arithmetic that the chosen path does not use.
 10. For a comparison request, move any numeric headline, result, speed ratio or analogy outside a table into a result table.
-11. Check every numeric cell against its column header, including Working and analogy tables. A ratio is not a duration, and a finishing clock time is not a duration in minutes. Separate those measures into correctly labelled columns or tables. Do duration comparisons reuse the declared unit? Convert only for mixed inputs or a requested conversion, in Working.
+11. Check every numeric cell against its column header, including Working and analogy tables. A ratio is not a duration, and a finishing clock time is not a duration in minutes. Separate those measures into correctly labelled columns or tables. Do duration comparisons reuse the declared unit? Convert only for mixed inputs or a requested conversion, in Working. Verify that every numeric table, including Working and back-checks, has its separate final Gloss or Meaning column; keep that column even when cells already contain glosses.
 12. Put every arithmetic back-check in the Working table. Count the numeric values in remaining prose sentences and paragraphs; remove over-limit repetitions.
 
 Then verify: can the reader act on this without doing any arithmetic, comparing any two numbers in their head, or retyping any digit string from memory?
@@ -287,10 +289,10 @@ If yes, send.
 > | Proposed cumulative wait | 6,200 | well below the timeout |
 > | Timeout | 30,000 | half a minute |
 >
-> | Named identifier | Current label | Proposed label |
-> | --- | --- | --- |
-> | Dev server port | `3000` | `3001` |
-> | API port | `8080` | `8081` |
+> | Named identifier | Current label | Proposed label | Meaning |
+> | --- | --- | --- | --- |
+> | Dev server port | `3000` | `3001` | Dev server port labels, not quantities |
+> | API port | `8080` | `8081` | API port labels, not quantities |
 
 ## On Claude Code
 

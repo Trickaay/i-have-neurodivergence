@@ -1,7 +1,7 @@
 ---
 name: easier-learning
 description: 'Presentation settings for learning: taking in something new: examples, representation, checking. Starting set: Show a worked example; Draw the structure; One part at a time, with the map; Example first, then one to try; Show me how it is done; Let me try remembering, with hints and the answer available; Give less help gradually, and let me restore it; Show the same idea in a different example; Keep the diagram, symbols and meanings connected; Print the trace; never ask me to work it out silently. For a reader who says "I need visual examples" / "Explanations do not stick unless I do something with them" / "I understand it now but forget it later" / "I can copy the example but cannot use it elsewhere" / "I want to choose: do it for me, show me, or let me try" / "Working it out silently in my head does not work for me". Chosen by the reader, not inferred, and not a diagnosis. Use only when the reader invokes /easier-learning or asks for these settings; stays on until "stop easier learning".'
-version: 0.4.7
+version: 0.4.8
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

@@ -23,11 +23,11 @@ python3 scripts/install_pack.py install --source "." --destination "FULL PROJECT
 
 The preview makes no changes. If it matches your intended installation, repeat with `--apply` at the end. On Windows use `py -3` if that is how Python is installed. For personal scope choose the skills path in your home environment and `--scope personal`. Do not copy a placeholder identity without verifying it: the helper records this value but cannot authenticate a repository or release for you.
 
-Use the exact retained path spelling. Parent-traversal (`..`) components, links and destinations inside the record store are refused; `--source "."` is supported.
+Use the exact retained path spelling. Parent-traversal (`..`) components, links and destinations inside the record store are refused; `--source "."` is supported. Do not normalize a refused path or install through a link. Choose a new direct path explicitly before starting another preview.
 
 Every applied run gets a durable record beside `skills`, under `.i-have-neurodivergence-records/RUN_ID/record.json`. Even an all-identical reinstall gets its own record and owns no pre-existing skills. Keep the exact path printed by the helper, including for later removal; keep these private records out of version control. Conflicting skills stop installation before any skill is copied. All 31 folders and their nested files are checked. Open a fresh Codex chat and invoke `$needs-picker` to verify the host loads them.
 
-To remove one run, close chats using its skills and preview:
+To remove one run, use the exact record path saved in its installation result. Do not choose a record by searching for the latest timestamp. If the exact path is unavailable, stop for an ownership review. Close chats using its skills and preview:
 
 ```text
 python3 scripts/install_pack.py remove --record "EXACT RECORD PATH"
@@ -58,7 +58,7 @@ For manual copying, retain the original download and a separate durable list of 
 
 For a helper-managed update, preview removal using the exact old run record. If its owned trees are unchanged and you want the update, apply that removal, retaining the quarantine and record; then install the verified new source as a new run. A no-op record owns nothing and cannot remove an earlier run. Changed or pre-existing unowned trees need an explicit preservation/ownership review before updating; the helper never overwrites them. Do not manually replace a managed tree and expect its old record to remain valid. For a manual installation, compare and back up customised folders outside the skills root before replacing only folders you explicitly choose. Keep unrelated skills and profiles. Check discovery in a new chat. Avoid duplicate project/personal copies unless intended.
 
-For helper-managed installations, use the exact recorded-removal command above. For older/manual installations, automatic removal is unavailable: inspect ownership and custom work before deciding what to keep or back up. A matching name or source hash is not proof of ownership. Do not ask an agent to reconstruct a removal list or delete the entire skills directory. Keep unrelated skills, profiles and records.
+For helper-managed installations, use the exact recorded-removal command above. For older/manual installations, automatic removal is unavailable: inspect ownership and current custom work before deciding what to keep or back up. A saved list of added folders does not account for later edits, additions or replacements; do not delete from that list alone. A matching name or source hash is not proof of ownership. Do not ask an agent to reconstruct a removal list or delete the entire skills directory. Keep unrelated skills, profiles and records.
 
 ## Claude Code
 
@@ -121,6 +121,8 @@ Restart afterward. See the [Claude Code command reference](https://code.claude.c
 For ordinary chat assistants, use the picker's Plain instructions export. An uploaded ZIP does not automatically install skills or give an assistant filesystem access. Cowork and Hermes instructions are in [platforms/README.md](platforms/README.md); their live integrations have not been qualified for this release.
 
 ## Integrity and help
+
+If an operation is explicitly denied by your host, stop it. Do not retry the denied operation through another command or tool without the required authorization. A missing Python installation is different: you can follow the manual copy instructions yourself, checking conflicts before copying. The agent recipe does not permit an agent to replace the helper with its own copy/removal script.
 
 The release includes a `.zip.sha256` checksum beside the ZIP. Compare it with your download if you want to check transport integrity; this is not a publisher signature. Inside the curated bundle, `BUNDLE_MANIFEST.json` records the source commit and the SHA-256 of every other file. GitHub's automatic source-code archives do not include that generated manifest.
 

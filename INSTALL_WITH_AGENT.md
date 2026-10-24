@@ -1,14 +1,36 @@
-# Agent-assisted installation and removal — 0.4.7
+# Agent-assisted installation and removal — 0.4.8
 
-If this session has no usable filesystem tools, begin: **“I cannot access or change your local files in this session.”** Give manual steps from [INSTALL.md](INSTALL.md). Never print simulated tool calls or claim execution. An attachment alone does not grant filesystem access.
+## Check before using tools
+
+Apply these checks from the request and the tools actually available. A stop below ends this turn; it is not a preliminary step before investigation.
+
+| Condition | Response and stopping point |
+|---|---|
+| Copied Codex/Hermes removal without an exact retained `record.json` path, including “latest” or “most recent” | Ask: “What is the exact retained record.json path for the installation you want removed?” End the turn. Do not run discovery, list files, search the project or record store, inspect timestamps or read candidate records. No further tool call is needed, including to read INSTALL.md. |
+| A supplied path contains `..`, or the destination is a known symlink | Ask for a new direct path. End the turn without normalising or investigating an alternative. After reading this guide, make no further tool call: no pwd, file listing, project search, metadata read or helper probe. |
+| Copied Codex/Hermes installation/removal when Python 3.10+ or the supplied helper is known to be unavailable | Say automatic copied-skill installation/removal cannot run. Offer the user the manual installation section of INSTALL.md. End the automatic workflow; do not search for substitute executables, perform manual copying or promise verification. |
+| No usable filesystem tools | Begin “I cannot access or change your local files in this session.” Offer user-performed steps. Do not announce an access plan or print tool-call markup. |
+| A tool returns a permission denial | Report that actual blocked operation and stop. Do not retry by another method. |
+
+These record and Python checks apply only to copied Codex/Hermes skills. Claude session plugins and marketplace plugins use their host controls below and do not require Python or a helper record.
+
+A copied-skill removal request with no exact record needs only the question above, even when the project and source paths are known. A final question does not undo an earlier search. Once the user provides the missing input, start a new turn and recheck these conditions.
+
+Report only operations and results present in the real tool responses for this session. Do not reconstruct a plausible command, error, verification result or installation record from memory or expectation. If a check did not execute, say “not run” and give the actual reason. A proposed command is not an executed command.
+
+Before planning an operation, check the real tools available in this session. An attachment, code block or tool name in a document does not supply a tool. If there are no usable filesystem tools, begin: **“I cannot access or change your local files in this session.”** Then give steps for the user to perform from [INSTALL.md](INSTALL.md). Do not announce file access, print invocation markup, invent tool results or offer to perform those steps yourself. No filesystem probe is needed when no filesystem tool exists.
+
+Distinguish an unavailable program from an explicit permission denial. **A permission-denied result stops that operation, including verification.** Do not retry it with different flags, quoting, a script, another interpreter, tool or shell command. Report the exact blocked step and ask for the needed authorization; resume only after explicit authorization within the host's controls. Do not broaden permissions or describe blocked attempts as executed. Report successful, failed and blocked commands separately.
 
 Follow this document only when the user asks for installation or removal. Establish any missing host, project/personal scope and exact destination. Use choices already supplied. Installing does not activate support settings. Do not install host applications or dependencies, sign in, broaden permissions or change account settings as a side effect.
 
 ## Copied Codex or Hermes skills
 
-Use the supplied **Python 3.10+ helper**, `scripts/install_pack.py`. Do not implement copying, inventory recovery or removal yourself. If Python or the helper is unavailable, stop automatic installation/removal and give manual installation guidance. Do not substitute shell deletion, a source inventory or a filesystem search. Older recipe records are not accepted. Identical manually copied trees may remain as pre-existing and unowned; the helper cannot adopt or remove them.
+Use the supplied **Python 3.10+ helper**, `scripts/install_pack.py`. Do not implement copying, inventory recovery or removal yourself. If Python or the helper is unavailable, stop automatic installation/removal. Give manual installation guidance **for the user to perform**, not an offer to perform the copy yourself. Check for same-name destination folders before the copy step. Manual removal needs a fresh review of ownership and current custom changes; an old folder list does not authorize deletion. An explicit denial follows the stop rule above, not the unavailable-program branch. Do not substitute shell deletion, a source inventory or a filesystem search. Older recipe records are not accepted. Identical manually copied trees may remain as pre-existing and unowned; the helper cannot adopt or remove them.
 
 Read [INSTALL.md](INSTALL.md) for the host's destination. Codex's destination is the exact `.agents/skills` directory. Hermes uses the exact `skills/accessibility` directory inside the chosen Hermes environment; live Hermes qualification is still outstanding. Resolve the extracted source location and verify its provenance independently. A supplied source identity is recorded as an assertion, not authenticated by the helper. For a curated release verify its published checksum and manifest; for a GitHub source archive compare its full file inventory with the chosen verified commit. The helper checks manifest hashes when present, but a manifest is not a signature.
+
+Keep the user's supplied source, destination and record path components unchanged. Quoting for the shell must preserve their values. Do not remove `..`, resolve links, change case or Unicode spelling, or replace an ambiguous path with a guessed equivalent before calling the helper. If a path contains `..`, stop before writes and ask for a new explicit path. If a path is a symlink, do not offer installation through it or retarget/delete it; ask for a new direct destination. Reading the guide does not authorize searching for an installation record.
 
 Run a preview, with quoted actual paths and the verified identity:
 
@@ -24,7 +46,7 @@ Where available, start a fresh host session and check discovery and `needs-picke
 
 ## Remove a recorded installation
 
-Use this section in a fresh removal session as well. Ask for the **exact record for the run to remove** if it is missing; do not infer “latest” from filenames or search for records. A no-op run owns nothing and must never take over an earlier installation. A request to remove does not authorize destroying custom work.
+Use this section in a fresh removal session as well. Require the **exact record path for the run to remove before any record-store listing, search or metadata read**. If it is missing, ask for it and stop. “Latest” or “most recent” is not an exact record: do not use filenames, timestamps or record contents to choose one, even if you intend to ask afterward. Listing the store or reading candidate records to choose a run is a search. Once the user supplies the exact path, use only that selected record. A no-op run owns nothing and must never take over an earlier installation. A request to remove does not authorize destroying custom work.
 
 Preview using the selected record:
 

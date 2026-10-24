@@ -1,4 +1,4 @@
-# Start here — 0.4.7 source revision
+# Start here — 0.4.8 source revision
 
 Choose how an assistant presents information. No diagnosis is required. You can change or stop the settings at any time.
 
@@ -14,9 +14,9 @@ The page needs no build step or Python. If Copy is blocked, use Download. Save *
 
 Open the extracted folder in a local coding agent, or give it access to that folder. Copy this message:
 
-> Please read INSTALL_WITH_AGENT.md in this extracted pack and help me install it. First establish which assistant I use and where the files should go if I have not already said. Preserve my existing skills and settings. For copied skills, use scripts/install_pack.py after verifying the source; do not write a replacement copying or removal script. Keep the run record it returns. Verify the installation and tell me where the record is, how to use the pack and how to preview removal with that exact record.
+> Help me install this pack using INSTALL_WITH_AGENT.md. First check whether you have real tools that can access my files. If not, say so and give steps for me to perform; do not simulate tool calls. Establish my assistant and exact destination if missing. Keep path components unchanged; ask about ambiguous paths. Use the supplied installer after verifying the source, preserve existing skills, and retain its exact run record. If a tool denies permission, stop that operation rather than retrying another way. If Python or the helper is unavailable, give manual instructions for me, without offering to do the copy. Report what you actually checked and how to preview removal using the exact record.
 
-A chat attachment alone may not give an agent access to your computer. If it cannot write files, it should guide you through [INSTALL.md](INSTALL.md).
+A chat attachment alone may not give an agent access to your computer. Without usable filesystem tools, use [INSTALL.md](INSTALL.md) yourself. That agent route is not qualified: tested agents can announce file access before admitting they cannot perform it. An announced action is not evidence of installation.
 
 ## Install it yourself
 
@@ -31,6 +31,6 @@ The browser picker and agent installation guide are separate ways to get started
 
 ## What early access means
 
-The current source includes repairs from the 0.4.6 retest. Check the README validation status for completed checks and remaining gaps; fresh Claude qualification of these repairs and human screen-reader testing remain outstanding. These settings are preferences, not proven treatments or guarantees of model behavior. See [release notes](RELEASE_NOTES.md) for the exact limits.
+The current source includes repairs from the 0.4.7 retest. Check the README validation status for completed checks and remaining gaps. Agent instructions cannot enforce a host's capabilities or guarantee compliance; the tool-less agent route remains unqualified. Fresh Claude qualification of these repairs and human screen-reader testing remain outstanding. These settings are preferences, not proven treatments or guarantees of model behavior. See [release notes](RELEASE_NOTES.md) for the exact limits.
 
 Inspired by [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd). [License](LICENSE) · [Attribution](THIRD_PARTY_NOTICES.md).

@@ -1,7 +1,7 @@
 ---
 name: i-have-dyslexia
 description: 'Shape output for a dyslexic reader: sentences of 15 words or fewer, paragraphs of 3 sentences or fewer, bold never italics, vertical lists never comma lists, every exact string in a copyable code block, confusable characters labelled, one term per concept, nouns not pronouns. Has a hyperlexic variant for fast decoders with weak comprehension. Invoke with /i-have-dyslexia; stays on until "stop dyslexia mode".'
-version: 0.4.7
+version: 0.4.8
 author: 'Accessibility skill pack contributors'
 license: MIT
 metadata:

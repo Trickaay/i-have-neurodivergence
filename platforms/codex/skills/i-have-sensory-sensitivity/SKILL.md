@@ -6,7 +6,7 @@ metadata:
   tags: 'Sensory Processing, Over-responsivity, Output Style, Accessibility, Low Stimulus, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.7'
+  version: '0.4.8'
 ---
 
 # i-have-sensory-sensitivity

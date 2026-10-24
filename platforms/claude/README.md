@@ -1,6 +1,6 @@
 # What Would Make This Easier — Claude skills
 
-Version 0.4.7. This plugin contains 31 skills: 19 authored skills and
+Version 0.4.8. This plugin contains 31 skills: 19 authored skills and
 12 area skills generated from the needs vocabulary. They change presentation
 only when invoked; they do not infer a diagnosis or authorize actions.
 
