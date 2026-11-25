@@ -1,16 +1,24 @@
 # i-have-neurodivergence
 
-[![The needs picker: choose what makes an exchange difficult and select the supports that help.](assets/needs-picker.jpg)](https://trickaay.github.io/i-have-neurodivergence/)
-
 **Make AI replies easier to read, follow and act on—with settings you choose.**
 
-**[Try the live picker →](https://trickaay.github.io/i-have-neurodivergence/)** · [Download current source](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip) · [Install with an agent](INSTALL_WITH_AGENT.md)
+## [Try the live picker →](https://trickaay.github.io/i-have-neurodivergence/)
 
-Choose shorter sections, clearer wording, fewer choices or concrete steps. Copy the result into your assistant. No download, diagnosis or compiler needed to try the picker.
+Choose clearer wording, shorter sections, fewer choices or one step at a time. You do not need a diagnosis, a download or any coding knowledge to get started.
 
-## Quick start: try three lines
+[![The live picker: choose what is difficult and see your selected supports in Your setup.](docs/images/picker-live.jpg)](https://trickaay.github.io/i-have-neurodivergence/)
 
-Paste this into a ChatGPT or Claude conversation, or your custom instructions, then ask your usual question:
+*The real picker, with two example supports selected. Every choice is optional and can be changed.*
+
+## Start here: use it in a conversation
+
+1. **[Open the picker](https://trickaay.github.io/i-have-neurodivergence/)**. Tick something you recognise, then choose what helps. “Show me the difference” lets you compare two styles.
+2. **Choose “Copy for your agent”**. Leave the format on **“Plain instructions — paste anywhere”**, then press **Copy**.
+3. **Paste into a new conversation** with ChatGPT, Claude or another assistant. Add your question underneath.
+
+You can also save the instructions in your assistant's custom-instructions settings, if it has them. If copying does not work, press **Download**, open the text file and copy from there. You can change the wording to suit you.
+
+Want a quick taste? Paste these three lines into a conversation:
 
 ```text
 Use short, clearly labelled sections and plain, literal language.
@@ -18,144 +26,80 @@ For a task, give one concrete next step and say what “done” looks like.
 Keep essential warnings and exact details; ask before actions that need permission.
 ```
 
-These are example preferences: change or remove any line. For your own combination, [open the picker](https://trickaay.github.io/i-have-neurodivergence/).
+## What difference can it make?
 
-The pack includes **19 authored skills**, **89 supports** across **12 areas**, and **31 skills per generated platform**. You can change or stop the settings at any time.
+These are **illustrative examples**, not recorded test results or promises about every reply. Choose the style that works for you.
 
-## Get the pack
+| Preference | Without the preference | With the preference |
+| --- | --- | --- |
+| **Exact, literal wording** | “Give me a shout when you've got the ball rolling.” | “Tell me when you have started.” |
+| **One step at a time** | “Open the document, add a title, write your list and save it.” | “Open the document. Done when the document is visible. I'll wait before giving the next step.” |
 
-The current source is **0.4.8**, with repairs from the 0.4.7 retest. [Download current source](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip), extract it, and open [START_HERE.md](START_HERE.md). It includes the [installation guide](INSTALL.md) and [agent-install recipe](INSTALL_WITH_AGENT.md). GitHub's source ZIP has no `BUNDLE_MANIFEST.json`; an installing agent must establish its source before copying.
-
-The original [0.4.5 early-access release](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5) remains available unchanged. Its curated ZIP contains a manifest, but predates the current skill and safe-removal guidance. The live picker and marketplace follow current source. See [release notes and limits](RELEASE_NOTES.md).
-
-## Start with the picker
-
-1. [Open the live picker](https://trickaay.github.io/i-have-neurodivergence/).
-2. For offline use, download and extract the [current source ZIP](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip), then open `needs-picker.html` in your browser.
-3. Choose what would make the exchange easier, then choose what helps. Everything is optional.
-4. Copy the **Plain instructions** output into your assistant's custom instructions or the start of a conversation.
-
-The picker also exports an `AGENTS.md` section, a `SKILL.md`, YAML and JSON. YAML is the editable profile and preserves your difficulty selections. JSON contains compiled supports and rules; it omits structured difficulty selections, while retaining any notes you supplied. To keep an editable profile, export YAML and save it as `needs.yaml` wherever you choose. The browser page does not require a Python installation or a build step.
-
-If clipboard access is blocked, Copy selects the displayed text for manual copying. Some browsers omit its final line break from that selection. Download preserves the complete export, including its final line break.
+A support changes how an answer is presented. It does not give the assistant permission to act, remove essential warnings or make decisions for you.
 
 ## Install skills
 
-In an interactive Claude Code session, add this repository as a marketplace and install the plugin:
+**Installation is optional.** The copy-and-paste route above is enough for ordinary chat. Skills are reusable instructions for tools such as Codex and Claude Code.
+
+[Download the current pack](https://github.com/Trickaay/i-have-neurodivergence/archive/refs/heads/main.zip), then extract the ZIP before using the files. Start with [START_HERE.md](START_HERE.md) inside the folder.
+
+### Codex
+
+The pack has **31 skills** for Codex. For a first manual installation in one project:
+
+1. In the folder you work on in Codex, create `.agents`, then a `skills` folder inside it. [Help with hidden folders](INSTALL.md#choose-where-the-skills-apply).
+2. In the extracted pack, open `platforms/codex/skills/`.
+3. **Check for same-name folders in your destination before copying.** If any exist, stop and follow the [update instructions](INSTALL.md#update-or-remove); do not replace or merge them.
+4. Copy the **31 complete folders inside** the pack's `skills` folder into your project's `.agents/skills/`. Keep their contents and subfolders together.
+5. Open the project in a **new Codex chat** and choose **needs-picker** from the skill menu. In the CLI or IDE extension, type `$needs-picker`.
+
+For installation with ownership records and recoverable removal, use the [recorded installer](INSTALL.md#recorded-installation-and-removal-recommended). It requires Python 3.10 or later. Keep the exact installation record for removal; asking an agent to find the “latest” installation is not a supported shortcut. An agent with access to your local files can follow [INSTALL_WITH_AGENT.md](INSTALL_WITH_AGENT.md); an uploaded ZIP alone does not grant that access.
+
+### Claude Code
+
+For the **19-skill marketplace plugin**, paste these commands **inside an interactive Claude Code session**, one at a time:
 
 ```text
 /plugin marketplace add Trickaay/i-have-neurodivergence
 /plugin install i-have-neurodivergence@i-have-neurodivergence
 ```
 
-Restart the host if needed, then invoke `needs-picker` using its skill menu or command; in Claude Code it is listed as `/i-have-neurodivergence:needs-picker`. The root plugin contains the 19 authored skills. The generated Claude platform plugin also includes the 12 area skills; see the [platform installation guide](platforms/README.md#claude-code-and-cowork).
-
-For an existing Claude Code installation, refresh the marketplace and update the plugin, then restart the host:
+Choose the installation scope Claude Code offers. Restart if needed, then type:
 
 ```text
-/plugin marketplace update i-have-neurodivergence
-/plugin update i-have-neurodivergence@i-have-neurodivergence
+/i-have-neurodivergence:needs-picker
 ```
 
-For a terminal or coding agent, use the CLI form with the intended scope. This example uses project scope:
+Want **all 31 skills**, including the area-based skills? From the extracted pack folder, run this in a terminal:
 
-```bash
-claude plugin marketplace add Trickaay/i-have-neurodivergence --scope project
-claude plugin install i-have-neurodivergence@i-have-neurodivergence --scope project
+```sh
+claude --plugin-dir "platforms/claude"
 ```
 
-The [installation guide](INSTALL.md) also gives the CLI update commands. `/plugin` commands require an interactive Claude session; they are not commands for `claude -p`.
+Then use `/what-would-make-this-easier-skills:needs-picker` in that session. Keep the extracted folder and use the launch command each time. Python is not needed. [Full Claude Code instructions, including updates and removal](INSTALL.md#claude-code).
 
-The current marketplace version is **0.4.8**. Earlier repaired files still used the `0.4.0` version, which caused existing installations to keep their cached copy. Updating the marketplace alone does not update the installed plugin.
+**Claude chat and ChatGPT:** use the browser picker instructions above; these Claude Code commands are for the coding application.
 
-For **Codex**, follow the [Codex installation steps](INSTALL.md#codex) to copy all 31 complete folders from `platforms/codex/skills/` into your project's `.agents/skills/` or your personal `~/.agents/skills/`. Open that project in Codex and select `needs-picker` from the skill picker; in the CLI or IDE extension, type `$needs-picker`.
+## Make it your own
 
-For **Hermes Agent**, use the skill folders and bundles under `platforms/hermes/`. For any other assistant, use the picker output or a block from `platforms/universal/`.
+- Start from what is difficult, browse by area, or use a condition or trait preset. No label is required.
+- Choose when a support applies—for example, only at work or when learning something new.
+- Keep an editable copy by choosing **Support profile (YAML)** and pressing **Download**. The JSON export contains compiled instructions, not the editable difficulty selections.
+- To use the picker offline, open `needs-picker.html` from the extracted pack in your browser.
+- Keep personal notes private. Exported instructions and profiles include any notes you add.
 
-See the [platform installation guide](platforms/README.md) for paths, commands and format details. Copy complete skill folders, including the picker's bundled references, compact menu and compiler.
+The pack includes 89 supports across 12 areas: understanding, information load, attention, planning, memory, learning, communication, sensory access, choice, transitions, motor interaction and pacing. The full platform packs contain 19 authored skills plus 12 area skills. [Browse the skills and other platforms](platforms/README.md).
 
-## Choose a skill directly
+## Validation status
 
-The authored skills include the picker, two task-focused skills, and 16 condition or trait presets:
+This is **early-access software**. Preferences can help express what you want, but an assistant may still ignore or misapply them. The rules have not been validated as treatments or as effective support for everyone.
 
-| Purpose | Skills |
-| --- | --- |
-| Choose your own supports | `needs-picker` |
-| Learning and communication | `help-me-learn-this`, `help-me-with-words` |
-| Wording and information | `i-have-autism`, `i-have-dyslexia`, `i-have-dyscalculia`, `i-have-apd` |
-| Action and input | `i-have-dyspraxia`, `i-have-dysgraphia`, `i-have-tics` |
-| Memory, starting and pacing | `i-have-working-memory-differences`, `i-have-inertia`, `i-have-limited-energy`, `i-need-low-demand` |
-| Internal references | `i-have-alexithymia`, `i-have-aphantasia` |
-| Sensory and assistive technology | `i-have-sensory-sensitivity`, `i-use-a-screen-reader`, `i-have-colour-vision-deficiency` |
+The current source is **0.4.9**. See [validation results and remaining limits](VALIDATION.md), [release notes](RELEASE_NOTES.md), and [installation help](INSTALL.md). The older [0.4.5 release](https://github.com/Trickaay/i-have-neurodivergence/releases/tag/v0.4.5) remains available; use the current-pack link above for the newer source.
 
-The generated `easier-<area>` skills offer supports without a condition label: understanding, information load, attention, planning, memory, learning, communication, sensory access, choice, transitions, motor interaction and pacing.
-
-Skills can be combined. Each support skill documents its stop phrase; the picker produces a profile and then stops. When preferences conflict, follow safety and host constraints, then what the reader can perceive, act on and understand. Ask the reader to resolve conflicts between their own settings. Presentation preferences never grant permission or replace a required confirmation.
-
-## Profiles and evidence
-
-No diagnosis is required. The picker stores chosen supports, contexts, reported difficulties and optional notes; it does not infer a condition or retain a preset label. Notes contain whatever you choose to write, including any personal information you include. Keep, edit or delete your exported profile yourself.
-
-Each support includes an evidence record separating the underlying difficulty, the presentation or teaching method, and the exact rule. **Evidence for a difficulty is not proof that a prompt rule helps. The exact rules have not been validated for effectiveness in an agent.** The picker's “Why is this offered?” view explains these distinctions. Defaults are starting points you can change.
-
-## Command-line use
-
-The compiler uses Python's standard library:
-
-```bash
-python3 needs/compile.py needs.yaml
-python3 needs/compile.py needs.yaml --format agents
-python3 needs/compile.py needs.yaml --format skill
-python3 needs/compile.py needs.yaml --format codex
-python3 needs/compile.py needs.yaml --format hermes
-```
-
-Run these from the repository root, with the path to your own profile. The [needs model](needs/NEEDS_MODEL.md) describes the data and exports.
-
-## Development and validation
-
-Edit the authored skills, `needs/needs-vocabulary.json`, `needs/picker.template.html` or `platforms/adaptations.json`, then regenerate derived files:
-
-```bash
-python3 needs/build.py
-python3 platforms/build_platform_skills.py
-```
-
-The same build writes `docs/index.html` as an exact copy of `needs-picker.html`. GitHub Pages publishes `main` → `/docs`; `needs/build.py --check` detects a stale live-page copy. Published release ZIPs and tags stay fixed; current source and the live picker can contain newer repairs.
-
-Before publishing changed skills, increase the version in `.claude-plugin/plugin.json`. The platform generator reads that version for every generated bundle; keeping the old version prevents existing Claude installations from receiving the update.
-
-Available checks:
-
-```bash
-python3 needs/build.py --check
-python3 needs/parity_check.py
-python3 needs/compile.py --self-test
-python3 needs/rule_checks.py
-python3 needs/conformance_test.py
-python3 platforms/build_platform_skills.py --check
-python3 platforms/validate_platforms.py
-python3 scripts/test_install_pack.py
-```
-
-Browser conformance needs Playwright and Chromium; missing Playwright reports a skip, while a missing browser executable must be installed or selected with `CHROMIUM_PATH`. Platform validation needs PyYAML, and uses `skills-ref` when installed.
-
-### Validation status
-
-These are smoke checks of files, the browser page and live sessions. **They do not establish support effectiveness, identical responses between sessions, or complete assistive-technology coverage.**
-
-**Returned Claude retest of 0.4.7.** Independent review supports 65 PASS / 1 FAIL across the fixed 66 behavior turns, with 33 separate positive, save, supplemental and picker turns passing. The reported agent-installation result was 29 PASS / 4 FAIL; review identified an additional retry after explicit permission denial, giving 28 PASS / 5 FAIL after that targeted correction. Unsafe-removal cases stopped, quarantine maps preserved owned bytes, and both public upgrades from 0.4.6 and 0.4.5 passed in the returned evidence. These are bounded samples, not reliability rates or fresh 0.4.8 results.
-
-**Current repairs (0.4.8).** Installation instructions check real tool capability before planning, preserve exact path components, require an exact record before searching, restrict manual fallback to user-performed steps, and stop operations on explicit permission denial. They exclude installation through symlinks. Dyscalculia separates explicitly requested teaching examples from the calculation's Working table, labels conversion factors with compound units, and retains a separate explanation column. The deterministic helper's ownership, refusal and retained-quarantine behavior is unchanged.
-
-**Verification.** Seven documented non-browser checks and `git diff --check` passed, including 45 helper tests; 83 separate software-DOM checks passed. The documented browser-conformance command was not run in this review. An isolated Claude CLI upgrade from 0.4.7 to the candidate 0.4.8 used local Git transport and matched all installed files; public update transport still needs Claude's retest. Initial native Codex numeric checks scored 7/9 against the full contract, followed by a 3/3 retest after repairing missing explanation columns. Those small, separate samples are not a full-pack or Claude qualification.
-
-**Agent limits.** Fresh Codex trials exposed searches before missing-record/symlink refusals; the guide now gives terminal stop conditions. Original failures and subsequent targeted checks are retained for independent retesting. A restricted-capability session still announced file access before admitting it could not perform it, so this response behavior is not repaired or qualified. With no filesystem tools, use the manual guide yourself. Genuine tool-less and genuinely unavailable-Python host tests remain outstanding; a scenario assertion does not establish either condition. The deterministic helper passed its tests, but prose cannot enforce agent behavior. Verify source provenance independently: the helper only records the caller's asserted identity. Native Windows, Cowork, Hermes, screen-reader and native mod-host qualification remain outstanding.
-
-**Browser limits.** The browser page, its logic, layout, styling and embedded support wording are unchanged in this revision. Software-DOM checks do not establish native clipboard or accessibility behavior. Manual selection may omit the final newline; use Download when exact bytes matter. The nonblocking missing-icon directory warning remains.
+The browser picker needs no Python or build step. Agents without usable file tools cannot install it for you. Cowork and Hermes host integrations remain unqualified. If exact export bytes matter, use Download: manual selection can omit the final line break.
 
 ## Inspiration and license
 
-Inspired by [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd), whose skill format provided the starting point for this collection.
+Inspired by [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd), whose skill format provided the starting point. This pack builds on that idea with a needs-based picker, individually chosen supports and exports for different assistants.
 
-Released under the [MIT License](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for upstream attribution.
+Released under the [MIT License](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md). For commands, builds and tests, see the [development guide](DEVELOPMENT.md).

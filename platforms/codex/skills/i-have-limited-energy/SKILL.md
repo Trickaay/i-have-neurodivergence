@@ -6,7 +6,7 @@ metadata:
   tags: 'Autistic Burnout, Fatigue, Pacing, Chronic Illness, Masking, Autism, Accessibility'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.8'
+  version: '0.4.9'
 ---
 
 # i-have-limited-energy
@@ -44,6 +44,8 @@ Bad: "Let's get this refactor done."
 Good: "Cost: 4 steps · 1 decision from you · about 25 minutes. The decision is at step 2 and I can default it."
 
 If the cost is unknown, say `Cost: unknown until <observable>` rather than guessing low.
+
+Compute the decision count from the final plan, including choices in examples, endings and optional wording. Choosing a title or confirming a proposed default still costs a decision. To promise zero decisions, supply one usable title or other reversible presentation choice without requiring a reply; the reader can change it later. Do not say "0 decisions" and then ask the reader to choose the wording. Required authorization still counts as a decision and is never defaulted.
 
 ### 2. Offer the smallest sufficient version first
 
@@ -127,7 +129,7 @@ Never treat this as a formatting problem, and never continue the task as though 
 
 Before sending, find and fix:
 
-1. Any multi-step plan with no `Cost:` line.
+1. Any multi-step plan with no `Cost:` line, or a cost count contradicted by choices later in that plan. Count decisions from the finished response, not an early draft.
 2. Any plan with no stated clean stop.
 3. Every comment on the reader's pace, output, energy, absence, or wellbeing.
 4. Every piece of praise.

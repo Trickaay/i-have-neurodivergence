@@ -203,7 +203,9 @@ contexts:
       - short_sections
 ```
 
-The bundled `scripts/compile.py` turns a saved profile into instructions: run `python3 scripts/compile.py /path/to/needs.yaml --format rules` from this skill folder, or invoke the script by its full path. It uses the bundled vocabulary and needs only Python 3. Offer the compiled rules for the reader to apply; do not claim they are installed until the host has loaded them.
+After the final summary or an Enter/skip save response, stop. Do not append a new choice, save prompt or offer to run the compiler. State what is in chat and what was actually saved, then end the turn.
+
+If the reader subsequently asks for compiled instructions, the bundled `scripts/compile.py` can turn a saved profile into them: `python3 scripts/compile.py /path/to/needs.yaml --format rules` from this skill folder, or the script by its full path. Running it requires a real execution tool, Python 3 and the actual saved profile path. Read/Glob/Grep tools alone cannot run it. Without these capabilities, explain the limit and provide user-performed instructions only when requested; never claim that you can execute it. A saved profile is not an installed skill. Report compilation only after a successful command, and installation only after the host has loaded the result.
 
 ## Presets
 
@@ -244,7 +246,8 @@ Before sending any screen:
 6. Any praise or encouragement.
 7. Any atom id, rule text or evidence tier on a selection or summary screen the reader did not ask for.
 8. Any claim that supports only add or never remove anything.
-9. On screen 0, any optional text outside the exact opening block, especially commentary about references or preparation. Remove it; keep only notices required by the host.
+9. Any unrequested closing offer after the final summary, or a claim to run/save something without the actual capability and required input.
+10. On screen 0, any optional text outside the exact opening block, especially commentary about references or preparation. Remove it; keep only notices required by the host.
 
 For screen 1, remove optional text before or after the complete menu, especially preset names the reader did not request.
 

@@ -1,3 +1,17 @@
+# 0.4.9 — clearer onboarding and retest repairs
+
+The README now starts with the live picker, a real screenshot, everyday illustrative examples and separate Codex/Claude Code installation steps. Technical commands and validation history have dedicated guides. No new curated GitHub release is created; the original v0.4.5 release remains unchanged.
+
+- Planning drafts use only supplied facts; starting settings apply without optional announcements.
+- Communication keeps one presentation default while preserving the boundary that silence never authorizes an external action.
+- Limited-energy cost lines count decisions in the completed plan. Dyscalculia back-checks separate duration and ratio columns and use neutral clock glosses.
+- The picker ends after its final summary instead of offering unavailable compiler execution.
+- Agent guidance checks capabilities first, preserves Unicode path text, stops at helper refusals and reports no-op record changes accurately. The deterministic helper is unchanged.
+
+Model compliance remains imperfect: tested agents still searched despite stop instructions. Agent-assisted removal and truly tool-less behavior remain unqualified; use the exact recorded helper command yourself. See [validation results and limits](VALIDATION.md). The known manual-selection final-newline limitation remains; Download preserves export bytes.
+
+---
+
 # 0.4.8 — installation decision points and numeric examples
 
 This source update follows review of the 0.4.7 retest. The published `v0.4.5` tag and curated release assets remain unchanged.

@@ -6,7 +6,7 @@ metadata:
   tags: 'Accessibility, Presentation, Choice and decision, What Would Make This Easier'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.8'
+  version: '0.4.9'
 ---
 
 # easier-choice
@@ -39,7 +39,7 @@ Limits of these preferences: they change only how you present information and wo
 
 CHOICE AND DECISION
 - At most two or three options, ever.
-- Name one concrete default option and say what happens if nothing is said. Two conditional recommendations are not a default. A presentation default can name a recommended option while making clear that no external action occurs without permission. A default is never approval for an action that needs permission or confirmation.
+- Name one concrete default option for the answer or plan and say that it remains the default if nothing is said. Do not cancel it with "no choice is made" or replace it with a conditional second recommendation. For example: "My default recommendation is labels by contents. If nothing is said, that remains the recommendation; no boxes are changed." Silence selects only this presentation or planning default. It never authorizes buying, sending, changing files or any other external action; required permission and confirmation remain separate.
 
 If two of these ever pull against each other, prefer in this order: what I can perceive, then what I can act on, then what I can understand, then the rest. Sensory overload I report is an access barrier, not comfort. Where two of my own settings conflict, ask me which to follow rather than ranking them.
 

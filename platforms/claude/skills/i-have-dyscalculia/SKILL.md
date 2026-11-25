@@ -7,7 +7,7 @@ metadata:
   tags: 'Dyscalculia, Output Style, Accessibility, Numeracy, Formatting'
   category: 'productivity'
   source: 'what-would-make-this-easier'
-  version: '0.4.8'
+  version: '0.4.9'
 ---
 
 # i-have-dyscalculia
@@ -84,6 +84,8 @@ For a comparison request, the input echo, computed savings, speed ratio, headlin
 
 A conversion factor has a compound unit: label its column, for example, "Factor (ms per s)", not "Milliseconds per second (ms)". Keep the input duration, conversion factor and output duration in separate columns, including in a back-check.
 
+Back-check operand columns must also name one measure. Never put a saved duration and a speed multiplier in an "Other value", "Operand" or similar generic column. Use separate columns headed "Time saved (ms)" and "Speed multiplier (times)", with an em dash when unused, or separate check tables. A row label that names the operation does not supply a missing column unit.
+
 Bad: "The old query took 840 ms and the new one takes 120 ms, so about seven times faster."
 Good:
 
@@ -108,6 +110,13 @@ Working:
 | Old time (ms) | New time (ms) | Speed multiplier = old ÷ new (times) | Gloss |
 | --- | --- | --- | --- |
 | 840 | 120 | 7 | seven files in the old single-file time |
+
+A back-check can preserve operand types in one table:
+
+| Check | New time (ms) | Time saved (ms) | Speed multiplier (times) | Recovered old time (ms) | Meaning |
+| --- | --- | --- | --- | --- | --- |
+| New time + time saved | 120 | 720 | — | 840 | The sum recovers the old duration |
+| New time × speed multiplier | 120 | — | 7 | 840 | The product recovers the old duration |
 
 A back-check changes the calculation, not the roles named in the headers. Start and finish stay in their own columns:
 
@@ -183,7 +192,7 @@ Good: "A megabyte is about one photo from a phone camera. Your file is 12 MB (ab
 
 ### 10. Neutral register around numbers
 
-Forbidden near any number or calculation: "just", "simply", "easy", "obviously", "quick maths", "trivially", "basic arithmetic". State the fact with no difficulty rating.
+Forbidden near any number or calculation: "just", "simply", "easy", "obviously", "quick maths", "trivially", "basic arithmetic". State the fact with no difficulty rating. Use neutral clock glosses such as "half past midnight on the next day"; "just into the next day" still contains the forbidden word.
 
 Bad: "It's just 500 ms doubled five times."
 Good: "Result: 16 s (a little over a quarter of a minute)."
@@ -230,7 +239,7 @@ Before sending, find every digit and check:
 8. Delete every "just / simply / easy / obviously / quick" near a number, including inside magnitude glosses: write "under a second", not "just under a second".
 9. Recompute the result from the supplied inputs. Check time arithmetic by adding the duration to the start time and subtracting it from the finish time. Every headline, working row and summary must agree; remove superseded results and self-correction text before sending. Trace every clause and quantity inside each Working cell to the result, a used intermediate or its check. Delete unused detours even inside an otherwise useful row, including correct arithmetic that the chosen path does not use.
 10. For a comparison request, move any numeric headline, result, speed ratio or analogy outside a table into a result table.
-11. Check every numeric cell against its column header, including Working and analogy tables. A ratio is not a duration, and a finishing clock time is not a duration in minutes. Separate those measures into correctly labelled columns or tables. Do duration comparisons reuse the declared unit? Convert only for mixed inputs or a requested conversion, in Working. Verify that every numeric table, including Working and back-checks, has its separate final Gloss or Meaning column; keep that column even when cells already contain glosses.
+11. Check every numeric cell against its column header, including Working and analogy tables. A ratio is not a duration, and a finishing clock time is not a duration in minutes. Separate those measures into correctly labelled columns or tables. Reject generic operand columns that mix durations and ratios in back-checks, even if the row labels name the operation. Do duration comparisons reuse the declared unit? Convert only for mixed inputs or a requested conversion, in Working. Verify that every numeric table, including Working and back-checks, has its separate final Gloss or Meaning column; keep that column even when cells already contain glosses.
 12. Put every arithmetic back-check in the Working table. Count the numeric values in remaining prose sentences and paragraphs; remove over-limit repetitions.
 
 Then verify: can the reader act on this without doing any arithmetic, comparing any two numbers in their head, or retyping any digit string from memory?

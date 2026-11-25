@@ -27,7 +27,7 @@ Use the exact retained path spelling. Parent-traversal (`..`) components, links 
 
 Every applied run gets a durable record beside `skills`, under `.i-have-neurodivergence-records/RUN_ID/record.json`. Even an all-identical reinstall gets its own record and owns no pre-existing skills. Keep the exact path printed by the helper, including for later removal; keep these private records out of version control. Conflicting skills stop installation before any skill is copied. All 31 folders and their nested files are checked. Open a fresh Codex chat and invoke `$needs-picker` to verify the host loads them.
 
-To remove one run, use the exact record path saved in its installation result. Do not choose a record by searching for the latest timestamp. If the exact path is unavailable, stop for an ownership review. Close chats using its skills and preview:
+To remove one run, use the exact record path saved in its installation result. Prefer running the recorded command yourself: agent-assisted removal remains unqualified because tested agents sometimes search despite the stop instructions. Do not choose a record by searching for the latest timestamp. If the exact path is unavailable, stop for an ownership review. Close chats using its skills and preview:
 
 ```text
 python3 scripts/install_pack.py remove --record "EXACT RECORD PATH"
@@ -52,7 +52,7 @@ Keep the record and quarantine in place. Recovery after an interrupted operation
 
 5. Open the target project and start a new Codex chat. Choose `needs-picker` from the skill menu; in the CLI or IDE extension, type `$needs-picker`. The first screen should say **WHAT WOULD MAKE THIS EASIER?**. `skip` selects the plain default. You can also invoke an individual skill.
 
-For manual copying, retain the original download and a separate durable list of newly added folders. These manual records are not accepted by the deterministic remover. For automatic ownership tracking use the recorded route above. The skill files are self-contained after copying; Python is optional for manual copying and compiling profiles. If host discovery cannot run, report it as not checked.
+For manual copying, retain the original download and a separate durable list of newly added folders. These manual records are not accepted by the deterministic remover. For automatic ownership tracking use the recorded route above. The skill files are self-contained after copying. Manual copying needs no Python. Compiling profiles with the command-line tool requires Python; the browser picker does not. If host discovery cannot run, report it as not checked.
 
 ### Update or remove
 
